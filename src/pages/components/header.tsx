@@ -1,182 +1,73 @@
-import { useState } from "react";
-
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image'
 
 const Header = () => {
-    // State untuk setiap dropdown
-    const [openDropdown, setOpenDropdown] = useState(null);
-    // Fungsi untuk toggle dropdown
-    const toggleDropdown = (menu) => {
-        setOpenDropdown(openDropdown === menu ? null : menu);
-    };
+  const [openDropdown, setOpenDropdown] = useState(null);
 
-    return (
-        <header className="bg-white p-4">
-            <nav className="container mx-auto">
-                <ul className="flex space-x-6 text-black">
-                    
-                    {/* Dropdown Pinjaman */}
-                    <li className="relative">
-                        <button 
-                            onClick={() => toggleDropdown("pinjaman")} 
-                            className="hover:text-black-300 focus:outline-none"
-                        >
-                            Pinjaman ⌄
-                        </button>
-                        {openDropdown === "pinjaman" && (
-                            <ul className="absolute left-0 mt-2 w-screen bg-white text-gray-800 shadow-lg rounded-lg p-4 grid grid-cols-2 gap-4">
-                                
-                                <button className="left-0 w-full text-left text-black-600 hover:text-gray-900">
-                                <h2>PINJAMAN</h2>
-                                </button>
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
 
-                                <li>
-                                    <a href="/Pinjaman/Kredit" className="block px-4 py-2 hover:bg-gray-200">Kredit Modal Kerja
-                                    <p className="text-sm text-gray-600">Kami hadir untuk memberikan kemudahan dalam pembiayaan kebutuhan modal kerja anda</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Investasi
-                                    <p className="text-sm text-gray-600">Nikmati pembiayaan untuk kebutuhan perluasan bisnis anda dalam jangka waktu yang panjang</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Multiguna
-                                    <p className="text-sm text-gray-600">Nikmati fasilitas pinjaman untuk segala kebutuhan anda</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Kepemilikan Rumah
-                                    <p className="text-sm text-gray-600">Makin mudah wujudkan hunian idaman dengan jangka waktu fleksibel</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Kepemilikan Mobil
-                                    <p className="text-sm text-gray-600">Jalan mudah untuk memiliki mobil idaman baru atau bekas dengan bunga ringan</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Kendaraan Bermotor
-                                    <p className="text-sm text-gray-600">Dapatkan bunga ringan untuk mewujudkan motor impian anda</p></a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kredit Tanpa Agunan
-                                    <p className="text-sm text-gray-600">Memberikan kemudahan dan keuntungan dalam memenuhi berbagai keperluan hidup anda</p></a>
-                                    
-                                </li>
-                            </ul>
-                        )}
-                    </li>
+  return (
+    <header className="bg-white shadow-md">
+      <nav className="container mx-auto flex items-center justify-start font-sogeo text-sm">
+        {/* Logo */}
+        <div className='mr-6'>
+          <Link href="/" legacyBehavior>
+            <a>
+              <Image src= "/assets/logoabdibank.png" width={50} height={50}/>
+            </a>
+          </Link>
+        </div>
 
-                    {/* Dropdown Tabungan */}
-                    <li className="relative">
-                        <button 
-                            onClick={() => toggleDropdown("tabungan")} 
-                            className="hover:text-black-300 focus:outline-none"
-                        >
-                            Tabungan ⌄
-                        </button>
-                        {openDropdown === "tabungan" && (
-                            <ul className="absolute left-0 mt-2 w-screen bg-white text-gray-800 shadow-lg rounded-lg p-4 grid grid-cols-2 gap-4">
-                                
-                            <button className="left-0 w-full text-left text-black-600 hover:text-gray-900">
-                            <h2>TABUNGAN</h2>
-                            </button>
-
-                            <li>
-                                <a href="/Pinjaman/Kredit" className="block px-4 py-2 hover:bg-gray-200">Tabungan Abdi
-                                <p className="text-sm text-gray-600">Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas penarikan dana kapan saja</p></a>
-                                
-                            </li>
-                            <li>
-                                <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Tabungan Abdi-Ku
-                                <p className="text-sm text-gray-600">Lebih hemat dengan menabung tanpa biaya administrasi bulanan yang mengikat</p></a>
-                                
-                            </li>
-                            <li>
-                                <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Tabungan Abdi-Simple
-                                <p className="text-sm text-gray-600">Mulailah mengasah disiplin menabung sejak usia dini untuk meraih kehidupan finansial yang lebih baik</p></a>
-                            </li>
-                        </ul>
-                        )}
-                    </li>
-
-                    {/* Dropdown Deposito */}
-                    <li className="relative">
-                        <button 
-                            onClick={() => toggleDropdown("deposito")} 
-                            className="hover:text-black-300 focus:outline-none"
-                        >
-                            Deposito ⌄
-                        </button>
-                        {openDropdown === "deposito" && (
-                            <ul className="absolute full-0 mt-2 w-screen bg-white text-gray-800 shadow-lg rounded-lg p-4 grid grid-cols-2 gap-4">
-                                
-                            <button className="left-0 w-full text-left text-black-600 hover:text-gray-900">
-                            <h2>TABUNGAN</h2>
-                            </button>
-
-                            <li>
-                                <a href="/Pinjaman/Kredit" className="block px-4 py-2 hover:bg-gray-200">Deposito Berjangka
-                                <p className="text-sm text-gray-600">Pilihan Investasi yang memberikan Keuntungan dan rasa aman karena dijamin oleh Lembaga Penjamin Simpanan (LPS) anda</p></a>
-                                
-                            </li>
-                            <li>
-                                <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Folmulir Deposito
-                                <p className="text-sm text-gray-600">Ajukan Deposito dengan mengisi Formulir BANK ABDI</p></a>
-                                
-                            </li>
-                            <li>
-                                <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Kalkulator Deposito
-                                <p className="text-sm text-gray-600">Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI</p></a>
-                            </li>
-                        </ul>
-                        )}
-                    </li>
-
-                    {/* Dropdown Informasi */}
-                    <li className="relative">
-                        <button 
-                            onClick={() => toggleDropdown("informasi")} 
-                            className="hover:text-black-300 focus:outline-none"
-                        >
-                            Informasi ⌄
-                        </button>
-                        {openDropdown === "informasi" && (
-                           <ul className="absolute full-0 mt-2 w-screen bg-white text-gray-800 shadow-lg rounded-lg p-4 grid grid-cols-2 gap-4">
-                                
-                           <button className="left-0 w-full text-left text-black-600 hover:text-gray-900">
-                           <h2>TABUNGAN</h2>
-                           </button>
-
-                           <li>
-                               <a href="/Pinjaman/Kredit" className="block px-4 py-2 hover:bg-gray-200">Suku Bunga
-                               <p className="text-sm text-gray-600">BANK ABDI menawarkan tabungan dengan suku bunga menarik</p></a>
-                               
-                           </li>
-                           <li>
-                               <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Blog
-                               <p className="text-sm text-gray-600">Dapatkan informasi terkini melalui Blog BANK ABDI</p></a>
-                               
-                           </li>
-                           <li>
-                               <a href="/Pinjaman/Angsuran" className="block px-4 py-2 hover:bg-gray-200">Laporan
-                               <p className="text-sm text-gray-600">Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama setahun berjalan</p></a>
-                           </li>
-                       </ul>
-                        )}
-                    </li>
-
-                    {/* Tentang Kami (Tanpa Dropdown) */}
-                    <li><a href="/Tentang-Kami" className="hover:text-white-300">Tentang Kami</a></li>
-
-                    {/* Hubungi Kami (Tanpa Dropdown) */}
-                    <li><a href="/Hubungi-Kami" className="hover:text-black-300">Hubungi Kami</a></li>
-
+        {/* Navigation Links */}
+        <ul className="flex space-x-6 text-gray-800">
+          {['pinjaman', 'tabungan', 'deposito'].map((menu) => (
+            <li key={menu} className="relative">
+              <button onClick={() => toggleDropdown(menu)} className="hover:text-blue-600 focus:outline-none capitalize">
+                {menu} ⌄
+              </button>
+              
+              {openDropdown === menu && (
+                <ul className="absolute left-0 mt-2 w-64 bg-white text-gray-800 shadow-lg rounded-lg p-4">
+                  {menu === 'pinjaman' && (
+                    <>
+                      <li><Link href="/pinjaman/kredit-modal-kerja" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Modal Kerja</a></Link></li>
+                      <li><Link href="/pinjaman/kredit-investasi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Investasi</a></Link></li>
+                      <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Multiguna</a></Link></li>
+                    </>
+                  )}
+                  {menu === 'tabungan' && (
+                    <>
+                      <li><Link href="/tabungan/tabungan-abdi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI</a></Link></li>
+                      <li><Link href="/tabungan/tabungan-abdiku" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDIKU</a></Link></li>
+                      <li><Link href="/tabungan/tabungan-abdi-simpel" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI SIMPEL</a></Link></li>
+                    </>
+                  )}
+                  {menu === 'deposito' && (
+                    <>
+                      <li><Link href="/deposito/deposito-berjangka" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Deposito Berjangka</a></Link></li>
+                      <li><Link href="/deposito/formulir-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Formulir Deposito</a></Link></li>
+                      <li><Link href="/deposito/kalkulator-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kalkulator Deposito</a></Link></li>
+                    </>
+                  )}
                 </ul>
-            </nav>
-        </header>
-    );
+              )}
+            </li>
+          ))}
+
+          <li><Link href="/tentang-kami" legacyBehavior><a className="hover:text-blue-600">Tentang Kami</a></Link></li>
+          <li><Link href="/hubungi-kami" legacyBehavior><a className="hover:text-blue-600">Hubungi Kami</a></Link></li>
+        </ul>
+
+        {/* Button Pengajuan Kredit */}
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-800 ml-auto font-sogeo">
+          Pengajuan Kredit
+        </button>
+      </nav>
+    </header>
+  );
 };
 
 export default Header;
