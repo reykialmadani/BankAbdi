@@ -6,7 +6,7 @@ export default function Home() {
         <div>
             <Header />
             <Main />
-            <p className="text-center mt-10">Welcome to Next.js!</p>
+            {/* <p className="text-center mt-10">Welcome to Next.js!</p> */}
         </div>
     );
 }

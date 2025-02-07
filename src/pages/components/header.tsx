@@ -10,8 +10,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md top-0 left-0 w-full z-50">
       <nav className="container mx-auto flex items-center justify-start font-sogeo text-sm">
+        
         {/* Logo */}
         <div className='mr-6'>
           <Link href="/" legacyBehavior>
