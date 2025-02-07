@@ -1,4 +1,5 @@
 import Image from "next/image";
+import DeviceSliderColumn from "./deviceSlider";
 
 const features = [
     { title: "Cepat", description: "Tanggap dan Sigap Melayani Anda" },
@@ -8,9 +9,9 @@ const features = [
 ];
 
 const bankingSolutions = [
-    { title: "Tabungan", image: "/assets/tabungan.jpg", description: "Simpan dana Anda dengan aman dan dapatkan berbagai keuntungan menarik" },
-    { title: "Deposito", image: "/assets/deposito.jpg", description: "Investasikan dana Anda dengan bunga kompetitif dan jangka waktu fleksibel" },
-    { title: "Kredit", image: "/assets/kredit.jpg", description: "Wujudkan impian Anda dengan solusi pembiayaan yang tepat" },
+    { title: "Tabungan", image: "/assets/tabungan.jpg", description: "Buku Tabungan Aman & Menguntungkan" },
+    { title: "Deposito", image: "/assets/deposito.jpg", description: "Buka Simpanan Aman & Menguntungkan" },
+    { title: "Pinjaman/Kredit", image: "/assets/kredit.jpg", description: "Ajukan Pinjaman Cepat dan Mudah" },
 ];
 
 const MainPage = () => {
@@ -32,7 +33,7 @@ const MainPage = () => {
             {/* Keunggulan Section */}
             <section className="p-6 mx-auto max-w-6xl">
                 <h3 className="text-lg font-bold text-[#003868] mb-4">
-                    Keunggulan Bank ABDI Bagi Anda Calon Nasabah Kami
+                    Keunggulan Bank ABDI Bagi <br/>Anda Calon Nasabah Kami
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {features.map((feature, index) => (
@@ -46,13 +47,13 @@ const MainPage = () => {
 
             {/* Solusi Perbankan Section */}
             <section className="bg-gray-100 py-12 px-6">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl font-bold text-[#003868] text-center mb-8">
                         Solusi Perbankan Kami, untuk Anda Nasabah Kami
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-3 md:grid-cols-3 gap-3">
                         {bankingSolutions.map((solution, index) => (
-                            <div key={index} className="bg-white rounded-md shadow overflow-hidden">
+                            <div key={index} className="bg-white rounded-md shadow overflow-hidden max-w-sm">
                                 <div className="relative h-32 w-full">
                                     <Image src={solution.image} layout="fill" objectFit="cover" alt={solution.title} />
                                 </div>
@@ -60,7 +61,7 @@ const MainPage = () => {
                                     <h3 className="text-lg font-bold text-[#003868] mb-1">{solution.title}</h3>
                                     <p className="text-gray-600 text-sm mb-2">{solution.description}</p>
                                     <button className="text-[#003868] text-sm font-semibold hover:text-blue-700">
-                                        Selengkapnya →
+                                        Lihat Solusi Lengkap →
                                     </button>
                                 </div>
                             </div>
@@ -68,6 +69,10 @@ const MainPage = () => {
                     </div>
                 </div>
             </section>
+
+            
+                <DeviceSliderColumn/>
+            
         </div>
     );
 };
