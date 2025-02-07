@@ -24,7 +24,7 @@ const Header = () => {
 
         {/* Navigation Links */}
         <ul className="flex space-x-6 text-gray-800">
-          {['pinjaman', 'tabungan', 'deposito'].map((menu) => (
+          {['pinjaman', 'tabungan', 'deposito','informasi'].map((menu) => (
             <li key={menu} className="relative">
               <button onClick={() => toggleDropdown(menu)} className="hover:text-blue-600 focus:outline-none capitalize">
                 {menu} ⌄
@@ -47,6 +47,13 @@ const Header = () => {
                     </>
                   )}
                   {menu === 'deposito' && (
+                    <>
+                      <li><Link href="/deposito/deposito-berjangka" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Deposito Berjangka</a></Link></li>
+                      <li><Link href="/deposito/formulir-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Formulir Deposito</a></Link></li>
+                      <li><Link href="/deposito/kalkulator-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kalkulator Deposito</a></Link></li>
+                    </>
+                  )}
+                  {menu === 'Informasi' && (
                     <>
                       <li><Link href="/deposito/deposito-berjangka" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Deposito Berjangka</a></Link></li>
                       <li><Link href="/deposito/formulir-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Formulir Deposito</a></Link></li>
