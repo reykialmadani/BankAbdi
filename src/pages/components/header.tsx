@@ -1,70 +1,59 @@
-import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'
+import Image from 'next/image';
 
 const Header = () => {
-  const [openDropdown, setOpenDropdown] = useState(null);
-
-  const toggleDropdown = (menu) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
-  };
-
   return (
-    <header className="bg-white shadow-md top-0 left-0 w-full z-50 relative">
-      <nav className="container mx-auto flex items-center justify-start font-sogeo text-sm">
+    <header className="bg-white shadow-md top-0 left-0 w-full z-50 relative h-[60px]">
+      <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
         
-        {/* Logo */}
+        {/* Logo pt */}
         <div className='mr-6'>
           <Link href="/" legacyBehavior>
             <a>
-              <Image src= "/assets/logoabdibank.png" width={50} height={50} alt="Logo Abdi Bank"/>
+              <Image src="https://bankabdi.co.id/img/logo/logo-color-abdi.svg" width={100} height={60} alt="Logo Abdi Bank" />
             </a>
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <ul className="flex space-x-6 text-gray-800">
-          {['pinjaman', 'tabungan', 'deposito','informasi'].map((menu) => (
-            <li key={menu} className="relative">
-              <button 
-                onClick={() => toggleDropdown(menu)} 
-                className="hover:text-blue-600 focus:outline-none capitalize"
-              >
+        <ul className="flex space-x-6 text-gray-800 justify-start items-center">
+          {['pinjaman', 'tabungan', 'deposito', 'informasi'].map((menu) => (
+            <li key={menu} className="relative group">
+              <button className="hover:text-blue-600 focus:outline-none capitalize">
                 {menu} ⌄
               </button>
-              
-              {openDropdown === menu && (
-                <ul className="absolute left-0 mt-2 w-64 bg-white text-gray-800 shadow-lg rounded-lg p-4 z-50">
-                  {menu === 'pinjaman' && (
-                    <>
-                      <li><Link href="/pinjaman/kredit-modal-kerja" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Modal Kerja</a></Link></li>
-                      <li><Link href="/pinjaman/kredit-investasi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Investasi</a></Link></li>
-                      <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Multiguna</a></Link></li>
-                    </>
-                  )}
-                  {menu === 'tabungan' && (
-                    <>
-                      <li><Link href="/tabungan/tabungan-abdi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI</a></Link></li>
-                      <li><Link href="/tabungan/tabungan-abdiku" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDIKU</a></Link></li>
-                      <li><Link href="/tabungan/tabungan-abdi-simpel" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI SIMPEL</a></Link></li>
-                    </>
-                  )}
-                  {menu === 'deposito' && (
-                    <>
-                      <li><Link href="/deposito/deposito-berjangka" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Deposito Berjangka</a></Link></li>
-                      <li><Link href="/deposito/formulir-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Formulir Deposito</a></Link></li>
-                      <li><Link href="/deposito/kalkulator-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kalkulator Deposito</a></Link></li>
-                    </>
-                  )}
-                  {menu === 'informasi' && (
-                    <>
-                      <li><Link href="/informasi/suku-bunga" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Suku Bunga</a></Link></li>
-                      <li><Link href="/informasi/promo" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Promo</a></Link></li>
-                      <li><Link href="/informasi/faq" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">FAQ</a></Link></li>
-                    </>
-                  )}
-                </ul>
-              )}
+
+              {/* Dropdown Menu */}
+              <ul className="absolute left-0 mt-2 w-64 bg-white text-gray-800 shadow-lg rounded-lg p-4 z-50 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity">
+                {menu === 'pinjaman' && (
+                  <>
+                    <li><Link href="/pinjaman/kredit-modal-kerja" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Modal Kerja</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-investasi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Investasi</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Multiguna</a></Link></li>
+                  </>
+                )}
+                {menu === 'tabungan' && (
+                  <>
+                    <li><Link href="/tabungan/tabungan-abdi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI</a></Link></li>
+                    <li><Link href="/tabungan/tabungan-abdiku" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDIKU</a></Link></li>
+                    <li><Link href="/tabungan/tabungan-abdi-simpel" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Tabungan ABDI SIMPEL</a></Link></li>
+                  </>
+                )}
+                {menu === 'deposito' && (
+                  <>
+                    <li><Link href="/deposito/deposito-berjangka" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Deposito Berjangka</a></Link></li>
+                    <li><Link href="/deposito/formulir-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Formulir Deposito</a></Link></li>
+                    <li><Link href="/deposito/kalkulator-deposito" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kalkulator Deposito</a></Link></li>
+                  </>
+                )}
+                {menu === 'informasi' && (
+                  <>
+                    <li><Link href="/informasi/suku-bunga" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Suku Bunga</a></Link></li>
+                    <li><Link href="/informasi/promo" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Promo</a></Link></li>
+                    <li><Link href="/informasi/faq" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">FAQ</a></Link></li>
+                  </>
+                )}
+              </ul>
             </li>
           ))}
 
@@ -73,7 +62,7 @@ const Header = () => {
         </ul>
 
         {/* Button Pengajuan Kredit */}
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-800 ml-auto font-sogeo">
+        <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-800 ml-auto font-sogeo">
           Pengajuan Kredit
         </button>
       </nav>

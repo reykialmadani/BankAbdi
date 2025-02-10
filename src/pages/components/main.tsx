@@ -24,20 +24,25 @@ const MainPage = () => {
 
             {/* Keunggulan Section */}
             <Keunggulan />
+            
             {/* Banking Solutions Section */}
             <Perbankan />
+
             {/* Device Sections */}
             <section>
                 <DeviceSliderColumn/>
             </section>
+
             {/* Testimoni Section */}
             <section>
                 <Testimoni/>
             </section>
+
             {/* Information Section */}
             <section>
                 <Information/>
             </section>
+
             {/* Blog Section */}
             <section>
                 <Blog/>
