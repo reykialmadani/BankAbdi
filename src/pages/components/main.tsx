@@ -1,5 +1,8 @@
 import Image from "next/image";
 import DeviceSliderColumn from "./deviceSlider";
+import Testimoni from "./testimoni";
+import Information from "./information";
+import Blog from "./blog";
 
 const features = [
     { title: "Cepat", description: "Tanggap dan Sigap Melayani Anda" },
@@ -48,6 +51,7 @@ const MainPage = () => {
                 </section>
 
             {/* Solusi Perbankan Section */}
+            <div className="relative flex flex-col items-center py-4 bg-cover bg-center" style={{ backgroundImage: "url('/assets/bg-accordion.png')" }}>
             <section className="bg-gray-100 py-12 px-6">
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl font-bold text-[#003868] text-center mb-8">
@@ -71,13 +75,27 @@ const MainPage = () => {
                     </div>
                 </div>
             </section>
+            </div>
 
             {/* Device Slider Section */}   
             <section>
                 <DeviceSliderColumn/>
             </section>
+            {/* Device Testimoni Section */}   
+            <section>
+                <Testimoni/>
+            </section>
+            {/* Device Information Section */}   
+            <section>
+                <Information/>
+            </section>
+            {/* Device Information Section */}   
+            <section>
+                <Blog/>
+            </section>
         </div>
     );
+    
 };
 
 export default MainPage;
