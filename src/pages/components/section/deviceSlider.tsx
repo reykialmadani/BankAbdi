@@ -80,7 +80,7 @@ const DeviceSliderColumn = () => {
                 {activeTab === "Tabungan" && (
                     <div className="flex flex-row items-start space-x-6">
                         <div className="flex-shrink-0">
-                            <Image src="/assets/tab-pinjaman.png" width={200} height={200} className="rounded-lg shadow-md" alt="Tabungan"/>
+                            <Image src="/assets/tabungan.png" width={200} height={200} className="rounded-lg shadow-md" alt="Tabungan"/>
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl text-black mb-2">Produk Tabungan</h3>
@@ -115,7 +115,7 @@ const DeviceSliderColumn = () => {
                 {activeTab === "Deposito" && (
                     <div className="flex flex-row items-start space-x-6">
                         <div className="flex-shrink-0">
-                            <Image src="/assets/tab-pinjaman.png" width={200} height={200} className="rounded-lg shadow-md" alt="Deposito"/>
+                            <Image src="/assets/deposito.jpeg" width={200} height={200} className="rounded-lg shadow-md" alt="Deposito"/>
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl text-black  mb-2">Produk Deposito</h3>

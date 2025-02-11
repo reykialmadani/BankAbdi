@@ -31,7 +31,7 @@ const MainPage = () => {
             <section>
                 <Perbankan />
             </section>
-            
+
             {/* Device Sections */}
             <section>
                 <DeviceSliderColumn/>
@@ -46,9 +46,9 @@ const MainPage = () => {
             <section>
                 <Information/>
             </section>
-
             {/* Blog Section */}
             <section>
+
                 <Blog/>
             </section>
         </div>
