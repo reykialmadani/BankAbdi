@@ -18,10 +18,8 @@ const Header = () => {
   }, []);
 
   return (
-<header className={`bg-white shadow-md top-0 left-0 w-full z-50 fixed h-[60px] ${isTransparent ? 'bg-transparent' : 'bg-white'}`}>
-
-
-      <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
+      <header className={`bg-white top-0 left-0 w-full z-50 fixed h-[60px] ${isTransparent ? 'bg-transparent' : 'bg-white'}`}>
+        <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
         
         {/* Logo pt */}
         <div className='mr-6'>
@@ -37,12 +35,12 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Navigation Links */}
+        {/* Navigation */}
         <ul className="flex space-x-6 text-gray-800 justify-start items-center">
           {['pinjaman', 'tabungan', 'deposito', 'informasi'].map((menu) => (
             <li key={menu} className="relative group">
               <button className="hover:text-blue-600 focus:outline-none capitalize">
-                {menu} ⌄
+                {menu} ▼
               </button>
 
               {/* Dropdown Menu */}

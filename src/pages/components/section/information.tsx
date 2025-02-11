@@ -1,64 +1,70 @@
 import React from 'react';
+import Image from 'next/image';
 
-interface BlogPostProps {
-  title: string;
-  link: string;
-  imageUrl: string;
-}
-
-const BlogPost: React.FC<BlogPostProps> = ({ title, link, imageUrl }) => {
+const Informasi = () => {
   return (
-    <div className="col-md-4">
-      <a href={link}>
-        <div className="ui-card post-item ui-action-card shadow-sm">
-          
-          <div
-            className="card-image bg-cover bg-center h-48"
-            style={{ backgroundImage: `url(${imageUrl})` }}
-          ></div>
-          
-          <div className="card-header p-4">
-            <small className="post-tag text-sm text-black">Nasabah BANK ABDI</small>
+    <section className="bg-gray-50 py-12 px-6 sm:px-12">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Informasi Terkini Tentang Kami</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-center">
+
+          {/* Card 1 */}
+          <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] mx-auto">
+            <Image
+              className="w-full h-64 object-cover"
+              src="https://bankabdi.co.id/storage/post-images/MHYRuxSlECwR5xpaybz4nSthGcNQ9uCeUlG3s2vb.png"
+              alt="Informasi Terkini"
+              width={640} 
+              height={256}
+            />
+            <div className="p-6 flex flex-col h-full">
+              <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
+              <p className=" font-bold text-black text-sm mb-4 flex-grow">
+                Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Mksimal!
+              </p>
+              <a href="#" className="text-indigo-600 hover:text-indigo-800 mt-auto">Selengkapnya</a>
+            </div>
           </div>
-          
-          <div className="card-body p-4 ui-turncate-text">
-            <p className="text-lg text-black">{title}</p>
+
+          {/* Card 2 */}
+          <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] mx-auto">
+            <Image
+              className="w-full h-64 object-cover"
+              src="https://bankabdi.co.id/storage/post-images/mIDthWsAMu65K7Le8Q5qGPA5qlELd6FUXxO89Pfr.png"
+              alt="Informasi Terkini"
+              width={640} 
+              height={256}
+            />
+            <div className="p-6 flex flex-col h-full">
+            <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
+            <p className=" font-bold text-black text-sm mb-4 flex-grow">
+                Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Mksimal!
+              </p>
+              <a href="#" className="text-indigo-600 hover:text-indigo-800 mt-auto">Selengkapnya</a>
+            </div>
           </div>
-          
-          <div className="card-footer flex justify-between items-center p-4">
-            <span className="post-meta text-blue-600">Baca Selengkapnya</span>
-            <span className="text-blue-600">&gt;</span>
+
+          {/* Card 3 */}
+          <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] mx-auto">
+            <Image
+              className="w-full h-64 object-cover"
+              src="https://bankabdi.co.id/storage/post-images/iNWDdyCNwdPwiMdXuJF4Jc04peujGAnYHYBIY11J.png"
+              alt="Informasi Terkini"
+              width={640} 
+              height={256}
+            />
+            <div className="p-6 flex flex-col h-full">
+            <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
+            <p className=" font-bold text-black text-sm mb-4 flex-grow">
+                Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Mksimal!
+              </p>
+              <a href="#" className="text-indigo-600 hover:text-indigo-800 mt-auto">Selengkapnya</a>
+            </div>
           </div>
         </div>
-      </a>
-    </div>
+      </div>
+    </section>
   );
 };
 
-const Information: React.FC = () => {
-  return (
-    <div className="container mx-auto px-4 py-8 bg-gray-100">
-      {/* Section Heading */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
-          Infomasi Terkini Tentang Kami
-        </h2>
-      </div>
-
-      <div className="ui-blog-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <BlogPost
-          title="Menyongsong Masa Pensiun: Langkah Bijak dalam Mengelola Dana"
-          link="/posts/menyongsong-masa-pensiun-langkah-bijak-dalam-mengelola-dana"
-          imageUrl="https://bankabdi.co.id/storage/post-images/MHYRuxSlECwR5xpaybz4nSthGcNQ9uCeUlG3s2vb.png"
-        />
-        <BlogPost
-          title="Perubahan Title BPR Akar Budaya Dana Indonesia"
-          link="/posts/perubahan-title-bpr-akar-budaya-dana-indonesia"
-          imageUrl="https://bankabdi.co.id/storage/post-images/BSlnrb8PnxgR7c5xt4VaZe183MUvcl9SprgsrX0B.jpg"
-        />
-      </div>
-    </div>
-  );
-};
-
-export default Information;
+export default Informasi;

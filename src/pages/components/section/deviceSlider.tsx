@@ -63,12 +63,14 @@ const DeviceSliderColumn = () => {
                                                 {item === "Kredit Investasi" && "Kembangkan dan perluas bisnis Anda bersama BANK ABDI dengan Kredit Investasi."}
                                                 {item === "Kredit Modal Kerja" && "Mulai usaha Anda bersama BANK ABDI dengan Kredit Modal Kerja."}
                                             </p>
-                                            <a 
-                                                href={`/pinjaman/${item.toLowerCase().replace(/ /g, '-')}`} 
-                                                className=" px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full shadow-md hover:opacity-80 transition duration-300 block mt-2 text-center"
-                                            >
-                                                Selengkapnya -
-                                            </a>
+                                            <div className="flex justify-end">
+                                                <a 
+                                                    href={`/pinjaman/${item.toLowerCase().replace(/ /g, '-')}`} 
+                                                    className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full shadow-md hover:opacity-80 transition duration-300"
+                                                >
+                                                    Selengkapnya ⮕
+                                                </a>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -78,7 +80,7 @@ const DeviceSliderColumn = () => {
                 )}
 
                 {activeTab === "Tabungan" && (
-                    <div className="flex flex-row items-start space-x-6">
+                    <div className="flex flex-row items-start space-x-6 md:w-[700px]">
                         <div className="flex-shrink-0">
                             <Image src="/assets/tabungan.png" width={200} height={200} className="rounded-lg shadow-md" alt="Tabungan"/>
                         </div>
@@ -98,12 +100,14 @@ const DeviceSliderColumn = () => {
                                                 {item === "Tabungan ABDIKU" && "Nikmati kemudahan menabung tanpa biaya administrasi bulanan."}
                                                 {item === "Tabungan Simpel" && "Dorong budaya menabung sejak dini para pelajar dengan Tabungan ABDI Simpel."}
                                             </p>
-                                            <a 
-                                                href={`/tabungan/${item.toLowerCase().replace(/ /g, '-')}`} 
-                                                className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300 block mt-2 text-center"
-                                            >
-                                                Selengkapnya -
-                                            </a>
+                                            <div className="flex justify-end">
+                                                <a 
+                                                    href={`/tabungan/${item.toLowerCase().replace(/ /g, '-')}`} 
+                                                    className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300"
+                                                >
+                                                    Selengkapnya ⮕
+                                                </a>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -113,7 +117,7 @@ const DeviceSliderColumn = () => {
                 )}
 
                 {activeTab === "Deposito" && (
-                    <div className="flex flex-row items-start space-x-6">
+                    <div className="flex flex-row items-start space-x-6 md:w-[700px]">
                         <div className="flex-shrink-0">
                             <Image src="/assets/deposito.jpeg" width={200} height={200} className="rounded-lg shadow-md" alt="Deposito"/>
                         </div>
@@ -129,12 +133,14 @@ const DeviceSliderColumn = () => {
                                         <p className="text-sm text-black">
                                             Dapatkan keuntungan dalam Berinvestasi secara Pasti.
                                         </p>
-                                        <a 
-                                            href="/deposito" 
-                                            className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300 block mt-2 text-center"
-                                        >
-                                            Selengkapnya -
-                                        </a>
+                                        <div className="flex justify-end">
+                                            <a 
+                                                href="/deposito" 
+                                                className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300"
+                                            >
+                                                selengkapnya ⮕
+                                            </a>
+                                        </div>
                                     </div>
                                 )}
                             </div>
