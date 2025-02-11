@@ -1,10 +1,10 @@
 import Image from "next/image";
-import DeviceSliderColumn from "./deviceSlider";
-import Perbankan from "./perbankan";
-import Keunggulan from "./keunggulan";
-import Testimoni from "./testimoni";
-import Information from "./information";
-import Blog from "./blog";
+import Keunggulan from "../section/keunggulan";
+import Perbankan from "../section/perbankan";
+import DeviceSliderColumn from "../section/deviceSlider";
+import Testimoni from "../section/testimoni";
+import Information from "../section/information";
+import Blog from "../section/blog";
 
 const MainPage = () => {
     return (
@@ -23,11 +23,15 @@ const MainPage = () => {
             </div>
 
             {/* Keunggulan Section */}
-            <Keunggulan />
-            
-            {/* Banking Solutions Section */}
-            <Perbankan />
+            <section>
+                <Keunggulan />
+            </section>
 
+            {/* Banking Solutions Section */}
+            <section>
+                <Perbankan />
+            </section>
+            
             {/* Device Sections */}
             <section>
                 <DeviceSliderColumn/>
