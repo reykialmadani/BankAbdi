@@ -44,14 +44,14 @@ const DeviceSliderColumn = () => {
                             <Image src="/assets/tab-pinjaman.png" width={200} height={500} className="rounded-lg shadow-md" alt="Tabungan"/>
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-xl text-black font-bold mb-2">Produk Pinjaman/Kredit</h3>
+                            <h3 className="text-xl text-black mb-2">Produk Pinjaman/Kredit</h3>
                             {pinjamanItems.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer"
+                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center"
                                     onClick={() => toggleSection(item)}
                                 >
-                                    <h6 className="text-lg text-black font-semibold">{item}</h6>
+                                    <h6 className="text-lg text-black">{item}</h6>
                                     {openSection === item && (
                                         <div className="mt-2">
                                             <p className="text-sm text-black">
@@ -65,7 +65,7 @@ const DeviceSliderColumn = () => {
                                             </p>
                                             <a 
                                                 href={`/pinjaman/${item.toLowerCase().replace(/ /g, '-')}`} 
-                                                className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300 block mt-2 text-center"
+                                                className=" px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full shadow-md hover:opacity-80 transition duration-300 block mt-2 text-center"
                                             >
                                                 Selengkapnya -
                                             </a>
@@ -83,14 +83,14 @@ const DeviceSliderColumn = () => {
                             <Image src="/assets/tab-pinjaman.png" width={200} height={200} className="rounded-lg shadow-md" alt="Tabungan"/>
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-xl text-black font-bold mb-2">Produk Tabungan</h3>
+                            <h3 className="text-xl text-black mb-2">Produk Tabungan</h3>
                             {tabunganItems.map((item, index) => (
                                 <div
                                     key={index}
                                     className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer"
                                     onClick={() => toggleSection(item)}
                                 >
-                                    <h6 className="text-lg text-black font-semibold">{item}</h6>
+                                    <h6 className="text-lg text-black">{item}</h6>
                                     {openSection === item && (
                                         <div className="mt-2">
                                             <p className="text-sm text-black">
@@ -118,12 +118,12 @@ const DeviceSliderColumn = () => {
                             <Image src="/assets/tab-pinjaman.png" width={200} height={200} className="rounded-lg shadow-md" alt="Deposito"/>
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-xl text-black font-bold mb-2">Produk Deposito</h3>
+                            <h3 className="text-xl text-black  mb-2">Produk Deposito</h3>
                             <div
                                 className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer"
                                 onClick={() => toggleSection("Deposito")}
                             >
-                                <h6 className="text-lg text-black font-semibold">Deposito</h6>
+                                <h6 className="text-lg text-black">Deposito</h6>
                                 {openSection === "Deposito" && (
                                     <div className="mt-2">
                                         <p className="text-sm text-black">

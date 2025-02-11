@@ -1,15 +1,16 @@
-// components/Footer.tsx
 import Image from 'next/image';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
-    <footer className="hidden lg:block bg-cover" style={{ backgroundImage: "url('https://bankabdi.co.id/img/home/footer.webp')" }}>
-      <div className="container mx-auto px-5">
-        <div className="grid grid-cols-12 gap-4">
+    <footer className="bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://bankabdi.co.id/img/home/footer.webp')" }}>
+      <div className="container mx-auto px-5 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
 
           {/* Logo Section */}
-          <div className="col-span-5">
+          <div className="lg:col-span-5">
             <Image
               src="https://bankabdi.co.id/img/logo/logo-color-abdi.svg"
               alt="Bank ABDI Logo"
@@ -19,33 +20,28 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="col-span-7">
-            <nav className="flex justify-end">
-              <ul className="flex space-x-6">
-                <li><Link href="#" className="text-black hover:text-primary">FAQ</Link></li>
-                <li><Link href="#" className="text-black hover:text-primary">Suku Bunga</Link></li>
-                <li><Link href="#" className="text-black hover:text-primary">Blogspot</Link></li>
-                <li><Link href="#" className="text-black hover:text-primary">Hubungi Kami</Link></li>
-              </ul>
+          <div className="lg:col-span-7 space-y-4">
+            <nav className="flex justify-start space-x-6">
+              <Link href="#" className="text-black text-base hover:text-primary">FAQ</Link>
+              <Link href="#" className="text-black text-base hover:text-primary">Suku Bunga</Link>
+              <Link href="#" className="text-black text-base hover:text-primary">Blogspot</Link>
+              <Link href="#" className="text-black text-base hover:text-primary">Hubungi Kami</Link>
             </nav>
-            
-            <nav className="flex justify-end mt-4">
-              <ul className="flex space-x-6">
-                <li><Link href="#" className="text-black hover:text-primary">Kebijakan Privasi</Link></li>
-                <li><Link href="#" className="text-black hover:text-primary">Syarat dan Ketentuan</Link></li>
-                <li><Link href="#" className="text-black hover:text-primary">Prosedur Pengaduan Nasabah</Link></li>
-              </ul>
+
+            <nav className="flex justify-start space-x-6">
+              <Link href="#" className="text-black text-sm hover:text-primary">Kebijakan Privasi |</Link>
+              <Link href="#" className="text-black text-sm hover:text-primary">Syarat dan Ketentuan |</Link>
+              <Link href="#" className="text-black text-sm hover:text-primary">Prosedur Pengaduan Nasabah |</Link>
             </nav>
           </div>
 
           {/* Contact Information */}
-          <div className="col-span-6 py-4">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-black text-sm">
                   Gedung Bulungan Business Center (BBC)
-                  Jl. Bulungan No. 15, Kramat Pela, Kebayoran Baru, Jakarta Selatan, DKI Jakarta,
-                  12130
+                  Jl. Bulungan No. 15, Kramat Pela, Kebayoran Baru, Jakarta Selatan, DKI Jakarta, 12130
                 </p>
               </div>
               <div>
@@ -59,28 +55,28 @@ const Footer = () => {
           </div>
 
           {/* Office Hours */}
-          <div className="col-span-6 py-4">
+          <div className="lg:col-span-6">
             <div className="text-right">
-              <h5 className="text-black font-semibold mb-4">Batas Akhir Penerimaan Transaksi di Cabang</h5>
-              <ul className="space-y-2 text-black">
-                <li>
-                  <span className="font-medium">Tarikan/Setoran Tunai: </span>
-                  Pukul 08.30 s/d 14.00 (WIB)
+              <h5 className="text-black font-medium mb-4">Batas Akhir Penerimaan Transaksi di Cabang</h5>
+              <ul className="space-y-1 text-black text-sm">
+                <li className="flex justify-between">
+                  <span className="font-medium">Tarikan/Setoran Tunai:</span>
+                  <span>Pukul 08.30 s/d 14.00 (WIB)</span>
                 </li>
-                <li>
-                  <span className="font-medium">Transfer/Kiriman Uang: </span>
-                  Pukul 08.30 s/d 13.00 (WIB)
+                <li className="flex justify-between">
+                  <span className="font-medium">Transfer/Kiriman Uang:</span>
+                  <span>Pukul 08.30 s/d 13.00 (WIB)</span>
                 </li>
-                <li>
-                  <span className="font-medium">Layanan Informasi: </span>
-                  Pukul 08.30 s/d 16.30 (WIB)
+                <li className="flex justify-between">
+                  <span className="font-medium">Layanan Informasi:</span>
+                  <span>Pukul 08.30 s/d 16.30 (WIB)</span>
                 </li>
               </ul>
             </div>
           </div>
 
           {/* Partner Logos */}
-          <div className="col-span-5 py-4">
+          <div className="lg:col-span-5">
             <div className="flex space-x-4">
               <Image
                 src="https://bankabdi.co.id/img/logo/bpr.png"
@@ -98,7 +94,7 @@ const Footer = () => {
           </div>
 
           {/* Company Information */}
-          <div className="col-span-3 py-4">
+          <div className="lg:col-span-3">
             <p className="text-black text-sm">
               <strong>PT BPR Akar Budaya Dana Indonesia (ABDI)</strong> terdaftar dan diawasi oleh Otoritas
               Jasa Keuangan (OJK), dan merupakan peserta program penjaminan Lembaga Penjamin Simpanan (LPS).
@@ -106,22 +102,23 @@ const Footer = () => {
           </div>
 
           {/* Social Media & Copyright */}
-          <div className="col-span-4 py-4 text-right">
-            <div className="flex justify-end space-x-4">
-              <button className="p-2 bg-white rounded-full hover:bg-black-100">
-                <i className="fab fa-facebook-f text-black" />
+          <div className="lg:col-span-4 text-right">
+            <div className="flex justify-end space-x-4 mb-4">
+              <button className="p-2 bg-white rounded-full hover:bg-gray-100">
+                <FontAwesomeIcon icon={faFacebookF} className="text-black w-4 h-4" />
               </button>
               <button className="p-2 bg-white rounded-full hover:bg-gray-100">
-                <i className="fab fa-youtube text-black" />
+                <FontAwesomeIcon icon={faYoutube} className="text-black w-4 h-4" />
               </button>
               <button className="p-2 bg-white rounded-full hover:bg-gray-100">
-                <i className="fab fa-instagram text-black" />
+                <FontAwesomeIcon icon={faInstagram} className="text-black w-4 h-4" />
               </button>
             </div>
-            <p className="text-black pt-3">
+            <p className="text-black text-sm">
               COPYRIGHT © 2022 PT BPR ABDI. ALL RIGHTS RESERVED.
             </p>
           </div>
+
         </div>
       </div>
     </footer>

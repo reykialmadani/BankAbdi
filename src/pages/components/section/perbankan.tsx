@@ -2,15 +2,23 @@
 import Image from "next/image";
 
 const bankingSolutions = [
-    { title: "Tabungan", image: "/assets/tabungan.jpg", description: "Buku Tabungan Aman & Menguntungkan" },
-    { title: "Deposito", image: "/assets/deposito.jpg", description: "Buka Simpanan Aman & Menguntungkan" },
-    { title: "Pinjaman/Kredit", image: "/assets/kredit.jpg", description: "Ajukan Pinjaman Cepat dan Mudah" },
+    { title: "Tabungan", image: "/assets/tab-tabungan.png", description: "Buku Tabungan Aman & Menguntungkan" },
+    { title: "Deposito", image: "/assets/tab-deposito.jpg", description: "Buka Simpanan Aman & Menguntungkan" },
+    { title: "Pinjaman/Kredit", image: "/assets/tab-kredit.png", description: "Ajukan Pinjaman Cepat dan Mudah" },
 ];
 
 const BankingSolutions = () => {
     return (
-        <div className="relative flex flex-col items-center py-4 bg-cover bg-center" style={{ backgroundImage: "url('/assets/bg-accordion.png')" }}>
-            <section className="bg-gray-100 py-12 px-6">
+        <div className="relative flex flex-col items-center py-4 bg-cover bg-center" 
+        style={{
+            backgroundImage: "url('/assets/bg-accordion.png')",
+            height: "500px", 
+            width: "100%", 
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+        }}
+    >
+            <section className="py-12 px-6">
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl font-bold text-[#003868] text-center mb-8">
                         Solusi Perbankan Kami, untuk Anda Nasabah Kami
