@@ -1,16 +1,38 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
 
 const Header = () => {
+  const [isTransparent, setIsTransparent] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsTransparent(window.scrollY === 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="bg-white shadow-md top-0 left-0 w-full z-50 relative h-[60px]">
+<header className={`bg-white shadow-md top-0 left-0 w-full z-50 fixed h-[60px] ${isTransparent ? 'bg-transparent' : 'bg-white'}`}>
+
+
       <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
         
         {/* Logo pt */}
         <div className='mr-6'>
           <Link href="/" legacyBehavior>
             <a>
+            {isTransparent ? (
+              <Image src="https://bankabdi.co.id/img/logo/logo-white-abdi.svg" width={100} height={60} alt="Logo Abdi Bank" className="logo-transparent" />
+            ) : (
               <Image src="https://bankabdi.co.id/img/logo/logo-color-abdi.svg" width={100} height={60} alt="Logo Abdi Bank" />
+            )}
+
             </a>
           </Link>
         </div>
@@ -30,6 +52,10 @@ const Header = () => {
                     <li><Link href="/pinjaman/kredit-modal-kerja" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Modal Kerja</a></Link></li>
                     <li><Link href="/pinjaman/kredit-investasi" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Investasi</a></Link></li>
                     <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Multiguna</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Kepemilikan Rumah</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Kepemilikan Mobil</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Kendaraan Bermotor</a></Link></li>
+                    <li><Link href="/pinjaman/kredit-multiguna" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Kredit Tanpa Agunan</a></Link></li>
                   </>
                 )}
                 {menu === 'tabungan' && (
@@ -49,8 +75,8 @@ const Header = () => {
                 {menu === 'informasi' && (
                   <>
                     <li><Link href="/informasi/suku-bunga" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Suku Bunga</a></Link></li>
-                    <li><Link href="/informasi/promo" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Promo</a></Link></li>
-                    <li><Link href="/informasi/faq" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">FAQ</a></Link></li>
+                    <li><Link href="/informasi/promo" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Blog</a></Link></li>
+                    <li><Link href="/informasi/faq" legacyBehavior><a className="block px-4 py-2 hover:bg-gray-100">Laporan</a></Link></li>
                   </>
                 )}
               </ul>
@@ -61,7 +87,7 @@ const Header = () => {
           <li><Link href="/hubungi-kami" legacyBehavior><a className="hover:text-blue-600">Hubungi Kami</a></Link></li>
         </ul>
 
-        {/* Button Pengajuan Kredit */}
+        {/* Button*/}
         <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-800 ml-auto font-sogeo">
           Pengajuan Kredit
         </button>
