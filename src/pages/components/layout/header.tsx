@@ -158,101 +158,101 @@ const Header = () => {
                   </>
                 )}
 
-{menu === 'tabungan' && (
-  <>
-    <li className="border-b border-gray-100 pb-2 mb-2">
-      <h2 className="font-semibold text-gray-900">TABUNGAN</h2>
-    </li>
-    <div className="grid grid-cols-2 gap-4">
-      {/* Kolom Kiri */}
-      <div>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/tabungan/tabungan-abdi" legacyBehavior>
-            <a className="block px-4 py-3">
-              <span className="font-medium text-gray-900">Tabungan ABDI</span>
-              <p className="text-sm text-gray-600 mt-1">
-                Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas
-                penarikan dana kapan saja
-              </p>
-            </a>
-          </Link>
-        </li>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/tabungan/tabungan-abdiku" legacyBehavior>
-            <a className="block px-4 py-2 hover:bg-gray-100">
-              <span className="font-medium text-gray-900">Tabungan Abdiku</span>
-              <p className="text-sm text-gray-600">
-                Lebih hemat dengan menabung tanpa biaya administrasi bulanan
-                yang mengikat anda
-              </p>
-            </a>
-          </Link>
-        </li>
-      </div>
-      {/* Kolom Kanan */}
-      <div>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/tabungan/tabungan-abdi-simple" legacyBehavior>
-            <a className="block px-4 py-2 hover:bg-gray-100">
-              <span className="font-medium text-gray-900">Tabungan ABDI SIMPLE</span>
-              <p className="text-sm text-gray-600">
-                Mulailah mengasah disiplin menabung sejak usia dini untuk meraih
-                kehidupan finansial yang lebih baik
-              </p>
-            </a>
-          </Link>
-        </li>
-      </div>
-    </div>
-  </>
-)}
+                {menu === 'tabungan' && (
+                  <>
+                    <li className="border-b border-gray-100 pb-2 mb-2">
+                      <h2 className="font-semibold text-gray-900">TABUNGAN</h2>
+                    </li>
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Kolom Kiri */}
+                      <div>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/tabungan/tabungan-abdi" legacyBehavior>
+                            <a className="block px-4 py-3">
+                              <span className="font-medium text-gray-900">Tabungan ABDI</span>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas
+                                penarikan dana kapan saja
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/tabungan/tabungan-abdiku" legacyBehavior>
+                            <a className="block px-4 py-2 hover:bg-gray-100">
+                              <span className="font-medium text-gray-900">Tabungan Abdiku</span>
+                              <p className="text-sm text-gray-600">
+                                Lebih hemat dengan menabung tanpa biaya administrasi bulanan
+                                yang mengikat anda
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                      </div>
+                      {/* Kolom Kanan */}
+                      <div>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/tabungan/tabungan-abdi-simple" legacyBehavior>
+                            <a className="block px-4 py-2 hover:bg-gray-100">
+                              <span className="font-medium text-gray-900">Tabungan ABDI SIMPLE</span>
+                              <p className="text-sm text-gray-600">
+                                Mulailah mengasah disiplin menabung sejak usia dini untuk meraih
+                                kehidupan finansial yang lebih baik
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                      </div>
+                    </div>
+                  </>
+                )}
 
-                {menu === 'deposito' && (
-  <>
-    <li className="border-b border-gray-100 pb-2 mb-2">
-      <h2 className="font-semibold text-gray-900">DEPOSITO</h2>
-    </li>
-    <div className="grid grid-cols-2 gap-4">
-      {/* Kolom Kiri */}
-      <div>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/deposito/deposito-berjangka" legacyBehavior>
-            <a className="block px-4 py-3">
-              <span className="font-medium text-gray-900">Deposito Berjangka</span>
-              <p className="text-sm text-gray-600 mt-1">
-                Pilihan Investasi yang memberikan Keuntungan dan rasa aman
-                karena dijamin oleh Lembaga Penjamin Simpanan (LPS)
-              </p>
-            </a>
-          </Link>
-        </li>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/deposito/formulir-deposito" legacyBehavior>
-            <a className="block px-4 py-3">
-              <span className="font-medium text-gray-900">Formulir Deposito</span>
-              <p className="text-sm text-gray-600 mt-1">
-                Ajukan Deposito dengan mengisi Formulir BANK ABDI
-              </p>
-            </a>
-          </Link>
-        </li>
-      </div>
-      {/* Kolom Kanan */}
-      <div>
-        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-          <Link href="/deposito/kalkulator-deposito" legacyBehavior>
-            <a className="block px-4 py-3">
-              <span className="font-medium text-gray-900">Kalkulator Deposito</span>
-              <p className="text-sm text-gray-600 mt-1">
-                Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI
-              </p>
-            </a>
-          </Link>
-        </li>
-      </div>
-    </div>
-  </>
-)}
+                  {menu === 'deposito' && (
+                  <>
+                    <li className="border-b border-gray-100 pb-2 mb-2">
+                      <h2 className="font-semibold text-gray-900">DEPOSITO</h2>
+                    </li>
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Kolom Kiri */}
+                      <div>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/deposito/deposito-berjangka" legacyBehavior>
+                            <a className="block px-4 py-3">
+                              <span className="font-medium text-gray-900">Deposito Berjangka</span>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Pilihan Investasi yang memberikan Keuntungan dan rasa aman
+                                karena dijamin oleh Lembaga Penjamin Simpanan (LPS)
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/deposito/formulir-deposito" legacyBehavior>
+                            <a className="block px-4 py-3">
+                              <span className="font-medium text-gray-900">Formulir Deposito</span>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Ajukan Deposito dengan mengisi Formulir BANK ABDI
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                      </div>
+                      {/* Kolom Kanan */}
+                      <div>
+                        <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                          <Link href="/deposito/kalkulator-deposito" legacyBehavior>
+                            <a className="block px-4 py-3">
+                              <span className="font-medium text-gray-900">Kalkulator Deposito</span>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI
+                              </p>
+                            </a>
+                          </Link>
+                        </li>
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 {menu === 'informasi' && (
                   <>
@@ -297,7 +297,7 @@ const Header = () => {
         </ul>
 
         {/* Button */}
-        <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors ml-auto font-sogeo">
+        <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors ml-auto mr-6 font-sogeo">
           Pengajuan Kredit
         </button>
       </nav>
