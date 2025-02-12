@@ -277,7 +277,7 @@ const Header = () => {
 
           {/* Navigation Links */}
           <li>
-            <Link href="/tentang-kami" legacyBehavior>
+            <Link href="/about" legacyBehavior>
               <a className={`hover:text-blue-600 ${
                 isTransparent ? 'text-white' : 'text-gray-800'
               }`}>

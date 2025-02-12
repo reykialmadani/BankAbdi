@@ -1,5 +1,5 @@
 import Header from "./components/layout/header";
-import Main from "./components/layout/main";
+import Main from "./main";
 import Footer from "./components/layout/footer";
 
 export default function Home() {
