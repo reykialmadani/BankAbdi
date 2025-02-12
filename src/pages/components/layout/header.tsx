@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isTransparent, setIsTransparent] = useState(true);
@@ -14,10 +14,10 @@ const Header = () => {
 
     // Initial check
     handleScroll();
-    
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header
       className={`top-0 left-0 w-full z-50 fixed h-[60px] transition-all duration-300 ${
-        isTransparent ? 'bg-transparent' : 'bg-white shadow-md'
+        isTransparent ? "bg-transparent" : "bg-white shadow-md"
       }`}
     >
       <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
@@ -56,17 +56,36 @@ const Header = () => {
 
         {/* Navigation */}
         <ul className="flex space-x-6 text-gray-800 justify-start items-center">
-          {['pinjaman', 'tabungan', 'deposito', 'informasi'].map((menu) => (
+          {["pinjaman", "tabungan", "deposito", "informasi"].map((menu) => (
             <li key={menu} className="relative group">
-              <button className={`hover:text-blue-600 focus:outline-none capitalize flex items-center ${
-                isTransparent ? 'text-white' : 'text-gray-800'
-              }`}>
-                {menu} <span className="ml-1">▼</span>
+              <button
+                className={`hover:text-blue-600 focus:outline-none capitalize flex items-center ${
+                  isTransparent ? "text-white" : "text-gray-800"
+                }`}
+              >
+                {menu}{" "}
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
               </button>
 
               {/* Dropdown Menu */}
-              <ul className={`absolute left-0 mt-2 ${menu === 'pinjaman' ? 'w-[800px]' : 'w-64'} bg-white text-gray-800 shadow-lg rounded-lg p-4 z-50 hidden group-hover:block transition-all duration-200 ease-in-out transform translate-y-2 group-hover:translate-y-0`}>
-                {menu === 'pinjaman' && (
+              <ul
+                className={`absolute left-0 mt-2 ${
+                  menu === "pinjaman" ? "w-[800px]" : "w-64"
+                } bg-white text-gray-800 shadow-lg rounded-lg p-4 z-50 hidden group-hover:block transition-all duration-200 ease-in-out transform translate-y-2 group-hover:translate-y-0`}
+              >
+                {menu === "pinjaman" && (
                   <>
                     <li className="border-b border-gray-100 pb-2 mb-2">
                       <h2 className="font-semibold text-gray-900">PINJAMAN</h2>
@@ -75,80 +94,117 @@ const Header = () => {
                       {/* Kolom Kiri */}
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-modal-kerja" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-modal-kerja"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-3">
-                              <span className="font-medium text-gray-900">Kredit Modal Kerja</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Modal Kerja
+                              </span>
                               <p className="text-sm text-gray-600 mt-1">
-                                Kami hadir untuk memberikan kemudahan dalam pembiayaan
-                                kebutuhan modal kerja anda
+                                Kami hadir untuk memberikan kemudahan dalam
+                                pembiayaan kebutuhan modal kerja anda
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-investasi" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-investasi"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Investasi</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Investasi
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Nikmati pembiayaan untuk kebutuhan perluasan bisnis anda
-                                dalam jangka waktu yang panjang
+                                Nikmati pembiayaan untuk kebutuhan perluasan
+                                bisnis anda dalam jangka waktu yang panjang
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-multiguna" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-multiguna"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Multiguna</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Multiguna
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Nikmati fasilitas pinjaman untuk segala kebutuhan anda
+                                Nikmati fasilitas pinjaman untuk segala
+                                kebutuhan anda
                               </p>
                             </a>
                           </Link>
                         </li>
                       </div>
-                      
+
                       {/* Kolom Kanan */}
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-kepemilikan-rumah" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-kepemilikan-rumah"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Kepemilikan Rumah</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Kepemilikan Rumah
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Makin mudah wujudkan hunian idaman dengan jangka waktu
-                                fleksibel
+                                Makin mudah wujudkan hunian idaman dengan jangka
+                                waktu fleksibel
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-kepemilikan-mobil" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-kepemilikan-mobil"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Kepemilikan Mobil</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Kepemilikan Mobil
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Jalan mudah untuk memiliki mobil idaman baru atau bekas
-                                dengan bunga ringan
+                                Jalan mudah untuk memiliki mobil idaman baru
+                                atau bekas dengan bunga ringan
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-kendaraan-bermotor" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-kendaraan-bermotor"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Kendaraan Bermotor</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Kendaraan Bermotor
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Dapatkan bunga ringan untuk mewujudkan motor impian anda
+                                Dapatkan bunga ringan untuk mewujudkan motor
+                                impian anda
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/pinjaman/kredit-tanpa-agunan" legacyBehavior>
+                          <Link
+                            href="/pinjaman/kredit-tanpa-agunan"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Kredit Tanpa Agunan</span>
+                              <span className="font-medium text-gray-900">
+                                Kredit Tanpa Agunan
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Memberikan kemudahan dan keuntungan dalam memenuhi berbagai
-                                keperluan hidup anda
+                                Memberikan kemudahan dan keuntungan dalam
+                                memenuhi berbagai keperluan hidup anda
                               </p>
                             </a>
                           </Link>
@@ -158,7 +214,7 @@ const Header = () => {
                   </>
                 )}
 
-                {menu === 'tabungan' && (
+                {menu === "tabungan" && (
                   <>
                     <li className="border-b border-gray-100 pb-2 mb-2">
                       <h2 className="font-semibold text-gray-900">TABUNGAN</h2>
@@ -169,10 +225,12 @@ const Header = () => {
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
                           <Link href="/tabungan/tabungan-abdi" legacyBehavior>
                             <a className="block px-4 py-3">
-                              <span className="font-medium text-gray-900">Tabungan ABDI</span>
+                              <span className="font-medium text-gray-900">
+                                Tabungan ABDI
+                              </span>
                               <p className="text-sm text-gray-600 mt-1">
-                                Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas
-                                penarikan dana kapan saja
+                                Raih keuntungan dengan suku bunga kompetitif dan
+                                fleksibilitas penarikan dana kapan saja
                               </p>
                             </a>
                           </Link>
@@ -180,10 +238,12 @@ const Header = () => {
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
                           <Link href="/tabungan/tabungan-abdiku" legacyBehavior>
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Tabungan Abdiku</span>
+                              <span className="font-medium text-gray-900">
+                                Tabungan Abdiku
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Lebih hemat dengan menabung tanpa biaya administrasi bulanan
-                                yang mengikat anda
+                                Lebih hemat dengan menabung tanpa biaya
+                                administrasi bulanan yang mengikat anda
                               </p>
                             </a>
                           </Link>
@@ -192,12 +252,18 @@ const Header = () => {
                       {/* Kolom Kanan */}
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/tabungan/tabungan-abdi-simple" legacyBehavior>
+                          <Link
+                            href="/tabungan/tabungan-abdi-simple"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-2 hover:bg-gray-100">
-                              <span className="font-medium text-gray-900">Tabungan ABDI SIMPLE</span>
+                              <span className="font-medium text-gray-900">
+                                Tabungan ABDI SIMPLE
+                              </span>
                               <p className="text-sm text-gray-600">
-                                Mulailah mengasah disiplin menabung sejak usia dini untuk meraih
-                                kehidupan finansial yang lebih baik
+                                Mulailah mengasah disiplin menabung sejak usia
+                                dini untuk meraih kehidupan finansial yang lebih
+                                baik
                               </p>
                             </a>
                           </Link>
@@ -207,7 +273,7 @@ const Header = () => {
                   </>
                 )}
 
-                  {menu === 'deposito' && (
+                {menu === "deposito" && (
                   <>
                     <li className="border-b border-gray-100 pb-2 mb-2">
                       <h2 className="font-semibold text-gray-900">DEPOSITO</h2>
@@ -216,22 +282,34 @@ const Header = () => {
                       {/* Kolom Kiri */}
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/deposito/deposito-berjangka" legacyBehavior>
+                          <Link
+                            href="/deposito/deposito-berjangka"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-3">
-                              <span className="font-medium text-gray-900">Deposito Berjangka</span>
+                              <span className="font-medium text-gray-900">
+                                Deposito Berjangka
+                              </span>
                               <p className="text-sm text-gray-600 mt-1">
-                                Pilihan Investasi yang memberikan Keuntungan dan rasa aman
-                                karena dijamin oleh Lembaga Penjamin Simpanan (LPS)
+                                Pilihan Investasi yang memberikan Keuntungan dan
+                                rasa aman karena dijamin oleh Lembaga Penjamin
+                                Simpanan (LPS)
                               </p>
                             </a>
                           </Link>
                         </li>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/deposito/formulir-deposito" legacyBehavior>
+                          <Link
+                            href="/deposito/formulir-deposito"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-3">
-                              <span className="font-medium text-gray-900">Formulir Deposito</span>
+                              <span className="font-medium text-gray-900">
+                                Formulir Deposito
+                              </span>
                               <p className="text-sm text-gray-600 mt-1">
-                                Ajukan Deposito dengan mengisi Formulir BANK ABDI
+                                Ajukan Deposito dengan mengisi Formulir BANK
+                                ABDI
                               </p>
                             </a>
                           </Link>
@@ -240,11 +318,17 @@ const Header = () => {
                       {/* Kolom Kanan */}
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                          <Link href="/deposito/kalkulator-deposito" legacyBehavior>
+                          <Link
+                            href="/deposito/kalkulator-deposito"
+                            legacyBehavior
+                          >
                             <a className="block px-4 py-3">
-                              <span className="font-medium text-gray-900">Kalkulator Deposito</span>
+                              <span className="font-medium text-gray-900">
+                                Kalkulator Deposito
+                              </span>
                               <p className="text-sm text-gray-600 mt-1">
-                                Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI
+                                Ketahui suku bunga deposito BANK ABDI dengan
+                                Kalkulator BANK ABDI
                               </p>
                             </a>
                           </Link>
@@ -254,7 +338,7 @@ const Header = () => {
                   </>
                 )}
 
-                {menu === 'informasi' && (
+                {menu === "informasi" && (
                   <>
                     <li className="border-b border-gray-100 pb-2 mb-2">
                       <h2 className="font-semibold text-gray-900">INFORMASI</h2>
@@ -262,9 +346,12 @@ const Header = () => {
                     <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
                       <Link href="/informasi/suku-bunga" legacyBehavior>
                         <a className="block px-4 py-3">
-                          <span className="font-medium text-gray-900">Suku Bunga</span>
+                          <span className="font-medium text-gray-900">
+                            Suku Bunga
+                          </span>
                           <p className="text-sm text-gray-600 mt-1">
-                            BANK ABDI menawarkan tabungan dengan suku bunga menarik
+                            BANK ABDI menawarkan tabungan dengan suku bunga
+                            menarik
                           </p>
                         </a>
                       </Link>
@@ -278,18 +365,22 @@ const Header = () => {
           {/* Navigation Links */}
           <li>
             <Link href="/about" legacyBehavior>
-              <a className={`hover:text-blue-600 ${
-                isTransparent ? 'text-white' : 'text-gray-800'
-              }`}>
+              <a
+                className={`hover:text-blue-600 ${
+                  isTransparent ? "text-white" : "text-gray-800"
+                }`}
+              >
                 Tentang Kami
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/hubungi-kami" legacyBehavior>
-              <a className={`hover:text-blue-600 ${
-                isTransparent ? 'text-white' : 'text-gray-800'
-              }`}>
+            <Link href="/contact" legacyBehavior>
+              <a
+                className={`hover:text-blue-600 ${
+                  isTransparent ? "text-white" : "text-gray-800"
+                }`}
+              >
                 Hubungi Kami
               </a>
             </Link>

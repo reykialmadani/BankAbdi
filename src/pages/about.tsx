@@ -1,5 +1,8 @@
+import Image from "next/image";
 import Header from "../pages/components/layout/header";
 import Hero from "../pages/components//section/hero";
+import Informasi from "./components/section/information";
+import Footer from "./components/layout/footer";
 
 const AboutPage: React.FC = () => {
   return (
@@ -258,6 +261,117 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-[#EFF6FC] profile-dewan py-8">
+        <div className="container mx-auto">
+          {/* Section Heading */}
+          <div className="text-center mb-6">
+            <h2 className="text-indigo-600 text-3xl font-semibold py-3">
+              Profil Dewan
+            </h2>
+          </div>
+
+          {/* Section Container */}
+          <div className="flex flex-wrap justify-center gap-6">
+            {/* Dewan Komisaris */}
+            <div className="w-full">
+              <div className="text-center text-xl font-semibold mb-4">
+                Dewan Komisaris
+              </div>
+              <div className="flex flex-wrap justify-center gap-6">
+                {/* Marlinah Ongko Widjojo */}
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                  <div className="card-image relative h-60">
+                    <Image
+                      src="https://bankabdi.co.id/img/profile/marlinah.webp"
+                      alt="Marlinah Ongko Widjojo"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="card-title p-4 text-center">
+                    <h5 className="text-black  text-xl font-semibold">
+                      Marlinah Ongko Widjojo
+                    </h5>
+                    <small className="text-sm text-black">
+                      Komisaris Utama
+                    </small>
+                  </div>
+                </div>
+
+                {/* Manuel Lahengke Nusa */}
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                  <div className="card-image relative h-60">
+                    <Image
+                      src="https://bankabdi.co.id/img/profile/manuel.webp"
+                      alt="Manuel Lahengke Nusa"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="card-title p-4 text-center">
+                    <h5 className="text-black  text-xl font-semibold">
+                      Manuel Lahengke Nusa
+                    </h5>
+                    <small className="text-sm text-black">
+                      Komisaris Anggota
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Dewan Direksi */}
+            <div className="w-full">
+              <div className="text-center text-xl font-semibold mt-8 mb-4">
+                Dewan Direksi
+              </div>
+              <div className="flex flex-wrap justify-center gap-6">
+                {/* Wardati SE */}
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                  <div className="card-image relative h-60">
+                    <Image
+                      src="https://bankabdi.co.id/img/profile/wardati.webp"
+                      alt="Wardati SE"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="card-title p-4 text-center">
+                    <h5 className=" text-black text-xl font-semibold">
+                      Wardati SE
+                    </h5>
+                    <small className="text-sm text-black">Direktur Utama</small>
+                  </div>
+                </div>
+
+                {/* Mario Yahya */}
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                  <div className="card-image relative h-60">
+                    <Image
+                      src="https://bankabdi.co.id/img/profile/mario.webp"
+                      alt="Mario Yahya"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="card-title p-4 text-center">
+                    <h5 className=" text-black text-xl font-semibold">
+                      Mario Yahya
+                    </h5>
+                    <small className="text-sm text-black">
+                      Direktur Operasional
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Informasi />
+      <Footer />
     </div>
   );
 };
