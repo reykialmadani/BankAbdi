@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 
-const testimonials = [
+interface Testimonial {
+  content: string;
+  author: string;
+  position: string;
+  avatar: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     content: "Saya sangat berharap BPR ABDI dapat tumbuh dan berkembang dengan baik sehingga berkontribusi dalam pembiayaan kepada pelaku usaha mikro kecil dan menengah di Indonesia",
     author: "Bpk. Roberto Akyuwen",
@@ -17,86 +24,118 @@ const testimonials = [
 ];
 
 const TestimonialSection = () => {
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - sliderRef.current.offsetLeft);
+    setScrollLeft(sliderRef.current.scrollLeft);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const handleMouseUp = () => {
+    if (!sliderRef.current) return;
+    setIsDragging(false);
+    
+    const slideWidth = sliderRef.current.offsetWidth;
+    const currentScroll = sliderRef.current.scrollLeft;
+    const nearestSlide = Math.round(currentScroll / slideWidth);
+    
+    sliderRef.current.scrollTo({
+      left: nearestSlide * slideWidth,
+      behavior: 'smooth'
+    });
+    
+    setCurrentSlide(nearestSlide);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging || !sliderRef.current) return;
+    e.preventDefault();
+    
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    sliderRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleSlideClick = (index: number) => {
+    if (isDragging || !sliderRef.current) return;
+    
+    const slideWidth = sliderRef.current.offsetWidth;
+    sliderRef.current.scrollTo({
+      left: index * slideWidth,
+      behavior: 'smooth'
+    });
+    setCurrentSlide(index);
   };
 
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
-        {/* Section Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Apa Kata Mereka?</h2>
         </div>
 
-        {/* Testimonials Slider */}
         <div className="relative">
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg"
+          <div 
+            ref={sliderRef}
+            className="overflow-x-hidden cursor-grab active:cursor-grabbing"
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onMouseMove={handleMouseMove}
           >
-            ←
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg"
-          >
-            →
-          </button>
-
-          {/* Testimonial Cards */}
-          <div className="overflow-hidden">
-            <div className="transition-transform duration-300 ease-in-out">
-              {/* Card */}
-              <div className="max-w-2xl mx-auto">
-                <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200">
-                  <div className="flex items-center mb-4">
-                    {/* Avatar */}
-                    <div className="w-20 h-20 rounded-full overflow-hidden mr-4">
-                      <Image
-                        src={testimonials[currentSlide].avatar}
-                        alt={`Testimonial by ${testimonials[currentSlide].author}`}
-                        className="w-full h-full object-cover"
-                        width={80}
-                        height={80}
-                      />
-                    </div>
-
-                    {/* Author Info */}
-                    <div>
-                      <h6 className="font-semibold text-gray-800 text-lg">
-                        {testimonials[currentSlide].author}
-                      </h6>
-                      <p className="text-gray-600 text-sm">
-                        {testimonials[currentSlide].position}
+            <div className="flex">
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className="w-full flex-shrink-0"
+                  onClick={() => handleSlideClick(index)}
+                >
+                  <div className="max-w-2xl mx-auto px-4">
+                    <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200">
+                      <div className="flex items-center mb-4">
+                        <div className="w-20 h-20 rounded-full overflow-hidden mr-4">
+                          <Image
+                            src={testimonial.avatar}
+                            alt={`Testimonial by ${testimonial.author}`}
+                            className="w-full h-full object-cover"
+                            width={80}
+                            height={80}
+                          />
+                        </div>
+                        <div>
+                          <h6 className="font-semibold text-gray-800 text-lg">
+                            {testimonial.author}
+                          </h6>
+                          <p className="text-gray-600 text-sm">
+                            {testimonial.position}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 text-lg italic">
+                        {testimonial.content}
                       </p>
                     </div>
                   </div>
-
-                  {/* Testimonial Content */}
-                  <p className="text-gray-700 text-lg italic">
-                    {testimonials[currentSlide].content}
-                  </p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Slide Indicators */}
           <div className="flex justify-center mt-6">
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 mx-1 rounded-full ${
-                  currentSlide === index ? 'bg-gray-800' : 'bg-gray-300'
+                onClick={() => handleSlideClick(index)}
+                className={`w-3 h-3 mx-1 rounded-full transition-colors duration-300 ${
+                  currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
                 }`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
