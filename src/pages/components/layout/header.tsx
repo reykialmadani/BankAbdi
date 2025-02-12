@@ -4,22 +4,29 @@ import { useEffect, useState } from 'react';
 
 const Header = () => {
   const [isTransparent, setIsTransparent] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsTransparent(window.scrollY === 0);
     };
 
+    // Initial check
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  if (!mounted) return null;
+
   return (
     <header
-      className={`bg-white top-0 left-0 w-full z-50 fixed h-[60px] transition-colors duration-300 ${
-        isTransparent ? 'bg-transparent' : 'bg-white'
+      className={`top-0 left-0 w-full z-50 fixed h-[60px] transition-all duration-300 ${
+        isTransparent ? 'bg-transparent' : 'bg-white shadow-md'
       }`}
     >
       <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
