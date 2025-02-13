@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
 
-// Deklarasi tipe untuk produk pinjaman
 interface LoanProduct {
   title: string;
   description: string;
@@ -14,6 +14,44 @@ interface LoanProductsSliderProps {
 }
 
 const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
+  useEffect(() => {
+    const sliderContainer = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.slider-container > li');
+    const prevButton = document.querySelector('.slider-nav');
+    const nextButton = document.querySelector('.slider-nav-next');
+    
+    let currentIndex = 0;
+    
+    const updateSlider = () => {
+      const offset = currentIndex * -33.33;
+      if (sliderContainer) {
+        sliderContainer.style.transform = `translateX(${offset}%)`;
+      }
+    };
+
+    const handlePrevClick = () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    };
+
+    const handleNextClick = () => {
+      if (currentIndex < slides.length - 3) {
+        currentIndex++;
+        updateSlider();
+      }
+    };
+
+    prevButton?.addEventListener('click', handlePrevClick);
+    nextButton?.addEventListener('click', handleNextClick);
+
+    return () => {
+      prevButton?.removeEventListener('click', handlePrevClick);
+      nextButton?.removeEventListener('click', handleNextClick);
+    };
+  }, []);
+
   return (
     <div className="py-8">
       <h4 className="text-2xl font-bold text-gray-900 mb-6">
@@ -29,13 +67,16 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
                   <Link href={product.href}>
                     <div className="p-6">
                       <div className="flex items-start gap-4">
-                        <Image
-                          src={product.icon}
-                          alt={product.title}
-                          width={40}
-                          height={40}
-                          className="object-contain"
-                        />
+                        <div className="relative w-10 h-10 flex-shrink-0">
+                          <Image
+                            src={product.icon}
+                            alt={product.title}
+                            sizes="40px"
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            priority={index === 0}
+                          />
+                        </div>
                         <h6 className="font-semibold text-gray-900">
                           {product.title}
                         </h6>

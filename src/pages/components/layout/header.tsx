@@ -95,7 +95,7 @@ const Header = () => {
                       <div>
                         <li className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
                           <Link
-                            href="/pinjaman/101/kredit-modal-kerja"
+                            href="/pinjaman/kredit-modal-kerja"
                             legacyBehavior
                           >
                             <a className="block px-4 py-3">
