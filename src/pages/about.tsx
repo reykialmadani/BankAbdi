@@ -93,7 +93,6 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Moto Perusahaan Section */}
-      {/* Moto Perusahaan Section */}
       <section
         className="section moto bg-cover bg-center py-16"
         style={{

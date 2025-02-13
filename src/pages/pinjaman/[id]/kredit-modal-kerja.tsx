@@ -1,12 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Header from "../../components/layout/header";
 import Hero from "../../components/section/hero";
+import Blog from "../../components/section/blog";
+import Footer from "@/pages/components/layout/footer";
 
 const KreditModalKerjaPage = () => {
   const router = useRouter();
   const currentPath = router.pathname;
+  const [modalPerkreditan, setModalPerkreditan] = useState(false);
+  const [modalPersyaratan, setModalPersyaratan] = useState(false);
 
   const menuItems = [
     { href: "/pinjaman/kredit-modal-kerja", label: "Kredit Modal Kerja (KMK)" },
@@ -25,6 +30,96 @@ const KreditModalKerjaPage = () => {
     { href: "/pinjaman/formulir", label: "Formulir Pengajuan Pinjaman" },
   ];
 
+  const loanProducts = [
+    {
+      title: "Kredit Modal Kerja (KMK)",
+      description:
+        "Kami hadir untuk memberikan kemudahan dalam pembiayaan kebutuhan modal kerja anda",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kmk.png",
+      href: "/pinjaman/kredit-modal-kerja",
+    },
+    {
+      title: "Kredit Investasi",
+      description:
+        "Nikmati pembiayaan untuk kebutuhan perluasan dan pengembangan bisnis anda dengan jangka waktu yang panjang",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_ki.png",
+      href: "/pinjaman/kredit-investasi",
+    },
+    {
+      title: "Kredit Kepemilikan Rumah",
+      description:
+        "Makin mudah wujudkan hunian idaman anda dengan jangka waktu fleksibel",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpr.png",
+      href: "/pinjaman/kpr",
+    },
+    {
+      title: "Kredit Multiguna",
+      description: "Nikmati fasilitas pinjaman untuk segala kebutuhan anda",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_km.png",
+      href: "/pinjaman/kredit-multiguna",
+    },
+    {
+      title: "Kredit Kepemilikan Mobil (KPM)",
+      description:
+        "Jalan mudah untuk memiliki mobil idaman baru atau bekas dengan bunga ringan",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpm.png",
+      href: "/pinjaman/kredit-kepemilikan-mobil",
+    },
+    {
+      title: "Kredit Kendaraan Bermotor (KKB)",
+      description: "Dapatkan bunga ringan untuk mewujudkan motor impian anda",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kkb.png",
+      href: "/pinjaman/kredit-kendaraan-bermotor",
+    },
+    {
+      title: "Kredit Tanpa Agunan",
+      description:
+        "Memberikan kemudahan dan keuntungan dalam memenuhi berbagai keperluan hidup anda",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
+      href: "/pinjaman/kta",
+    },
+  ];
+
+  useEffect(() => {
+    const sliderContainer = document.querySelector(
+      ".slider-container"
+    ) as HTMLElement;
+    const slides = document.querySelectorAll(".slider-container > li");
+    const prevButton = document.querySelector(".slider-nav");
+    const nextButton = document.querySelector(".slider-nav-next");
+
+    let currentIndex = 0;
+
+    const updateSlider = () => {
+      const offset = currentIndex * -33.33;
+      if (sliderContainer) {
+        sliderContainer.style.transform = `translateX(${offset}%)`;
+      }
+    };
+
+    const handlePrevClick = () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    };
+
+    const handleNextClick = () => {
+      if (currentIndex < slides.length - 3) {
+        currentIndex++;
+        updateSlider();
+      }
+    };
+
+    prevButton?.addEventListener("click", handlePrevClick);
+    nextButton?.addEventListener("click", handleNextClick);
+
+    return () => {
+      prevButton?.removeEventListener("click", handlePrevClick);
+      nextButton?.removeEventListener("click", handleNextClick);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -35,9 +130,7 @@ const KreditModalKerjaPage = () => {
         showButton={false}
       />
 
-      {/* Main Container */}
       <div className="container mx-auto px-4">
-        
         <div className="flex flex-col lg:flex-row gap-8 py-8">
           {/* Sidebar */}
           <div className="lg:w-1/4 w-full">
@@ -236,7 +329,183 @@ const KreditModalKerjaPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Slider Section */}
+        <div className="py-8">
+          <h4 className="text-2xl font-bold text-gray-900 mb-6">
+            Produk Pinjaman Lainnya
+          </h4>
+
+          <div className="relative">
+            <div className="overflow-hidden">
+              <ul className="slider-container flex transition-transform duration-300">
+                {loanProducts.map((product, index) => (
+                  <li key={index} className="w-1/3 flex-shrink-0 px-4">
+                    <div className="bg-white rounded-lg shadow-sm h-full">
+                      <Link href={product.href}>
+                        <div className="p-6">
+                          <div className="flex items-start gap-4">
+                            <Image
+                              src={product.icon}
+                              alt={product.title}
+                              width={40}
+                              height={40}
+                              className="object-contain"
+                            />
+                            <h6 className="font-semibold text-gray-900">
+                              {product.title}
+                            </h6>
+                          </div>
+                          <p className="mt-4 text-gray-600 text-sm">
+                            {product.description}
+                          </p>
+                        </div>
+                        <div className="px-6 py-4 border-t flex justify-between items-center">
+                          <span className="text-blue-600 text-sm">
+                            Selengkapnya
+                          </span>
+                          <span className="text-blue-600">&gt;</span>
+                        </div>
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              className="slider-nav absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center z-10 hover:bg-gray-50"
+              aria-label="Previous"
+            >
+              <span className="text-blue-600">&lt;</span>
+            </button>
+
+            <button
+              type="button"
+              className="slider-nav-next absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center z-10 hover:bg-gray-50"
+              aria-label="Next"
+            >
+              <span className="text-blue-600">&gt;</span>
+            </button>
+          </div>
+          <div className="bg-[#eff6fc] py-8">
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-white rounded-lg p-6 shadow-sm">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Image
+                      src="https://bankabdi.co.id/icons/warning.png"
+                      alt="Warning"
+                      width={24}
+                      height={24}
+                    />
+                    <h3 className="font-semibold text-xl">
+                      KETENTUAN PERKREDITAN
+                    </h3>
+                  </div>
+                  <h6 className="text-gray-600 mb-4">
+                    Klik tombol dibawah ini untuk membuka pop up ketentuan
+                    perkreditan.
+                  </h6>
+                  <button
+                    onClick={() => setModalPerkreditan(true)}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                  >
+                    Ketentuan Perkreditan
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-lg p-6 shadow-sm">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Image
+                      src="https://bankabdi.co.id/icons/clipboard.png"
+                      alt="Clipboard"
+                      width={24}
+                      height={24}
+                    />
+                    <h3 className="font-semibold text-xl">
+                      PERSYARATAN KREDIT
+                    </h3>
+                  </div>
+                  <h6 className="text-gray-600 mb-4">
+                    Klik tombol dibawah ini untuk membuka pop up persyaratan
+                    perkreditan.
+                  </h6>
+                  <button
+                    onClick={() => setModalPersyaratan(true)}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                  >
+                    Persyaratan Kredit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Perkreditan */}
+          {modalPerkreditan && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+              <div className="bg-white rounded-lg max-w-2xl w-full mx-4">
+                <div className="p-4 border-b">
+                  <h5 className="text-xl font-semibold text-center">
+                    KETENTUAN PERKREDITAN
+                  </h5>
+                </div>
+                <div className="p-4 max-h-[70vh] overflow-y-auto">
+                  <table className="w-full border-collapse">
+                    {/* Add your ketentuan perkreditan table content here */}
+                    {/* Copy the table content from the original HTML */}
+                  </table>
+                </div>
+                <div className="p-4 border-t flex justify-end">
+                  <button
+                    onClick={() => setModalPerkreditan(false)}
+                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Modal Persyaratan Kredit */}
+          {modalPersyaratan && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+              <div className="bg-white rounded-lg max-w-4xl w-full mx-4">
+                <div className="p-4 border-b">
+                  <h5 className="text-xl font-semibold text-center">
+                    PERSYARATAN KREDIT
+                  </h5>
+                </div>
+                <div className="p-4 max-h-[70vh] overflow-y-auto">
+                  <table className="w-full border-collapse">
+                    {/* Add your persyaratan kredit table content here */}
+                    {/* Copy the table content from the original HTML */}
+                  </table>
+                </div>
+                <div className="p-4 border-t flex justify-end">
+                  <button
+                    onClick={() => setModalPersyaratan(false)}
+                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
       </div>
+          <section>
+            <Blog />
+          </section>
+
+          <section>
+            <Footer />
+          </section>
     </div>
   );
 };

@@ -19,3 +19,25 @@ body {
   background: var(--background);
   font-family: 'Sogeo', Arial, Helvetica, sans-serif;
 }
+
+/* Slider Styles */
+.slider-container {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.slider-container > li {
+  flex: 0 0 33.333333%;
+}
+
+@media (max-width: 1024px) {
+  .slider-container > li {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .slider-container > li {
+    flex: 0 0 100%;
+  }
+}
