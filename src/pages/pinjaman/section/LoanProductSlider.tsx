@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 
-interface LoanProduct {
+interface LoanProduct { 
   title: string;
   description: string;
   icon: string;
@@ -20,13 +20,13 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
     const prevButton = document.querySelector('.slider-nav');
     const nextButton = document.querySelector('.slider-nav-next');
     
-    let currentIndex = 0;
+    let currentIndex = 0; 
     
     const updateSlider = () => {
       const offset = currentIndex * -33.33;
-      if (sliderContainer) {
+      if (sliderContainer instanceof HTMLElement) {
         sliderContainer.style.transform = `translateX(${offset}%)`;
-      }
+      } 
     };
 
     const handlePrevClick = () => {
@@ -54,16 +54,16 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
 
   return (
     <div className="py-8">
-      <h4 className="text-2xl font-bold text-gray-900 mb-6">
+      <h4 className="text-2xl font-bold text-gray-900 mb-6 mx-auto max-w-[1100px]">
         Produk Pinjaman Lainnya
       </h4>
 
       <div className="relative">
-        <div className="overflow-hidden">
+        <div className="overflow-hidden mx-auto max-w-[1100px]">
           <ul className="slider-container flex transition-transform duration-300">
             {loanProducts.map((product, index) => (
-              <li key={index} className="w-1/3 flex-shrink-0 px-4">
-                <div className="bg-white rounded-lg shadow-sm h-full">
+              <li key={index} className="w-1/3 flex-shrink-0 px-1">
+                <div className="bg-white w-[350px] h-[270px] rounded-lg shadow-sm">
                   <Link href={product.href}>
                     <div className="p-6">
                       <div className="flex items-start gap-4">

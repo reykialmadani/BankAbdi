@@ -20,6 +20,11 @@ body {
   font-family: 'Sogeo', Arial, Helvetica, sans-serif;
 }
 
+/* Menonaktifkan scroll di body */
+.no-scroll {
+  overflow: hidden;
+}
+
 /* Slider Styles */
 .slider-container {
   transform: translateX(0);

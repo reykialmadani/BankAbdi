@@ -25,7 +25,7 @@ const PinjamanDetail = () => {
     title: string; 
     description: string; 
     image: string;
-    icon: string; // Menambahkan field icon
+    icon: string; 
   }> = {
     "kredit-modal-kerja": {
       title: "Kredit Modal Kerja",
@@ -36,13 +36,13 @@ const PinjamanDetail = () => {
     "kredit-investasi": {
       title: "Kredit Investasi",
       description: "Pembiayaan untuk kebutuhan perluasan dan pengembangan bisnis dengan jangka waktu panjang.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-investasi.webp",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-ki.webp",
       icon: "https://bankabdi.co.id/img/icon/pinjaman_ki.png"
     },
     "kredit-multiguna": {
       title: "Kredit Multiguna",
       description: "Nikmati fasilitas pinjaman untuk berbagai kebutuhan Anda.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-multiguna.webp",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-km.webp",
       icon: "https://bankabdi.co.id/img/icon/pinjaman_km.png"
     },
     "kredit-kepemilikan-rumah": {
@@ -68,7 +68,7 @@ const PinjamanDetail = () => {
       description: "Kemudahan dalam memenuhi berbagai keperluan hidup tanpa jaminan.",
       image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kta.webp",
       icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png"
-    },
+    },  
   };
   
   const loanProducts: LoanProduct[] = Object.keys(dataPinjaman).map((key) => ({

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const BannerContact: React.FC = () => {
   return (
@@ -13,13 +14,13 @@ const BannerContact: React.FC = () => {
           <h2 className="heading text-white text-3xl sm:text-4xl md:text-1xl mt-10" style={{ marginBottom: '2rem' }}>
             Ingin Mengembangkan Investasi dan Usaha Anda?
           </h2>
-          <a
+          <Link
             href="/contact"
             className="btn btn-lg bg-blue-600 text-white py-2 px-6 rounded-full mt-10"
             style={{ marginTop: '2rem' }}
           >
             Hubungi Kami
-          </a>
+          </Link>
         </div>
       </div>
     </div>
