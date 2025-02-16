@@ -1,9 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 
-const RiskManagement: React.FC = () => {
+
+interface RiskManagementProps {
+  className?: string;
+}
+const RiskManagement: React.FC<RiskManagementProps> = ({ className }) => {
   return (
-    <div>
+    <div className={`risk-management-section ${className || ""}`}>
+      
       {/* Docs Section Manfaat */}
       <div className="docs-section">
         <h4 className="heading prime-primary pb-5 text-black">Manfaat</h4>

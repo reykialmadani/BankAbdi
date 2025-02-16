@@ -14,15 +14,13 @@ const CreditModal: FC<CreditModalProps> = ({
   title,
   children,
 }) => {
-
-
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
     }
-    
+
     return () => document.body.classList.remove("no-scroll");
   }, [isOpen]);
 
@@ -51,7 +49,7 @@ const CreditModal: FC<CreditModalProps> = ({
 };
 
 const CreditSection: FC = () => {
-  const [modalPerkreditan, setModalPerkreditan] = useState(false);
+  // const [modalPerkreditan, setModalPerkreditan] = useState(false);
   const [modalPersyaratan, setModalPersyaratan] = useState(false);
 
   return (
@@ -68,19 +66,15 @@ const CreditSection: FC = () => {
                   height={24}
                 />
                 <h3 className="text-black font-semibold text-xl">
-                  KETENTUAN PERKREDITAN
+                  INFORMASI TAMBAHAN
                 </h3>
               </div>
               <h6 className="text-gray-600 mb-4">
-                Klik tombol dibawah ini untuk membuka pop up ketentuan
-                perkreditan.
+                BANK ABDI berhak untuk menolak pembukaan rekening antara lain
+                jika nasabah tidak memenuhi persyaratan pembukaan rekening.
+                <br />
+                Dijamin oleh Lembaga Penjamin Simpanan (LPS).
               </h6>
-              <button
-                onClick={() => setModalPerkreditan(true)}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-              >
-                Ketentuan Perkreditan
-              </button>
             </div>
 
             <div className="rounded-lg p-6 shadow-sm">
@@ -92,7 +86,7 @@ const CreditSection: FC = () => {
                   height={24}
                 />
                 <h3 className="text-black font-semibold text-xl">
-                  PERSYARATAN KREDIT
+                  TABEL BIAYA
                 </h3>
               </div>
               <h6 className="text-gray-600 mb-4">
@@ -103,299 +97,95 @@ const CreditSection: FC = () => {
                 onClick={() => setModalPersyaratan(true)}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
               >
-                Persyaratan Kredit
+                Tabel Biaya
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Modal Perkreditan */}
-      <CreditModal
-        isOpen={modalPerkreditan}
-        onClose={() => setModalPerkreditan(false)}
-        title="KETENTUAN PERKREDITAN"
-      >
-        <table className="min-w-full table-auto border-collapse text-black">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2 text-left font-medium text-sm">
-                Keterangan
-              </th>
-              <th className="border p-2 text-left font-medium text-sm">
-                Deskripsi
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Denda Keterlambatan Bayar</td>
-              <td className="border p-2">
-                0,20% perhari keterlambatan dikali dengan nilai angsuran
-                tertunggak
-              </td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Denda Pelunasan Dipercepat</td>
-              <td className="border p-2">
-                3% dikali Sisa Pinjaman yang dilunasi (minimal Rp 200.000)
-              </td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Pengikatan Notaril</td>
-              <td className="border p-2">Tentative</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Asuransi (Kecuali KTA)</td>
-              <td className="border p-2">
-                KPM = TLO <br />
-                KPR = Jiwa dan Kebakaran (subject to Usia dan Jaminan)
-              </td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">
-                Debt Service Ratio (DSR)/Kemampuan Bayar
-              </td>
-              <td className="border p-2">40% dari Penghasilan Bersih (THP)</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Batas Maksimum Pembiayaan</td>
-              <td className="border p-2">80% dari Nilai Jaminan/Agunan</td>
-            </tr>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="border p-2">Batas Maksimum Usia Pemohon</td>
-              <td className="border p-2">
-                Perorangan = pada saat lunas maksimal 55 thn <br />
-                Profesional = pada saat lunas maksimal 60 thn
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </CreditModal>
-
       {/* Modal Persyaratan */}
       <CreditModal
         isOpen={modalPersyaratan}
         onClose={() => setModalPersyaratan(false)}
-        title="PERSYARATAN KREDIT"
+        title="BIAYA-BIAYA TABUNGAN ABDI"
       >
         <table className="w-full border-collapse text-black">
           <thead>
             <tr className="bg-gray-50">
               <th className="border p-2 text-black font-semibold">
-                PERSYARATAN
-              </th>
-              <th className="border p-2 text-black font-semibold">MOTOR</th>
-              <th className="border p-2 text-black font-semibold">MOBIL</th>
-              <th className="border p-2 text-black font-semibold">KPR</th>
-              <th className="border p-2 text-black font-semibold">
-                Perorangan
+                KETERANGAN
               </th>
               <th className="border p-2 text-black font-semibold">
-                Badan Usaha
+                PERORANGAN
               </th>
-              <th className="border p-2 text-black font-semibold">KTA</th>
+              <th className="border p-2 text-black font-semibold">
+                PERUSAHAAN
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border p-2">Photocopy KTP Suami dan Istri</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2">Setoran Awal Minumum</td>
+              <td className="border p-2 text-center">Rp.100.000</td>
+              <td className="border p-2 text-center">Rp.500.000</td>
             </tr>
             <tr>
-              <td className="border p-2">Photocopy Kartu Keluarga (KK)</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2">Setoran Minimum Selanjutnya</td>
+              <td className="border p-2 text-center">Rp.10.000</td>
+              <td className="border p-2 text-center">Rp.250.000</td>
             </tr>
             <tr>
               <td className="border p-2">
-                Photocopy Surat Nikah Suami dan Istri atau Akta Cerai
+              Saldo Minimum Dapat Bunga
               </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2 text-center">Rp.50.000</td>
+              <td className="border p-2 text-center">Rp.250.000</td>
             </tr>
             <tr>
-              <td className="border p-2">Pas Foto 4x6 Suami dan Istri </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2">Saldo Minimum </td>
+              <td className="border p-2 text-center">Rp.25.000</td>
+              <td className="border p-2 text-center">Rp.100.000</td>
             </tr>
             <tr>
               <td className="border p-2">
-                Surat keterangan bekerja/ijin profesional/surat keterangan
-                penghasilan
+              Biaya Dormant (Saldo Minimum 6 bulan dan rekening tidak aktif)
               </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2 text-center">Rp.5.000</td>
+              <td className="border p-2 text-center">Rp.10.000</td>
             </tr>
             <tr>
               <td className="border p-2">
-                Asli slip gaji bulan terakhir/surat keterangan penghasilan
-                (u/Joint income)
+              Biaya Administrasi
               </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2 text-center">Rp.2.500</td>
+              <td className="border p-2 text-center">Rp.10.000</td>
             </tr>
             <tr>
               <td className="border p-2">
-                Copy Rekening Tabungan/Bank 3 Bulan terkahir (Suami & Istri)
+              Minimum Saldo Kena Pajak
               </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
+              <td className="border p-2 text-center">Rp 7.500.001</td>
+              <td className="border p-2 text-center">Rp 7.500.001</td>
             </tr>
             <tr>
               <td className="border p-2">
-                Sertifikat SHM/SHGB/SHMSRS (untuk jaminan tanah)
+              Biaya Tutup Rekening
               </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
+              <td className="border p-2 text-center">Rp 15.000</td>
+              <td className="border p-2 text-center">Rp 15.000</td>
             </tr>
             <tr>
               <td className="border p-2">
-                BPKB berikut photocopy STNK dan KIR (untuk jaminan kendaraan
-                bermotor)
+              Suku Bunga per Tahun
               </td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
+              <td className="border p-2 text-center">1.50%</td>
+              <td className="border p-2 text-center">1.50%</td>
             </tr>
             <tr>
-              <td className="border p-2">SPPT dan STTS PBB tahun terakhir</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Photocopy IMB (Untuk Jaminan SHM)</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Photocopy KTP Pengurus</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Photocopy NPWP</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">v</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Photocopy Tanda Daftar Perusahaan (TDP)/NIB
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Photocopy Surat Izin Usaha Perdagangan (SIUP)
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Photocopy Surat Keterangan Domisili
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Photocopy Akta Pendirian & Perubahan-perubahaannya
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Laporan Keuangan/Neraca Audit/Non Audit
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-                Photocopy bukti pendaftaran di Pengadilan Negeri/Instansi
-                terkait
-              </td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">-</td>
-              <td className="border p-2 text-center">v</td>
-              <td className="border p-2 text-center">-</td>
+              <td className="border p-2">Pajak Penghasilan (PPh)</td>
+              <td className="border p-2 text-center">20%</td>
+              <td className="border p-2 text-center">20%</td>
             </tr>
             {/* Add more rows as needed */}
           </tbody>
