@@ -120,12 +120,57 @@ const RiskManagement = () => {
           text: "Bank sewaktu-waktu dapat melakukan perubahan atas besaran suku bunga / biaya lainnya tanpa pemberitahuan kepada nasabah terlebih dulu (syarat ketentuan berlaku).."
         }
       ]
-    }
+    },
+    "deposito-berjangka": {
+      title: "",
+      benefits: [
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_plant.png",
+          text: "Deposito yang memberikan suku bunga kompetitif."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_clock1.png",
+          text: "Jangka waktu 1, 3, 6, dan 12 bulan."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_bilyet.png",
+          text: "Mendapatkan Bilyet Deposito."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_bunga_transfer.png",
+          text: "Bunga dapat ditransfer ke rekening BANK ABDI atau bank lain."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_clock2.png",
+          text: "Perpanjangan Deposito dilakukan secara otomatis (Automatic Roll Over /ARO)."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/manfaat_agunan_pinjaman.png",
+          text: "Dapat dijadikan agunan untuk fasilitas pinjaman."
+        }
+      ],
+      risks: [
+        {
+          icon: "https://bankabdi.co.id/img/icon/risiko_bilyet.png",
+          text: "Bilyet Deposito hilang merupakan tanggung jawab nasabah, harus membuat laporan kehilangan dari kepolisian setempat.",
+          fullWidth: true
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/risiko_tempo.png",
+          text: "Tidak dapat dicairkan sebelum jatuh tempo)."
+        },
+        {
+          icon: "https://bankabdi.co.id/img/icon/risiko_tempo.png",
+          text: "Akan dibebankan penalty atas pencairan deposito sebelum jatuh tempo."
+        }
+      ]
+    },
+    
   }
 
   // Pastikan id valid dan merupakan salah satu dari angka yang ada
   if (!id || !content[id as keyof typeof content]) {
-    return <p>Konten tidak ditemukan</p>
+    return <p>Konten tidak ditemukan</p>;
   }
 
   const currentContent = content[id as keyof typeof content];
@@ -146,7 +191,7 @@ const RiskManagement = () => {
                   alt=""
                   width={48}
                   height={48}
-                  className="object-contain"
+                  style={{ objectFit: "contain" }}
                 />
               </div>
               <p className="text-gray-700">{benefit.text}</p>
@@ -160,7 +205,8 @@ const RiskManagement = () => {
         <h5 className="text-secondary text-xl font-semibold mb-4">Risiko</h5>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {currentContent.risks.map((risk, index) => (
-            <div key={index} className={`flex items-start space-x-4 ${risk.fullWidth ? 'md:col-span-3' : ''}`}>
+            <div key={index} className={`flex items-start space-x-4 ${risk.fullWidth === true ? 'md:col-span-3' : ''}`}>
+
               <div className="w-12 h-12 flex-shrink-0">
                 <Image
                   src={risk.icon}

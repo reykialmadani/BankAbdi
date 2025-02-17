@@ -1,19 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 
-interface MenuItem {
-  href: string;
-  label: string;
-}
-
 interface SidebarProps {
-  menuItems: MenuItem[];
   currentPath: string;
 }
 
-const Sidebar = ({ menuItems, currentPath }: SidebarProps) => {
-  // Define static deposito menu items
-  const depositoMenuItems: MenuItem[] = [
+const Sidebar = ({ currentPath }: SidebarProps) => {
+  // Data tabungan yang sebelumnya berasal dari menuItems
+  const tabunganMenuItems = [
+    {
+      href: "/tabungan/tabungan-abdi",
+      label: "Tabungan Abdi"
+    },
+    {
+      href: "/tabungan/tabungan-abdiku",
+      label: "Tabungan Abdiku"
+    },
+    {
+      href: "/tabungan/tabungan-abdi-simple",
+      label: "Tabungan Abdi Simple"
+    }
+  ];
+
+  // Data deposito (sudah statis sebelumnya)
+  const depositoMenuItems = [
     {
       href: "/deposito/deposito-berjangka",
       label: "Deposito Berjangka"
@@ -35,7 +45,7 @@ const Sidebar = ({ menuItems, currentPath }: SidebarProps) => {
         <div>
           <h6 className="text-lg font-semibold text-gray-700 mb-4">TABUNGAN</h6>
           <ul className="space-y-2">
-            {menuItems.map((item) => (
+            {tabunganMenuItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} legacyBehavior>
                   <a

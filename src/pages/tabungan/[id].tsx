@@ -75,11 +75,6 @@ const dataTabungan: Record<string, SavingsProduct> = {
   },
 };
 
-// Menu Sidebar Items
-const menuItems = Object.keys(dataTabungan).map((key) => ({
-  href: `/tabungan/${key}`,
-  label: dataTabungan[key].title,
-}));
 
 const TabunganDetail: NextPage = () => {
   const router = useRouter();
@@ -123,7 +118,8 @@ const TabunganDetail: NextPage = () => {
         <div className="flex flex-col lg:flex-row gap-8 py-8">
 
           {/* Sidebar Section */}
-          <Sidebar menuItems={menuItems} currentPath={router.asPath} />
+          <Sidebar currentPath={router.pathname} />
+
 
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">

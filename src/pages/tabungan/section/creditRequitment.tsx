@@ -274,6 +274,7 @@ const CreditSection: FC = () => {
             </table>
           ),
         };
+        
       default:
         return {
           title: "DEFAULT TITLE",
