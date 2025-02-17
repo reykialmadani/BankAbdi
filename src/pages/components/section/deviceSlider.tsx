@@ -41,14 +41,14 @@ const DeviceSliderColumn = () => {
                 {activeTab === "Pinjaman" && (
                     <div className="flex flex-row items-start space-x-6">
                         <div className="flex-shrink-0">
-                            <Image src="/assets/tab-pinjaman.png" width={200} height={500} className="rounded-lg shadow-md" alt="Tabungan"/>
+                            <Image src="/assets/tab-pinjaman.png" width={200} height={533} className="rounded-lg shadow-md" alt="Tabungan"/>
                         </div>
                         <div className="flex-1">
                             <h3 className="text-xl text-black mb-2">Produk Pinjaman/Kredit</h3>
                             {pinjamanItems.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center"
+                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
                                     onClick={() => toggleSection(item)}
                                 >
                                     <h6 className="text-lg text-black">{item}</h6>
@@ -89,7 +89,7 @@ const DeviceSliderColumn = () => {
                             {tabunganItems.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer"
+                                    className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer bg-white"
                                     onClick={() => toggleSection(item)}
                                 >
                                     <h6 className="text-lg text-black">{item}</h6>
@@ -124,7 +124,7 @@ const DeviceSliderColumn = () => {
                         <div className="flex-1">
                             <h3 className="text-xl text-black  mb-2">Produk Deposito</h3>
                             <div
-                                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer"
+                                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer bg-white"
                                 onClick={() => toggleSection("Deposito")}
                             >
                                 <h6 className="text-lg text-black">Deposito</h6>

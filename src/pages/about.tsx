@@ -1,10 +1,47 @@
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "../pages/components/layout/header";
 import Hero from "../pages/components//section/hero";
 import Informasi from "./components/section/information";
 import Footer from "./components/layout/footer";
 
 const AboutPage: React.FC = () => {
+  const historyData = [
+    {
+      number: "1",
+      date: "Desember 1988",
+      description:
+        "Berdiri dengan nama PT Bank Perkreditan Rakyat/BPR Sarana Ekonomi",
+    },
+    {
+      number: "2",
+      date: "April 2006",
+      description: "Berganti nama menjadi PT BPR Sentra Rahardja",
+    },
+    {
+      number: "3",
+      date: "April 2008",
+      description: "Berganti nama menjadi PT BPR Anugerah Multi Dana",
+    },
+    {
+      number: "4",
+      date: "Mei 2021",
+      description: "Diakuisisi dan berganti kepemilikan menjadi PT ABS dan ABI",
+    },
+    {
+      number: "5",
+      date: "Mei 2023",
+      description: "Berganti nama menjadi BPR ABDI",
+    },
+    {
+      number: "6",
+      date: "November 2023",
+      description:
+        "Menjadi BANK Perekonomian Rakyat Akar Budaya Dana Indonesia",
+    },
+  ];
+
   return (
     <div>
       <Header />
@@ -172,91 +209,81 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Riwayat Perusahaan Section */}
-      <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="hidden lg:block py-12 bg-white">
+        <div className="container mx-auto px-4">
           {/* Section Heading */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-indigo-600 py-3">
+          <div className="text-center mb-10">
+            <h2 className="text-indigo-600 text-2xl font-semibold py-3">
               Riwayat Singkat Perusahaan
             </h2>
           </div>
 
-          {/* Timeline */}
-          <div className="grid grid-cols-4 gap-8">
-            {/* Timeline Item 1 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                1
-              </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">
-                Desember 1988
-              </p>
-              <p className="text-gray-700">
-                Berdiri dengan nama PT Bank Perkreditan Rakyat/BPR Sarana
-                Ekonomi
-              </p>
+          <div className="relative">
+            {/* Horizontal Line 1-2-3-4 */}
+            <div className="absolute top-5 left-[140px] right-[140px] h-0.5 bg-indigo-200" />
+            
+            {/* Vertical Line for 1-5 */}
+            <div className="absolute top-5 left-[128px] w-0.5 h-[200px] bg-indigo-200" />
+            
+            {/* Horizontal Line 5-6 */}
+            <div className="absolute top-[240px] left-[128px] w-[350px] h-0.5 bg-indigo-200" />
+
+            {/* First Row */}
+            <div className="flex justify-between mb-20">
+              {historyData.slice(0, 4).map((item) => (
+                <div key={item.number} className="flex flex-col items-center w-64 relative z-10">
+                  <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mb-3">
+                    {item.number}
+                  </span>
+                  <span className="text-gray-600 font-medium mb-2">{item.date}</span>
+                  <span className="text-center text-sm">{item.description}</span>
+                </div>
+              ))}
             </div>
 
-            {/* Timeline Item 2 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                2
-              </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">
-                April 2006
-              </p>
-              <p className="text-gray-700">
-                Berganti nama menjadi PT BPR Sentra Rahardja
-              </p>
-            </div>
-
-            {/* Timeline Item 3 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                3
-              </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">
-                April 2008
-              </p>
-              <p className="text-gray-700">
-                Berganti nama menjadi PT BPR Anugerah Multi Dana
-              </p>
-            </div>
-
-            {/* Timeline Item 4 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                4
-              </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">Mei 2021</p>
-              <p className="text-gray-700">
-                Diakuisisi dan berganti kepemilikan menjadi PT ABS dan ABI
-              </p>
+            {/* Second Row */}
+            <div className="flex justify-start gap-24">
+              {historyData.slice(4).map((item) => (
+                <div key={item.number} className="flex flex-col items-center w-64 relative z-10">
+                  <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mb-3">
+                    {item.number}
+                  </span>
+                  <span className="text-gray-600 font-medium mb-2">{item.date}</span>
+                  <span className="text-center text-sm">{item.description}</span>
+                </div>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-2 gap-8 mt-8">
-            {/* Timeline Item 5 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                5
-              </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">Mei 2023</p>
-              <p className="text-gray-700">Berganti nama menjadi BPR ABDI</p>
-            </div>
+      {/* Mobile Version */}
+      <section id="steps" className="lg:hidden py-12">
+        <div className="container mx-auto px-4">
+          {/* Section Heading */}
+          <div className="text-center mb-10">
+            <h2 className="text-indigo-600 text-2xl font-semibold">
+              Riwayat Singkat Perusahaan
+            </h2>
+          </div>
 
-            {/* Timeline Item 6 */}
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full">
-                6
+          {/* Steps */}
+          <div className="space-y-8">
+            {historyData.map((item) => (
+              <div key={item.number} className="relative pl-12 border-l-2 border-indigo-200 pb-8 last:border-l-0 last:pb-0">
+                <span className="absolute left-[-17px] bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                  {item.number}
+                </span>
+                <div>
+                  <h4 className="text-gray-800 font-medium mb-2">
+                    {item.date}
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <p className="mt-4 text-sm font-medium text-gray-900">
-                November 2023
-              </p>
-              <p className="text-gray-700">
-                Menjadi BANK Perekonomian Rakyat Akar Budaya Dana
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -364,6 +391,65 @@ const AboutPage: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-laporan-keuangan bg-white py-12">
+        <div className="container mx-auto px-4">
+          {/* Section Heading */}
+          <div className="text-center mb-8">
+            <h2 className="text-indigo-600 text-2xl font-semibold py-3">
+              Informasi Laporan Keuangan
+            </h2>
+          </div>
+
+          {/* List Container */}
+          <div className="flex flex-col md:flex-row justify-start gap-6">
+            {/* Laporan Tahunan */}
+            <div className="list-informasi-laporan">
+              <Link
+                href="/laporan/tahunan/2021"
+                className="block hover:opacity-80"
+              >
+                <h3 className="flex items-center text-lg font-semibold mb-2">
+                  Laporan Tahunan
+                  <Image
+                    src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                    alt="arrow right"
+                    width={24}
+                    height={24}
+                    className="ml-2"
+                  />
+                </h3>
+                <h6 className="text-sm text-gray-600">
+                  Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan
+                  pencapaian yang telah diperoleh selama setahun berjalan.
+                </h6>
+              </Link>
+            </div>
+
+            {/* Laporan Triwulan */}
+            <div className="list-informasi-laporan">
+              <Link
+                href="/laporan/triwulan/2021"
+                className="block hover:opacity-80"
+              >
+                <h3 className="flex items-center text-lg font-semibold mb-2">
+                  Laporan Triwulan
+                  <Image
+                    src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                    alt="arrow right"
+                    width={24}
+                    height={24}
+                    className="ml-2"
+                  />
+                </h3>
+                <h6 className="text-sm text-gray-600">
+                  Laporan triwulanan BANK ABDI yang terbit setiap triwulan.
+                </h6>
+              </Link>
             </div>
           </div>
         </div>
