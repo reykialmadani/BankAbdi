@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FC, useState, useEffect } from "react";
-
+import { useRouter } from "next/router";
 interface CreditModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -49,8 +49,240 @@ const CreditModal: FC<CreditModalProps> = ({
 };
 
 const CreditSection: FC = () => {
-  // const [modalPerkreditan, setModalPerkreditan] = useState(false);
   const [modalPersyaratan, setModalPersyaratan] = useState(false);
+  const router = useRouter();
+  const { id } = router.query; // Mendapatkan parameter `id` dari URL
+
+  // Menyesuaikan isi berdasarkan `id`
+  const getContentBasedOnId = (id: string | string[] | undefined) => {
+    switch (id) {
+      case "tabungan-abdi":
+        return {
+          title: "BIAYA-BIAYA TABUNGAN ABDI",
+          content: (
+            <table className="w-full border-collapse text-black">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="border p-2 text-black font-semibold">
+                    KETERANGAN
+                  </th>
+                  <th className="border p-2 text-black font-semibold">
+                    PERORANGAN
+                  </th>
+                  <th className="border p-2 text-black font-semibold">
+                    PERUSAHAAN
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Setoran Awal Minumum</td>
+                  <td className="border p-2">Rp.100.000</td>
+                  <td className="border p-2">Rp.500.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Setoran Minimum Selanjutnya</td>
+                  <td className="border p-2">Rp.10.000</td>
+                  <td className="border p-2">Rp.250.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Saldo Minimum Dapat Bunga</td>
+                  <td className="border p-2">Rp.50.000</td>
+                  <td className="border p-2">Rp.250.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Saldo Minimum </td>
+                  <td className="border p-2">Rp.25.000</td>
+                  <td className="border p-2">Rp.100.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">
+                    Biaya Dormant (Saldo Minimum 6 bulan dan rekening tidak
+                    aktif)
+                  </td>
+                  <td className="border p-2">Rp.5.000</td>
+                  <td className="border p-2">Rp.10.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Biaya Administrasi</td>
+                  <td className="border p-2">Rp.2.500</td>
+                  <td className="border p-2">Rp.10.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Minimum Saldo Kena Pajak</td>
+                  <td className="border p-2">Rp 7.500.001</td>
+                  <td className="border p-2">Rp 7.500.001</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Biaya Tutup Rekening</td>
+                  <td className="border p-2">Rp 15.000</td>
+                  <td className="border p-2">Rp 15.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Suku Bunga per Tahun</td>
+                  <td className="border p-2">1.50%</td>
+                  <td className="border p-2">1.50%</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Pajak Penghasilan (PPh)</td>
+                  <td className="border p-2">20%</td>
+                  <td className="border p-2">20%</td>
+                </tr>
+              </tbody>
+            </table>
+          ),
+        };
+      case "tabungan-abdiku":
+        return {
+          title: "BIAYA TABUNGAN 2",
+          content: (
+            <table className="w-full border-collapse text-black">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="border p-2 text-black font-semibold">
+                    KETERANGAN
+                  </th>
+                  <th className="border p-2 text-black font-semibold">
+                    Tabungan ABDIKU
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Setoran Awal Minumum</td>
+                  <td className="border p-2">Rp.20.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Setoran Awal Minimum</td>
+                  <td className="border p-2">Rp 20.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Setoran Minimum Selanjutnya </td>
+                  <td className="border p-2">Rp 10.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Saldo Minimum Dapat Bunga</td>
+                  <td className="border p-2">Rp 50.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Saldo Minimum</td>
+                  <td className="border p-2">Rp 20.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">
+                    Biaya Dormant (Saldo Minimum 6 bulan dan rekening tidak
+                    aktif)
+                  </td>
+                  <td className="border p-2">Rp 2.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Biaya Administrasi</td>
+                  <td className="border p-2">Free</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-2">Minimum Saldo Kena Pajak</td>
+                  <td className="border p-2">Rp 7.500.001</td>
+                </tr>
+
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Biaya Tutup Rekening</td>
+                  <td className="border p-2">Rp 20.000</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-2">Suku Bunga per Tahun</td>
+                  <td className="border p-2">1.00%</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Pajak Penghasilan (PPh)</td>
+                  <td className="border p-2">20%</td>
+                </tr>
+              </tbody>
+            </table>
+          ),
+        };
+      case "tabungan-abdi-simple":
+        return {
+          title: "BIAYA TABUNGAN 3",
+          content: (
+            <table className="w-full border-collapse text-black">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="border p-2 text-black font-semibold">
+                    KETERANGAN
+                  </th>
+                  <th className="border p-2 text-black font-semibold">
+                    Tabungan ABDI SIMPLE
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Setoran Awal Minumum</td>
+                  <td className="border p-2">Rp 5.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Setoran Awal Minimum</td>
+                  <td className="border p-2">Rp 5.000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Setoran Minimum Selanjutnya</td>
+                  <td className="border p-2">Rp 1.000</td>
+                </tr>
+                <tr>
+                  <td className="border p-2">Saldo Minimum Dapat Bunga</td>
+                  <td className="border p-2">-</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Saldo Minimum</td>
+                  <td className="border p-2">Rp 5000</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-2">
+                    Biaya Dormant (Saldo Minimum 12 bulan dan rekening tidak
+                    aktif)
+                  </td>
+                  <td className="border p-2">Rp 1000</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Biaya Administrasi</td>
+                  <td className="border p-2">Free</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-2">Minimum Saldo Kena Pajak</td>
+                  <td className="border p-2">Rp 7.500.001</td>
+                </tr>
+
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Biaya Tutup Rekening</td>
+                  <td className="border p-2">Rp 5.000</td>
+                </tr>
+
+                <tr>
+                  <td className="border p-2">Suku Bunga per Tahun</td>
+                  <td className="border p-2">0%</td>
+                </tr>
+                <tr className="bg-[#DEECF9]">
+                  <td className="border p-2">Pajak Penghasilan (PPh)</td>
+                  <td className="border p-2">0%</td>
+                </tr>
+                {/* Add other rows specific to tabungan3 */}
+              </tbody>
+            </table>
+          ),
+        };
+      default:
+        return {
+          title: "DEFAULT TITLE",
+          content: <p>Content not available for this tabungan.</p>,
+        };
+    }
+  };
+
+  const { title, content } = getContentBasedOnId(id);
 
   return (
     <>
@@ -108,88 +340,9 @@ const CreditSection: FC = () => {
       <CreditModal
         isOpen={modalPersyaratan}
         onClose={() => setModalPersyaratan(false)}
-        title="BIAYA-BIAYA TABUNGAN ABDI"
+        title={title}
       >
-        <table className="w-full border-collapse text-black">
-          <thead>
-            <tr className="bg-gray-50">
-              <th className="border p-2 text-black font-semibold">
-                KETERANGAN
-              </th>
-              <th className="border p-2 text-black font-semibold">
-                PERORANGAN
-              </th>
-              <th className="border p-2 text-black font-semibold">
-                PERUSAHAAN
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border p-2">Setoran Awal Minumum</td>
-              <td className="border p-2 text-center">Rp.100.000</td>
-              <td className="border p-2 text-center">Rp.500.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Setoran Minimum Selanjutnya</td>
-              <td className="border p-2 text-center">Rp.10.000</td>
-              <td className="border p-2 text-center">Rp.250.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Saldo Minimum Dapat Bunga
-              </td>
-              <td className="border p-2 text-center">Rp.50.000</td>
-              <td className="border p-2 text-center">Rp.250.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Saldo Minimum </td>
-              <td className="border p-2 text-center">Rp.25.000</td>
-              <td className="border p-2 text-center">Rp.100.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Biaya Dormant (Saldo Minimum 6 bulan dan rekening tidak aktif)
-              </td>
-              <td className="border p-2 text-center">Rp.5.000</td>
-              <td className="border p-2 text-center">Rp.10.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Biaya Administrasi
-              </td>
-              <td className="border p-2 text-center">Rp.2.500</td>
-              <td className="border p-2 text-center">Rp.10.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Minimum Saldo Kena Pajak
-              </td>
-              <td className="border p-2 text-center">Rp 7.500.001</td>
-              <td className="border p-2 text-center">Rp 7.500.001</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Biaya Tutup Rekening
-              </td>
-              <td className="border p-2 text-center">Rp 15.000</td>
-              <td className="border p-2 text-center">Rp 15.000</td>
-            </tr>
-            <tr>
-              <td className="border p-2">
-              Suku Bunga per Tahun
-              </td>
-              <td className="border p-2 text-center">1.50%</td>
-              <td className="border p-2 text-center">1.50%</td>
-            </tr>
-            <tr>
-              <td className="border p-2">Pajak Penghasilan (PPh)</td>
-              <td className="border p-2 text-center">20%</td>
-              <td className="border p-2 text-center">20%</td>
-            </tr>
-            {/* Add more rows as needed */}
-          </tbody>
-        </table>
+        {content}
       </CreditModal>
     </>
   );

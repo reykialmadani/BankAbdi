@@ -19,15 +19,6 @@ interface SavingsProduct {
   href: string;
   className?: string;
 }
-
-// Define the interface for Loan Product
-// interface LoanProduct {
-//   title: string;
-//   description: string;
-//   icon: string;
-//   href: string;
-// }
-
 // Savings Products Data
 const savingsProducts: SavingsProduct[] = [
   {
@@ -55,28 +46,6 @@ const savingsProducts: SavingsProduct[] = [
     href: "/tabungan/deposito-berjangka",
   },
 ];
-
-// Loan Products Data
-// const loanProducts: LoanProduct[] = [
-//   {
-//     title: "Pinjaman Umum",
-//     description: "Pinjaman dengan persyaratan mudah dan proses cepat.",
-//     icon: "https://bankabdi.co.id/img/icon/pinjaman_umum.png",
-//     href: "/pinjaman/umum",
-//   },
-//   {
-//     title: "Pinjaman Mikro",
-//     description: "Solusi pendanaan untuk usaha kecil dan menengah.",
-//     icon: "https://bankabdi.co.id/img/icon/pinjaman_mikro.png",
-//     href: "/pinjaman/mikro",
-//   },
-//   {
-//     title: "Pinjaman Konsumtif",
-//     description: "Pinjaman untuk kebutuhan konsumsi pribadi.",
-//     icon: "https://bankabdi.co.id/img/icon/pinjaman_konsumtif.png",
-//     href: "/pinjaman/konsumtif",
-//   },
-// ];
 
 // Tabungan Data
 const dataTabungan: Record<string, SavingsProduct> = {
@@ -152,6 +121,7 @@ const TabunganDetail: NextPage = () => {
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 py-8">
+
           {/* Sidebar Section */}
           <Sidebar menuItems={menuItems} currentPath={router.asPath} />
 
@@ -163,7 +133,7 @@ const TabunganDetail: NextPage = () => {
         </div>
       </div>
 
-      <CreditRequitment />
+       <CreditRequitment />
       <LoanProductSlider savingsProducts={savingsProducts} />
 
       <Footer />
