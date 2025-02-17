@@ -221,10 +221,16 @@ const Header = () => {
                   )}
 
                   {menu === "tabungan" && (
-                    <div className="w-[500px] p-4">
+                    <div className="w-[800px] p-4">
                       <div className="border-b border-gray-100 pb-2 mb-2">
-                        <h2 className="font-semibold text-gray-900">
+                        <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           TABUNGAN
+                          <Image
+                            src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                            width={16}
+                            height={16}
+                            alt="arrow right"
+                          />
                         </h2>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
@@ -232,9 +238,17 @@ const Header = () => {
                           <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
                             <Link href="/tabungan/tabungan-abdi" legacyBehavior>
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Tabungan ABDI
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Tabungan ABDI
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600 mt-1">
                                   Raih keuntungan dengan suku bunga kompetitif
                                   dan fleksibilitas penarikan dana kapan saja
@@ -248,9 +262,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Tabungan Abdiku
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Tabungan Abdiku
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Lebih hemat dengan menabung tanpa biaya
                                   administrasi bulanan yang mengikat anda
@@ -266,9 +288,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Tabungan ABDI SIMPLE
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Tabungan ABDI SIMPLE
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Mulailah mengasah disiplin menabung sejak usia
                                   dini untuk meraih kehidupan finansial yang
@@ -283,10 +313,16 @@ const Header = () => {
                   )}
 
                   {menu === "deposito" && (
-                    <div className="w-[500px] p-4">
+                    <div className="w-[800px] p-4">
                       <div className="border-b border-gray-100 pb-2 mb-2">
-                        <h2 className="font-semibold text-gray-900">
+                        <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           DEPOSITO
+                          <Image
+                            src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                            width={16}
+                            height={16}
+                            alt="arrow right"
+                          />
                         </h2>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
@@ -297,9 +333,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Deposito Berjangka
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Deposito Berjangka
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600 mt-1">
                                   Pilihan Investasi yang memberikan Keuntungan
                                   dan rasa aman karena dijamin oleh Lembaga
@@ -314,9 +358,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Formulir Deposito
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Formulir Deposito
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600 mt-1">
                                   Ajukan Deposito dengan mengisi Formulir BANK
                                   ABDI
@@ -332,9 +384,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kalkulator Deposito
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kalkulator Deposito
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600 mt-1">
                                   Ketahui suku bunga deposito BANK ABDI dengan
                                   Kalkulator BANK ABDI
@@ -348,25 +408,8 @@ const Header = () => {
                   )}
 
                   {menu === "informasi" && (
-                    <div className="w-[500px] p-4">
-                      <div className="border-b border-gray-100 pb-2 mb-2">
-                        <h2 className="font-semibold text-gray-900">
-                          INFORMASI
-                        </h2>
-                      </div>
-                      <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                        <Link href="/informasi/suku-bunga" legacyBehavior>
-                          <a className="block px-4 py-3">
-                            <span className="font-medium text-gray-900">
-                              Suku Bunga
-                            </span>
-                            <p className="text-sm text-gray-600 mt-1">
-                              BANK ABDI menawarkan tabungan dengan suku bunga
-                              menarik
-                            </p>
-                          </a>
-                        </Link>
-                      </div>
+                    <div className="w-[800px] p-4">
+                      {/* Informasi content */}
                     </div>
                   )}
                 </div>

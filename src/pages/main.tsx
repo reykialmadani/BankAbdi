@@ -15,7 +15,7 @@ const MainPage = () => {
             <section>
             <Hero
             imageSrc="https://bankabdi.co.id/img/banner/hero-tabungan-abdiku.webp"
-            title="Sahabat Anda dalam Menggapai Masa Depan <br/>    yang Lebih Baik"
+            title="Sahabat Anda dalam Menggapai Masa Depan yang Lebih Baik"
             showButton = {true}
             />
             </section>

@@ -77,7 +77,7 @@ const AboutPage: React.FC = () => {
           <div className="flex flex-wrap justify-between">
             {/* Section Heading */}
             <div className="w-full text-center mb-10">
-              <h2 className="text-indigo-600 text-3xl font-semibold">
+              <h2 className="text-black text-3xl font-semibold">
                 Nilai-Nilai Perusahaan
               </h2>
             </div>
@@ -85,7 +85,7 @@ const AboutPage: React.FC = () => {
             {/* Adapting */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-lg font-semibold mt-2">Adapting</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">Adapting</h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
                   konsisten dan meramalkan keunggulan kompetitif yang baru.
@@ -96,7 +96,7 @@ const AboutPage: React.FC = () => {
             {/* Blessing */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-lg font-semibold mt-2">Blessing</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">Blessing</h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Kepercayaan pelanggan menjadi faktor utama kami dalam melayani
                   dan memberikan nilai tambah bagi keperluan pelanggan.
@@ -107,7 +107,7 @@ const AboutPage: React.FC = () => {
             {/* Developing */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-lg font-semibold mt-2">Developing</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">Developing</h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Selalu bergerak dan berkembang sehingga menjadikan bank yang
                   terkinikan.
@@ -118,7 +118,7 @@ const AboutPage: React.FC = () => {
             {/* Improving */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-lg font-semibold mt-2">Improving</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">Improving</h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Selalu berinovasi dalam upaya peningkatan kualitas pelayanan
                   terhadap pelanggan.
@@ -292,7 +292,7 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto">
           {/* Section Heading */}
           <div className="text-center mb-6">
-            <h2 className="text-indigo-600 text-3xl font-semibold py-3">
+            <h2 className="text-black text-3xl font-semibold py-3">
               Profil Dewan
             </h2>
           </div>
@@ -301,7 +301,7 @@ const AboutPage: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-6">
             {/* Dewan Komisaris */}
             <div className="w-full">
-              <div className="text-center text-xl font-semibold mb-4">
+              <div className="text-black text-center text-xl font-semibold mb-4">
                 Dewan Komisaris
               </div>
               <div className="flex flex-wrap justify-center gap-6">
@@ -349,7 +349,7 @@ const AboutPage: React.FC = () => {
 
             {/* Dewan Direksi */}
             <div className="w-full">
-              <div className="text-center text-xl font-semibold mt-8 mb-4">
+              <div className="text-black text-center text-xl font-semibold mt-8 mb-4">
                 Dewan Direksi
               </div>
               <div className="flex flex-wrap justify-center gap-6">
