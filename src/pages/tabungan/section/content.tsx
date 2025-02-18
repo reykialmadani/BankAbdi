@@ -57,7 +57,7 @@ const MainPage = () => {
         return (
           <div className="lg:w-3/4 w-full">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">
+              <h4 className="text-2xl font-bold text-[#003868] mb-6">
                 PERSYARATAN TABUNGAN ABDIKU
               </h4>
               <ol className="list-decimal pl-6 text-gray-800 space-y-4">
@@ -86,7 +86,7 @@ const MainPage = () => {
         return (
           <div className="lg:w-3/4 w-full">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">
+              <h4 className="text-2xl font-bold text-[#003868] mb-6">
                 PERSYARATAN TABUNGAN ABDI
               </h4>
               <ol className="list-decimal pl-6 text-gray-800 space-y-4">

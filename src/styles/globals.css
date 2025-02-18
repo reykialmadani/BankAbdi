@@ -14,10 +14,18 @@
   }
 }
 
+@font-face {
+  font-family: 'segoe_uiregular';
+  src: url('/fonts/segoe-ui-regular.woff2') format('woff2'),
+       url('/fonts/segoe-ui-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Sogeo', Arial, Helvetica, sans-serif;
+  font-family: 'segoe_uiregular', Arial, Helvetica, sans-serif; /* Perbaikan di sini */
 }
 
 /* Menonaktifkan scroll di body */

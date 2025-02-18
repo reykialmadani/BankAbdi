@@ -92,13 +92,15 @@ const MainPage = () => {
 
         return (
           <div className="lg:w-3/4 w-full">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">{pageTitle}</h4>
+            <div className="rounded-lg shadow-sm p-6">
+              <h4 className="text-2xl font-bold text-[#003868] mb-6">
+                {pageTitle}
+              </h4>
               <ol className="list-decimal pl-6 text-gray-800 space-y-4">
                 <li>Tersedia bagi nasabah Perorangan dan Badan Hukum.</li>
                 <li>
-                  Melengkapi formulir pembukaan rekening dan dokumen pendukung lain
-                  yang disyaratkan.
+                  Melengkapi formulir pembukaan rekening dan dokumen pendukung
+                  lain yang disyaratkan.
                 </li>
                 <li>
                   Dokumen yang diwajibkan:
@@ -108,11 +110,16 @@ const MainPage = () => {
                       <ol className="list-decimal pl-6 space-y-2 mt-2">
                         <li>Photocopy KTP Suami dan Istri</li>
                         <li>Photocopy Kartu Keluarga</li>
-                        <li>Photocopy Surat Nikah Suami dan Istri / Akta Cerai</li>
+                        <li>
+                          Photocopy Surat Nikah Suami dan Istri / Akta Cerai
+                        </li>
                         <li>Pas Foto 4x6 Suami dan Istri</li>
                         <li>Surat keterangan bekerja / ijin profesional</li>
                         <li>Slip gaji bulan terakhir</li>
-                        <li>Rekening Tabungan Bank 3 bulan terakhir (Suami & Istri)</li>
+                        <li>
+                          Rekening Tabungan Bank 3 bulan terakhir (Suami &
+                          Istri)
+                        </li>
                         <li>Sertifikat SHM / SHGB (untuk jaminan tanah)</li>
                         <li>BPKB & STNK (untuk jaminan kendaraan)</li>
                         <li>SPPT & STTS PBB tahun terakhir</li>
@@ -140,19 +147,23 @@ const MainPage = () => {
         return (
           <div className="lg:w-3/4 w-full">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h4 className="text-2xl font-semibold text-blue-600 mb-6">Formulir Pengajuan Pinjaman</h4>
+              <h4 className="text-2xl font-semibold text-blue-600 mb-6">
+                Formulir Pengajuan Pinjaman
+              </h4>
               <div>
-                {/* Form Start */}
                 <form onSubmit={handleSubmit} className="w-full">
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="formGroupExampleInput">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="formGroupExampleInput"
+                      >
                         Nama Lengkap Peminjam
                       </label>
                       <input
                         type="text"
                         name="NamaLengkap"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="formGroupExampleInput"
                         placeholder="Masukkan nama lengkap Anda disini"
                         value={formData.NamaLengkap}
@@ -161,13 +172,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputTelp">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputTelp"
+                      >
                         No Handphone
                       </label>
                       <input
                         type="tel"
                         name="NoHandphone"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputTelp"
                         placeholder="Contoh: 0818 1818 7777"
                         value={formData.NoHandphone}
@@ -176,13 +190,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputEmail4">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputEmail4"
+                      >
                         Email
                       </label>
                       <input
                         type="email"
                         name="Email"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputEmail4"
                         placeholder="Contoh: deposito@gmail.com"
                         value={formData.Email}
@@ -193,13 +210,16 @@ const MainPage = () => {
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputProvinsi">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputProvinsi"
+                      >
                         Provinsi Domisili
                       </label>
                       <input
                         type="text"
                         name="Provinsi"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputProvinsi"
                         placeholder="Provinsi domisili Anda"
                         value={formData.Provinsi}
@@ -208,13 +228,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputAddress2">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputAddress2"
+                      >
                         Kota/Kabupaten Domisili
                       </label>
                       <input
                         type="text"
                         name="Kota"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputAddress2"
                         placeholder="Kota domisili Anda"
                         value={formData.Kota}
@@ -223,13 +246,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputPekerjaan">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputPekerjaan"
+                      >
                         Pekerjaan
                       </label>
                       <input
                         type="text"
                         name="Pekerjaan"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputPekerjaan"
                         placeholder="Pekerjaan Anda"
                         value={formData.Pekerjaan}
@@ -238,13 +264,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputJaminan">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputJaminan"
+                      >
                         Jenis Jaminan
                       </label>
                       <input
                         type="text"
                         name="JenisJaminan"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputJaminan"
                         placeholder="Jaminan Anda"
                         value={formData.JenisJaminan}
@@ -253,13 +282,16 @@ const MainPage = () => {
                       />
                     </div>
                     <div className="w-full px-3 mb-4">
-                      <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="inputNominal">
+                      <label
+                        className="block text-gray-700 text-sm font-medium mb-2"
+                        htmlFor="inputNominal"
+                      >
                         Nominal Pengajuan
                       </label>
                       <input
                         type="text"
                         name="NominalPengajuan"
-                        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none block w-full bg-transparent text-gray-700 border-b-2 border-blue-500 py-2 px-0 leading-tight focus:outline-none"
                         id="inputNominal"
                         placeholder="Contoh : Rp 10.0000.000"
                         value={formData.NominalPengajuan}
@@ -271,12 +303,11 @@ const MainPage = () => {
 
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-pink-500 to-orange-400 text-white font-medium py-2 px-6 rounded-md hover:from-pink-600 hover:to-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors duration-200 mt-4"
+                    className="bg-blue-900 text-white font-medium py-2 px-6 rounded-full mt-4"
                   >
                     Ajukan Pinjaman
                   </button>
                 </form>
-                {/* Form End */}
               </div>
             </div>
           </div>

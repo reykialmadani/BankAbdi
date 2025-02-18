@@ -18,12 +18,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
         className="z-0"
       />
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 z-10">
-        <h1 className="text-white text-3xl md:text-5xl font-bold leading-snug">
-          {title}
+      <h1 className="text-white text-3xl md:text-5xl font-bold leading-snug pl-8">
+          {title.split(" ").map((word, index) => {
+            return index === 3 ? (
+              <>
+                {word} <br /> 
+              </>
+            ) : (
+              word + " "
+            );
+          })}
         </h1>
         
         {paragraph && (
-          <p className="text-white mt-4 text-lg">{paragraph}</p> // Tampilkan paragraf jika ada
+          <p className="text-white mt-4 text-lg pl-8">{paragraph}</p>
         )}
 
         {showButton && (

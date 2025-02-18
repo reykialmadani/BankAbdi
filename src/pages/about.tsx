@@ -85,7 +85,9 @@ const AboutPage: React.FC = () => {
             {/* Adapting */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">Adapting</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">
+                  Adapting
+                </h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
                   konsisten dan meramalkan keunggulan kompetitif yang baru.
@@ -96,7 +98,9 @@ const AboutPage: React.FC = () => {
             {/* Blessing */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">Blessing</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">
+                  Blessing
+                </h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Kepercayaan pelanggan menjadi faktor utama kami dalam melayani
                   dan memberikan nilai tambah bagi keperluan pelanggan.
@@ -107,7 +111,9 @@ const AboutPage: React.FC = () => {
             {/* Developing */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">Developing</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">
+                  Developing
+                </h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Selalu bergerak dan berkembang sehingga menjadikan bank yang
                   terkinikan.
@@ -118,7 +124,9 @@ const AboutPage: React.FC = () => {
             {/* Improving */}
             <div className="w-full sm:w-1/2 md:w-1/4 text-left">
               <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">Improving</h6>
+                <h6 className="text-black text-lg font-semibold mt-2">
+                  Improving
+                </h6>
                 <p className="text-sm text-gray-700 mt-2">
                   Selalu berinovasi dalam upaya peningkatan kualitas pelayanan
                   terhadap pelanggan.
@@ -169,7 +177,7 @@ const AboutPage: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-blue-900">
+            <h2 className="text-2xl font-bold text-black">
               Visi dan Misi Perusahaan
             </h2>
           </div>
@@ -191,13 +199,13 @@ const AboutPage: React.FC = () => {
               <h3 className="text-2xl font-semibold text-blue-900 mb-4 text-center">
                 Misi
               </h3>
-              <ul className="flex space-x-8 text-lg text-gray-700 text center">
-                <li className="flex-1">
+              <ul className="flex space-x-8 text-lg text-gray-700">
+                <li className="flex-1 list-disc pl-5">
                   Menjadi mitra pelaku UMKM untuk mendukung dan mengingkatkan
                   Usaha Mikro Kecil Menengah yang mandiri dan memiliki daya
                   saing kuat.
                 </li>
-                <li className="flex-1">
+                <li className="flex-1 list-disc pl-5">
                   Meningkatkan layanan perbankan yang mengedepankan
                   service/layanan mutu, infrastruktur yang kuat dan terdepan dan
                   SDM yang kompeten.
@@ -208,7 +216,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Riwayat Perusahaan Section */}
+      {/* Desktop Version */}
       <section className="hidden lg:block py-12 bg-white">
         <div className="container mx-auto px-4">
           {/* Section Heading */}
@@ -219,46 +227,70 @@ const AboutPage: React.FC = () => {
           </div>
 
           <div className="relative">
-            {/* Horizontal Line 1-2-3-4 */}
-            <div className="absolute top-5 left-[140px] right-[140px] h-0.5 bg-indigo-200" />
-            
-            {/* Vertical Line for 1-5 */}
-            <div className="absolute top-5 left-[128px] w-0.5 h-[200px] bg-indigo-200" />
-            
+            {/* Horizontal Line connecting 1-2-3-4 */}
+            <div className="absolute top-12 left-24 right-24 h-0.5 bg-gray-300" />
+
+            {/* Vertical lines */}
+            <div className="absolute top-12 left-24 w-0.5 h-48 bg-gray-300" />
+            <div className="absolute top-12 left-1/3 w-0.5 h-48 bg-gray-300" />
+            <div className="absolute top-12 left-2/3 w-0.5 h-48 bg-gray-300" />
+            <div className="absolute top-12 right-24 w-0.5 h-48 bg-gray-300" />
+
             {/* Horizontal Line 5-6 */}
-            <div className="absolute top-[240px] left-[128px] w-[350px] h-0.5 bg-indigo-200" />
+            <div className="absolute top-[240px] left-24 w-[33%] h-0.5 bg-gray-300" />
 
             {/* First Row */}
-            <div className="flex justify-between mb-20">
+            <div className="flex justify-between mb-28">
               {historyData.slice(0, 4).map((item) => (
-                <div key={item.number} className="flex flex-col items-center w-64 relative z-10">
-                  <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mb-3">
+                <div
+                  key={item.number}
+                  className="w-1/4 px-4 flex flex-col items-center"
+                >
+                  {/* Circle with Number */}
+                  <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
-                  </span>
-                  <span className="text-gray-600 font-medium mb-2">{item.date}</span>
-                  <span className="text-center text-sm">{item.description}</span>
+                  </div>
+
+                  {/* Date */}
+                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
+
+                  {/* Description */}
+                  <div className="text-center border-l border-r border-b border-gray-300 rounded-b-md p-3">
+                    <p className="text-sm text-gray-800">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Second Row */}
-            <div className="flex justify-start gap-24">
-              {historyData.slice(4).map((item) => (
-                <div key={item.number} className="flex flex-col items-center w-64 relative z-10">
-                  <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center mb-3">
+            <div className="flex">
+              {historyData.slice(4).map((item,) => (
+                <div
+                  key={item.number}
+                  className="w-1/4 px-4 flex flex-col items-center ml-0"
+                >
+                  {/* Circle with Number */}
+                  <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
-                  </span>
-                  <span className="text-gray-600 font-medium mb-2">{item.date}</span>
-                  <span className="text-center text-sm">{item.description}</span>
+                  </div>
+
+                  {/* Date */}
+                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
+
+                  {/* Description */}
+                  <div className="text-center border-l border-r border-b border-gray-300 rounded-b-md p-3">
+                    <p className="text-sm text-gray-800">{item.description}</p>
+                  </div>
                 </div>
               ))}
+              <div className="w-2/4"></div> {/* Empty space for alignment */}
             </div>
           </div>
         </div>
       </section>
 
       {/* Mobile Version */}
-      <section id="steps" className="lg:hidden py-12">
+      <section className="lg:hidden py-12 bg-white">
         <div className="container mx-auto px-4">
           {/* Section Heading */}
           <div className="text-center mb-10">
@@ -267,21 +299,30 @@ const AboutPage: React.FC = () => {
             </h2>
           </div>
 
-          {/* Steps */}
-          <div className="space-y-8">
-            {historyData.map((item) => (
-              <div key={item.number} className="relative pl-12 border-l-2 border-indigo-200 pb-8 last:border-l-0 last:pb-0">
-                <span className="absolute left-[-17px] bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center">
+          {/* Timeline */}
+          <div className="relative pl-10">
+            {/* Vertical timeline line */}
+            <div className="absolute top-0 bottom-0 left-4 w-0.5 bg-gray-300"></div>
+
+            {historyData.map((item, index) => (
+              <div key={item.number} className="mb-12 relative">
+                {/* Circle with number */}
+                <div className="absolute left-[-32px] bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center z-10 text-xl font-bold">
                   {item.number}
-                </span>
-                <div>
-                  <h4 className="text-gray-800 font-medium mb-2">
-                    {item.date}
-                  </h4>
-                  <p className="text-gray-600 text-sm">
-                    {item.description}
-                  </p>
                 </div>
+
+                {/* Content */}
+                <div className="ml-4">
+                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
+                  <div className="border border-gray-300 rounded-md p-3">
+                    <p className="text-sm text-gray-800">{item.description}</p>
+                  </div>
+                </div>
+
+                {/* Connecting dot to vertical line */}
+                {index < historyData.length - 1 && (
+                  <div className="absolute left-4 top-12 h-[calc(100%-24px)] w-0.5 bg-gray-300"></div>
+                )}
               </div>
             ))}
           </div>
@@ -301,8 +342,10 @@ const AboutPage: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-6">
             {/* Dewan Komisaris */}
             <div className="w-full">
-              <div className="text-black text-center text-xl font-semibold mb-4">
-                Dewan Komisaris
+              <div className="text-black text-xl font-semibold mb-4 text-left">
+                <span className="inline-block border-b-2 border-[#003868] pb-1">
+                  Dewan Komisaris
+                </span>
               </div>
               <div className="flex flex-wrap justify-center gap-6">
                 {/* Marlinah Ongko Widjojo */}
@@ -316,7 +359,7 @@ const AboutPage: React.FC = () => {
                     />
                   </div>
                   <div className="card-title p-4 text-center">
-                    <h5 className="text-black  text-xl font-semibold">
+                    <h5 className="text-black text-xl font-semibold">
                       Marlinah Ongko Widjojo
                     </h5>
                     <small className="text-sm text-black">
@@ -336,7 +379,7 @@ const AboutPage: React.FC = () => {
                     />
                   </div>
                   <div className="card-title p-4 text-center">
-                    <h5 className="text-black  text-xl font-semibold">
+                    <h5 className="text-black text-xl font-semibold">
                       Manuel Lahengke Nusa
                     </h5>
                     <small className="text-sm text-black">
@@ -349,8 +392,10 @@ const AboutPage: React.FC = () => {
 
             {/* Dewan Direksi */}
             <div className="w-full">
-              <div className="text-black text-center text-xl font-semibold mt-8 mb-4">
-                Dewan Direksi
+              <div className="text-black text-xl font-semibold mt-8 mb-4 text-left">
+                <span className="inline-block border-b-2 border-[#003868] pb-1">
+                  Dewan Direksi
+                </span>
               </div>
               <div className="flex flex-wrap justify-center gap-6">
                 {/* Wardati SE */}
@@ -364,7 +409,7 @@ const AboutPage: React.FC = () => {
                     />
                   </div>
                   <div className="card-title p-4 text-center">
-                    <h5 className=" text-black text-xl font-semibold">
+                    <h5 className="text-black text-xl font-semibold">
                       Wardati SE
                     </h5>
                     <small className="text-sm text-black">Direktur Utama</small>
@@ -382,7 +427,7 @@ const AboutPage: React.FC = () => {
                     />
                   </div>
                   <div className="card-title p-4 text-center">
-                    <h5 className=" text-black text-xl font-semibold">
+                    <h5 className="text-black text-xl font-semibold">
                       Mario Yahya
                     </h5>
                     <small className="text-sm text-black">
@@ -400,20 +445,20 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto px-4">
           {/* Section Heading */}
           <div className="text-center mb-8">
-            <h2 className="text-indigo-600 text-2xl font-semibold py-3">
+            <h2 className="text-black text-2xl font-semibold py-3">
               Informasi Laporan Keuangan
             </h2>
           </div>
 
           {/* List Container */}
-          <div className="flex flex-col md:flex-row justify-start gap-6">
+          <div className="flex flex-col md:flex-row justify-center gap-12">
             {/* Laporan Tahunan */}
-            <div className="list-informasi-laporan">
+            <div className="list-informasi-laporan max-w-xs">
               <Link
                 href="/laporan/tahunan/2021"
                 className="block hover:opacity-80"
               >
-                <h3 className="flex items-center text-lg font-semibold mb-2">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
                   Laporan Tahunan
                   <Image
                     src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
@@ -423,7 +468,7 @@ const AboutPage: React.FC = () => {
                     className="ml-2"
                   />
                 </h3>
-                <h6 className="text-sm text-gray-600">
+                <h6 className="text-sm text-gray-600 line-clamp-3">
                   Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan
                   pencapaian yang telah diperoleh selama setahun berjalan.
                 </h6>
@@ -431,12 +476,12 @@ const AboutPage: React.FC = () => {
             </div>
 
             {/* Laporan Triwulan */}
-            <div className="list-informasi-laporan">
+            <div className="list-informasi-laporan max-w-xs">
               <Link
                 href="/laporan/triwulan/2021"
                 className="block hover:opacity-80"
               >
-                <h3 className="flex items-center text-lg font-semibold mb-2">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
                   Laporan Triwulan
                   <Image
                     src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"

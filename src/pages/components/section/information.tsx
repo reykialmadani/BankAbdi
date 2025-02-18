@@ -6,12 +6,12 @@ const Informasi = () => {
     <section className="bg-gray-50 py-12 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Informasi Terkini Tentang Kami</h2>
-        {/* Added flex and justify-center to better center the grid */}
+        
         <div className="flex justify-center">
-          {/* Reduced gap-6 to gap-4 to bring cards closer together and added place-items-center */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+          
             {/* Card 1 */}
-            <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/MHYRuxSlECwR5xpaybz4nSthGcNQ9uCeUlG3s2vb.png"
@@ -29,7 +29,7 @@ const Informasi = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/mIDthWsAMu65K7Le8Q5qGPA5qlELd6FUXxO89Pfr.png"
@@ -47,7 +47,7 @@ const Informasi = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white shadow-md rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/iNWDdyCNwdPwiMdXuJF4Jc04peujGAnYHYBIY11J.png"

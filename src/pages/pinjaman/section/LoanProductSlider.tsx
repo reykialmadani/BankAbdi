@@ -63,7 +63,7 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
           <ul className="slider-container flex transition-transform duration-300">
             {loanProducts.map((product, index) => (
               <li key={index} className="w-1/3 flex-shrink-0 px-1">
-                <div className="bg-white w-[350px] h-[270px] rounded-lg shadow-sm">
+                <div className="bg-gray-100 w-[350px] h-[270px] rounded-lg shadow-lg hover:bg-gray-300 transition-all duration-300">
                   <Link href={product.href}>
                     <div className="p-6">
                       <div className="flex items-start gap-4">

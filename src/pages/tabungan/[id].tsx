@@ -124,7 +124,7 @@ const TabunganDetail: NextPage = () => {
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
             <Content />
-            <RiskManagement className="mt-6" />
+            <RiskManagement />
           </div>
         </div>
       </div>

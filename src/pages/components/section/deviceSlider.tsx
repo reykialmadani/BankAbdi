@@ -42,11 +42,12 @@ const DeviceSliderColumn = () => {
       className="relative flex flex-col items-center py-4 w-full bg-no-repeat"
       style={{
         backgroundImage: `url("https://bankabdi.co.id/img/home/bg-tab-section.webp")`,
-        backgroundSize: "auto 400px", 
-        backgroundPosition: "center 100px", 
+        backgroundSize: "auto 400px",
+        backgroundPosition: "center 100px",
       }}
     >
-      <div className="flex space-x-6 mb-4">
+      {/* Tab buttons - Made scrollable on mobile */}
+      <div className="flex overflow-x-auto space-x-6 mb-4 w-full px-4 md:justify-center">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -54,7 +55,7 @@ const DeviceSliderColumn = () => {
               setActiveTab(tab);
               setOpenSection(null);
             }}
-            className={`text-black text-lg px-6 py-2 transition-all duration-300 ${
+            className={`text-black text-lg px-6 py-2 transition-all duration-300 whitespace-nowrap ${
               activeTab === tab
                 ? "border-b-4 border-black-100"
                 : "opacity-60 hover:opacity-100"
@@ -67,24 +68,24 @@ const DeviceSliderColumn = () => {
 
       <div className="w-full max-w-4xl px-4">
         {activeTab === "Pinjaman" && (
-          <div className="flex flex-row items-start space-x-6">
-            <div className="flex-shrink-0">
+          <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
+            <div className="w-full md:w-auto flex justify-center">
               <Image
                 src="/assets/tab-pinjaman.png"
                 width={400}
                 height={533}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-full md:w-auto max-w-[400px]"
                 alt="Tabungan"
               />
             </div>
-            <div className="flex-1">
-              <h3 className="text-xl text-black mb-2">
+            <div className="w-full">
+              <h3 className="text-xl text-black mb-2 text-center md:text-left">
                 Produk Pinjaman/Kredit
               </h3>
               {pinjamanItems.map((item, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
+                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-full flex flex-col justify-center bg-white"
                   onClick={() => toggleSection(item)}
                 >
                   <h6 className="text-lg text-black">{item}</h6>
@@ -125,22 +126,24 @@ const DeviceSliderColumn = () => {
         )}
 
         {activeTab === "Tabungan" && (
-          <div className="flex flex-row items-start space-x-6 md:w-[700px]">
-            <div className="flex-shrink-0">
+          <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
+            <div className="w-full md:w-auto flex justify-center">
               <Image
                 src="/assets/tabungan.png"
                 width={400}
                 height={366}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-full md:w-auto max-w-[400px]"
                 alt="Tabungan"
               />
             </div>
-            <div className="flex-1">
-              <h3 className="text-xl text-black mb-2">Produk Tabungan</h3>
+            <div className="w-full">
+              <h3 className="text-xl text-black mb-2 text-center md:text-left">
+                Produk Tabungan
+              </h3>
               {tabunganItems.map((item, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
+                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-full flex flex-col justify-center bg-white"
                   onClick={() => toggleSection(item)}
                 >
                   <h6 className="text-lg text-black">{item}</h6>
@@ -173,20 +176,22 @@ const DeviceSliderColumn = () => {
         )}
 
         {activeTab === "Deposito" && (
-          <div className="flex flex-row items-start space-x-6 md:w-[700px]">
-            <div className="flex-shrink-0">
+          <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
+            <div className="w-full md:w-auto flex justify-center">
               <Image
                 src="/assets/deposito.jpeg"
                 width={400}
                 height={366}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-full md:w-auto max-w-[400px]"
                 alt="Deposito"
               />
             </div>
-            <div className="flex-1">
-              <h3 className="text-xl text-black  mb-2">Produk Deposito</h3>
+            <div className="w-full">
+              <h3 className="text-xl text-black mb-2 text-center md:text-left">
+                Produk Deposito
+              </h3>
               <div
-                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
+                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-full flex flex-col justify-center bg-white"
                 onClick={() => toggleSection("Deposito")}
               >
                 <h6 className="text-lg text-black">Deposito</h6>

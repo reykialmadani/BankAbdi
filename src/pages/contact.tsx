@@ -17,22 +17,6 @@ const ContactPage: React.FC = () => {
       ),
     },
     {
-      icon: <Phone className="text-indigo-600 w-6 h-6 mt-1" />,
-      title: "PHONE",
-      details: (
-        <>
-          <p className="text-gray-600">
-            <span className="font-semibold">Telepon:</span>
-            <a href="tel:+622127095212" className="hover:underline"> (+62) 21 27095212</a>
-          </p>
-          <p className="text-gray-600">
-            <span className="font-semibold">WhatsApp:</span>
-            <a href="https://wa.me/6281110686111" target="_blank" className="hover:underline"> 0811 1068 6111</a>
-          </p>
-        </>
-      ),
-    },
-    {
       icon: <Mail className="text-indigo-600 w-6 h-6 mt-1" />,
       title: "EMAIL",
       details: (
@@ -52,6 +36,23 @@ const ContactPage: React.FC = () => {
         </>
       ),
     },
+    {
+      icon: <Phone className="text-indigo-600 w-6 h-6 mt-1" />,
+      title: "PHONE",
+      details: (
+        <>
+          <p className="text-gray-600">
+            <span className="font-semibold">Telepon:</span>
+            <a href="tel:+622127095212" className="hover:underline"> (+62) 21 27095212</a>
+          </p>
+          <p className="text-gray-600">
+            <span className="font-semibold">WhatsApp:</span>
+            <a href="https://wa.me/6281110686111" target="_blank" className="hover:underline"> 0811 1068 6111</a>
+          </p>
+        </>
+      ),
+    },
+   
   ];
 
   return (
@@ -60,7 +61,7 @@ const ContactPage: React.FC = () => {
       <Hero imageSrc="https://bankabdi.co.id/img/banner/hero-contact.webp" title="Hubungi Kami" showButton={false} />
       
       {/* Kontak Section */}
-      <section className="bg-[#EFF6FC] py-12">
+      <section className="bg-gray-50 py-12">
         <div className="container mx-auto px-6 lg:px-20">
           <div className="text-center mb-8">
             <h2 className="text-black text-3xl font-semibold">KONTAK BANK ABDI</h2>
