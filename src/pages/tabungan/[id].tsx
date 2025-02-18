@@ -7,6 +7,7 @@ import Content from "../../pages/tabungan/section/content";
 import RiskManagement from "../../pages/tabungan/section/riskManegement";
 import CreditRequitment from "../../pages/tabungan/section/creditRequitment";
 import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
+import Blog from "../components/section/blog";
 import Footer from "../../pages/components/layout/footer";
 import Link from "next/link";
 
@@ -19,6 +20,7 @@ interface SavingsProduct {
   href: string;
   className?: string;
 }
+
 // Savings Products Data
 const savingsProducts: SavingsProduct[] = [
   {
@@ -73,14 +75,24 @@ const dataTabungan: Record<string, SavingsProduct> = {
     icon: "https://bankabdi.co.id/img/icon/tabungan_abdi_simple.png",
     href: "/tabungan/tabungan-abdi-simple",
   },
+  "formulir": {
+    title: "Formulir Pengajuan Tabungan",
+    description:
+      "TABUNGAN ABDI merupakan tabungan yang penarikannya dapat dilakukan setiap saat dengan menggunakan sarana yang disediakan bank.",
+    image: "https://bankabdi.co.id/img/banner/hero-tabungan-formulir.webp",
+    icon: "https://bankabdi.co.id/img/icon/tabungan_abdi_simple.png",
+    href: "/tabungan/formulir",
+  },
 };
-
 
 const TabunganDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const tabunganData = id && typeof id === "string" ? dataTabungan[id] : null;
+
+  // Check if the current page is the formulir page
+  const isFormulirPage = id === "formulir";
 
   if (!tabunganData) {
     return (
@@ -116,10 +128,8 @@ const TabunganDetail: NextPage = () => {
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 py-8">
-
           {/* Sidebar Section */}
           <Sidebar currentPath={router.pathname} />
-
 
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
@@ -129,9 +139,14 @@ const TabunganDetail: NextPage = () => {
         </div>
       </div>
 
-       <CreditRequitment />
-      <LoanProductSlider savingsProducts={savingsProducts} />
-
+      {/* Conditionally render CreditRequitment and LoanProductSlider */}
+      {!isFormulirPage && (
+        <>
+          <CreditRequitment />
+          <LoanProductSlider savingsProducts={savingsProducts} />
+        </>
+      )}
+      <Blog />
       <Footer />
     </div>
   );

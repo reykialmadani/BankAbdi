@@ -19,7 +19,11 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
     {
       href: "/tabungan/tabungan-abdi-simple",
       label: "Tabungan Abdi Simple"
-    }
+    },
+    {
+      href: "/tabungan/formulir",
+      label: "Formulir Pengajuan Tabungan"
+    },
   ];
 
   // Data deposito (sudah statis sebelumnya)
