@@ -65,13 +65,13 @@ const DeviceSliderColumn = () => {
         ))}
       </div>
 
-      <div className="w-full max-w-xl">
+      <div className="w-full max-w-4xl px-4">
         {activeTab === "Pinjaman" && (
           <div className="flex flex-row items-start space-x-6">
             <div className="flex-shrink-0">
               <Image
                 src="/assets/tab-pinjaman.png"
-                width={200}
+                width={400}
                 height={533}
                 className="rounded-lg shadow-md"
                 alt="Tabungan"
@@ -129,8 +129,8 @@ const DeviceSliderColumn = () => {
             <div className="flex-shrink-0">
               <Image
                 src="/assets/tabungan.png"
-                width={200}
-                height={200}
+                width={400}
+                height={366}
                 className="rounded-lg shadow-md"
                 alt="Tabungan"
               />
@@ -140,7 +140,7 @@ const DeviceSliderColumn = () => {
               {tabunganItems.map((item, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer bg-white"
+                  className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
                   onClick={() => toggleSection(item)}
                 >
                   <h6 className="text-lg text-black">{item}</h6>
@@ -177,8 +177,8 @@ const DeviceSliderColumn = () => {
             <div className="flex-shrink-0">
               <Image
                 src="/assets/deposito.jpeg"
-                width={200}
-                height={200}
+                width={400}
+                height={366}
                 className="rounded-lg shadow-md"
                 alt="Deposito"
               />
@@ -186,7 +186,7 @@ const DeviceSliderColumn = () => {
             <div className="flex-1">
               <h3 className="text-xl text-black  mb-2">Produk Deposito</h3>
               <div
-                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer bg-white"
+                className="border rounded-lg p-4 shadow-md mb-2 cursor-pointer w-[400px] md:w-[500px] flex flex-col justify-center bg-white"
                 onClick={() => toggleSection("Deposito")}
               >
                 <h6 className="text-lg text-black">Deposito</h6>

@@ -123,9 +123,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Investasi
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Investasi
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Nikmati pembiayaan untuk kebutuhan perluasan
                                   bisnis anda dalam jangka waktu yang panjang
@@ -139,9 +147,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Multiguna
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Multiguna
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Nikmati fasilitas pinjaman untuk segala
                                   kebutuhan anda
@@ -157,9 +173,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Kepemilikan Rumah
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Kepemilikan Rumah
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Makin mudah wujudkan hunian idaman dengan
                                   jangka waktu fleksibel
@@ -173,9 +197,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Kepemilikan Mobil
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Kepemilikan Mobil
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Jalan mudah untuk memiliki mobil idaman baru
                                   atau bekas dengan bunga ringan
@@ -189,9 +221,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Kendaraan Bermotor
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Kendaraan Bermotor
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Dapatkan bunga ringan untuk mewujudkan motor
                                   impian anda
@@ -205,9 +245,17 @@ const Header = () => {
                               legacyBehavior
                             >
                               <a className="block px-4 py-3">
-                                <span className="font-medium text-gray-900">
-                                  Kredit Tanpa Agunan
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Kredit Tanpa Agunan
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
                                 <p className="text-sm text-gray-600">
                                   Memberikan kemudahan dan keuntungan dalam
                                   memenuhi berbagai keperluan hidup anda
@@ -409,7 +457,86 @@ const Header = () => {
 
                   {menu === "informasi" && (
                     <div className="w-[800px] p-4">
-                      {/* Informasi content */}
+                      <div className="border-b border-gray-100 pb-2 mb-2">
+                        <h2 className="font-semibold text-gray-900 flex items-center gap-2">
+                          INFORMASI
+                          <Image
+                            src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                            width={16}
+                            height={16}
+                            alt="arrow right"
+                          />
+                        </h2>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                            <Link href="/informasi/suku-bunga" legacyBehavior>
+                              <a className="block px-4 py-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Suku Bunga
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
+                                <p className="text-sm text-gray-600 mt-1">
+                                  BANK ABDI menawarkan tabungan dengan suku
+                                  bunga menarik
+                                </p>
+                              </a>
+                            </Link>
+                          </div>
+                          <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                            <Link href="/informasi/blog" legacyBehavior>
+                              <a className="block px-4 py-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Blog
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
+                                <p className="text-sm text-gray-600 mt-1">
+                                  Dapatkan informasi terkini melalui Blog Bank
+                                  ABDI
+                                </p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
+                            <Link href="/informasi/laporan" legacyBehavior>
+                              <a className="block px-4 py-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-medium text-gray-900">
+                                    Laporan
+                                  </span>
+                                  <Image
+                                    src="https://bankabdi.co.id/img/icon/arrow_right.png"
+                                    width={16}
+                                    height={16}
+                                    alt="arrow right"
+                                  />
+                                </div>
+                                <p className="text-sm text-gray-600">
+                                  Laporan tahunan BANK ABDI yang berisi tentang
+                                  aktivitas
+                                </p>
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -444,7 +571,15 @@ const Header = () => {
 
         {/* Button */}
         <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors ml-auto mr-6 font-sogeo">
-          Pengajuan Kredit
+          <Link href="pinjaman/form-pengajuan-kredit" legacyBehavior>
+            <a
+              className={`hover:text-blue-600 ${
+                isTransparent ? "text-white" : "text-gray-800"
+              }`}
+            >
+              Pengajuan Kredit
+            </a>
+          </Link>
         </button>
       </nav>
     </header>

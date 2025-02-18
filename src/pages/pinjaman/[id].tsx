@@ -69,6 +69,12 @@ const PinjamanDetail = () => {
       image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kta.webp",
       icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png"
     },  
+    "form-pengajuan-kredit": {
+      title: "Formulir Pengajuan Pinjaman",
+      description: "",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png"
+    },  
   };
   
   const loanProducts: LoanProduct[] = Object.keys(dataPinjaman).map((key) => ({
