@@ -218,44 +218,46 @@ const AboutPage: React.FC = () => {
 
       {/* Desktop Version */}
       <section className="hidden lg:block py-12 bg-white">
-        <div className="container mx-auto px-4">
-          {/* Section Heading */}
-          <div className="text-center mb-10">
-            <h2 className="text-indigo-600 text-2xl font-semibold py-3">
-              Riwayat Singkat Perusahaan
-            </h2>
-          </div>
+        <div className="text-center mb-10">
+          <h2 className="text-indigo-600 text-2xl font-semibold py-3">
+            Riwayat Singkat Perusahaan
+          </h2>
+        </div>
 
+        <div className="container px-4">
+          {/* Section Heading */}
           <div className="relative">
             {/* Horizontal Line connecting 1-2-3-4 */}
             <div className="absolute top-12 left-24 right-24 h-0.5 bg-gray-300" />
 
             {/* Vertical lines */}
-            <div className="absolute top-12 left-24 w-0.5 h-48 bg-gray-300" />
+            {/* <div className="absolute top-12 left-24 w-0.5 h-48 bg-gray-300" />
             <div className="absolute top-12 left-1/3 w-0.5 h-48 bg-gray-300" />
             <div className="absolute top-12 left-2/3 w-0.5 h-48 bg-gray-300" />
-            <div className="absolute top-12 right-24 w-0.5 h-48 bg-gray-300" />
+            <div className="absolute top-12 right-24 w-0.5 h-48 bg-gray-300" /> */}
 
             {/* Horizontal Line 5-6 */}
-            <div className="absolute top-[240px] left-24 w-[33%] h-0.5 bg-gray-300" />
-
+            {/* <div className="absolute top-[240px] left-24 w-[33%] h-0.5 bg-gray-300" /> */}
             {/* First Row */}
             <div className="flex justify-between mb-28">
               {historyData.slice(0, 4).map((item) => (
                 <div
                   key={item.number}
-                  className="w-1/4 px-4 flex flex-col items-center"
+                  className="w-4/4 px-3 flex flex-col items-center"
                 >
                   {/* Circle with Number */}
                   <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
                   </div>
 
-                  {/* Date */}
-                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
+                  {/* Wrapper untuk Date dan Description agar sedikit ke kanan */}
+                  <div className="ml-[50%]">
+                    {/* Date */}
+                    <h4 className="text-black font-semibold text-lg mb-2">
+                      {item.date}
+                    </h4>
 
-                  {/* Description */}
-                  <div className="text-center border-l border-r border-b border-gray-300 rounded-b-md p-3">
+                    {/* Description */}
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
                 </div>
@@ -264,26 +266,29 @@ const AboutPage: React.FC = () => {
 
             {/* Second Row */}
             <div className="flex">
-              {historyData.slice(4).map((item,) => (
+              {historyData.slice(4).map((item) => (
                 <div
                   key={item.number}
-                  className="w-1/4 px-4 flex flex-col items-center ml-0"
+                  className="w-4/4 px-3 flex flex-col items-center"
                 >
                   {/* Circle with Number */}
                   <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
                   </div>
 
-                  {/* Date */}
-                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
+                  {/* Wrapper untuk Date dan Description agar sedikit ke kanan */}
+                  <div className="ml-[50%]">
+                    {/* Date */}
+                    <h4 className="text-black font-semibold text-lg mb-2">
+                      {item.date}
+                    </h4>
 
-                  {/* Description */}
-                  <div className="text-center border-l border-r border-b border-gray-300 rounded-b-md p-3">
+                    {/* Description */}
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
                 </div>
               ))}
-              <div className="w-2/4"></div> {/* Empty space for alignment */}
+            {/* Empty space for alignment */}
             </div>
           </div>
         </div>

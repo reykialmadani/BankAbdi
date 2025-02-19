@@ -1,9 +1,9 @@
+import React from 'react';
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 
-// Define font styles
 const segoeUIStyles = {
   fontFamily: "segoe_uiregular, sans-serif",
 };
@@ -39,8 +39,8 @@ const BankingSolutions = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <section className="py-12 px-6">
-        <div className="max-w-2xl mx-auto">
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto">
           <h2
             className="text-2xl font-semibold text-black text-center mb-8"
             style={segoeUIStyles}
@@ -70,13 +70,13 @@ const BankingSolutions = () => {
                 spaceBetween: 20,
               },
             }}
-            className="cursor-grab"
+            className="cursor-grab [&_.swiper-slide]:transition-all [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-in-out [&_.swiper-slide-active]:scale-110 [&_.swiper-slide-active]:z-10 [&_.swiper-slide]:scale-95"
           >
             {[...Array(3)].map((_, arrayIndex) =>
               bankingSolutions.map((solution, index) => (
                 <SwiperSlide key={`${arrayIndex}-${index}`}>
                   <div
-                    className="bg-white rounded-md shadow overflow-hidden max-w-sm h-[389px]"
+                    className="bg-white rounded-md shadow overflow-hidden max-w-sm h-[389px] transition-transform duration-300"
                     style={segoeUIStyles}
                   >
                     <div className="relative h-2/3 w-full">

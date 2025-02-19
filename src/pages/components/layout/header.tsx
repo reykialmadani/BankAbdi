@@ -570,7 +570,7 @@ const Header = () => {
                         </div>
                         <div>
                           <div className="hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                            <Link href="/informasi/laporan" legacyBehavior>
+                            <Link href="/laporan/2021" legacyBehavior>
                               <a className="block px-4 py-3">
                                 <div className="flex items-center gap-2">
                                   <span className="font-medium text-gray-900">
