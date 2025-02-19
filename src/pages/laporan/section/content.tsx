@@ -2,7 +2,7 @@ import { useState } from "react";
 import SidebarLaporan from "../../laporan/section/sidebar";
 
 const MainPage = () => {
-  const [page, setPage] = useState("2021"); // Default ke 2021
+  const [page, setPage] = useState("2021");
 
   const renderContent = () => {
     switch (page) {
@@ -15,14 +15,14 @@ const MainPage = () => {
               </h4>
               <ol className="list-decimal pl-6 text-gray-800 space-y-4">
                 <li>Laporanya Tahunan 2022 .</li>
-            </ol>
+              </ol>
             </div>
           </div>
         );
       case "2022":
-        case "2023":
-        case "2024":
-        case "2025":
+      case "2023":
+      case "2024":
+      case "2025":
         return (
           <div className="lg:w-3/4 w-full">
             <div className="rounded-lg shadow-sm p-6">
@@ -31,7 +31,7 @@ const MainPage = () => {
               </h4>
               <ol className="list-decimal pl-6 text-gray-800 space-y-4">
                 <li>Laporanya Tahunan 2022 .</li>
-            </ol>
+              </ol>
             </div>
           </div>
         );

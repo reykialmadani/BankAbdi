@@ -43,6 +43,7 @@ const MainPage: React.FC = () => {
     e.preventDefault();
     // Handle form submission here
     // You can use API routes in Next.js to handle the submission
+    console.log(id);  // To debug and ensure `id` is correctly populated
   };
 
   // Tentukan konten berbeda berdasarkan `id`
@@ -132,7 +133,7 @@ const MainPage: React.FC = () => {
                           name="noHandphone"
                           placeholder="Contoh: 0818 1818 7777"
                           required
-                          className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
+                          className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                         />
                         <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
                       </div>
@@ -146,7 +147,7 @@ const MainPage: React.FC = () => {
                           id="email"
                           name="Email"
                           placeholder="Contoh: deposito@gmail.com"
-                          className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
+                          className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                         />
                         <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
                       </div>
@@ -162,7 +163,7 @@ const MainPage: React.FC = () => {
                         id="province"
                         name="Domisili"
                         placeholder="Provinsi domisili Anda"
-                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
+                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                       />
                       <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
                     </div>
@@ -177,7 +178,7 @@ const MainPage: React.FC = () => {
                         id="city"
                         name="Kota"
                         placeholder="Kota domisili Anda"
-                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
+                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                       />
                       <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
                     </div>

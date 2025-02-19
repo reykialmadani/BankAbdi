@@ -3,8 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 // import { useState } from 'react';
 
+type BlogPost = {
+  href: string;
+  image: string;
+  title: string;
+  excerpt: string;
+};
+
 // Blog Card Component
-const BlogCard = ({ post }: { post: any }) => {
+const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => {
   return (
     <Link href={post.href} className="block">
       <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">

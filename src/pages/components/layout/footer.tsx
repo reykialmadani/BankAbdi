@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-4 md:space-y-0">
             <nav className="flex justify-start space-x-6">
               <Link href="#" className="text-gray-400 text-base hover:text-primary">FAQ</Link>
               <Link href="#" className="text-gray-400 text-base hover:text-primary">Suku Bunga</Link>

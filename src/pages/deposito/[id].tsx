@@ -10,6 +10,22 @@ import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
 import Footer from "../../pages/components/layout/footer";
 import Link from "next/link";
 
+// Define interfaces
+interface SavingsProduct {
+  title: string;
+  description: string;
+  image: string;
+  icon: string;
+  href: string;
+}
+
+interface DepositoProduct {
+  title: string;
+  description: string;
+  image: string;
+  icon: string;
+  href: string;
+}
 
 // Savings Products Data
 const savingsProducts: SavingsProduct[] = [
@@ -38,18 +54,21 @@ const savingsProducts: SavingsProduct[] = [
     href: "/tabungan/deposito-berjangka",
   },
 ];
+
 // Data Produk Deposito
-const dataDeposito = {
+const dataDeposito: Record<string, DepositoProduct> = {
   "deposito-berjangka": {
     title: "Deposito Berjangka",
-    description: "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
+    description:
+      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
     image: "https://bankabdi.co.id/img/banner/hero-deposito.webp",
     icon: "https://bankabdi.co.id/img/icon/deposito_berjangka.png",
     href: "/deposito/deposito-berjangka",
   },
   "formulir-deposito": {
     title: "Formulir Deposito",
-    description: "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
+    description:
+      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
     image: "https://bankabdi.co.id/img/banner/hero-deposito.webp",
     icon: "https://bankabdi.co.id/img/icon/formulir_deposito.png",
     href: "/deposito/formulir-deposito",
@@ -63,27 +82,14 @@ const dataDeposito = {
   },
 };
 
-interface DepositoProduct {
-  title: string;
-  description: string;
-  image: string;
-  icon: string;
-  href: string;
-}
-
-// Menu Sidebar Items
-const menuItems = Object.keys(dataDeposito).map((key) => ({
-  href: `/deposito/${key}`,
-  label: dataDeposito[key].title,
-}));
-
 const DepositoDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  // Check if id is valid and corresponding data exists
   const depositoData = id && typeof id === "string" ? dataDeposito[id] : null;
 
-  // Jika produk deposito tidak ditemukan
+  // If deposito data not found, show 404 page
   if (!depositoData) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -119,12 +125,12 @@ const DepositoDetail: NextPage = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 py-8">
           {/* Sidebar Section */}
-          <Sidebar menuItems={menuItems} currentPath={router.asPath} />
+          <Sidebar currentPath={router.asPath} />
 
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
-          <Content />
-            <RiskManagement className="mt-6" />
+            <Content />
+            <RiskManagement />
           </div>
         </div>
       </div>
@@ -144,17 +150,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: false, // fallback to 404 if id doesn't match
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
-  const depositoData = dataDeposito[id];
+  const depositoData = dataDeposito[id] || null;
 
   return {
     props: {
-      depositoData: depositoData || null,
+      depositoData,
     },
   };
 };

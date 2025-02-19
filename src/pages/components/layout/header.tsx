@@ -22,7 +22,8 @@ const Header = () => {
   const [isTransparent, setIsTransparent] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState(null);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<MenuType | null>(null);
+;
 
   useEffect(() => {
     setMounted(true);
@@ -47,29 +48,93 @@ const Header = () => {
   const getSubmenuContent = (menu: MenuType): MenuItem[] => {
     const submenuMap = {
       pinjaman: [
-        { title: "Kredit Modal Kerja", href: "/pinjaman/kredit-modal-kerja", desc: "Kami hadir untuk memberikan kemudahan dalam pembiayaan kebutuhan modal kerja anda" },
-        { title: "Kredit Investasi", href: "/pinjaman/kredit-investasi", desc: "Nikmati pembiayaan untuk kebutuhan perluasan bisnis anda dalam jangka waktu yang panjang" },
-        { title: "Kredit Multiguna", href: "/pinjaman/kredit-multiguna", desc: "Nikmati fasilitas pinjaman untuk segala kebutuhan anda" },
-        { title: "Kredit Kepemilikan Rumah", href: "/pinjaman/kredit-kepemilikan-rumah", desc: "Makin mudah wujudkan hunian idaman dengan jangka waktu fleksibel" },
-        { title: "Kredit Kepemilikan Mobil", href: "/pinjaman/kredit-kepemilikan-mobil", desc: "Jalan mudah untuk memiliki mobil idaman baru atau bekas dengan bunga ringan" },
-        { title: "Kredit Kendaraan Bermotor", href: "/pinjaman/kredit-kendaraan-bermotor", desc: "Dapatkan bunga ringan untuk mewujudkan motor impian anda" },
-        { title: "Kredit Tanpa Agunan", href: "/pinjaman/kredit-tanpa-agunan", desc: "Memberikan kemudahan dan keuntungan dalam memenuhi berbagai keperluan hidup anda" }
+        {
+          title: "Kredit Modal Kerja",
+          href: "/pinjaman/kredit-modal-kerja",
+          desc: "Kami hadir untuk memberikan kemudahan dalam pembiayaan kebutuhan modal kerja anda",
+        },
+        {
+          title: "Kredit Investasi",
+          href: "/pinjaman/kredit-investasi",
+          desc: "Nikmati pembiayaan untuk kebutuhan perluasan bisnis anda dalam jangka waktu yang panjang",
+        },
+        {
+          title: "Kredit Multiguna",
+          href: "/pinjaman/kredit-multiguna",
+          desc: "Nikmati fasilitas pinjaman untuk segala kebutuhan anda",
+        },
+        {
+          title: "Kredit Kepemilikan Rumah",
+          href: "/pinjaman/kredit-kepemilikan-rumah",
+          desc: "Makin mudah wujudkan hunian idaman dengan jangka waktu fleksibel",
+        },
+        {
+          title: "Kredit Kepemilikan Mobil",
+          href: "/pinjaman/kredit-kepemilikan-mobil",
+          desc: "Jalan mudah untuk memiliki mobil idaman baru atau bekas dengan bunga ringan",
+        },
+        {
+          title: "Kredit Kendaraan Bermotor",
+          href: "/pinjaman/kredit-kendaraan-bermotor",
+          desc: "Dapatkan bunga ringan untuk mewujudkan motor impian anda",
+        },
+        {
+          title: "Kredit Tanpa Agunan",
+          href: "/pinjaman/kredit-tanpa-agunan",
+          desc: "Memberikan kemudahan dan keuntungan dalam memenuhi berbagai keperluan hidup anda",
+        },
       ],
       tabungan: [
-        { title: "Tabungan ABDI", href: "/tabungan/tabungan-abdi", desc: "Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas penarikan dana kapan saja" },
-        { title: "Tabungan Abdiku", href: "/tabungan/tabungan-abdiku", desc: "Lebih hemat dengan menabung tanpa biaya administrasi bulanan yang mengikat anda" },
-        { title: "Tabungan ABDI SIMPLE", href: "/tabungan/tabungan-abdi-simple", desc: "Mulailah mengasah disiplin menabung sejak usia dini untuk meraih kehidupan finansial yang lebih baik" }
+        {
+          title: "Tabungan ABDI",
+          href: "/tabungan/tabungan-abdi",
+          desc: "Raih keuntungan dengan suku bunga kompetitif dan fleksibilitas penarikan dana kapan saja",
+        },
+        {
+          title: "Tabungan Abdiku",
+          href: "/tabungan/tabungan-abdiku",
+          desc: "Lebih hemat dengan menabung tanpa biaya administrasi bulanan yang mengikat anda",
+        },
+        {
+          title: "Tabungan ABDI SIMPLE",
+          href: "/tabungan/tabungan-abdi-simple",
+          desc: "Mulailah mengasah disiplin menabung sejak usia dini untuk meraih kehidupan finansial yang lebih baik",
+        },
       ],
       deposito: [
-        { title: "Deposito Berjangka", href: "/deposito/deposito-berjangka", desc: "Pilihan Investasi yang memberikan Keuntungan dan rasa aman karena dijamin oleh LPS" },
-        { title: "Formulir Deposito", href: "/deposito/formulir-deposito", desc: "Ajukan Deposito dengan mengisi Formulir BANK ABDI" },
-        { title: "Kalkulator Deposito", href: "/deposito/kalkulator-deposito", desc: "Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI" }
+        {
+          title: "Deposito Berjangka",
+          href: "/deposito/deposito-berjangka",
+          desc: "Pilihan Investasi yang memberikan Keuntungan dan rasa aman karena dijamin oleh LPS",
+        },
+        {
+          title: "Formulir Deposito",
+          href: "/deposito/formulir-deposito",
+          desc: "Ajukan Deposito dengan mengisi Formulir BANK ABDI",
+        },
+        {
+          title: "Kalkulator Deposito",
+          href: "/deposito/kalkulator-deposito",
+          desc: "Ketahui suku bunga deposito BANK ABDI dengan Kalkulator BANK ABDI",
+        },
       ],
       informasi: [
-        { title: "Suku Bunga", href: "/informasi/suku-bunga", desc: "BANK ABDI menawarkan tabungan dengan suku bunga menarik" },
-        { title: "Blog", href: "/informasi/blog", desc: "Dapatkan informasi terkini melalui Blog Bank ABDI" },
-        { title: "Laporan", href: "/informasi/laporan", desc: "Laporan tahunan BANK ABDI yang berisi tentang aktivitas" }
-      ]
+        {
+          title: "Suku Bunga",
+          href: "/informasi/suku-bunga",
+          desc: "BANK ABDI menawarkan tabungan dengan suku bunga menarik",
+        },
+        {
+          title: "Blog",
+          href: "/informasi/blog",
+          desc: "Dapatkan informasi terkini melalui Blog Bank ABDI",
+        },
+        {
+          title: "Laporan",
+          href: "/informasi/laporan",
+          desc: "Laporan tahunan BANK ABDI yang berisi tentang aktivitas",
+        },
+      ],
     };
     return submenuMap[menu] || [];
   };
@@ -625,12 +690,10 @@ const Header = () => {
         </ul>
 
         <button className="bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors ml-auto mr-6 font-sogeo">
-  <Link href="pinjaman/form-pengajuan-kredit" legacyBehavior>
-    <a className="text-white hover:text-blue-100">
-      Pengajuan Kredit
-    </a>
-  </Link>
-</button>
+          <Link href="pinjaman/form-pengajuan-kredit" legacyBehavior>
+            <a className="text-white hover:text-blue-100">Pengajuan Kredit</a>
+          </Link>
+        </button>
 
         {/* Hamburger Menu Button (visible on mobile) */}
         <button
@@ -644,12 +707,14 @@ const Header = () => {
         </button>
       </nav>
 
-     {/* Mobile Menu */}
-     {isMobileMenuOpen && (
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
         <div className="md:hidden fixed top-[60px] left-0 w-full bg-white shadow-lg z-40 max-h-[calc(100vh-60px)] overflow-y-auto">
           <div className="container mx-auto py-4">
             <ul className="space-y-4 px-6">
-              {(["pinjaman", "tabungan", "deposito", "informasi"] as MenuType[]).map((menu) => (
+              {(
+                ["pinjaman", "tabungan", "deposito", "informasi"] as MenuType[]
+              ).map((menu) => (
                 <li key={menu} className="w-full">
                   <div className="border-b border-gray-100">
                     <button
@@ -663,24 +728,30 @@ const Header = () => {
                         <ChevronDown className="w-4 h-4" />
                       )}
                     </button>
-                    
+
                     {/* Mobile Submenu */}
                     {openMobileSubmenu === menu && (
                       <div className="py-2 space-y-2">
-                        {getSubmenuContent(menu).map((item: MenuItem, index: number) => (
-                          <Link key={index} href={item.href} legacyBehavior>
-                            <a className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded">
-                              <span className="font-medium text-gray-800 block">{item.title}</span>
-                              <span className="text-sm mt-1">{item.desc}</span>
-                            </a>
-                          </Link>
-                        ))}
+                        {getSubmenuContent(menu).map(
+                          (item: MenuItem, index: number) => (
+                            <Link key={index} href={item.href} legacyBehavior>
+                              <a className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded">
+                                <span className="font-medium text-gray-800 block">
+                                  {item.title}
+                                </span>
+                                <span className="text-sm mt-1">
+                                  {item.desc}
+                                </span>
+                              </a>
+                            </Link>
+                          )
+                        )}
                       </div>
                     )}
                   </div>
                 </li>
               ))}
-              
+
               <li className="border-b border-gray-100">
                 <Link href="/about" legacyBehavior>
                   <a className="block py-2 text-gray-800 hover:text-blue-600">

@@ -171,8 +171,8 @@ const AboutPage: React.FC = () => {
         className="bg-white py-16 px-4 sm:px-6 lg:px-8"
         style={{
           backgroundImage: "url('/assets/bg-accordion.png')",
-          backgroundSize: "cover", // Ensure the image covers the section without repeating
-          backgroundPosition: "center", // Center the background image
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="max-w-7xl mx-auto">
@@ -181,7 +181,6 @@ const AboutPage: React.FC = () => {
               Visi dan Misi Perusahaan
             </h2>
           </div>
-
           <div className="space-y-8">
             {/* Visi */}
             <div className="p-8 rounded-lg ">
@@ -216,10 +215,10 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Desktop Version */}
+      {/* Riwayat Version */}
       <section className="hidden lg:block py-12 bg-white">
-        <div className="text-center mb-10">
-          <h2 className="text-indigo-600 text-2xl font-semibold py-3">
+        <div className="text-center">
+          <h2 className="text-black text-2xl font-semibold py-3">
             Riwayat Singkat Perusahaan
           </h2>
         </div>
@@ -228,36 +227,31 @@ const AboutPage: React.FC = () => {
           {/* Section Heading */}
           <div className="relative">
             {/* Horizontal Line connecting 1-2-3-4 */}
-            <div className="absolute top-12 left-24 right-24 h-0.5 bg-gray-300" />
-
-            {/* Vertical lines */}
-            {/* <div className="absolute top-12 left-24 w-0.5 h-48 bg-gray-300" />
-            <div className="absolute top-12 left-1/3 w-0.5 h-48 bg-gray-300" />
-            <div className="absolute top-12 left-2/3 w-0.5 h-48 bg-gray-300" />
-            <div className="absolute top-12 right-24 w-0.5 h-48 bg-gray-300" /> */}
+            <div className="absolute top-8 left-48 right-24 h-0.5 bg-[#2F5399]" />
+            {/* Vertical Line connecting 1-5 */}
+            <div className="absolute top-12 left-44 h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+            {/* Vertical Line connecting 2-6 */}
+            <div className="absolute top-12 left-[calc(40%+5px)] h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+            <div className="absolute top-12 left-[calc(55%+90px)] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+            <div className="absolute top-12 left-[calc(80%+80px)] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
 
             {/* Horizontal Line 5-6 */}
-            {/* <div className="absolute top-[240px] left-24 w-[33%] h-0.5 bg-gray-300" /> */}
+            <div className="absolute top-72 left-48 w-[40%] h-0.5 bg-[#2F5399]" />
+
             {/* First Row */}
-            <div className="flex justify-between mb-28">
+            <div className="flex justify-between mb-20">
               {historyData.slice(0, 4).map((item) => (
                 <div
                   key={item.number}
-                  className="w-4/4 px-3 flex flex-col items-center"
+                  className="w-3/3 px-3 flex flex-col items-center"
                 >
-                  {/* Circle with Number */}
                   <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
                   </div>
-
-                  {/* Wrapper untuk Date dan Description agar sedikit ke kanan */}
                   <div className="ml-[50%]">
-                    {/* Date */}
                     <h4 className="text-black font-semibold text-lg mb-2">
                       {item.date}
                     </h4>
-
-                    {/* Description */}
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
                 </div>
@@ -265,30 +259,23 @@ const AboutPage: React.FC = () => {
             </div>
 
             {/* Second Row */}
-            <div className="flex">
+            <div className="flex ml-[5%] mt-[-50px]">
               {historyData.slice(4).map((item) => (
                 <div
                   key={item.number}
                   className="w-4/4 px-3 flex flex-col items-center"
                 >
-                  {/* Circle with Number */}
                   <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
                     {item.number}
                   </div>
-
-                  {/* Wrapper untuk Date dan Description agar sedikit ke kanan */}
                   <div className="ml-[50%]">
-                    {/* Date */}
                     <h4 className="text-black font-semibold text-lg mb-2">
                       {item.date}
                     </h4>
-
-                    {/* Description */}
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
                 </div>
               ))}
-            {/* Empty space for alignment */}
             </div>
           </div>
         </div>
@@ -299,7 +286,7 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto px-4">
           {/* Section Heading */}
           <div className="text-center mb-10">
-            <h2 className="text-indigo-600 text-2xl font-semibold">
+            <h2 className="text-black text-2xl font-semibold">
               Riwayat Singkat Perusahaan
             </h2>
           </div>
@@ -307,9 +294,9 @@ const AboutPage: React.FC = () => {
           {/* Timeline */}
           <div className="relative pl-10">
             {/* Vertical timeline line */}
-            <div className="absolute top-0 bottom-0 left-4 w-0.5 bg-gray-300"></div>
+            <div className="absolute top-0 bottom-0 left-8 w-0.5 bg-gray-300"></div>
 
-            {historyData.map((item, index) => (
+            {historyData.map((item) => (
               <div key={item.number} className="mb-12 relative">
                 {/* Circle with number */}
                 <div className="absolute left-[-32px] bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center z-10 text-xl font-bold">
@@ -318,32 +305,32 @@ const AboutPage: React.FC = () => {
 
                 {/* Content */}
                 <div className="ml-4">
-                  <h4 className="font-semibold text-lg mb-2">{item.date}</h4>
-                  <div className="border border-gray-300 rounded-md p-3">
+                  <h4 className="text-black font-semibold text-lg mb-2 ml-2">
+                    {item.date}
+                  </h4>
+                  <div className=" p-3">
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
                 </div>
 
                 {/* Connecting dot to vertical line */}
-                {index < historyData.length - 1 && (
+                {/* {index < historyData.length - 1 && (
                   <div className="absolute left-4 top-12 h-[calc(100%-24px)] w-0.5 bg-gray-300"></div>
-                )}
+                )} */}
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Profil Dewan */}
       <section className="bg-[#EFF6FC] profile-dewan py-8">
         <div className="container mx-auto">
-          {/* Section Heading */}
           <div className="text-center mb-6">
             <h2 className="text-black text-3xl font-semibold py-3">
               Profil Dewan
             </h2>
           </div>
-
-          {/* Section Container */}
           <div className="flex flex-wrap justify-center gap-6">
             {/* Dewan Komisaris */}
             <div className="w-full">
@@ -354,7 +341,7 @@ const AboutPage: React.FC = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-6">
                 {/* Marlinah Ongko Widjojo */}
-                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-[360px] h-[333px]">
                   <div className="card-image relative h-60">
                     <Image
                       src="https://bankabdi.co.id/img/profile/marlinah.webp"
@@ -374,7 +361,7 @@ const AboutPage: React.FC = () => {
                 </div>
 
                 {/* Manuel Lahengke Nusa */}
-                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-[360px] h-[333px]">
                   <div className="card-image relative h-60">
                     <Image
                       src="https://bankabdi.co.id/img/profile/manuel.webp"
@@ -404,7 +391,7 @@ const AboutPage: React.FC = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-6">
                 {/* Wardati SE */}
-                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-[360px] h-[333px]">
                   <div className="card-image relative h-60">
                     <Image
                       src="https://bankabdi.co.id/img/profile/wardati.webp"
@@ -422,7 +409,7 @@ const AboutPage: React.FC = () => {
                 </div>
 
                 {/* Mario Yahya */}
-                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-1/2 max-w-md">
+                <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-[360px] h-[333px]">
                   <div className="card-image relative h-60">
                     <Image
                       src="https://bankabdi.co.id/img/profile/mario.webp"
@@ -446,23 +433,19 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Laporan Keuangan */}
       <section className="section-laporan-keuangan bg-white py-12">
         <div className="container mx-auto px-4">
-          {/* Section Heading */}
           <div className="text-center mb-8">
             <h2 className="text-black text-2xl font-semibold py-3">
               Informasi Laporan Keuangan
             </h2>
           </div>
-
           {/* List Container */}
           <div className="flex flex-col md:flex-row justify-center gap-12">
             {/* Laporan Tahunan */}
             <div className="list-informasi-laporan max-w-xs">
-              <Link
-                href="/laporan/tahunan/2021"
-                className="block hover:opacity-80"
-              >
+              <Link href="/laporan/2021" className="block hover:opacity-80">
                 <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
                   Laporan Tahunan
                   <Image
@@ -482,10 +465,7 @@ const AboutPage: React.FC = () => {
 
             {/* Laporan Triwulan */}
             <div className="list-informasi-laporan max-w-xs">
-              <Link
-                href="/laporan/triwulan/2021"
-                className="block hover:opacity-80"
-              >
+              <Link href="/laporan/2021" className="block hover:opacity-80">
                 <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
                   Laporan Triwulan
                   <Image

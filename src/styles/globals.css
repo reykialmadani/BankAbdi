@@ -15,7 +15,7 @@
 }
 
 @font-face {
-  font-family: 'segoe_uiregular';
+  font-family: 'Segoe UI';
   src: url('/fonts/segoe-ui-regular.woff2') format('woff2'),
        url('/fonts/segoe-ui-regular.woff') format('woff');
   font-weight: normal;

@@ -66,9 +66,6 @@ const LaporanDetail = () => {
 
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-8 py-8">
-                
-              {/* Sidebar Section */}
-              {/* <Sidebar currentPath={router.asPath} /> */}
 
               {/* Main Content */}
               <div className="lg:w-3/4 w-full">
