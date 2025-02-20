@@ -71,66 +71,87 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Keunggulan Section */}
-      <section className="bg-white py-16">
+      {/* Nilai Section */}
+      <section className="bg-[#EFF6FC] py-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-between">
             {/* Section Heading */}
             <div className="w-full text-center mb-10">
-              <h2 className="text-black text-3xl font-semibold">
+              <h2 className="text-black text-2xl font-semibold">
                 Nilai-Nilai Perusahaan
               </h2>
             </div>
 
             {/* Adapting */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left">
-              <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">
-                  Adapting
-                </h6>
-                <p className="text-sm text-gray-700 mt-2">
-                  Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
-                  konsisten dan meramalkan keunggulan kompetitif yang baru.
-                </p>
+            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
+              <div className="ui-icon-block px-12 relative z-10">
+                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20 ">
+                  A
+                </span>
+                <div className="relative z-20">
+                  <h6 className="text-black text-lg font-semibold mt-2">
+                    Adapting
+                  </h6>
+                  <p className="text-sm text-gray-700 mt-2">
+                    Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
+                    konsisten dan meramalkan keunggulan kompetitif yang baru.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Blessing */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left">
-              <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">
-                  Blessing
-                </h6>
-                <p className="text-sm text-gray-700 mt-2">
-                  Kepercayaan pelanggan menjadi faktor utama kami dalam melayani
-                  dan memberikan nilai tambah bagi keperluan pelanggan.
-                </p>
+            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
+              <div className="ui-icon-block px-12 relative z-10">
+                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
+                  B
+                </span>
+                <div className="relative z-20">
+                  <h6 className="text-black text-lg font-semibold mt-2">
+                    Blessing
+                  </h6>
+                  <p className="text-sm text-gray-700 mt-2">
+                    Kepercayaan pelanggan menjadi faktor utama kami dalam
+                    melayani dan memberikan nilai tambah bagi keperluan
+                    pelanggan.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Developing */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left">
-              <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">
-                  Developing
-                </h6>
-                <p className="text-sm text-gray-700 mt-2">
-                  Selalu bergerak dan berkembang sehingga menjadikan bank yang
-                  terkinikan.
-                </p>
+            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
+              <div className="ui-icon-block px-12 relative z-10">
+                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
+                  D
+                </span>
+                <div className="relative z-20">
+                  <h6 className="text-black text-lg font-semibold mt-2">
+                    Developing
+                  </h6>
+                  <p className="text-sm text-gray-700 mt-2">
+                    Selalu bergerak dan berkembang sehingga menjadikan bank yang
+                    terkinikan.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Improving */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left">
-              <div className="ui-icon-block px-12">
-                <h6 className="text-black text-lg font-semibold mt-2">
-                  Improving
-                </h6>
-                <p className="text-sm text-gray-700 mt-2">
-                  Selalu berinovasi dalam upaya peningkatan kualitas pelayanan
-                  terhadap pelanggan.
-                </p>
+            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
+              <div className="ui-icon-block px-12 relative z-10">
+                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
+                  I
+                </span>
+                <div className="relative z-20">
+                  <h6 className="text-black text-lg font-semibold mt-2">
+                    Improving
+                  </h6>
+                  <p className="text-sm text-gray-700 mt-2">
+                    Selalu berinovasi dalam upaya peningkatan kualitas pelayanan
+                    terhadap pelanggan.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -145,20 +166,20 @@ const AboutPage: React.FC = () => {
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="section-heading text-center mb-0 relative z-10">
-            <h2 className="text-2xl text-white font-[Segoe UI] text-[28px]">
+          <div className="section-heading text-center mb-8 relative z-10">
+            <h2 className="text-2xl text-white font-semibold">
               Moto Perusahaan
             </h2>
-            <h1 className="text-4xl font-bold text-white mt-4 font-[Segoe UI] text-[48px]">
+            <h1 className="text-4xl font-bold text-white mt-4">
               SAHABAT USAHA ANDA
             </h1>
           </div>
-          <div className="flex flex-row gap-2 text-white mt-8 relative z-10">
-            <span className="motto-p text-sm w-1/2 font-[Segoe UI] px-[92.8px] pt-[48px]">
+          <div className="flex flex-col md:flex-row gap-6 text-white mt-8 relative z-10">
+            <span className="text-sm md:w-1/2 px-6 md:px-12 text-center md:text-left leading-relaxed">
               Komitmen BANK ABDI sebagai sahabat usaha anda dalam berusaha untuk
               mengembangkan kegiatan usaha bersama-sama.
             </span>
-            <span className="motto-p text-sm w-1/2 font-[Segoe UI] px-[92.8px] pt-[48px]">
+            <span className="text-sm md:w-1/2 px-6 md:px-12 text-center md:text-left leading-relaxed">
               BANK ABDI hadir menjadi mitra usaha dalam pengembangan UMKM agar
               menjadi pelaku usaha yang mandiri & memiliki daya saing.
             </span>
@@ -168,7 +189,7 @@ const AboutPage: React.FC = () => {
 
       {/* Visi dan Misi Section */}
       <section
-        className="bg-white py-16 px-4 sm:px-6 lg:px-8"
+        className="bg-white py-12 md:py-16 px-4 sm:px-6 lg:px-8"
         style={{
           backgroundImage: "url('/assets/bg-accordion.png')",
           backgroundSize: "cover",
@@ -176,46 +197,50 @@ const AboutPage: React.FC = () => {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-black">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="md:text-2xl font-bold text-black">
               Visi dan Misi Perusahaan
             </h2>
           </div>
-          <div className="space-y-8">
+
+          <div className="space-y-6 md:space-y-8">
             {/* Visi */}
-            <div className="p-8 rounded-lg ">
-              <h3 className="text-2xl font-semibold text-blue-900 mb-4 text-center">
+            <div className="backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-sm">
+              <h3 className="text-xl md:text-2xl font-semibold text-blue-900 mb-4 text-center">
                 Visi
               </h3>
-              <p className="text-lg text-gray-700 mb-4 text-center">
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center">
                 Menjadi BPR digital di Indonesia yang berinovasi tinggi, maju
                 dan sehat dengan didukung sistem, layanan dan SDM terbaik.
               </p>
             </div>
 
             {/* Misi */}
-            <div className="p-8 rounded-lg ">
-              <h3 className="text-2xl font-semibold text-blue-900 mb-4 text-center">
+            <div className="backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-sm">
+              <h3 className="text-xl md:text-2xl font-semibold text-blue-900 mb-4 text-center">
                 Misi
               </h3>
-              <ul className="flex space-x-8 text-lg text-gray-700">
-                <li className="flex-1 list-disc pl-5">
-                  Menjadi mitra pelaku UMKM untuk mendukung dan mengingkatkan
-                  Usaha Mikro Kecil Menengah yang mandiri dan memiliki daya
-                  saing kuat.
-                </li>
-                <li className="flex-1 list-disc pl-5">
-                  Meningkatkan layanan perbankan yang mengedepankan
-                  service/layanan mutu, infrastruktur yang kuat dan terdepan dan
-                  SDM yang kompeten.
-                </li>
-              </ul>
+              <div className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
+                <div className="flex-1">
+                  <div className="text-base md:text-lg text-gray-700 leading-relaxed pl-4 border-l-4 border-blue-900">
+                    Menjadi mitra pelaku UMKM untuk mendukung dan meningkatkan
+                    Usaha Mikro Kecil Menengah yang mandiri dan memiliki daya
+                    saing kuat.
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="text-base md:text-lg text-gray-700 leading-relaxed pl-4 border-l-4 border-blue-900">
+                    Meningkatkan layanan perbankan yang mengedepankan
+                    service/layanan mutu, infrastruktur yang kuat dan terdepan
+                    dan SDM yang kompeten.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Riwayat Version */}
       <section className="hidden lg:block py-12 bg-white">
         <div className="text-center">
           <h2 className="text-black text-2xl font-semibold py-3">
@@ -223,60 +248,61 @@ const AboutPage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="container px-4">
-          {/* Section Heading */}
-          <div className="relative">
-            {/* Horizontal Line connecting 1-2-3-4 */}
-            <div className="absolute top-8 left-48 right-24 h-0.5 bg-[#2F5399]" />
-            {/* Vertical Line connecting 1-5 */}
-            <div className="absolute top-12 left-44 h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
-            {/* Vertical Line connecting 2-6 */}
-            <div className="absolute top-12 left-[calc(40%+5px)] h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
-            <div className="absolute top-12 left-[calc(55%+90px)] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
-            <div className="absolute top-12 left-[calc(80%+80px)] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+        <div className="container px-4 relative">
+          {/* Horizontal Line connecting 1-2-3-4 */}
+          <div className="absolute top-8 left-[20%] right-[12%] h-0.5 bg-[#2F5399]" />
 
-            {/* Horizontal Line 5-6 */}
-            <div className="absolute top-72 left-48 w-[40%] h-0.5 bg-[#2F5399]" />
+          {/* Vertical Lines */}
+          <div className="absolute top-12 left-[22%] h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+          <div className="absolute top-12 left-[40%] h-[400px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+          <div className="absolute top-12 left-[59%] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
+          <div className="absolute top-12 left-[78%] h-[200px] w-0.5 border-l-2 border-dashed border-[#2F5399]" />
 
-            {/* First Row */}
-            <div className="flex justify-between mb-20">
-              {historyData.slice(0, 4).map((item) => (
-                <div
-                  key={item.number}
-                  className="w-3/3 px-3 flex flex-col items-center"
-                >
-                  <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
-                    {item.number}
-                  </div>
-                  <div className="ml-[50%]">
-                    <h4 className="text-black font-semibold text-lg mb-2">
-                      {item.date}
-                    </h4>
-                    <p className="text-sm text-gray-800">{item.description}</p>
-                  </div>
+          {/* Horizontal Line 5-6 */}
+          <div className="absolute top-64 left-[22%] w-[35%] h-0.5 bg-[#2F5399]" />
+
+          {/* First Row */}
+          <div className="flex justify-between px-[12%] mb-20">
+            {historyData.slice(0, 4).map((item) => (
+              <div
+                key={item.number}
+                className="w-1/4 flex flex-col items-center"
+              >
+                <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
+                  {item.number}
                 </div>
-              ))}
-            </div>
-
-            {/* Second Row */}
-            <div className="flex ml-[5%] mt-[-50px]">
-              {historyData.slice(4).map((item) => (
-                <div
-                  key={item.number}
-                  className="w-4/4 px-3 flex flex-col items-center"
-                >
-                  <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
-                    {item.number}
-                  </div>
-                  <div className="ml-[50%]">
-                    <h4 className="text-black font-semibold text-lg mb-2">
-                      {item.date}
-                    </h4>
-                    <p className="text-sm text-gray-800">{item.description}</p>
-                  </div>
+                <div className="text-left ml-[90%]">
+                  <h4 className="text-black font-semibold text-lg mb-2">
+                    {item.date}
+                  </h4>
+                  <p className="w-[150px] text-sm text-gray-800 ">
+                    {item.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Second Row */}
+          <div className="flex px-[12%] mt-[-50px]">
+            {historyData.slice(4).map((item) => (
+              <div
+                key={item.number}
+                className="w-1/4 flex flex-col items-center"
+              >
+                <div className="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-8 z-10 text-2xl font-bold">
+                  {item.number}
+                </div>
+                <div className="text-left ml-[90%]">
+                  <h4 className="text-black font-semibold text-lg mb-2">
+                    {item.date}
+                  </h4>
+                  <p className="w-[150px] text-sm text-gray-800 ">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -292,31 +318,43 @@ const AboutPage: React.FC = () => {
           </div>
 
           {/* Timeline */}
-          <div className="relative pl-10">
+          <div className="relative">
             {/* Vertical timeline line */}
-            <div className="absolute top-0 bottom-0 left-8 w-0.5 bg-gray-300"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-300"></div>
 
-            {historyData.map((item) => (
-              <div key={item.number} className="mb-12 relative">
+            {historyData.map((item, index) => (
+              <div
+                key={item.number}
+                className="mb-12 flex items-center relative"
+              >
+                {/* Left Side Content */}
+                {index % 2 === 0 ? (
+                  <div className="w-1/2 pr-4 text-right">
+                    <h4 className="text-black font-semibold text-lg mb-2">
+                      {item.date}
+                    </h4>
+                    <p className="text-sm text-gray-800">{item.description}</p>
+                  </div>
+                ) : (
+                  <div className="w-1/2"></div>
+                )}
+
                 {/* Circle with number */}
-                <div className="absolute left-[-32px] bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center z-10 text-xl font-bold">
+                <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center z-10 text-xl font-bold mx-4">
                   {item.number}
                 </div>
 
-                {/* Content */}
-                <div className="ml-4">
-                  <h4 className="text-black font-semibold text-lg mb-2 ml-2">
-                    {item.date}
-                  </h4>
-                  <div className=" p-3">
+                {/* Right Side Content */}
+                {index % 2 !== 0 ? (
+                  <div className="w-1/2 pl-4 text-left">
+                    <h4 className="text-black font-semibold text-lg mb-2">
+                      {item.date}
+                    </h4>
                     <p className="text-sm text-gray-800">{item.description}</p>
                   </div>
-                </div>
-
-                {/* Connecting dot to vertical line */}
-                {/* {index < historyData.length - 1 && (
-                  <div className="absolute left-4 top-12 h-[calc(100%-24px)] w-0.5 bg-gray-300"></div>
-                )} */}
+                ) : (
+                  <div className="w-1/2"></div>
+                )}
               </div>
             ))}
           </div>

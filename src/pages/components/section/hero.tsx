@@ -3,7 +3,7 @@ import Image from "next/image";
 interface HeroSectionProps {
   imageSrc: string;
   title: string;
-  paragraph?: string; // Properti baru untuk paragraf
+  paragraph?: string; 
   showButton?: boolean;
 }
 

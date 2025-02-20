@@ -56,7 +56,7 @@ const MainPage: React.FC = () => {
               <h4 className="text-2xl font-bold text-[#003868] mb-6">
                 PERSYARATAN
               </h4>
-              <ol className="list-decimal pl-6 text-gray-800 space-y-4">
+              <ol className="list-decimal pl-6 text-[#414c5a] space-y-4">
                 <li>Tersedia bagi nasabah Perorangan dan Badan Hukum.</li>
                 <li>
                   Melengkapi formulir pembukaan rekening dan dokumen pendukung
@@ -101,7 +101,7 @@ const MainPage: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <div className="docs-content">
               <div className="docs-section">
-                <h4 className="text-2xl font-bold text-blue-600 mb-6">
+                <h4 className="text-2xl font-bold text-[#003868] mb-6">
                   FORMULIR PENGAJUAN DEPOSITO
                 </h4>
                 <div>
@@ -116,9 +116,9 @@ const MainPage: React.FC = () => {
                         id="fullName"
                         name="NamaLengkap"
                         placeholder="Masukkan nama lengkap Anda disini"
-                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700"
+                        className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                       />
-                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
+                      {/* <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div> */}
                     </div>
     
                     {/* No Handphone and Email in one row */}
@@ -135,7 +135,7 @@ const MainPage: React.FC = () => {
                           required
                           className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                         />
-                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
+                        {/* <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div> */}
                       </div>
                       
                       <div className="form-group relative">
@@ -149,7 +149,7 @@ const MainPage: React.FC = () => {
                           placeholder="Contoh: deposito@gmail.com"
                           className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                         />
-                        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
+                        {/* <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div> */}
                       </div>
                     </div>
     
@@ -165,7 +165,7 @@ const MainPage: React.FC = () => {
                         placeholder="Provinsi domisili Anda"
                         className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                       />
-                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
+                      {/* <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div> */}
                     </div>
     
                     {/* Kota/Kabupaten */}
@@ -180,7 +180,7 @@ const MainPage: React.FC = () => {
                         placeholder="Kota domisili Anda"
                         className="w-full px-3 py-2 bg-transparent border-b-2 border-blue-500 focus:outline-none focus:border-blue-700 text-black"
                       />
-                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div>
+                      {/* <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 transform rotate-45 translate-y-1/2"></div> */}
                     </div>
     
                     <button
@@ -202,7 +202,7 @@ const MainPage: React.FC = () => {
           <div className="container mx-auto px-4 py-8">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-lg shadow-lg p-6">
-                <h4 className="text-2xl font-bold text-blue-600 mb-6">
+                <h4 className="text-2xl font-bold text-[#003868] mb-6">
                   KALKULATOR DEPOSITO BANK ABDI
                 </h4>
 
@@ -214,7 +214,7 @@ const MainPage: React.FC = () => {
                     </label>
                     <input
                       type="number"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
                       placeholder="Contoh : Rp 10.000.000"
                       value={nominal}
                       onChange={(e) => setNominal(e.target.value)}
@@ -226,7 +226,7 @@ const MainPage: React.FC = () => {
                       Jangka Waktu (Bulan)
                     </label>
                     <select
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
                       value={tenure}
                       onChange={(e) => setTenure(e.target.value)}
                     >
@@ -243,7 +243,7 @@ const MainPage: React.FC = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
                       placeholder="Contoh: 6,00%"
                       value={interestRate}
                       onChange={(e) => setInterestRate(e.target.value)}
@@ -252,7 +252,7 @@ const MainPage: React.FC = () => {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex justify-center gap-4 mb-8">
+                <div className="flex justify-center gap-4 mb-8 text-black">
                   <button
                     onClick={resetCalculator}
                     className="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
@@ -305,10 +305,10 @@ const MainPage: React.FC = () => {
 
                 {/* Disclaimer */}
                 <div className="mt-8 space-y-4">
-                  <h4 className="text-xl font-bold text-blue-600">
+                  <h4 className="text-xl font-bold text-[#003868] ">
                     Simulasi Kalkulator Deposito | BANK ABDI
                   </h4>
-                  <h3 className="text-lg font-semibold">Disclaimer</h3>
+                  <h3 className="text-[#Ff0000] text-lg font-semibold">Disclaimer</h3>
                   <p className="text-gray-600">
                     Kalkulator Deposito ini dirancang untuk membantu Anda menghitung
                     pendapatan Bunga Deposito Berjangka.
