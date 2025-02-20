@@ -369,14 +369,16 @@ const AboutPage: React.FC = () => {
               Profil Dewan
             </h2>
           </div>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-1">
             {/* Dewan Komisaris */}
             <div className="w-full">
-              <div className="text-black text-xl font-semibold mb-4 text-left">
-                <span className="inline-block border-b-2 border-[#003868] pb-1">
-                  Dewan Komisaris
+              <div className="text-black text-xl font-semibold mb-1 text-left">
+                <span className="inline-flex flex-col border-b-2 border-[#003868] pb-1">
+                  <span>Dewan</span>
+                  <span>Komisaris</span>
                 </span>
               </div>
+
               <div className="flex flex-wrap justify-center gap-6">
                 {/* Marlinah Ongko Widjojo */}
                 <div className="ui-card bg-white shadow-lg rounded-md overflow-hidden w-[360px] h-[333px]">

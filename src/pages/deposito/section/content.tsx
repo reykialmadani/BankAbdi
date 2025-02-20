@@ -52,7 +52,7 @@ const MainPage: React.FC = () => {
       case "deposito-berjangka":
         return (
           <div className="lg:w-3/4 w-full">
-            <div className="rounded-lg shadow-sm p-6">
+            <div className="rounded-lg shadow-sm p-6 text-sm">
               <h4 className="text-2xl font-bold text-[#003868] mb-6">
                 PERSYARATAN
               </h4>

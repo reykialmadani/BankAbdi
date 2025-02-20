@@ -200,7 +200,7 @@ const Header = () => {
               <div className="hidden group-hover:block fixed left-0 right-0 bg-white shadow-lg z-50">
                 <div className="container mx-auto">
                   {menu === "pinjaman" && (
-                    <div className="w-[800px] p-4">
+                    <div className="w-[800px] p-4 text-base">
                       <div className="border-b border-gray-100 pb-2 mb-2">
                         <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           PINJAMAN
@@ -389,7 +389,7 @@ const Header = () => {
                     </div>
                   )}
                   {menu === "tabungan" && (
-                    <div className="w-[800px] p-4">
+                    <div className="w-[800px] p-4 text-base">
                       <div className="border-b border-gray-100 pb-2 mb-2">
                         <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           TABUNGAN
@@ -481,7 +481,7 @@ const Header = () => {
                   )}
 
                   {menu === "deposito" && (
-                    <div className="w-[800px] p-4">
+                    <div className="w-[800px] p-4 text-base">
                       <div className="border-b border-gray-100 pb-2 mb-2">
                         <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           DEPOSITO
@@ -576,7 +576,7 @@ const Header = () => {
                   )}
 
                   {menu === "informasi" && (
-                    <div className="w-[800px] p-4">
+                    <div className="w-[800px] p-4 text-base">
                       <div className="border-b border-gray-100 pb-2 mb-2">
                         <h2 className="font-semibold text-gray-900 flex items-center gap-2">
                           INFORMASI

@@ -1,4 +1,3 @@
-// components/layout/Sidebar.tsx
 import Link from "next/link";
 import Image from "next/image";
 
@@ -22,7 +21,7 @@ const Sidebar = ({ menuItems, currentPath }: SidebarProps) => {
             <li key={item.href}>
               <Link href={item.href} legacyBehavior>
                 <a
-                  className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
+                  className={`flex items-center px-4 py-2 rounded-lg transition-colors text-sm ${
                     currentPath === item.href
                       ? "bg-gray-100 text-blue-600 font-semibold"
                       : "text-gray-700 hover:bg-gray-50"

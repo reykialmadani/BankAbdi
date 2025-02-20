@@ -5,7 +5,7 @@ import Hero from "../../pages/components/section/hero";
 import Sidebar from "../../pages/tabungan/section/sidebar";
 import Content from "../../pages/deposito/section/content";
 import RiskManagement from "../../pages/tabungan/section/riskManegement";
-import CreditRequitment from "../../pages/deposito/section/creditRequitment";
+import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
 import Footer from "../../pages/components/layout/footer";
 import Link from "next/link";
@@ -60,15 +60,15 @@ const dataDeposito: Record<string, DepositoProduct> = {
   "deposito-berjangka": {
     title: "Deposito Berjangka",
     description:
-      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
+      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo yang telah disepakati dalam perjanjian pembukaan deposito berjangka (1,3,6, dan 12 bulan) . Pilihan Investasi yang memberikan Keuntungan dan rasa aman karena dijamin oleh Lembaga Penjamin Simpanan (LPS)",
     image: "https://bankabdi.co.id/img/banner/hero-deposito.webp",
     icon: "https://bankabdi.co.id/img/icon/deposito_berjangka.png",
     href: "/deposito/deposito-berjangka",
   },
   "formulir-deposito": {
-    title: "Formulir Deposito",
+    title: "Deposito Berjangka",
     description:
-      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo...",
+      "Simpanan pihak ketiga yang penarikan dananya dilakukan setiap tanggal jatuh tempo yang telah disepakati dalam perjanjian pembukaan deposito berjangka (1,3,6, dan 12 bulan) . Pilihan Investasi yang memberikan Keuntungan dan rasa aman karena dijamin oleh Lembaga Penjamin Simpanan (LPS)",
     image: "https://bankabdi.co.id/img/banner/hero-deposito.webp",
     icon: "https://bankabdi.co.id/img/icon/formulir_deposito.png",
     href: "/deposito/formulir-deposito",

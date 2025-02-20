@@ -44,7 +44,7 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
 
   return (
     <div className="lg:w-1/4 w-full">
-      <div className="rounded-lg shadow-sm p-6 sticky top-4">
+      <div className="rounded-lg shadow-sm p-6 sticky top-4 text-sm">
         {/* Tabungan Section */}
         <div>
           <h6 className="text-lg font-semibold text-gray-700 mb-4">TABUNGAN</h6>

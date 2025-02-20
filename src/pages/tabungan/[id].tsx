@@ -54,7 +54,7 @@ const dataTabungan: Record<string, SavingsProduct> = {
   "tabungan-abdi": {
     title: "Tabungan Abdi",
     description:
-      "Tabungan yang memberikan kemudahan serta keuntungan optimal bagi nasabah.",
+      "TABUNGAN ABDI merupakan tabungan yang penarikannya dapat dilakukan setiap saat dengan menggunakan sarana yang disediakan bank.",
     image: "https://bankabdi.co.id/img/banner/hero-tabungan-abdi.webp",
     icon: "https://bankabdi.co.id/img/icon/tabungan_abdi.png",
     href: "/tabungan/tabungan-abdi",
@@ -62,7 +62,7 @@ const dataTabungan: Record<string, SavingsProduct> = {
   "tabungan-abdiku": {
     title: "Tabungan Abdiku",
     description:
-      "Tabungan fleksibel dengan suku bunga menarik dan biaya administrasi rendah.",
+      "Tabungan ABDIKU merupakan produk tabungan yang dikhususkan untuk perorang dengan persyaratan mudah dan ringan. Diterbitkan secara bersama oleh bank-bank di Indonesia (TABUNGANKU), ABDIKU hadir untuk menumbuhkan budaya menabung serta meningkatkan kesejahteraan masyarakat dan tidak dikenakan biaya administrasi bulanan..",
     image: "https://bankabdi.co.id/img/banner/hero-tabungan-abdiku.webp",
     icon: "https://bankabdi.co.id/img/icon/tabungan_abdiku.png",
     href: "/tabungan/tabungan-abdiku",
@@ -70,7 +70,7 @@ const dataTabungan: Record<string, SavingsProduct> = {
   "tabungan-abdi-simple": {
     title: "Tabungan Abdi Simple",
     description:
-      "Tabungan dengan fitur sederhana untuk memenuhi kebutuhan transaksi harian Anda.",
+      "Tabungan ABDI SIMPEL (Simpanan Pelajar) merupakan tabungan khusus bagi pelajar PAUD, SD,SMP, dan SMA yang berusia dibawah 17 tahun dan belum memiliki KTP. ABDI SIMPEL dikemas untuk memberikan edukasi dan inklusi keuangan untuk belajar mengelola keuangan khususnya membentuk 'karakter' budaya menabung sejak dini dan melatih persiapan masa depan dan pengenalan perbankan lebih dini.",
     image: "https://bankabdi.co.id/img/banner/hero-tabungan-abdiku.webp",
     icon: "https://bankabdi.co.id/img/icon/tabungan_abdi_simple.png",
     href: "/tabungan/tabungan-abdi-simple",
