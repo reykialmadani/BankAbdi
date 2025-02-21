@@ -27,13 +27,15 @@ const Sidebar = ({ menuItems, currentPath }: SidebarProps) => {
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
-                  <Image
-                    src="https://bankabdi.co.id/img/icon/circle_active.svg"
-                    alt="active sign"
-                    width={16}
-                    height={16}
-                    className="w-4 h-4 mr-2"
-                  />
+                  {currentPath === item.href && (
+                    <Image
+                      src="https://bankabdi.co.id/img/icon/circle_active.svg"
+                      alt="active sign"
+                      width={16}
+                      height={16}
+                      className="w-4 h-4 mr-2"
+                    />
+                  )}
                   {item.label}
                 </a>
               </Link>

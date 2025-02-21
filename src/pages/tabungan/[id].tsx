@@ -5,7 +5,7 @@ import Hero from "../../pages/components/section/hero";
 import Sidebar from "../../pages/tabungan/section/sidebar";
 import Content from "../../pages/tabungan/section/content";
 import RiskManagement from "../../pages/tabungan/section/riskManegement";
-import CreditRequitment from "../../pages/tabungan/section/creditRequitment";
+import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
 import Blog from "../components/section/blog";
 import Footer from "../../pages/components/layout/footer";

@@ -9,6 +9,11 @@ interface CreditModalProps {
   children: React.ReactNode;
 }
 
+interface TableData {
+  headers: string[];
+  rows: string[][];
+}
+
 const CreditModal: FC<CreditModalProps> = ({
   isOpen,
   onClose,
@@ -51,11 +56,11 @@ const CreditModal: FC<CreditModalProps> = ({
   );
 };
 
-const ResponsiveTable: FC<{ data: any }> = ({ data }) => {
+const ResponsiveTable: FC<{ data: TableData }> = ({ data }) => {
   // Responsive table component that adapts based on screen size
   return (
     <div className="overflow-x-auto w-full">
-      <table className="w-full border-collapse text-black text-sm md:text-base">
+      <table className="w-full border-collapse text-black text-sm md:text-sm">
         <thead>
           <tr className="bg-gray-50">
             {data.headers.map((header: string, index: number) => (

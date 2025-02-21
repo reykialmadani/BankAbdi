@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="lg:col-span-7 space-y-4 md:space-y-0">
+          <div className="lg:col-span-6 space-y-4 md:space-y-0">
             <nav className="flex justify-start space-x-6">
               <Link href="#" className="text-gray-400 text-base hover:text-primary">FAQ</Link>
               <Link href="#" className="text-gray-400 text-base hover:text-primary">Suku Bunga</Link>
@@ -59,15 +59,15 @@ const Footer = () => {
             <div className="text-right">
               <h5 className="text-gray-400 font-medium mb-4">Batas Akhir Penerimaan Transaksi di Cabang</h5>
               <ul className="space-y-1 text-gray-400 text-sm">
-                <li className="flex justify-between">
+                <li className="flex justify-evenly">
                   <span className="font-medium">Tarikan/Setoran Tunai:</span>
                   <span>Pukul 08.30 s/d 14.00 (WIB)</span>
                 </li>
-                <li className="flex justify-between">
+                <li className="flex justify-evenly">
                   <span className="font-medium">Transfer/Kiriman Uang:</span>
                   <span>Pukul 08.30 s/d 13.00 (WIB)</span>
                 </li>
-                <li className="flex justify-between">
+                <li className="flex justify-evenly">
                   <span className="font-medium">Layanan Informasi:</span>
                   <span>Pukul 08.30 s/d 16.30 (WIB)</span>
                 </li>
@@ -101,18 +101,18 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Social Media & Copyright */}
-          <div className="lg:col-span-4 text-right">
+         {/* Social Media & Copyright */}
+         <div className="lg:col-span-4 text-right">
             <div className="flex justify-end space-x-4 mb-4">
-              <button className="p-2 bg-white rounded-full hover:bg-gray-100">
+              <a href="https://www.facebook.com/BPRABDI" target="_blank" rel="noopener noreferrer" className="p-2 bg-white rounded-full hover:bg-gray-100">
                 <FontAwesomeIcon icon={faFacebookF} className="text-gray-400 w-4 h-4" />
-              </button>
-              <button className="p-2 bg-white rounded-full hover:bg-gray-100">
+              </a>
+              <a href="https://www.youtube.com/@bpranugerahmultidana" target="_blank" rel="noopener noreferrer" className="p-2 bg-white rounded-full hover:bg-gray-100">
                 <FontAwesomeIcon icon={faYoutube} className="text-gray-400 w-4 h-4" />
-              </button>
-              <button className="p-2 bg-white rounded-full hover:bg-gray-100">
+              </a>
+              <a href="https://www.instagram.com/bank.abdi/" target="_blank" rel="noopener noreferrer" className="p-2 bg-white rounded-full hover:bg-gray-100">
                 <FontAwesomeIcon icon={faInstagram} className="text-gray-400 w-4 h-4" />
-              </button>
+              </a>
             </div>
             <p className="text-gray-400 text-base">
               COPYRIGHT © 2022 PT BPR ABDI. ALL RIGHTS RESERVED.

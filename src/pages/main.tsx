@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import Hero from "./components/section/hero"
 import Keunggulan from "./components/section/keunggulan";
 import Perbankan from "./components/section/perbankan";

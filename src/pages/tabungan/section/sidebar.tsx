@@ -1,28 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface SidebarProps {
   currentPath: string;
 }
 
-const Sidebar = ({ currentPath }: SidebarProps) => {
+const Sidebar = ({ }: SidebarProps) => {
+  const router = useRouter(); // Inisialisasi router
+  const { id } = router.query; // Dapatkan id dari query parameter
+
   // Data tabungan yang sebelumnya berasal dari menuItems
   const tabunganMenuItems = [
     {
       href: "/tabungan/tabungan-abdi",
-      label: "Tabungan Abdi"
+      label: "Tabungan Abdi",
     },
     {
       href: "/tabungan/tabungan-abdiku",
-      label: "Tabungan Abdiku"
+      label: "Tabungan Abdiku",
     },
     {
       href: "/tabungan/tabungan-abdi-simple",
-      label: "Tabungan Abdi Simple"
+      label: "Tabungan Abdi Simple",
     },
     {
       href: "/tabungan/formulir",
-      label: "Formulir Pengajuan Tabungan"
+      label: "Formulir Pengajuan Tabungan",
     },
   ];
 
@@ -30,17 +34,22 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
   const depositoMenuItems = [
     {
       href: "/deposito/deposito-berjangka",
-      label: "Deposito Berjangka"
+      label: "Deposito Berjangka",
     },
     {
       href: "/deposito/formulir-deposito",
-      label: "Formulir Deposito"
+      label: "Formulir Deposito",
     },
     {
       href: "/deposito/kalkulator-deposito",
-      label: "Kalkulator Deposito"
-    }
+      label: "Kalkulator Deposito",
+    },
   ];
+
+  const isActive = (href: string) => {
+    const itemId = href.split('/').pop(); // Get the last segment of the URL
+    return itemId === id;
+  };
 
   return (
     <div className="lg:w-1/4 w-full">
@@ -54,18 +63,21 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
                 <Link href={item.href} legacyBehavior>
                   <a
                     className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
-                      currentPath === item.href
+                      isActive(item.href)
                         ? "bg-gray-100 text-blue-600 font-semibold"
                         : "text-gray-700 hover:bg-gray-50"
                     }`}
                   >
-                    <Image
-                      src="https://bankabdi.co.id/img/icon/circle_active.svg"
-                      alt="active sign"
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 mr-2"
-                    />
+                    {isActive(item.href) && (
+                      <Image
+                        src="https://bankabdi.co.id/img/icon/circle_active.svg"
+                        alt="active indicator"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 mr-2"
+                        priority
+                      />
+                    )}
                     {item.label}
                   </a>
                 </Link>
@@ -83,18 +95,21 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
                 <Link href={item.href} legacyBehavior>
                   <a
                     className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
-                      currentPath === item.href
+                      isActive(item.href)
                         ? "bg-gray-100 text-blue-600 font-semibold"
                         : "text-gray-700 hover:bg-gray-50"
                     }`}
                   >
-                    <Image
-                      src="https://bankabdi.co.id/img/icon/circle_active.svg"
-                      alt="active sign"
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 mr-2"
-                    />
+                    {isActive(item.href) && (
+                      <Image
+                        src="https://bankabdi.co.id/img/icon/circle_active.svg"
+                        alt="active indicator"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 mr-2"
+                        priority
+                      />
+                    )}
                     {item.label}
                   </a>
                 </Link>

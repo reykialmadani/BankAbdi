@@ -61,6 +61,7 @@ const BankingSolutions = () => {
               320: { slidesPerView: 1, spaceBetween: 5 },
               768: { slidesPerView: 2, spaceBetween: 8 },
               1024: { slidesPerView: 3, spaceBetween: 10 },
+              1280: { slidesPerView: 4, spaceBetween: 10 },
             }}
             className="cursor-grab [&_.swiper-slide]:transition-all [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-in-out [&_.swiper-slide-active]:scale-105 [&_.swiper-slide-active]:z-10 [&_.swiper-slide]:scale-100"
           >

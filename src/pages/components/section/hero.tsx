@@ -31,7 +31,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
         </h1>
         
         {paragraph && (
-          <p className="text-white mt-4 text-lg pl-8">{paragraph}</p>
+          <p className="text-white mt-4 text-base pl-8 max-w-[600px] break-words">
+            {paragraph}
+          </p>
         )}
 
         {showButton && (

@@ -53,7 +53,7 @@ const CreditModal: FC<CreditModalProps> = ({
 const CreditSection: FC = () => {
   const [modalPersyaratan, setModalPersyaratan] = useState(false);
   const router = useRouter();
-  const { id } = router.query; // Mendapatkan parameter `id` dari URL
+  const { id } = router.query; 
 
   // Menyesuaikan isi berdasarkan `id`
   const getContentBasedOnId = (id: string | string[] | undefined) => {
@@ -71,7 +71,7 @@ const CreditSection: FC = () => {
                   SUKU BUNGA DEPOSITO
                 </h5>
                 <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-xs sm:text-sm md:text-base">
+                  <table className="w-full border-collapse text-xs sm:text-sm md:text-sm">
                     <thead>
                       <tr className="bg-gray-100">
                         <th className=" p-1 sm:p-2 text-left text-black">NOMINAL</th>
@@ -114,7 +114,7 @@ const CreditSection: FC = () => {
                   BIAYA ADMINISTRASI DEPOSITO
                 </h5>
                 <div className="overflow-x-auto">
-                  <table className="w-full -collapse text-xs sm:text-sm md:text-base">
+                  <table className="w-full -collapse text-xs sm:text-sm md:text-sm">
                     <thead>
                       <tr className="bg-gray-100">
                         <th colSpan={2} className=" p-1 sm:p-2 text-center text-gray-800">

@@ -1,4 +1,3 @@
-"use client";
 import { Phone, Mail, MapPin } from "lucide-react";
 import Header from "./components/layout/header";
 import Hero from "./components/section/hero";

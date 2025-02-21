@@ -10,32 +10,32 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
   const informationMenuItems = [
     {
       href: "/informasi/tabungan",
-      label: "Tabungan"
+      label: "Tabungan",
     },
     {
       href: "/informasi/deposito",
-      label: "Informasi Deposito"
+      label: "Informasi Deposito",
     },
     {
       href: "/informasi/lps",
-      label: "Informasi LPS"
+      label: "Informasi LPS",
     },
     {
       href: "/informasi/iso",
-      label: "Informasi ISO"
-    }
+      label: "Informasi ISO",
+    },
   ];
 
   // Data menu blog/event
   const blogEventMenuItems = [
     {
       href: "/informasi/blog",
-      label: "Blog"
+      label: "Blog",
     },
     {
       href: "/informasi/event",
-      label: "Event"
-    }
+      label: "Event",
+    },
   ];
 
   return (
@@ -43,7 +43,9 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
       <div className="rounded-lg shadow-sm p-6 sticky top-4">
         {/* Informasi Section */}
         <div>
-          <h6 className="text-lg font-semibold text-gray-700 mb-4">INFORMASI</h6>
+          <h6 className="text-lg font-semibold text-gray-700 mb-4">
+            INFORMASI
+          </h6>
           <ul className="space-y-2">
             {informationMenuItems.map((item) => (
               <li key={item.href}>
@@ -55,13 +57,15 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
                         : "text-gray-700 hover:bg-gray-50"
                     }`}
                   >
-                    <Image
-                      src="https://bankabdi.co.id/img/icon/circle_active.svg"
-                      alt="active sign"
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 mr-2"
-                    />
+                    {currentPath === item.href && (
+                      <Image
+                        src="https://bankabdi.co.id/img/icon/circle_active.svg"
+                        alt="active sign"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 mr-2"
+                      />
+                    )}
                     {item.label}
                   </a>
                 </Link>
@@ -72,7 +76,9 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
 
         {/* Blog/Event Section */}
         <div className="mt-6">
-          <h6 className="text-lg font-semibold text-gray-700 mb-4">BLOG/EVENT</h6>
+          <h6 className="text-lg font-semibold text-gray-700 mb-4">
+            BLOG/EVENT
+          </h6>
           <ul className="space-y-2">
             {blogEventMenuItems.map((item) => (
               <li key={item.href}>
