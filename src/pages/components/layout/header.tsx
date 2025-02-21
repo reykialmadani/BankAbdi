@@ -68,6 +68,52 @@ const Header = () => {
     return submenuMap[menu] || [];
   };
 
+  const renderSplitSubmenu = (menu: MenuType) => {
+    const items = getSubmenuContent(menu);
+    let leftItems, rightItems;
+
+    if (menu === 'pinjaman') {
+      leftItems = items.slice(0, 4);
+      rightItems = items.slice(4);
+    } else if (['tabungan', 'deposito', 'informasi'].includes(menu)) {
+      leftItems = items.slice(0, 2);
+      rightItems = items.slice(2);
+    } else {
+      return null;
+    }
+
+    return (
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          {leftItems.map((item, index) => (
+            <Link key={index} href={item.href}>
+              <div className="block px-4 py-3 hover:bg-gray-50">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-gray-900 text-sm">{item.title}</span>
+                  <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+                </div>
+                <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="space-y-2">
+          {rightItems.map((item, index) => (
+            <Link key={index} href={item.href}>
+              <div className="block px-4 py-3 hover:bg-gray-50">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-gray-900 text-sm">{item.title}</span>
+                  <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+                </div>
+                <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   if (!mounted) return null;
 
   return (
@@ -99,17 +145,30 @@ const Header = () => {
               {/* Dropdown */}
               <div className="hidden group-hover:block fixed left-0 right-0 bg-white shadow-lg z-50">
                 <div className="container mx-auto p-4 text-base">
-                  {getSubmenuContent(menu).map((item, index) => (
-                    <Link key={index} href={item.href}>
-                      <div className="block px-4 py-3 hover:bg-gray-50">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium text-gray-900">{item.title}</span>
-                          <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2 capitalize">
+                    {menu}
+                    <Image
+                      src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                      width={16}
+                      height={16}
+                      alt="arrow right"
+                    />
+                  </h2>
+                  {['pinjaman', 'tabungan', 'deposito', 'informasi'].includes(menu) ? (
+                    renderSplitSubmenu(menu)
+                  ) : (
+                    getSubmenuContent(menu).map((item, index) => (
+                      <Link key={index} href={item.href}>
+                        <div className="block px-4 py-3 hover:bg-gray-50">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-gray-900 text-sm">{item.title}</span>
+                            <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+                          </div>
+                          <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
                         </div>
-                        <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    ))
+                  )}
                 </div>
               </div>
             </li>
