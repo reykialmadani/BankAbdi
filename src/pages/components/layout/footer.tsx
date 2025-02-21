@@ -5,7 +5,7 @@ import { faFacebookF, faYoutube, faInstagram } from '@fortawesome/free-brands-sv
 
 const Footer = () => {
   return (
-    <footer className="bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://bankabdi.co.id/img/home/footer.webp')" }}>
+    <footer className="hidden md:block bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://bankabdi.co.id/img/home/footer.webp')" }}>
       <div className="container mx-auto px-5 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
 

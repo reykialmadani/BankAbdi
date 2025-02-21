@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
+import { motion } from "framer-motion";
 import "swiper/css";
 
 const segoeUIStyles = {
@@ -14,25 +15,30 @@ const bankingSolutions = [
     title: "Tabungan",
     image: "https://bankabdi.co.id/img/home/produk-tabungan.webp",
     description: "Buku Tabungan Aman & Menguntungkan",
-    link: "/tabungan/tabungan-abdi", 
+    link: "/tabungan/tabungan-abdi",
   },
   {
     title: "Deposito",
     image: "https://bankabdi.co.id/img/home/product-deposito.webp",
     description: "Buka Simpanan Aman & Menguntungkan",
-    link: "/deposito/deposito-berjangka", 
+    link: "/deposito/deposito-berjangka",
   },
   {
     title: "Pinjaman/Kredit",
     image: "https://bankabdi.co.id/img/home/produk-pinjaman.webp",
     description: "Ajukan Pinjaman Cepat dan Mudah",
-    link: "/pinjaman/pinjaman-modal-kerja", 
+    link: "/pinjaman/pinjaman-modal-kerja",
   },
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
 const BankingSolutions = () => {
   return (
-    <div
+    <motion.div
       className="relative flex flex-col items-center justify-center bg-cover bg-center"
       style={{
         ...segoeUIStyles,
@@ -42,6 +48,10 @@ const BankingSolutions = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={fadeInUp}
     >
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -53,10 +63,7 @@ const BankingSolutions = () => {
             spaceBetween={10}
             slidesPerView={4}
             grabCursor={true}
-            freeMode={{
-              enabled: true,
-              sticky: false,
-            }}
+            freeMode={{ enabled: true, sticky: false }}
             breakpoints={{
               320: { slidesPerView: 1, spaceBetween: 5 },
               768: { slidesPerView: 2, spaceBetween: 8 },
@@ -68,7 +75,14 @@ const BankingSolutions = () => {
             {[...Array(3)].map((_, arrayIndex) =>
               bankingSolutions.map((solution, index) => (
                 <SwiperSlide key={`${arrayIndex}-${index}`}>
-                  <div className="bg-white rounded-xl shadow overflow-hidden w-64 h-[400px] transition-transform duration-300" style={segoeUIStyles}>
+                  <motion.div
+                    className="bg-white rounded-xl shadow overflow-hidden w-64 h-[400px] transition-transform duration-300"
+                    style={segoeUIStyles}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                  >
                     <div className="relative h-3/5 w-full">
                       <Image src={solution.image} layout="fill" objectFit="cover" alt={solution.title} />
                     </div>
@@ -87,14 +101,14 @@ const BankingSolutions = () => {
                         </span>
                       </Link>
                     </div>
-                  </div>
+                  </motion.div>
                 </SwiperSlide>
               ))
             )}
           </Swiper>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

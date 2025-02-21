@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface HeroSectionProps {
   imageSrc: string;
@@ -18,28 +19,43 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
         className="z-0"
       />
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 z-10">
-      <h1 className="text-white text-3xl md:text-5xl font-bold leading-snug pl-8">
-          {title.split(" ").map((word, index) => {
-            return index === 3 ? (
+        <motion.h1 
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-white text-3xl md:text-5xl font-bold leading-snug pl-8"
+        >
+          {title.split(" ").map((word, index) => (
+            index === 3 ? (
               <>
-                {word} <br /> 
+                {word} <br />
               </>
             ) : (
               word + " "
-            );
-          })}
-        </h1>
+            )
+          ))}
+        </motion.h1>
         
         {paragraph && (
-          <p className="text-white mt-4 text-base pl-8 max-w-[600px] break-words">
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-white mt-4 text-base pl-8 max-w-[600px] break-words"
+          >
             {paragraph}
-          </p>
+          </motion.p>
         )}
 
         {showButton && (
-          <button className="ml-8 mt-4 bg-[#003868] text-white px-6 py-3 rounded-full hover:bg-blue-800 font-bold">
+          <motion.button 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="ml-8 mt-4 bg-[#003868] text-white px-6 py-3 rounded-full hover:bg-blue-800 font-bold"
+          >
             Pengajuan Kredit
-          </button>
+          </motion.button>
         )}
       </div>
     </div>

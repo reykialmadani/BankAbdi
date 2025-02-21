@@ -16,7 +16,7 @@ const BannerContact: React.FC = () => {
           </h2>
           <Link
             href="/contact"
-            className="btn btn-lg bg-blue-600 text-white py-2 px-6 rounded-full mt-10"
+            className="btn btn-lg bg-[#003868] text-white py-2 px-6 rounded-full mt-10"
             style={{ marginTop: '2rem' }}
           >
             Hubungi Kami
