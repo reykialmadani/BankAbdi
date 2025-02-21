@@ -91,18 +91,30 @@ const DeviceSliderColumn = () => {
                   }`}
                   onClick={() => toggleSection(item)}
                 >
-                  <h6 className="text-lg text-black">{item}</h6>
+                  <h6 className="font-bold text-lg text-black">{item}</h6>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
                       <p className="text-sm text-black">
-                        {item === "KTA" &&
+                      {item === "KTA" &&
                           "Penuhi berbagai macam kebutuhan Anda tanpa jaminan bersama BANK ABDI dengan Kredit Tanpa Agunan."}
+                        {item === "KKB" &&
+                          "Raih Kendaraan Bermotor impian Anda bersama BANK ABDI dengan Kredit Kendaraan Bermotor."}
+                        {item === "KPM" &&
+                          "Miliki Mobil Impian Anda bersama BANK ABDI dengan Kredit Kepemilikan Mobil."}
+                        {item === "KPR" &&
+                          "Wujudkan rumah idaman Anda bersama BANK ABDI dengan Kredit Kepemilikan Rumah."}
+                        {item === "Kredit Multiguna" &&
+                          "Penuhi segala kebutuhan Anda bersama BANK ABDI dengan Kredit Multiguna."}
+                        {item === "Kredit Investasi" &&
+                          "Kembangkan dan perluas bisnis Anda bersama BANK ABDI dengan Kredit Investasi."}
+                        {item === "Kredit Modal Kerja" &&
+                          "Mulai usaha Anda bersama BANK ABDI dengan Kredit Modal Kerja."}
                         {/* ... other conditions ... */}
                       </p>
                       <div className="flex justify-end">
                         <a
                           href={`/pinjaman/${item.toLowerCase().replace(/ /g, "-")}`}
-                          className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full shadow-md hover:opacity-80 transition duration-300"
+                          className="px-4 py-2 text-sm font-semibold text-white bg-[#003868] rounded-full shadow-md hover:opacity-80 transition duration-300"
                         >
                           Selengkapnya ⮕
                         </a>
@@ -141,18 +153,22 @@ const DeviceSliderColumn = () => {
                   }`}
                   onClick={() => toggleSection(item)}
                 >
-                  <h6 className="text-lg text-black">{item}</h6>
+                  <h6 className="font-bold text-lg text-black">{item}</h6>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
                       <p className="text-sm text-black">
-                        {item === "Tabungan Abdi" &&
+                      {item === "Tabungan Abdi" &&
                           "Rencanakan masa depan Anda bersama Tabungan ABDI."}
+                      {item === "Tabungan ABDIKU" &&
+                          "Nikmati kemudahan menabung tanpa biaya administrasi bulanan."}
+                      {item === "Tabungan Simpel" &&
+                          "Dorong budaya menabung sejak dini para pelajar dengan Tabungan ABDI Simpel."}
                         {/* ... other conditions ... */}
                       </p>
                       <div className="flex justify-end">
                         <a
                           href={`/tabungan/${item.toLowerCase().replace(/ /g, "-")}`}
-                          className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300"
+                          className="px-4 py-2 text-sm font-semibold text-white bg-[#003868] rounded-md shadow-md hover:opacity-80 transition duration-300"
                         >
                           Selengkapnya ⮕
                         </a>
@@ -188,7 +204,7 @@ const DeviceSliderColumn = () => {
                 }`}
                 onClick={() => toggleSection("Deposito")}
               >
-                <h6 className="text-lg text-black">Deposito</h6>
+                <h6 className="font-bold text-lg text-black">Deposito</h6>
                 {openSection === "Deposito" && (
                   <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
                     <p className="text-sm text-black">
@@ -197,7 +213,7 @@ const DeviceSliderColumn = () => {
                     <div className="flex justify-end">
                       <a
                         href="/deposito"
-                        className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:opacity-80 transition duration-300"
+                        className="px-4 py-2 text-sm font-semibold text-white bg-[#003868] rounded-md shadow-md hover:opacity-80 transition duration-300"
                       >
                         selengkapnya ⮕
                       </a>

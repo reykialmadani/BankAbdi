@@ -37,7 +37,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
         )}
 
         {showButton && (
-          <button className="ml-8 mt-4 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-800 font-bold">
+          <button className="ml-8 mt-4 bg-[#003868] text-white px-6 py-3 rounded-full hover:bg-blue-800 font-bold">
             Pengajuan Kredit
           </button>
         )}
