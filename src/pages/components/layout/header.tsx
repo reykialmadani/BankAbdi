@@ -68,44 +68,67 @@ const Header = () => {
     return submenuMap[menu] || [];
   };
 
-  const renderSplitSubmenu = (menu: MenuType) => {
+  const renderMobileSubmenu = (menu: MenuType) => {
     const items = getSubmenuContent(menu);
     let leftItems, rightItems;
 
     if (menu === 'pinjaman') {
       leftItems = items.slice(0, 4);
       rightItems = items.slice(4);
-    } else if (['tabungan', 'deposito', 'informasi'].includes(menu)) {
-      leftItems = items.slice(0, 2);
-      rightItems = items.slice(2);
     } else {
-      return null;
+      const midPoint = Math.ceil(items.length / 2);
+      leftItems = items.slice(0, midPoint);
+      rightItems = items.slice(midPoint);
     }
 
     return (
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-2 px-2">
+        <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2 capitalize col-span-2">
+        {menu}
+        <Image
+          src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+          width={16}
+          height={16}
+          alt="arrow right"
+        />
+      </h2>
+        {/* Left Column */}
         <div className="space-y-2">
           {leftItems.map((item, index) => (
             <Link key={index} href={item.href}>
-              <div className="block px-4 py-3 hover:bg-gray-50">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900 text-sm">{item.title}</span>
-                  <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+              <div className="rounded-lg p-3 hover:bg-blue-50 transition-colors duration-200">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-medium text-gray-900 text-sm line-clamp-2">{item.title}</span>
+                  <Image 
+                    src="https://bankabdi.co.id/img/icon/arrow_right.png" 
+                    width={16} 
+                    height={16} 
+                    alt="arrow right"
+                    className="flex-shrink-0" 
+                  />
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
+                <p className="text-xs text-gray-600 line-clamp-2">{item.desc}</p>
               </div>
             </Link>
           ))}
         </div>
+
+        {/* Right Column */}
         <div className="space-y-2">
           {rightItems.map((item, index) => (
             <Link key={index} href={item.href}>
-              <div className="block px-4 py-3 hover:bg-gray-50">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900 text-sm">{item.title}</span>
-                  <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
+              <div className="rounded-lg p-3 hover:bg-blue-50 transition-colors duration-200">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-medium text-gray-900 text-sm line-clamp-2">{item.title}</span>
+                  <Image 
+                    src="https://bankabdi.co.id/img/icon/arrow_right.png" 
+                    width={16} 
+                    height={16} 
+                    alt="arrow right"
+                    className="flex-shrink-0" 
+                  />
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
+                <p className="text-xs text-gray-600 line-clamp-2">{item.desc}</p>
               </div>
             </Link>
           ))}
@@ -155,7 +178,7 @@ const Header = () => {
                     />
                   </h2>
                   {['pinjaman', 'tabungan', 'deposito', 'informasi'].includes(menu) ? (
-                    renderSplitSubmenu(menu)
+                    renderMobileSubmenu(menu)
                   ) : (
                     getSubmenuContent(menu).map((item, index) => (
                       <Link key={index} href={item.href}>
@@ -188,35 +211,30 @@ const Header = () => {
         </button>
       </nav>
 
-      {/* Mobile */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden fixed top-[60px] left-0 w-full bg-white shadow-lg z-40 max-h-[calc(100vh-60px)] overflow-y-auto">
-          <div className="container mx-auto py-4 px-6 space-y-4">
+          <div className="container mx-auto py-4 space-y-4 flex flex-col items-center"> 
             {(["pinjaman", "tabungan", "deposito", "informasi"] as MenuType[]).map((menu) => (
-              <div key={menu} className="w-full">
-                <button className="w-full text-left py-2 text-gray-800 hover:text-blue-600 capitalize flex items-center justify-between" onClick={() => handleMobileSubmenuToggle(menu)}>
+              <div key={menu} className="w-full max-w-md"> 
+                <button 
+                  className="w-full text-center py-2 text-gray-800 hover:text-blue-600 capitalize flex items-center justify-center gap-2" 
+                  onClick={() => handleMobileSubmenuToggle(menu)}
+                >
                   <span className="font-medium">{menu}</span>
                   {openMobileSubmenu === menu ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
                 {openMobileSubmenu === menu && (
                   <div className="py-2 space-y-2">
-                    {getSubmenuContent(menu).map((item, index) => (
-                      <Link key={index} href={item.href}>
-                        <div className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded">
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium text-gray-800">{item.title}</span>
-                            <Image src="https://bankabdi.co.id/img/icon/arrow_right.png" width={16} height={16} alt="arrow right" />
-                          </div>
-                          <span className="text-sm mt-1">{item.desc}</span>
-                        </div>
-                      </Link>
-                    ))}
+                    {renderMobileSubmenu(menu)}
                   </div>
                 )}
               </div>
             ))}
-            <Link href="/about"><span className="block py-2 text-gray-800 hover:text-blue-600">Tentang Kami</span></Link>
-            <Link href="/contact"><span className="block py-2 text-gray-800 hover:text-blue-600">Hubungi Kami</span></Link>
+            <div className="flex flex-col items-center space-y-2 w-full max-w-md"> 
+              <Link href="/about"><span className="block py-2 text-gray-800 hover:text-blue-600">Tentang Kami</span></Link>
+              <Link href="/contact"><span className="block py-2 text-gray-800 hover:text-blue-600">Hubungi Kami</span></Link>
+            </div>
           </div>
         </div>
       )}
