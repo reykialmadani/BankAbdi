@@ -47,7 +47,7 @@ const DeviceSliderColumn = () => {
         backgroundPosition: "center 100px",
       }}
     >
-      <div className="flex overflow-x-auto space-x-6 mb-4 w-full px-4 md:justify-center">
+      <div className="flex space-x-6 mb-4 w-full px-4 md:justify-center md:flex-nowrap flex-wrap justify-center">
         {tabs.map((tab) => (
           <button
             key={tab}
@@ -217,7 +217,7 @@ const DeviceSliderColumn = () => {
               </motion.div>
             </div>
             <div className="w-full">
-              <h3 className="text-xl text-black mb-2 text-center md:text-left">
+              <h3 className="text-xl font-bold text-black mb-2 text-center md:text-left">
                 Produk Deposito
               </h3>
               <div

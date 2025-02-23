@@ -9,7 +9,7 @@ const ContactPage: React.FC = () => {
       icon: <MapPin className="text-indigo-600 w-6 h-6 mt-1" />,
       title: "OFFICE",
       details: (
-        <p className="text-gray-600">
+        <p className="text-sm text-gray-600">
           Gedung Bulungan Business Center (BBC) <br />
           Jl. Bulungan I No.15, Kramat Pela, Kebayoran Baru, Jakarta Selatan 12130
         </p>
@@ -20,15 +20,15 @@ const ContactPage: React.FC = () => {
       title: "EMAIL",
       details: (
         <>
-          <p className="text-gray-600">
+          <p className="text-sm text-gray-600">
             <span className="font-semibold">CS:</span>
             <a href="mailto:cs@bankabdi.co.id" className="hover:underline"> cs@bankabdi.co.id</a>
           </p>
-          <p className="text-gray-600">
+          <p className="text-sm text-gray-600">
             <span className="font-semibold">Informasi Produk/Marketing:</span>
             <a href="mailto:info@bankabdi.co.id" className="hover:underline"> info@bankabdi.co.id</a>
           </p>
-          <p className="text-gray-600">
+          <p className="text-sm text-gray-600">
             <span className="font-semibold">Pengaduan Nasabah:</span>
             <a href="mailto:pengaduan.nasabah@bankabdi.co.id" className="hover:underline"> pengaduan.nasabah@bankabdi.co.id</a>
           </p>
@@ -71,7 +71,7 @@ const ContactPage: React.FC = () => {
               <div key={index} className="flex items-start space-x-4">
                 {contact.icon}
                 <div>
-                  <h3 className="text-black text-lg font-semibold">{contact.title}</h3>
+                  <h3 className="text-[#003868] text-lg font-semibold">{contact.title}</h3>
                   {contact.details}
                 </div>
               </div>
