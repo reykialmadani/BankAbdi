@@ -168,15 +168,6 @@ const Header = () => {
               {/* Dropdown */}
               <div className="hidden group-hover:block fixed left-0 right-0 bg-white shadow-lg z-50">
                 <div className="container mx-auto p-4 text-2xl">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2 capitalize">
-                    {menu}
-                    <Image
-                      src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
-                      width={16}
-                      height={16}
-                      alt="arrow right"
-                    />
-                  </h2>
                   {['pinjaman', 'tabungan', 'deposito', 'informasi'].includes(menu) ? (
                     renderMobileSubmenu(menu)
                   ) : (

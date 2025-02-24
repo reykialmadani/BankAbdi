@@ -82,75 +82,76 @@ const AboutPage: React.FC = () => {
               </h2>
             </div>
 
-            {/* Adapting */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
-              <div className="ui-icon-block px-12 relative z-10">
-                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20 ">
-                  A
-                </span>
-                <div className="relative z-20">
-                  <h6 className="text-black text-lg font-semibold mt-2">
-                    Adapting
-                  </h6>
-                  <p className="text-sm text-gray-700 mt-2">
-                    Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
-                    konsisten dan meramalkan keunggulan kompetitif yang baru.
-                  </p>
+            {/* Adapting & Blessing (Mobile: 2 columns) */}
+            <div className="w-full sm:w-1/2 flex flex-wrap">
+              <div className="w-1/2 text-left relative px-4">
+                <div className="relative md:static">
+                  {/* Mobile: span di atas, Desktop: di belakang p */}
+                  <span className="block text-[2.3rem] text-[#003868]  mb-2 md:absolute md:text-9xl md:text-[#DBEBF8] md:top-[30] md:right-12 md:-translate-y-1/2 md:z-0">
+                    A
+                  </span>
+                  <div className="relative md:z-10">
+                    <h6 className="text-black text-lg font-semibold mt-2">
+                      Adapting
+                    </h6>
+                    <p className="text-sm text-gray-700 mt-2">
+                      Beradaptasi dengan cepat pada perubahan ekonomi pasar yang
+                      konsisten dan meramalkan keunggulan kompetitif yang baru.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="w-1/2 text-left relative px-4">
+                <div className="relative md:static">
+                  <span className="block text-[2.3rem] text-[#003868]  mb-2 md:absolute md:text-9xl md:text-[#DBEBF8] md:top-[30] md:right-12 md:-translate-y-1/2 md:z-0">
+                    B
+                  </span>
+                  <div className="relative md:z-10">
+                    <h6 className="text-black text-lg font-semibold mt-2">
+                      Blessing
+                    </h6>
+                    <p className="text-sm text-gray-700 mt-2">
+                      Kepercayaan pelanggan menjadi faktor utama kami dalam
+                      melayani dan memberikan nilai tambah bagi keperluan
+                      pelanggan.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Blessing */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
-              <div className="ui-icon-block px-12 relative z-10">
-                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
-                  B
-                </span>
-                <div className="relative z-20">
-                  <h6 className="text-black text-lg font-semibold mt-2">
-                    Blessing
-                  </h6>
-                  <p className="text-sm text-gray-700 mt-2">
-                    Kepercayaan pelanggan menjadi faktor utama kami dalam
-                    melayani dan memberikan nilai tambah bagi keperluan
-                    pelanggan.
-                  </p>
+            {/* Developing & Improving (Mobile: 2 columns) */}
+            <div className="w-full sm:w-1/2 flex flex-wrap mt-4">
+              <div className="w-1/2 text-left relative px-4">
+                <div className="relative md:static">
+                  <span className="block text-[2.3rem] text-[#003868] mb-2 md:absolute md:text-9xl md:text-[#DBEBF8] md:top-[15] md:right-12 md:-translate-y-1/2 md:z-0">
+                    D
+                  </span>
+                  <div className="relative md:z-10">
+                    <h6 className="text-black text-lg font-semibold mt-2">
+                      Developing
+                    </h6>
+                    <p className="text-sm text-gray-700 mt-2">
+                      Selalu bergerak dan berkembang sehingga menjadikan bank
+                      yang terkinikan.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Developing */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
-              <div className="ui-icon-block px-12 relative z-10">
-                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
-                  D
-                </span>
-                <div className="relative z-20">
-                  <h6 className="text-black text-lg font-semibold mt-2">
-                    Developing
-                  </h6>
-                  <p className="text-sm text-gray-700 mt-2">
-                    Selalu bergerak dan berkembang sehingga menjadikan bank yang
-                    terkinikan.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Improving */}
-            <div className="w-full sm:w-1/2 md:w-1/4 text-left relative">
-              <div className="ui-icon-block px-12 relative z-10">
-                <span className="absolute text-9xl font-xs text-[#DBEBF8] z-0 top-[-50] right-20">
-                  I
-                </span>
-                <div className="relative z-20">
-                  <h6 className="text-black text-lg font-semibold mt-2">
-                    Improving
-                  </h6>
-                  <p className="text-sm text-gray-700 mt-2">
-                    Selalu berinovasi dalam upaya peningkatan kualitas pelayanan
-                    terhadap pelanggan.
-                  </p>
+              <div className="w-1/2 text-left relative px-4">
+                <div className="relative md:static">
+                  <span className="block text-[2.3rem] text-[#003868]  mb-2 md:absolute md:text-9xl md:text-[#DBEBF8] md:top-[15] md:right-20 md:-translate-y-1/2 md:z-0">
+                    I
+                  </span>
+                  <div className="relative md:z-10">
+                    <h6 className="text-black text-lg font-semibold mt-2">
+                      Improving
+                    </h6>
+                    <p className="text-sm text-gray-700 mt-2">
+                      Selalu berinovasi dalam upaya peningkatan kualitas
+                      pelayanan terhadap pelanggan.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -320,41 +321,25 @@ const AboutPage: React.FC = () => {
           {/* Timeline */}
           <div className="relative">
             {/* Vertical timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+            <div className="absolute left-10 top-0 bottom-0 w-0.5 bg-gray-300"></div>
 
-            {historyData.map((item, index) => (
+            {historyData.map((item) => (
               <div
                 key={item.number}
-                className="mb-12 flex items-center relative"
+                className="mb-12 flex items-start relative pl-4"
               >
-                {/* Left Side Content */}
-                {index % 2 === 0 ? (
-                  <div className="w-1/2 pr-4 text-right">
-                    <h4 className="text-black font-semibold text-lg mb-2">
-                      {item.date}
-                    </h4>
-                    <p className="text-sm text-gray-800">{item.description}</p>
-                  </div>
-                ) : (
-                  <div className="w-1/2"></div>
-                )}
-
                 {/* Circle with number */}
-                <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center z-10 text-xl font-bold mx-4">
+                <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center z-10 text-xl font-bold">
                   {item.number}
                 </div>
 
-                {/* Right Side Content */}
-                {index % 2 !== 0 ? (
-                  <div className="w-1/2 pl-4 text-left">
-                    <h4 className="text-black font-semibold text-lg mb-2">
-                      {item.date}
-                    </h4>
-                    <p className="text-sm text-gray-800">{item.description}</p>
-                  </div>
-                ) : (
-                  <div className="w-1/2"></div>
-                )}
+                {/* Content */}
+                <div className="pl-6">
+                  <h4 className="text-black font-semibold text-lg mb-2">
+                    {item.date}
+                  </h4>
+                  <p className="text-sm text-gray-800">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
