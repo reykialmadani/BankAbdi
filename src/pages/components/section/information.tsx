@@ -8,10 +8,10 @@ const Informasi = () => {
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Informasi Terkini Tentang Kami</h2>
         
         <div className="flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
-          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+            
             {/* Card 1 */}
-            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/MHYRuxSlECwR5xpaybz4nSthGcNQ9uCeUlG3s2vb.png"
@@ -26,10 +26,12 @@ const Informasi = () => {
                 </p>
                 <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
               </div>
+              {/* Blue overlay at the bottom of the card */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8] h-2"></div>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/mIDthWsAMu65K7Le8Q5qGPA5qlELd6FUXxO89Pfr.png"
@@ -44,10 +46,12 @@ const Informasi = () => {
                 </p>
                 <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
               </div>
+              {/* Blue overlay at the bottom of the card */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8]  h-2"></div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-4 after:bg-gradient-to-t after:from-blue-200 after:to-transparent">
+            <div className="bg-white rounded-lg overflow-hidden w-[288px] h-[556px] flex flex-col relative">
               <Image
                 className="w-full h-[70%] object-cover"
                 src="https://bankabdi.co.id/storage/post-images/iNWDdyCNwdPwiMdXuJF4Jc04peujGAnYHYBIY11J.png"
@@ -62,6 +66,8 @@ const Informasi = () => {
                 </p>
                 <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
               </div>
+              {/* Blue overlay at the bottom of the card */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8] h-2"></div>
             </div>
           </div>
         </div>

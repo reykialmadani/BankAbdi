@@ -115,6 +115,8 @@ const TabunganDetail: NextPage = () => {
     );
   }
 
+   // Check if the current page is formulir-deposito or kalkulator-deposito
+   const hideRiskManagement = id === "formulir";
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -134,7 +136,7 @@ const TabunganDetail: NextPage = () => {
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
             <Content />
-            <RiskManagement />
+            {!hideRiskManagement && <RiskManagement />}
           </div>
         </div>
       </div>

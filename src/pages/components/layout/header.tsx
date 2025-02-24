@@ -62,7 +62,7 @@ const Header = () => {
       informasi: [
         { title: "Suku Bunga", href: "/informasi/suku-bunga", desc: "BANK ABDI menawarkan tabungan dengan suku bunga menarik" },
         { title: "Blog", href: "/informasi/blog", desc: "Dapatkan informasi terkini melalui Blog Bank ABDI" },
-        { title: "Laporan", href: "/informasi/laporan", desc: "Laporan tahunan BANK ABDI yang berisi tentang aktivitas" },
+        { title: "Laporan", href: "/laporan/2021", desc: "Laporan tahunan BANK ABDI yang berisi tentang aktivitas" },
       ],
     };
     return submenuMap[menu] || [];
@@ -141,7 +141,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 h-[60px] transition-all duration-300 ${isTransparent ? "bg-transparent" : "bg-white shadow-md"}`}>
-      <nav className="container mx-auto flex items-center justify-between font-sogeo text-sm h-full">
+      <nav className="container mx-auto flex items-center justify-between font-sogeo text-lg h-full">
         <div className="mr-6 pl-4">
           <Link href="/">
             <Image

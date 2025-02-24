@@ -97,29 +97,25 @@ const TestimonialSection = () => {
                   onClick={() => handleSlideClick(index)}
                 >
                   <div className="max-w-2xl mx-auto px-4">
-                    <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200">
-                      <div className="flex items-center mb-4">
-                        <div className="w-20 h-20 rounded-full overflow-hidden mr-4">
-                          <Image
-                            src={testimonial.avatar}
-                            alt={`Testimonial by ${testimonial.author}`}
-                            className="w-full h-full object-cover"
-                            width={80}
-                            height={80}
-                          />
-                        </div>
-                        <div>
-                          <h6 className="font-semibold text-gray-800 text-lg">
-                            {testimonial.author}
-                          </h6>
-                          <p className="text-gray-600 text-sm">
-                            {testimonial.position}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-gray-700 text-lg italic">
-                        {testimonial.content}
-                      </p>
+                    <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200 relative">
+                      <p className="text-gray-700 text-lg italic mb-8">{testimonial.content}</p>
+                    </div>
+                  </div>
+
+                  {/* Info di bawah card */}
+                  <div className="flex items-center justify-start mt-4 ml-[22%]">
+                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                      <Image
+                        src={testimonial.avatar}
+                        alt={`Testimonial by ${testimonial.author}`}
+                        className="w-full h-full object-cover"
+                        width={48}
+                        height={48}
+                      />
+                    </div>
+                    <div>
+                      <h6 className="font-semibold text-gray-800 text-sm">{testimonial.author}</h6>
+                      <p className="text-gray-600 text-xs">{testimonial.position}</p>
                     </div>
                   </div>
                 </div>

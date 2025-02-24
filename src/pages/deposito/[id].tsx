@@ -4,7 +4,7 @@ import Header from "../../pages/components/layout/header";
 import Hero from "../../pages/components/section/hero";
 import Sidebar from "../../pages/tabungan/section/sidebar";
 import Content from "../../pages/deposito/section/content";
-import RiskManagement from "../../pages/tabungan/section/riskManegement";
+import RiskManagement from "../../pages/deposito/section/riskManagement";
 import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
 import Footer from "../../pages/components/layout/footer";
@@ -111,6 +111,9 @@ const DepositoDetail: NextPage = () => {
     );
   }
 
+  // Check if the current page is formulir-deposito or kalkulator-deposito
+  const hideRiskManagement = id === "formulir-deposito" || id === "kalkulator-deposito";
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -130,7 +133,8 @@ const DepositoDetail: NextPage = () => {
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
             <Content />
-            <RiskManagement />
+            {/* Only show RiskManagement if NOT on formulir-deposito or kalkulator-deposito page */}
+            {!hideRiskManagement && <RiskManagement />}
           </div>
         </div>
       </div>

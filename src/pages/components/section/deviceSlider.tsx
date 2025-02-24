@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion } from "framer-motion";
 
 type TabType = "Pinjaman" | "Tabungan" | "Deposito";
 type PinjamanType =
@@ -47,23 +47,26 @@ const DeviceSliderColumn = () => {
         backgroundPosition: "center 100px",
       }}
     >
-      <div className="flex space-x-6 mb-4 w-full px-4 md:justify-center md:flex-nowrap flex-wrap justify-center">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => {
-              setActiveTab(tab);
-              setOpenSection(null);
-            }}
-            className={`text-black text-lg px-6 py-2 transition-all duration-300 whitespace-nowrap ${
-              activeTab === tab
-                ? "border-b-4 border-black-100"
-                : "opacity-60 hover:opacity-100"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
+      {/* Modified tab container to ensure horizontal display */}
+      <div className="flex w-full justify-center mb-4">
+        <div className="grid grid-cols-3 w-full max-w-md">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                setOpenSection(null);
+              }}
+              className={`text-black text-sm sm:text-lg px-2 sm:px-6 py-2 transition-all duration-300 ${
+                activeTab === tab
+                  ? "border-b-4 border-black-100 font-semibold"
+                  : "opacity-60 hover:opacity-100"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="w-full max-w-4xl px-4">
@@ -136,7 +139,6 @@ const DeviceSliderColumn = () => {
           </div>
         )}
 
-        {/* Similar for Tabungan and Deposito sections with framer-motion */}
         {activeTab === "Tabungan" && (
           <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
             <div className="w-full md:w-auto flex justify-center">
