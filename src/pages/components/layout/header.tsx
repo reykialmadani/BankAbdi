@@ -98,7 +98,7 @@ const Header = () => {
             <Link key={index} href={item.href}>
               <div className="rounded-lg p-3 hover:bg-blue-50 transition-colors duration-200">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-medium text-gray-900 text-sm line-clamp-2">{item.title}</span>
+                  <span className="font-medium text-gray-900 text-base line-clamp-2">{item.title}</span>
                   <Image 
                     src="https://bankabdi.co.id/img/icon/arrow_right.png" 
                     width={16} 
