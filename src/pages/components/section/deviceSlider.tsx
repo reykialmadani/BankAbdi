@@ -38,6 +38,10 @@ const DeviceSliderColumn = () => {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const segoeUIStyles = {
+    fontFamily: "'Segoe UI', sans-serif",
+  };
+
   return (
     <div
       className="relative flex flex-col items-center py-4 w-full bg-no-repeat"
@@ -45,6 +49,7 @@ const DeviceSliderColumn = () => {
         backgroundImage: `url("https://bankabdi.co.id/img/home/bg-tab-section.webp")`,
         backgroundSize: "auto 400px",
         backgroundPosition: "center 100px",
+        ...segoeUIStyles,
       }}
     >
       {/* Modified tab container to ensure horizontal display */}
@@ -62,6 +67,7 @@ const DeviceSliderColumn = () => {
                   ? "border-b-4 border-black-100 font-semibold"
                   : "opacity-60 hover:opacity-100"
               }`}
+              style={segoeUIStyles}
             >
               {tab}
             </button>
@@ -89,7 +95,10 @@ const DeviceSliderColumn = () => {
               </motion.div>
             </div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-black mb-2 text-center md:text-left">
+              <h3
+                className="text-xl font-semibold text-black mb-2 text-center md:text-left"
+                style={segoeUIStyles}
+              >
                 Produk Pinjaman/Kredit
               </h3>
               {pinjamanItems.map((item, index) => (
@@ -102,10 +111,26 @@ const DeviceSliderColumn = () => {
                   }`}
                   onClick={() => toggleSection(item)}
                 >
-                  <h6 className="font-bold text-lg text-black">{item}</h6>
+                  <div className="flex justify-between items-center">
+                    <h6
+                      className="font-semibold text-sm text-black"
+                      style={segoeUIStyles}
+                    >
+                      {item}
+                    </h6>
+                    <span
+                      className={`transition-transform duration-300 ${
+                        openSection === item ? "rotate-180" : "rotate-0"
+                      }`}
+                      style={{ color: "#8E9BAE" }}
+                      
+                    >
+                      ▼
+                    </span>
+                  </div>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                      <p className="text-sm text-black">
+                      <p className="text-sm text-black" style={segoeUIStyles}>
                         {item === "KTA" &&
                           "Penuhi berbagai macam kebutuhan Anda tanpa jaminan bersama BANK ABDI dengan Kredit Tanpa Agunan."}
                         {item === "KKB" &&
@@ -158,7 +183,10 @@ const DeviceSliderColumn = () => {
               </motion.div>
             </div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-black mb-2 text-center md:text-left">
+              <h3
+                className="text-xl font-semibold text-black mb-2 text-center md:text-left"
+                style={segoeUIStyles}
+              >
                 Produk Tabungan
               </h3>
               {tabunganItems.map((item, index) => (
@@ -171,10 +199,25 @@ const DeviceSliderColumn = () => {
                   }`}
                   onClick={() => toggleSection(item)}
                 >
-                  <h6 className="font-bold text-lg text-black">{item}</h6>
+                  <div className="flex justify-between items-center">
+                    <h6
+                      className="font-semibold text-sm text-black"
+                      style={segoeUIStyles}
+                    >
+                      {item}
+                    </h6>
+                    <span
+                      className={`transition-transform duration-300 ${
+                        openSection === item ? "rotate-180" : "rotate-0"
+                      }`}
+                      style={{ color: "#8E9BAE" }}
+                    >
+                      ▼
+                    </span>
+                  </div>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                      <p className="text-sm text-black">
+                      <p className="text-sm text-black" style={segoeUIStyles}>
                         {item === "Tabungan Abdi" &&
                           "Rencanakan masa depan Anda bersama Tabungan ABDI."}
                         {item === "Tabungan ABDIKU" &&
@@ -219,7 +262,10 @@ const DeviceSliderColumn = () => {
               </motion.div>
             </div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-black mb-2 text-center md:text-left">
+              <h3
+                className="text-xl font-semibold text-black mb-2 text-center md:text-left"
+                style={segoeUIStyles}
+              >
                 Produk Deposito
               </h3>
               <div
@@ -230,10 +276,25 @@ const DeviceSliderColumn = () => {
                 }`}
                 onClick={() => toggleSection("Deposito")}
               >
-                <h6 className="font-bold text-lg text-black">Deposito</h6>
+                <div className="flex justify-between items-center">
+                  <h6
+                    className="font-semibold text-sm text-black"
+                    style={segoeUIStyles}
+                  >
+                    Deposito
+                  </h6>
+                  <span
+                    className={`transition-transform duration-300 ${
+                      openSection === "Deposito" ? "rotate-180" : "rotate-0"
+                    }`}
+                    style={{ color: "#8E9BAE" }}
+                  >
+                    ▼
+                  </span>
+                </div>
                 {openSection === "Deposito" && (
                   <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                    <p className="text-sm text-black">
+                    <p className="text-sm text-black" style={segoeUIStyles}>
                       Dapatkan keuntungan dalam Berinvestasi secara Pasti.
                     </p>
                     <div className="flex justify-end">

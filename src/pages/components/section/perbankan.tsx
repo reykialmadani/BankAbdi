@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const segoeUIStyles = {
-  fontFamily: "segoe_uiregular, sans-serif",
+  fontFamily: "'Segoe UI', sans-serif",
 };
 
 const bankingSolutions = [
@@ -115,7 +115,7 @@ const BankingSolutions = () => {
                       </div>
                       <div className="p-6 h-2/5 flex flex-col justify-between">
                         <div>
-                          <h3 className="text-lg font-bold text-black mb-2" style={segoeUIStyles}>
+                          <h3 className="text-lg font-semibold text-black mb-2" style={segoeUIStyles}>
                             {solution.title}
                           </h3>
                           <p className="text-gray-600 text-sm mb-4" style={segoeUIStyles}>

@@ -2,10 +2,19 @@ import React from 'react';
 import Image from 'next/image';
 
 const Informasi = () => {
+  const segoeUIStyles = {
+    fontFamily: "'Segoe UI', sans-serif",
+  };
+
   return (
     <section className="bg-gray-50 py-12 px-6 sm:px-12">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Informasi Terkini Tentang Kami</h2>
+        <h2
+          className="text-2xl font-semibold text-center text-gray-800 mb-6"
+          style={segoeUIStyles}
+        >
+          Informasi Terkini Tentang Kami
+        </h2>
         
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
@@ -20,11 +29,25 @@ const Informasi = () => {
                 height={278} 
               />
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
-                <p className="font-bold text-black text-sm mb-2">
+                <h3
+                  className="text-sm text-gray-400 mb-2"
+                  style={segoeUIStyles}
+                >
+                  Nasabah Bank ABDI
+                </h3>
+                <p
+                  className="font-semibold text-black text-sm mb-2"
+                  style={segoeUIStyles}
+                >
                   Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Maksimal!
                 </p>
-                <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
+                <a
+                  href="#"
+                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  style={segoeUIStyles}
+                >
+                  Baca Selengkapnya
+                </a>
               </div>
               {/* Blue overlay at the bottom of the card */}
               <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8] h-2"></div>
@@ -40,14 +63,28 @@ const Informasi = () => {
                 height={278}
               />
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
-                <p className="font-bold text-black text-sm mb-2">
+                <h3
+                  className="text-sm text-gray-400 mb-2"
+                  style={segoeUIStyles}
+                >
+                  Nasabah Bank ABDI
+                </h3>
+                <p
+                  className="font-semibold text-black text-sm mb-2"
+                  style={segoeUIStyles}
+                >
                   Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Maksimal!
                 </p>
-                <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
+                <a
+                  href="#"
+                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  style={segoeUIStyles}
+                >
+                  Baca Selengkapnya
+                </a>
               </div>
               {/* Blue overlay at the bottom of the card */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8]  h-2"></div>
+              <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8] h-2"></div>
             </div>
 
             {/* Card 3 */}
@@ -60,11 +97,25 @@ const Informasi = () => {
                 height={256}
               />
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-sm text-gray-400 mb-2">Nasabah Bank ABDI</h3>
-                <p className="font-bold text-black text-sm mb-2">
+                <h3
+                  className="text-sm text-gray-400 mb-2"
+                  style={segoeUIStyles}
+                >
+                  Nasabah Bank ABDI
+                </h3>
+                <p
+                  className="font-semibold text-black text-sm mb-2"
+                  style={segoeUIStyles}
+                >
                   Tips Menyusun Anggaran Penjualan, Biar Cuan Makin Maksimal!
                 </p>
-                <a href="#" className="text-sm text-gray-300 hover:text-indigo-800">Baca Selengkapnya</a>
+                <a
+                  href="#"
+                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  style={segoeUIStyles}
+                >
+                  Baca Selengkapnya
+                </a>
               </div>
               {/* Blue overlay at the bottom of the card */}
               <div className="absolute bottom-0 left-0 right-0 bg-[#2B88D8] h-2"></div>
