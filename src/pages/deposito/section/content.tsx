@@ -198,23 +198,29 @@ const MainPage: React.FC = () => {
       );
 
       case "kalkulator-deposito":
+        // Define Segoe UI font styles
+        const segoeUIStyles = {
+          fontFamily: '"Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif',
+        };
+        
         return (
-          <div className="container mx-auto px-4 py-8">
+          <div className="container mx-auto px-4 py-8" style={segoeUIStyles}>
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-lg shadow-lg p-6">
-                <h4 className="text-2xl font-bold text-[#003868] mb-6">
+                <h4 className="text-2xl font-bold text-[#003868] mb-6" style={segoeUIStyles}>
                   KALKULATOR DEPOSITO BANK ABDI
                 </h4>
 
                 {/* Calculator Form */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                   <div className="form-group">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" style={segoeUIStyles}>
                       Nominal
                     </label>
                     <input
                       type="number"
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
+                      style={segoeUIStyles}
                       placeholder="Contoh : Rp 10.000.000"
                       value={nominal}
                       onChange={(e) => setNominal(e.target.value)}
@@ -222,11 +228,12 @@ const MainPage: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" style={segoeUIStyles}>
                       Jangka Waktu (Bulan)
                     </label>
                     <select
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
+                      style={segoeUIStyles}
                       value={tenure}
                       onChange={(e) => setTenure(e.target.value)}
                     >
@@ -238,12 +245,13 @@ const MainPage: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" style={segoeUIStyles}>
                       Suku Bunga per Tahun
                     </label>
                     <input
                       type="text"
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
+                      style={segoeUIStyles}
                       placeholder="Contoh: 6,00%"
                       value={interestRate}
                       onChange={(e) => setInterestRate(e.target.value)}
@@ -256,12 +264,14 @@ const MainPage: React.FC = () => {
                   <button
                     onClick={resetCalculator}
                     className="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                    style={segoeUIStyles}
                   >
                     Reset
                   </button>
                   <button
                     onClick={calculateDeposit}
                     className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    style={segoeUIStyles}
                   >
                     Hitung
                   </button>
@@ -269,35 +279,35 @@ const MainPage: React.FC = () => {
 
                 {/* Results Card */}
                 {calculationResult.maturityAmount && (
-                  <div className="grid md:grid-cols-2 gap-6 bg-gray-50 rounded-lg p-6">
+                  <div className="grid md:grid-cols-2 gap-6 bg-gray-50 rounded-lg p-6" style={segoeUIStyles}>
                     <div className="space-y-4">
                       <div>
-                        <h6 className="text-sm text-gray-600">Nominal saat jatuh tempo</h6>
-                        <h3 className="text-xl font-bold text-blue-600">
+                        <h6 className="text-sm text-gray-600" style={segoeUIStyles}>Nominal saat jatuh tempo</h6>
+                        <h3 className="text-xl font-bold text-blue-600" style={segoeUIStyles}>
                           Rp {calculationResult.maturityAmount}
                         </h3>
                       </div>
                       <div>
-                        <h6 className="text-sm text-gray-600">Total Akumulasi Bunga</h6>
-                        <h3 className="text-xl font-bold text-blue-600">
+                        <h6 className="text-sm text-gray-600" style={segoeUIStyles}>Total Akumulasi Bunga</h6>
+                        <h3 className="text-xl font-bold text-blue-600" style={segoeUIStyles}>
                           Rp {calculationResult.totalInterest}
                         </h3>
                       </div>
                     </div>
 
                     <div className="space-y-3">
-                      <h6 className="text-sm text-gray-600">Faktor Kalkulasi</h6>
+                      <h6 className="text-sm text-gray-600" style={segoeUIStyles}>Faktor Kalkulasi</h6>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Nominal</span>
-                        <span className="font-medium">Rp {nominal}</span>
+                        <span className="text-gray-600" style={segoeUIStyles}>Nominal</span>
+                        <span className="font-medium" style={segoeUIStyles}>Rp {nominal}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Jangka Waktu (Bulan)</span>
-                        <span className="font-medium">{tenure}</span>
+                        <span className="text-gray-600" style={segoeUIStyles}>Jangka Waktu (Bulan)</span>
+                        <span className="font-medium" style={segoeUIStyles}>{tenure}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Suku Bunga per Tahun</span>
-                        <span className="font-medium">{interestRate}%</span>
+                        <span className="text-gray-600" style={segoeUIStyles}>Suku Bunga per Tahun</span>
+                        <span className="font-medium" style={segoeUIStyles}>{interestRate}%</span>
                       </div>
                     </div>
                   </div>
