@@ -19,39 +19,31 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const sliderContainerRef = useRef<HTMLUListElement>(null);
+  
+  // Default placeholder image untuk icon
+  const placeholderIcon = "/img/icon/placeholder-icon.png";
 
   // Function to determine slides per view based on screen width
   const updateSlidesPerView = useCallback(() => {
-    if (window.innerWidth < 640) {
-      setSlidesPerView(1);
-    } else if (window.innerWidth < 1024) {
-      setSlidesPerView(2);
-    } else {
-      setSlidesPerView(3);
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) {
+        setSlidesPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setSlidesPerView(2);
+      } else {
+        setSlidesPerView(3);
+      }
     }
-  }, []);
-
-  // Update slider position
-  const updateSlider = useCallback(() => {
-    if (sliderContainerRef.current) {
-      const slideWidth = 100 / slidesPerView;
-      const offset = currentIndex * -slideWidth;
-      sliderContainerRef.current.style.transform = `translateX(${offset}%)`;
-    }
-  }, [currentIndex, slidesPerView]);
+  }, []); // Tidak ada dependensi di sini
 
   // Handle navigation
   const handlePrevClick = useCallback(() => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  }, [currentIndex]);
+    setCurrentIndex(prev => prev > 0 ? prev - 1 : prev);
+  }, []); // Tidak ada dependensi di sini
 
   const handleNextClick = useCallback(() => {
-    if (currentIndex < loanProducts.length - slidesPerView) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  }, [currentIndex, loanProducts.length, slidesPerView]);
+    setCurrentIndex(prev => prev < loanProducts.length - slidesPerView ? prev + 1 : prev);
+  }, [loanProducts.length, slidesPerView]); // Hapus currentIndex dari dependensi
 
   // Handle touch events for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -73,22 +65,30 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
     }
   };
 
+  // Update slider position
+  useEffect(() => {
+    if (sliderContainerRef.current) {
+      const slideWidth = 100 / slidesPerView;
+      const offset = currentIndex * -slideWidth;
+      sliderContainerRef.current.style.transform = `translateX(${offset}%)`;
+    }
+  }, [currentIndex, slidesPerView]); // Ini lebih baik jadi useEffect, bukan useCallback
+
+  // Setup initial slides per view and add resize listener
   useEffect(() => {
     // Initial setup
     updateSlidesPerView();
     
     // Add resize listener
-    window.addEventListener('resize', updateSlidesPerView);
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', updateSlidesPerView);
-    };
-  }, [updateSlidesPerView]);
-
-  useEffect(() => {
-    updateSlider();
-  }, [currentIndex, slidesPerView, updateSlider]);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateSlidesPerView);
+      
+      // Cleanup
+      return () => {
+        window.removeEventListener('resize', updateSlidesPerView);
+      };
+    }
+  }, [updateSlidesPerView]); // Karena updateSlidesPerView tidak memiliki dependensi, ini aman
 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8">
@@ -105,47 +105,54 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {loanProducts.map((product, index) => (
-              <li 
-                key={index} 
-                className={`${
-                  slidesPerView === 1 ? 'w-full' : 
-                  slidesPerView === 2 ? 'w-1/2' : 'w-1/3'
-                } flex-shrink-0 px-1 sm:px-2 md:px-3`}
-                style={{transition: 'width 0.3s ease'}}
-              >
-                <div className="bg-gray-100 w-full h-[270px] rounded-lg shadow-lg hover:bg-gray-300 transition-all duration-300">
-                  <Link href={product.href}>
-                    <div className="p-4 sm:p-6">
-                      <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
-                          <Image
-                            src={product.icon}
-                            alt={product.title}
-                            sizes="(max-width: 640px) 32px, 40px"
-                            fill
-                            style={{ objectFit: 'contain' }}
-                            priority={index === 0}
-                          />
+            {loanProducts.map((product, index) => {
+              // Validasi icon untuk memastikan tidak kosong
+              const validIcon = product.icon && product.icon.trim() !== '' 
+                ? product.icon 
+                : placeholderIcon;
+                
+              return (
+                <li 
+                  key={index} 
+                  className={`${
+                    slidesPerView === 1 ? 'w-full' : 
+                    slidesPerView === 2 ? 'w-1/2' : 'w-1/3'
+                  } flex-shrink-0 px-1 sm:px-2 md:px-3`}
+                  style={{transition: 'width 0.3s ease'}}
+                >
+                  <div className="bg-gray-100 w-full h-[270px] rounded-lg shadow-lg hover:bg-gray-300 transition-all duration-300">
+                    <Link href={product.href}>
+                      <div className="p-4 sm:p-6">
+                        <div className="flex items-start gap-3 sm:gap-4">
+                          <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
+                            <Image
+                              src={validIcon}
+                              alt={`Ikon untuk ${product.title}`}
+                              sizes="(max-width: 640px) 32px, 40px"
+                              fill
+                              style={{ objectFit: 'contain' }}
+                              priority={index === 0}
+                            />
+                          </div>
+                          <h6 className="text-sm sm:text-base font-semibold text-gray-900">
+                            {product.title}
+                          </h6>
                         </div>
-                        <h6 className="text-sm sm:text-base font-semibold text-gray-900">
-                          {product.title}
-                        </h6>
+                        <p className="mt-3 sm:mt-4 text-gray-600 text-xs sm:text-sm">
+                          {product.description}
+                        </p>
                       </div>
-                      <p className="mt-3 sm:mt-4 text-gray-600 text-xs sm:text-sm">
-                        {product.description}
-                      </p>
-                    </div>
-                    <div className="px-4 sm:px-6 py-3 sm:py-4 border-t flex justify-between items-center">
-                      <span className="text-blue-600 text-xs sm:text-sm">
-                        Selengkapnya
-                      </span>
-                      <span className="text-blue-600">&gt;</span>
-                    </div>
-                  </Link>
-                </div>
-              </li>
-            ))}
+                      <div className="px-4 sm:px-6 py-3 sm:py-4 border-t flex justify-between items-center">
+                        <span className="text-blue-600 text-xs sm:text-sm">
+                          Selengkapnya
+                        </span>
+                        <span className="text-blue-600">&gt;</span>
+                      </div>
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -173,10 +180,10 @@ const LoanProductsSlider = ({ loanProducts }: LoanProductsSliderProps) => {
         
         {/* Pagination indicators (optional) */}
         <div className="flex justify-center mt-4">
-          {Array.from({length: Math.ceil(loanProducts.length / slidesPerView)}).map((_, index) => (
+          {Array.from({length: Math.max(1, Math.ceil(loanProducts.length / slidesPerView))}).map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => setCurrentIndex(index * slidesPerView)}
               className={`mx-1 w-2 h-2 rounded-full ${
                 index === Math.floor(currentIndex / slidesPerView) 
                   ? 'bg-blue-600' 
