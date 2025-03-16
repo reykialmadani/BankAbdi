@@ -37,9 +37,9 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
           if (Array.isArray(parsed) && parsed.length > 0) {
             requiredDocuments = (
               <div className="mt-4">
-                <h5 className="text-lg font-semibold text-[#003868] mb-2">
+                {/* <h5 className="text-lg font-semibold text-[#003868] mb-2">
                   Dokumen yang Diperlukan:
-                </h5>
+                </h5> */}
                 <ul className="list-disc pl-5 text-[#414c5a]">
                   {parsed.map((doc, index) => (
                     <li key={index}>
@@ -78,7 +78,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     }
 
     return (
-      <div className="rounded-lg shadow-sm p-6 text-sm bg-white">
+      <div className="rounded-lg shadow-sm p-6 text-sm">
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>

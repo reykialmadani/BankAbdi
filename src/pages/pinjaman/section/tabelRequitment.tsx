@@ -76,7 +76,7 @@ const CreditSection: FC = () => {
 
   return (
     <>
-      <div className="bg-[#eff6fc] py-8 w-full md:py-12">
+      <div className="py-8 w-full md:py-12">
         <div className="container mx-auto px-4 max-w-[1100px]">
           <div className="grid md:grid-cols-2 gap-8">
             <div className="rounded-lg p-6 shadow-sm">

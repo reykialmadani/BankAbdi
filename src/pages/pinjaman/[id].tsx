@@ -27,54 +27,48 @@ const defaultData: Record<string, { title: string, description: string, image: s
     icon: "https://bankabdi.co.id/img/icon/pinjaman_kmk.png",
   },
   "kredit-investasi": {
-      title: "Kredit Investasi",
-      description:
-        "Fasilitas pembiayaanyang diberikan untuk membiayai kebutuhan dalam jangka panjang dalam mengembangkan/memperluas usaha anda.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-ki.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_ki.png",
-    },
-    "kredit-multiguna": {
-      title: "Kredit Multiguna",
-      description:
-        "Fasilitas pembiayaan yang diberikan kepada pegawai/pengusaha yang memiliki penghasilan/profesi tetap, untuk membiayai berbagai macam kebutuhannya.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-km.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_km.png",
-    },
-    "kredit-kepemilikan-rumah": {
-      title: "Kredit Kepemilikan Rumah (KPR)",
-      description:
-        "Fasilitas pembiayaan untuk membeli rumah / rumah toko / rumah kantor.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpr.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpr.png",
-    },
-    "kredit-kepemilikan-mobil": {
-      title: "Kredit Kepemilikan Mobil (KPM)",
-      description:
-        "Fasilitas pembiayaan untuk pembelian kendaraan roda empat / mobil baik baru maupun bekas.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpm.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpm.png",
-    },
-    "kredit-kendaraan-bermotor": {
-      title: "Kredit Kendaraan Bermotor (KKB)",
-      description:
-        "Faslititas pembiayaan untuk pembelian kendaraan bermotor roda dua untuk nasabah perseorangan.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kkb.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_kkb.png",
-    },
-    "kredit-tanpa-agunan": {
-      title: "Kredit Tanpa Agunan (KTA)",
-      description:
-        "Fasilitas pembiayaan yang merupakan pinjaman tanpa adanya jaminan atau agunan atas pinjaman yang diajukan.",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kta.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
-    },
-    "form-pengajuan-kredit": {
-      title: "Formulir Pengajuan Pinjaman",
-      description: "",
-      image: "https://bankabdi.co.id/img/banner/hero-pinjaman.webp",
-      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
-    },
-  };
+    title: "Kredit Investasi",
+    description: "Fasilitas pembiayaanyang diberikan untuk membiayai kebutuhan dalam jangka panjang dalam mengembangkan/memperluas usaha anda.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-ki.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_ki.png",
+  },
+  "kredit-multiguna": {
+    title: "Kredit Multiguna",
+    description: "Fasilitas pembiayaan yang diberikan kepada pegawai/pengusaha yang memiliki penghasilan/profesi tetap, untuk membiayai berbagai macam kebutuhannya.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-km.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_km.png",
+  },
+  "kredit-kepemilikan-rumah": {
+    title: "Kredit Kepemilikan Rumah (KPR)",
+    description: "Fasilitas pembiayaan untuk membeli rumah / rumah toko / rumah kantor.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpr.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_kpr.png",
+  },
+  "kredit-kepemilikan-mobil": {
+    title: "Kredit Kepemilikan Mobil (KPM)",
+    description: "Fasilitas pembiayaan untuk pembelian kendaraan roda empat / mobil baik baru maupun bekas.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpm.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_kpm.png",
+  },
+  "kredit-kendaraan-bermotor": {
+    title: "Kredit Kendaraan Bermotor (KKB)",
+    description: "Faslititas pembiayaan untuk pembelian kendaraan bermotor roda dua untuk nasabah perseorangan.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kkb.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_kkb.png",
+  },
+  "kredit-tanpa-agunan": {
+    title: "Kredit Tanpa Agunan (KTA)",
+    description: "Fasilitas pembiayaan yang merupakan pinjaman tanpa adanya jaminan atau agunan atas pinjaman yang diajukan.",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kta.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
+  },
+  "form-pengajuan-kredit": {
+    title: "Formulir Pengajuan Pinjaman",
+    description: "",
+    image: "https://bankabdi.co.id/img/banner/hero-pinjaman.webp",
+    icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
+  },
+};
 
 const PinjamanDetail = () => {
   const router = useRouter();
@@ -84,6 +78,37 @@ const PinjamanDetail = () => {
   const [menuItems, setMenuItems] = useState<{ href: string; label: string }[]>([]);
   const [loanProducts, setLoanProducts] = useState<LoanProduct[]>([]);
   const [currentContent, setCurrentContent] = useState<ContentType | null>(null);
+  
+  // Ensure we always have the default menu items first in the correct order
+  useEffect(() => {
+    // Define the exact order we want
+    const orderKeys = [
+      "kredit-modal-kerja",
+      "kredit-investasi",
+      "kredit-multiguna",
+      "kredit-kepemilikan-rumah",
+      "kredit-kepemilikan-mobil",
+      "kredit-kendaraan-bermotor",
+      "kredit-tanpa-agunan",
+      "form-pengajuan-kredit"
+    ];
+    
+    // Set default menu items immediately in the specified order
+    const defaultMenuItems = orderKeys.map(key => ({
+      href: `/pinjaman/${key}`,
+      label: defaultData[key].title,
+    }));
+    
+    setMenuItems(defaultMenuItems);
+    
+    // Also set default loan products in the same order
+    setLoanProducts(orderKeys.map(key => ({
+      title: defaultData[key].title,
+      description: defaultData[key].description,
+      icon: defaultData[key].icon,
+      href: `/pinjaman/${key}`,
+    })));
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,117 +126,150 @@ const PinjamanDetail = () => {
         console.log("API Response (all contents):", JSON.stringify(allContents, null, 2));
         setContents(allContents);
 
-        // Mengumpulkan menu items dari semua konten
-        const uniqueSubMenus = new Map();
-        allContents.forEach(content => {
-          if (content.sub_menu && content.status) {
-            const url = content.sub_menu.url.startsWith('/') ? content.sub_menu.url.substring(1) : content.sub_menu.url;
-            const href = `/pinjaman/${url.replace('/pinjaman/', '')}`;
-            if (!uniqueSubMenus.has(url)) {
-              uniqueSubMenus.set(url, { href, label: content.sub_menu.name || content.sub_menu.sub_menu_name });
+        // Check if we got valid content from backend
+        const hasValidContent = allContents && allContents.length > 0;
+        
+        if (hasValidContent) {
+          console.log("Processing backend data for menu items");
+          
+          // Create a set to keep track of added menu items to avoid duplicates
+          const processedMenuItems: Set<string> = new Set();
+          const backendMenuItems: { href: string; label: string }[] = [];
+          
+          // First, go through all contents and extract valid menu items
+          allContents.forEach(content => {
+            if (content.sub_menu && content.status) {
+              // Extract the last part of the URL to match with our route format
+              const subMenuUrl = content.sub_menu.url;
+              const urlParts = subMenuUrl.split('/');
+              const lastUrlPart = urlParts[urlParts.length - 1];
+              
+              // Use the lastUrlPart as our route parameter
+              const routeId = lastUrlPart || subMenuUrl.replace(/^\//g, '').replace(/^pinjaman\//g, '');
+              const href = `/pinjaman/${routeId}`;
+              
+              // Make sure we don't add duplicates
+              const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
+              if (!processedMenuItems.has(menuKey)) {
+                processedMenuItems.add(menuKey);
+                backendMenuItems.push({
+                  href: href,
+                  label: content.sub_menu.name || content.sub_menu.sub_menu_name
+                });
+              }
             }
+          });
+          
+          // If we have backend items, only use them if we have all expected items
+          // Otherwise we'll stick with our ordered default items
+          if (backendMenuItems.length >= Object.keys(defaultData).length) {
+            console.log("Using backend-provided menu items:", backendMenuItems);
+            
+            // Define the exact order we want
+            const orderKeys = [
+              "kredit-modal-kerja",
+              "kredit-investasi",
+              "kredit-multiguna",
+              "kredit-kepemilikan-rumah",
+              "kredit-kepemilikan-mobil",
+              "kredit-kendaraan-bermotor",
+              "kredit-tanpa-agunan",
+              "form-pengajuan-kredit"
+            ];
+            
+            // Create a map for quick lookups
+            const menuItemMap = new Map();
+            backendMenuItems.forEach(item => {
+              const key = item.href.replace('/pinjaman/', '');
+              menuItemMap.set(key, item);
+            });
+            
+            // Create ordered items from backend data
+            const orderedMenuItems = orderKeys
+              .map(key => menuItemMap.get(key) || {
+                href: `/pinjaman/${key}`,
+                label: defaultData[key].title
+              });
+              
+            setMenuItems(orderedMenuItems);
+            
+            // Update loan products based on ordered backend data
+            const backendLoanProducts = orderedMenuItems.map(item => {
+              const routeId = item.href.replace('/pinjaman/', '');
+              const matchingContent = allContents.find(content => 
+                content.sub_menu && (
+                  content.sub_menu.url.endsWith(`/${routeId}`) ||
+                  content.sub_menu.url === routeId ||
+                  content.sub_menu.url === `/${routeId}`
+                )
+              );
+              
+              // Use default data as fallback if available
+              const defaultProduct = defaultData[routeId];
+              
+              return {
+                title: item.label,
+                description: matchingContent?.description || (defaultProduct?.description || ""),
+                icon: matchingContent?.thumbnail || (defaultProduct?.icon || "/img/icon/placeholder-icon.png"),
+                href: item.href,
+              };
+            });
+            
+            setLoanProducts(backendLoanProducts);
           }
-        });
-
-        if (uniqueSubMenus.size === 0) {
-          console.log("Tidak ada data dari backend, menggunakan data default");
-          const defaultMenuItems = Object.keys(defaultData).map(key => ({
-            href: `/pinjaman/${key}`,
-            label: defaultData[key].title,
-          }));
-          setMenuItems(defaultMenuItems);
-          setLoanProducts(Object.keys(defaultData).map(key => ({
-            title: defaultData[key].title,
-            description: defaultData[key].description,
-            icon: defaultData[key].icon,
-            href: `/pinjaman/${key}`,
-          })));
-        } else {
-          console.log("Menggunakan data dari backend");
-          setMenuItems(Array.from(uniqueSubMenus.values()));
-          setLoanProducts(Array.from(uniqueSubMenus.values()).map(item => {
-            const urlPath = item.href.replace('/pinjaman/', '');
-            const relatedContent = allContents.find(content => 
-              content.sub_menu && (
-                content.sub_menu.url === urlPath || 
-                content.sub_menu.url === `/${urlPath}` ||
-                content.sub_menu.url.endsWith(`/${urlPath}`)
-              )
-            );
-            const defaultIcon = defaultData[urlPath]?.icon || "/img/icon/placeholder-icon.png";
-            return {
-              title: item.label,
-              description: relatedContent?.description || "",
-              icon: relatedContent?.thumbnail || defaultIcon,
-              href: item.href,
-            };
-          }));
         }
 
-        // PERBAIKAN: Cara pencarian konten yang lebih fleksibel
-        console.log("Mencari konten untuk ID:", normalizedId);
+        // Find content for current page
+        const findContentForPage = (normalizedId: string) => {
+          return contents.find(content => {
+            if (!content.sub_menu || !content.status) return false;
+            
+            const subMenuUrl = content.sub_menu.url;
+            const urlParts = subMenuUrl.split('/');
+            const lastUrlPart = urlParts[urlParts.length - 1];
+            
+            return (
+              lastUrlPart === normalizedId || 
+              subMenuUrl === `/${normalizedId}` || 
+              subMenuUrl === normalizedId ||
+              subMenuUrl === `/pinjaman/${normalizedId}` ||
+              subMenuUrl.endsWith(`/${normalizedId}`)
+            );
+          });
+        };
         
-        // Metode 1: Cari berdasarkan berbagai format URL yang mungkin
-        let contentForCurrentPage = allContents.find(content => {
-          if (!content.sub_menu || !content.status) return false;
-          
-          const subMenuUrl = content.sub_menu.url;
-          
-          // Ekstrak bagian terakhir dari URL untuk perbandingan
-          const urlParts = subMenuUrl.split('/');
-          const lastUrlPart = urlParts[urlParts.length - 1];
-          
-          // Bandingkan dengan berbagai kemungkinan format
-          return (
-            lastUrlPart === normalizedId || 
-            subMenuUrl === `/${normalizedId}` || 
-            subMenuUrl === normalizedId ||
-            subMenuUrl === `/pinjaman/${normalizedId}` ||
-            subMenuUrl.endsWith(`/${normalizedId}`)
-          );
-        });
+        const contentForCurrentPage = findContentForPage(normalizedId);
         
-        // Jika masih tidak ditemukan, coba dengan getContentBySubMenuUrl
-        if (!contentForCurrentPage) {
-          console.log("Konten tidak ditemukan dengan pencarian langsung, mencoba getContentBySubMenuUrl");
+        // If not found directly, try API call
+        if (!contentForCurrentPage && hasValidContent) {
+          console.log("Trying to fetch specific content for:", normalizedId);
           try {
-            // Coba berbagai format URL untuk API call
             let specificContents = await getContentBySubMenuUrl(normalizedId);
             
-            // Jika kosong, coba format lain
             if (!specificContents || specificContents.length === 0) {
               specificContents = await getContentBySubMenuUrl(`/pinjaman/${normalizedId}`);
             }
             
-            console.log("Specific contents response:", specificContents);
             if (specificContents && specificContents.length > 0) {
-              contentForCurrentPage = specificContents[0];
+              setCurrentContent(specificContents[0]);
             }
           } catch (err) {
             console.error("Error fetching specific content:", err);
           }
+        } else {
+          setCurrentContent(contentForCurrentPage || null);
         }
-
-        console.log("Content for current page:", contentForCurrentPage);
-        setCurrentContent(contentForCurrentPage || null);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setMenuItems(Object.keys(defaultData).map(key => ({
-          href: `/pinjaman/${key}`,
-          label: defaultData[key].title,
-        })));
-        setLoanProducts(Object.keys(defaultData).map(key => ({
-          title: defaultData[key].title,
-          description: defaultData[key].description,
-          icon: defaultData[key].icon,
-          href: `/pinjaman/${key}`,
-        })));
+        // On error, keep using default data (already set in first useEffect)
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    if (id) {
+      fetchData();
+    }
   }, [id]);
 
   const getPinjamanData = () => {
@@ -219,15 +277,14 @@ const PinjamanDetail = () => {
     
     const normalizedId = typeof id === 'string' ? id : '';
     
-    // Selalu prioritaskan data default untuk title, description, image, dan icon
-    // Ini memastikan tampilan Hero selalu konsisten dengan desain yang diinginkan
+    // Always prioritize default data for visual consistency
     const defaultHeroData = defaultData[normalizedId];
     
     if (!defaultHeroData) {
-      return null; // Jika tidak ada data default, kembalikan null
+      return null;
     }
     
-    // Metode pencarian untuk data lain dari backend (jika diperlukan)
+    // Try to find matching backend content for additional data if needed
     const content = contents.find(c => {
       if (!c.sub_menu || !c.status) return false;
       
@@ -254,10 +311,6 @@ const PinjamanDetail = () => {
 
   const pinjamanData = getPinjamanData();
 
-  useEffect(() => {
-    console.log("Current content state:", currentContent);
-  }, [currentContent]);
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex justify-center items-center">
@@ -279,6 +332,7 @@ const PinjamanDetail = () => {
           />
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-8 py-8">
+              {/* Sidebar with menu items - always populated */}
               <Sidebar menuItems={menuItems} currentPath={router.asPath} />
               <div className="lg:w-3/4 w-full">
                 <Content contentData={currentContent} isLoading={loading} />
