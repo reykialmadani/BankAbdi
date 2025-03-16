@@ -26,7 +26,55 @@ const defaultData: Record<string, { title: string, description: string, image: s
     image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
     icon: "https://bankabdi.co.id/img/icon/pinjaman_kmk.png",
   },
-};
+  "kredit-investasi": {
+      title: "Kredit Investasi",
+      description:
+        "Fasilitas pembiayaanyang diberikan untuk membiayai kebutuhan dalam jangka panjang dalam mengembangkan/memperluas usaha anda.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-ki.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_ki.png",
+    },
+    "kredit-multiguna": {
+      title: "Kredit Multiguna",
+      description:
+        "Fasilitas pembiayaan yang diberikan kepada pegawai/pengusaha yang memiliki penghasilan/profesi tetap, untuk membiayai berbagai macam kebutuhannya.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-km.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_km.png",
+    },
+    "kredit-kepemilikan-rumah": {
+      title: "Kredit Kepemilikan Rumah (KPR)",
+      description:
+        "Fasilitas pembiayaan untuk membeli rumah / rumah toko / rumah kantor.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpr.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpr.png",
+    },
+    "kredit-kepemilikan-mobil": {
+      title: "Kredit Kepemilikan Mobil (KPM)",
+      description:
+        "Fasilitas pembiayaan untuk pembelian kendaraan roda empat / mobil baik baru maupun bekas.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kpm.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kpm.png",
+    },
+    "kredit-kendaraan-bermotor": {
+      title: "Kredit Kendaraan Bermotor (KKB)",
+      description:
+        "Faslititas pembiayaan untuk pembelian kendaraan bermotor roda dua untuk nasabah perseorangan.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kkb.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kkb.png",
+    },
+    "kredit-tanpa-agunan": {
+      title: "Kredit Tanpa Agunan (KTA)",
+      description:
+        "Fasilitas pembiayaan yang merupakan pinjaman tanpa adanya jaminan atau agunan atas pinjaman yang diajukan.",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kta.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
+    },
+    "form-pengajuan-kredit": {
+      title: "Formulir Pengajuan Pinjaman",
+      description: "",
+      image: "https://bankabdi.co.id/img/banner/hero-pinjaman.webp",
+      icon: "https://bankabdi.co.id/img/icon/pinjaman_kta.png",
+    },
+  };
 
 const PinjamanDetail = () => {
   const router = useRouter();
@@ -171,7 +219,15 @@ const PinjamanDetail = () => {
     
     const normalizedId = typeof id === 'string' ? id : '';
     
-    // Metode pencarian lebih fleksibel untuk pinjamanData juga
+    // Selalu prioritaskan data default untuk title, description, image, dan icon
+    // Ini memastikan tampilan Hero selalu konsisten dengan desain yang diinginkan
+    const defaultHeroData = defaultData[normalizedId];
+    
+    if (!defaultHeroData) {
+      return null; // Jika tidak ada data default, kembalikan null
+    }
+    
+    // Metode pencarian untuk data lain dari backend (jika diperlukan)
     const content = contents.find(c => {
       if (!c.sub_menu || !c.status) return false;
       
@@ -188,16 +244,12 @@ const PinjamanDetail = () => {
       );
     });
     
-    if (content) {
-      return {
-        title: content.title,
-        description: content.description || "",
-        image: content.thumbnail || defaultData[normalizedId]?.image || "/img/banner/placeholder-image.jpg",
-        icon: content.thumbnail || defaultData[normalizedId]?.icon || "/img/icon/placeholder-icon.png",
-      };
-    }
-    
-    return defaultData[normalizedId] || null;
+    return {
+      title: defaultHeroData.title,
+      description: defaultHeroData.description,
+      image: defaultHeroData.image,
+      icon: defaultHeroData.icon,
+    };
   };
 
   const pinjamanData = getPinjamanData();
