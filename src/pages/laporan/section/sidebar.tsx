@@ -10,7 +10,7 @@ const SidebarLaporan = ({ currentPath, setPage }: SidebarProps) => {
   const triwulan = ["2021", "2022", "2023", "2024", "2025"];
 
   return (
-    <div className="lg:w-1/4 w-full">
+    <div className="lg:w-1/4 w-full text-sm">
       <div className="rounded-lg shadow-sm p-6 sticky top-4">
         {/* LAPORAN TAHUNAN */}
         <h6 className="text-lg font-semibold text-gray-700 mb-4">LAPORAN TAHUNAN</h6>
@@ -37,7 +37,6 @@ const SidebarLaporan = ({ currentPath, setPage }: SidebarProps) => {
             </li>
           ))}
         </ul>
-
         {/* LAPORAN TRIWULAN */}
         <h6 className="text-lg font-semibold text-gray-700 mb-4">LAPORAN TRIWULAN</h6>
         <ul className="space-y-2">
