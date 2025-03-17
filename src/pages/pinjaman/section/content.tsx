@@ -1,5 +1,6 @@
 // pages/pinjaman/section/content.tsx
 import { Content as ContentType } from "@/pages/api/fetching/routes";
+import "react-quill-new/dist/quill.snow.css"; // Tambahkan import CSS Quill
 
 interface ContentProps {
   contentData: ContentType | null;
@@ -8,15 +9,12 @@ interface ContentProps {
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
   // Debug info dengan detail tambahan
-  console.log("Content component - received contentData:", 
-    contentData ? 
-    {
-      id: contentData.id,
-      title: contentData.title,
-      subMenuId: contentData.sub_menu_id,
-      subMenu: contentData.sub_menu
-    } : null
-  );
+  console.log("Content component - received contentData:", contentData ? {
+    id: contentData.id,
+    title: contentData.title,
+    subMenuId: contentData.sub_menu_id,
+    subMenu: contentData.sub_menu
+  } : null);
 
   if (isLoading) {
     return (
@@ -45,10 +43,10 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
                     <li key={index}>
                       {doc.name && <span>{doc.name}</span>}
                       {doc.url && (
-                        <a 
-                          href={doc.url} 
+                        <a
+                          href={doc.url}
                           className="text-blue-600 hover:underline ml-2"
-                          target="_blank" 
+                          target="_blank"
                           rel="noopener noreferrer"
                         >
                           Lihat Dokumen
@@ -69,8 +67,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               Dokumen yang Diperlukan:
             </h5>
             <div 
-              className="text-[#414c5a]" 
-              dangerouslySetInnerHTML={{ __html: contentData.required_documents }} 
+              className="text-[#414c5a] ql-editor" 
+              dangerouslySetInnerHTML={{ __html: contentData.required_documents }}
             />
           </div>
         );
@@ -82,18 +80,18 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
-        
-        {/* Tampilkan deskripsi konten */}
+
+        {/* Tampilkan deskripsi konten dengan kelas ql-editor untuk styles Quill */}
         {contentData.description && (
           <div 
-            className="mb-6 text-[#414c5a] prose max-w-none" 
+            className="mb-6 text-[#414c5a] prose max-w-none ql-editor" 
             dangerouslySetInnerHTML={{ __html: contentData.description }}
           />
         )}
-        
+
         {/* Tampilkan dokumen yang diperlukan jika ada */}
         {requiredDocuments}
-        
+
         {/* Tampilkan informasi tambahan untuk laporan jika ada */}
         {contentData.report_type && (
           <div className="mt-4">
@@ -110,7 +108,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             )}
           </div>
         )}
-        
+
         {/* Tampilkan konten tambahan lainnya jika tersedia */}
         {contentData.additional_content && (
           <div className="mt-4">
@@ -118,19 +116,19 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               Informasi Tambahan:
             </h5>
             <div 
-              className="text-[#414c5a]" 
-              dangerouslySetInnerHTML={{ __html: contentData.additional_content }} 
+              className="text-[#414c5a] ql-editor" 
+              dangerouslySetInnerHTML={{ __html: contentData.additional_content }}
             />
           </div>
         )}
-        
+
         {/* Tampilkan tanggal pembaruan jika tersedia */}
         {contentData.updated_at && (
           <div className="mt-6 text-xs text-gray-500">
-            Terakhir diperbarui: {new Date(contentData.updated_at).toLocaleDateString('id-ID', { 
-              day: 'numeric', 
-              month: 'long', 
-              year: 'numeric' 
+            Terakhir diperbarui: {new Date(contentData.updated_at).toLocaleDateString('id-ID', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
             })}
           </div>
         )}
