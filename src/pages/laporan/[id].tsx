@@ -7,7 +7,6 @@ import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
 import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
 
-// Data default untuk tampilan jika data dari backend belum tersedia
 const defaultData: Record<string, { title: string, description: string, image: string, icon: string }> = {
   "2021": {
     title: "LAPORAN TAHUNAN",
@@ -17,7 +16,6 @@ const defaultData: Record<string, { title: string, description: string, image: s
   },
 };
 
-// Helper function untuk debug tujuan troubleshooting
 const debugContent = (content) => {
   if (!content) return "null";
   return {
@@ -42,11 +40,11 @@ const LaporanDetail = () => {
       try {
         setLoading(true);
         if (!id) return;
-
+        
         // Normalisasi ID untuk pencarian
         const normalizedId = typeof id === 'string' ? id : '';
         console.log("Current URL ID:", normalizedId);
-
+        
         // Ambil semua konten dari backend
         console.log("Fetching all contents...");
         const allContents = await getAllContents();
@@ -66,66 +64,85 @@ const LaporanDetail = () => {
           console.error("Invalid content data format, expected array:", allContents);
           setContents([]);
         }
-
+        
         // Check if we got valid content from backend
         const hasValidContent = Array.isArray(allContents) && allContents.length > 0;
         
         if (hasValidContent) {
           // Log semua konten dengan jenis laporan untuk troubleshooting
-          console.log("All report content from API:", 
-            allContents
-              .filter(c => c.report_type)
-              .map(debugContent)
+          console.log("All report content from API:", allContents
+            .filter(c => c.report_type)
+            .map(debugContent)
           );
           
-          // Cari konten yang sesuai dengan normalizedId (tahun laporan)
-          let matchingContents = allContents.filter(content => {
-            // Untuk keamanan, periksa dulu properti yang dibutuhkan
-            if (!content || !content.status) return false;
-            
-            // Debug untuk membantu troubleshooting
-            if (content.report_year) {
-              console.log(`Checking content ${content.id}: report_type=${content.report_type}, report_year=${content.report_year}, normalized_id=${normalizedId}`);
-            }
-            
-            // Jika ini laporan tahunan tanpa triwulan (hanya berisi tahun)
-            if (!normalizedId.includes('-') && 
-                content.report_type === 'Tahunan' && 
-                content.report_year === normalizedId) {
-              console.log(`Found matching annual report: ${content.id} - ${content.title}`);
-              return true;
-            }
-            
-            // Jika ini laporan triwulan (format: tahun-triwulan)
-            if (normalizedId.includes('-')) {
-              const [year, quarter] = normalizedId.split('-');
-              const isMatch = content.report_type === 'Triwulan' && 
-                              content.report_year === year && 
-                              content.report_quarter === quarter;
-              if (isMatch) {
-                console.log(`Found matching quarterly report: ${content.id} - ${content.title}`);
+          let matchingContents = [];
+          if (normalizedId.includes('-')) {
+            const parts = normalizedId.split('-');
+
+            if (parts.length === 2 && !isNaN(Number(parts[0])) && !isNaN(Number(parts[1]))) {
+  
+              for (const year of parts) {
+                const yearlyContents = allContents.filter(content => 
+                  content.report_type === 'Tahunan' && 
+                  content.report_year === year
+                );
+                
+                if (yearlyContents.length > 0) {
+                  matchingContents = [...matchingContents, ...yearlyContents];
+                  console.log(`Found matching annual reports for year ${year}: ${yearlyContents.length} reports`);
+                }
+                
+                
+                const quarterlyContents = allContents.filter(content => 
+                  content.report_type === 'Triwulan' && 
+                  content.report_year === year
+                );
+                
+                if (quarterlyContents.length > 0) {
+                  matchingContents = [...matchingContents, ...quarterlyContents];
+                  console.log(`Found matching quarterly reports for year ${year}: ${quarterlyContents.length} reports`);
+                }
               }
-              return isMatch;
-            }
+            } 
             
-            return false;
-          });
+            else {
+              const [year, quarter] = normalizedId.split('-');
+              matchingContents = allContents.filter(content => {
+                const isMatch = content.report_type === 'Triwulan' && 
+                               content.report_year === year && 
+                               content.report_quarter === quarter;
+                if (isMatch) {
+                  console.log(`Found matching quarterly report: ${content.id} - ${content.title}`);
+                }
+                return isMatch;
+              });
+            }
+          } 
+          
+          else {
+            matchingContents = allContents.filter(content => {
+              if (content.report_type === 'Tahunan' && content.report_year === normalizedId) {
+                console.log(`Found matching annual report: ${content.id} - ${content.title}`);
+                return true;
+              }
+              return false;
+            });
+          }
           
           console.log(`Found ${matchingContents.length} matching contents for ${normalizedId}`);
           
-          // Jika konten ditemukan, gunakan konten pertama
+        
           if (matchingContents.length > 0) {
             setCurrentContent(matchingContents[0]);
             console.log("Setting current content:", debugContent(matchingContents[0]));
           } else {
-            // Jika tidak ditemukan konten yang sesuai, coba panggil API spesifik
+            
             console.log("No matching content found in allContents, trying specific API");
             try {
               if (!normalizedId.includes('-')) {
-                // Untuk laporan tahunan
+                
                 console.log(`Fetching Tahunan report for year: ${normalizedId}`);
                 const specificContents = await getContentByReportType('Tahunan', normalizedId);
-                
                 if (specificContents && specificContents.length > 0) {
                   console.log("Found specific content via API:", debugContent(specificContents[0]));
                   setCurrentContent(specificContents[0]);
@@ -134,17 +151,40 @@ const LaporanDetail = () => {
                   setCurrentContent(null);
                 }
               } else {
-                // Untuk laporan triwulan
-                const [year, quarter] = normalizedId.split('-');
-                console.log(`Fetching Triwulan report for year: ${year}, quarter: ${quarter}`);
-                const specificContents = await getContentByReportType('Triwulan', year, quarter);
                 
-                if (specificContents && specificContents.length > 0) {
-                  console.log("Found specific content via API:", debugContent(specificContents[0]));
-                  setCurrentContent(specificContents[0]);
+                const parts = normalizedId.split('-');
+                
+                if (parts.length === 2 && !isNaN(Number(parts[0])) && !isNaN(Number(parts[1]))) {
+                 
+                  console.log(`Fetching Tahunan report for latest year in range: ${parts[0]}`);
+                  const specificContents = await getContentByReportType('Tahunan', parts[0]);
+                  if (specificContents && specificContents.length > 0) {
+                    console.log("Found specific content via API:", debugContent(specificContents[0]));
+                    setCurrentContent(specificContents[0]);
+                  } else {
+                    
+                    console.log(`Fetching Tahunan report for second year in range: ${parts[1]}`);
+                    const fallbackContents = await getContentByReportType('Tahunan', parts[1]);
+                    if (fallbackContents && fallbackContents.length > 0) {
+                      console.log("Found fallback content via API:", debugContent(fallbackContents[0]));
+                      setCurrentContent(fallbackContents[0]);
+                    } else {
+                      console.log("No specific content found via API");
+                      setCurrentContent(null);
+                    }
+                  }
                 } else {
-                  console.log("No specific content found via API");
-                  setCurrentContent(null);
+                 
+                  const [year, quarter] = normalizedId.split('-');
+                  console.log(`Fetching Triwulan report for year: ${year}, quarter: ${quarter}`);
+                  const specificContents = await getContentByReportType('Triwulan', year, quarter);
+                  if (specificContents && specificContents.length > 0) {
+                    console.log("Found specific content via API:", debugContent(specificContents[0]));
+                    setCurrentContent(specificContents[0]);
+                  } else {
+                    console.log("No specific content found via API");
+                    setCurrentContent(null);
+                  }
                 }
               }
             } catch (err) {
@@ -153,7 +193,7 @@ const LaporanDetail = () => {
             }
           }
         } else {
-          // Jika tidak ada konten valid dari backend
+          
           console.log("No valid content from backend");
           setCurrentContent(null);
         }
@@ -164,7 +204,7 @@ const LaporanDetail = () => {
         setLoading(false);
       }
     };
-
+    
     if (id) {
       fetchData();
     }
@@ -173,20 +213,17 @@ const LaporanDetail = () => {
   // Fungsi untuk mendapatkan data berdasarkan jenis laporan (asumsi fungsi ini tersedia di API)
   const getContentByReportType = async (type: string, year: string, quarter?: string) => {
     console.log(`Fetching ${type} report for year: ${year}${quarter ? `, quarter: ${quarter}` : ''}`);
-    
     try {
       if (contents && contents.length > 0) {
         const filtered = contents.filter(content => {
           if (type === 'Tahunan' && content.report_type === type && content.report_year === year) {
             return true;
           }
-          if (type === 'Triwulan' && content.report_type === type && 
-              content.report_year === year && content.report_quarter === quarter) {
+          if (type === 'Triwulan' && content.report_type === type && content.report_year === year && content.report_quarter === quarter) {
             return true;
           }
           return false;
         });
-        
         if (filtered.length > 0) {
           console.log(`Found ${filtered.length} matching reports by filtering existing data`);
           return filtered;
@@ -195,10 +232,9 @@ const LaporanDetail = () => {
       
       // Jika tidak ditemukan dari data yang ada, coba panggil API
       console.log("Trying API call as fallback");
-      const url = quarter 
-        ? `/api/reports?type=${type}&year=${year}&quarter=${quarter}` 
-        : `/api/reports?type=${type}&year=${year}`;
-      
+      const url = quarter ? 
+        `/api/reports?type=${type}&year=${year}&quarter=${quarter}` : 
+        `/api/reports?type=${type}&year=${year}`;
       return await getContentBySubMenuUrl(url);
     } catch (error) {
       console.error("Error fetching report by type:", error);
@@ -210,30 +246,45 @@ const LaporanDetail = () => {
     if (!id) return null;
     const normalizedId = typeof id === 'string' ? id : '';
     
-    // Selalu gunakan data default untuk tampilan Hero
+    // Selalu gunakan data default untuk tampilan Hero jika tersedia
     const defaultLaporanData = defaultData[normalizedId];
     
-    if (!defaultLaporanData) {
-      // Jika tidak ada data default yang cocok, buat data berdasarkan ID
-      if (normalizedId.includes('-')) {
-        const [year, quarter] = normalizedId.split('-');
+    if (defaultLaporanData) {
+      return defaultLaporanData;
+    }
+    
+    // Jika tidak ada data default yang cocok, buat data berdasarkan ID
+    // Periksa format ID
+    if (normalizedId.includes('-')) {
+      const parts = normalizedId.split('-');
+      
+      // Jika format "2025-2021" (mungkin menunjukkan rentang tahun)
+      if (parts.length === 2 && !isNaN(Number(parts[0])) && !isNaN(Number(parts[1]))) {
         return {
-          title: `LAPORAN TRIWULAN ${quarter} TAHUN ${year}`,
-          description: `Laporan triwulan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama triwulan ${quarter} tahun ${year}.`,
-          image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
-          icon: "https://bankabdi.co.id/img/icon/laporan.png",
-        };
-      } else {
-        return {
-          title: `LAPORAN TAHUNAN ${normalizedId}`,
-          description: `Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun ${normalizedId}.`,
+          title: `LAPORAN ${parts[0]}-${parts[1]}`,
+          description: `Laporan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama periode ${parts[1]} hingga ${parts[0]}.`,
           image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
           icon: "https://bankabdi.co.id/img/icon/laporan.png",
         };
       }
+      
+      // Format standar untuk laporan triwulan (tahun-triwulan)
+      const [year, quarter] = parts;
+      return {
+        title: `LAPORAN TRIWULAN ${quarter} TAHUN ${year}`,
+        description: `Laporan triwulan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama triwulan ${quarter} tahun ${year}.`,
+        image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
+        icon: "https://bankabdi.co.id/img/icon/laporan.png",
+      };
+    } else {
+      // Format untuk laporan tahunan (hanya tahun)
+      return {
+        title: `LAPORAN TAHUNAN ${normalizedId}`,
+        description: `Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun ${normalizedId}.`,
+        image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
+        icon: "https://bankabdi.co.id/img/icon/laporan.png",
+      };
     }
-    
-    return defaultLaporanData;
   };
 
   const laporanData = getLaporanData();
@@ -251,20 +302,19 @@ const LaporanDetail = () => {
       <Header />
       {laporanData ? (
         <>
-          <Hero
-            imageSrc={laporanData.image}
-            title={laporanData.title}
-            paragraph={laporanData.description}
-            showButton={false}
+          <Hero 
+            imageSrc={laporanData.image} 
+            title={laporanData.title} 
+            paragraph={laporanData.description} 
+            showButton={false} 
           />
           <div className="container mx-auto px-4">
             <div className="py-8">
-              {/* Kirim konten yang sesuai dan semua konten yang tersedia */}
               <Content 
                 contentData={currentContent} 
                 isLoading={loading} 
                 id={id} 
-                allContents={contents}
+                allContents={contents} 
               />
             </div>
           </div>
