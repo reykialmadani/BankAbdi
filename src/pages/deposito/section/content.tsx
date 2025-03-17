@@ -1,4 +1,5 @@
 import { Content as ContentType } from "@/pages/api/fetching/routes";
+import "react-quill-new/dist/quill.snow.css"; // Tambahkan import CSS Quill
 
 interface ContentProps {
   contentData?: ContentType | null;
@@ -67,7 +68,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               Dokumen yang Diperlukan:
             </h5>
             <div
-              className="text-[#414c5a]"
+              className="text-[#414c5a] ql-editor"
               dangerouslySetInnerHTML={{
                 __html: contentData.required_documents,
               }}
@@ -82,15 +83,18 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
-        {/* Tampilkan deskripsi konten */}
+        
+        {/* Tampilkan deskripsi konten dengan kelas ql-editor */}
         {contentData.description && (
           <div
-            className="mb-6 text-[#414c5a] prose max-w-none"
+            className="mb-6 text-[#414c5a] prose max-w-none ql-editor"
             dangerouslySetInnerHTML={{ __html: contentData.description }}
           />
         )}
+        
         {/* Tampilkan dokumen yang diperlukan jika ada */}
         {requiredDocuments}
+        
         {/* Tampilkan informasi tambahan untuk laporan jika ada */}
         {contentData.report_type && (
           <div className="mt-4">
@@ -109,6 +113,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             )}
           </div>
         )}
+        
         {/* Tampilkan konten tambahan lainnya jika tersedia */}
         {contentData.additional_content && (
           <div className="mt-4">
@@ -116,13 +121,14 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               Informasi Tambahan:
             </h5>
             <div
-              className="text-[#414c5a]"
+              className="text-[#414c5a] ql-editor"
               dangerouslySetInnerHTML={{
                 __html: contentData.additional_content,
               }}
             />
           </div>
         )}
+        
         {/* Tampilkan tanggal pembaruan jika tersedia */}
         {contentData.updated_at && (
           <div className="mt-6 text-xs text-gray-500">
@@ -145,11 +151,11 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         Informasi Tidak Tersedia
       </h4>
       <p className="text-[#414c5a]">
-        Mohon maaf, informasi untuk halaman ini belum tersedia. Silakan kunjungi halaman lain atau hubungi kami untuk informasi lebih lanjut.
+        Mohon maaf, informasi untuk halaman ini belum tersedia. Silakan kunjungi
+        halaman lain atau hubungi kami untuk informasi lebih lanjut.
       </p>
     </div>
   );
 };
-
 
 export default Content;
