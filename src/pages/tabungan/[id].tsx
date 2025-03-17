@@ -8,6 +8,7 @@ import Header from "../components/layout/header";
 import Hero from "../components/section/hero";
 import Sidebar from "./section/sidebar";
 import Content from "./section/content";
+import Main from "./section/main"; 
 import RiskManagement from "./section/riskManegement";
 import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "./section/LoanProductSlider";
@@ -117,6 +118,9 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
     "formulir"
   ];
 
+  // Check if the current page is the formulir page
+  const isFormulirPage = id === "formulir";
+
   // Set default menu items on mount
   useEffect(() => {
     // Set default menu items immediately in the specified order
@@ -127,12 +131,18 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
     setMenuItems(defaultMenuItems);
   }, []);
 
-  // Fetch data when ID changes
+  // Fetch data when ID changes (but only for non-formulir pages)
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         if (!id) return;
+        
+        // For formulir page, don't fetch from backend
+        if (isFormulirPage) {
+          setLoading(false);
+          return;
+        }
 
         // Normalize ID for search
         const normalizedId = typeof id === 'string' ? id : '';
@@ -178,7 +188,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
 
           // If we have backend items, only use them if we have all expected items
           // Otherwise we'll stick with our ordered default items
-          if (backendMenuItems.length >= orderKeys.length) {
+          if (backendMenuItems.length >= orderKeys.length - 1) { // Subtract 1 to account for formulir which is static
             console.log("Using backend-provided menu items:", backendMenuItems);
             // Create a map for quick lookups
             const menuItemMap = new Map();
@@ -188,8 +198,20 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
             });
 
             // Create ordered items from backend data
+            // Always add formulir from default data
             const orderedMenuItems = orderKeys
-              .map(key => menuItemMap.get(key) || { href: `/tabungan/${key}`, label: defaultData[key].title });
+              .map(key => {
+                if (key === "formulir") {
+                  return {
+                    href: `/tabungan/${key}`,
+                    label: defaultData[key].title
+                  };
+                }
+                return menuItemMap.get(key) || {
+                  href: `/tabungan/${key}`,
+                  label: defaultData[key].title
+                };
+              });
             setMenuItems(orderedMenuItems);
           }
         }
@@ -241,19 +263,29 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
     if (id) {
       fetchData();
     }
-  }, [id, contents.length]);
+  }, [id, contents.length, isFormulirPage]);
 
   // Get tabungan data consistently with default data priority
   const getTabunganData = () => {
     if (!id) return null;
     const normalizedId = typeof id === 'string' ? id : '';
-    
+
     // Always prioritize default data for visual consistency
     const defaultHeroData = defaultData[normalizedId];
     if (!defaultHeroData) {
       return null;
     }
-    
+
+    // For formulir, just return the default data
+    if (normalizedId === "formulir") {
+      return {
+        title: defaultHeroData.title,
+        description: defaultHeroData.description,
+        image: defaultHeroData.image,
+        icon: defaultHeroData.icon,
+      };
+    }
+
     // Try to find matching backend content for additional data if needed
     const content = contents.find(c => {
       if (!c.sub_menu || !c.status) return false;
@@ -268,7 +300,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
         subMenuUrl.endsWith(`/${normalizedId}`)
       );
     });
-    
+
     return {
       title: defaultHeroData.title,
       description: defaultHeroData.description,
@@ -278,9 +310,6 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
   };
 
   const tabunganData = getTabunganData();
-
-  // Check if the current page is the formulir page
-  const isFormulirPage = id === "formulir";
 
   // If no data and not loading, show 404
   if (!tabunganData && !loading) {
@@ -328,13 +357,19 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
             <div className="flex flex-col lg:flex-row gap-8 py-8">
               {/* Sidebar Section */}
               <Sidebar menuItems={menuItems} currentPath={router.asPath} />
+              
               {/* Main Content */}
               <div className="lg:w-3/4 w-full">
-                <Content contentData={currentContent} isLoading={loading} />
+                {isFormulirPage ? (
+                  <Main />
+                ) : (
+                  <Content contentData={currentContent} isLoading={loading} />
+                )}
                 {!hideRiskManagement && <RiskManagement />}
               </div>
             </div>
           </div>
+
           {/* Conditionally render additional sections */}
           {!isFormulirPage && (
             <>
@@ -360,7 +395,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Object.keys(defaultData).map((id) => ({
     params: { id },
   }));
-
   return {
     paths,
     fallback: true, // Allow paths not returned from getStaticPaths to render on-demand
@@ -369,12 +403,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
-
   try {
     // For SSG, we'll just use the default data directly
-    // This matches the behavior of the getPinjamanData function on the client
+    // This matches the behavior of the getTabunganData function on the client
     const defaultHeroData = defaultData[id];
-    
     return {
       props: {
         tabunganData: defaultHeroData || null,
