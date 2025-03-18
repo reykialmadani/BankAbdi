@@ -1,6 +1,7 @@
 // pages/pinjaman/section/content.tsx
 import { Content as ContentType } from "@/pages/api/fetching/routes";
-import "react-quill-new/dist/quill.snow.css"; // Tambahkan import CSS Quill
+import "react-quill-new/dist/quill.snow.css";
+import { useEffect, useState } from "react";
 
 interface ContentProps {
   contentData: ContentType | null;
@@ -8,6 +9,9 @@ interface ContentProps {
 }
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
+  // State untuk menyimpan dokumen yang sudah diproses
+  const [processedDocs, setProcessedDocs] = useState<any[]>([]);
+
   // Debug info dengan detail tambahan
   console.log("Content component - received contentData:", contentData ? {
     id: contentData.id,
@@ -15,6 +19,39 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     subMenuId: contentData.sub_menu_id,
     subMenu: contentData.sub_menu
   } : null);
+
+  // Proses URLs dokumen untuk menangani perbedaan antara back-end dan front-end
+  useEffect(() => {
+    if (contentData?.required_documents) {
+      try {
+        if (typeof contentData.required_documents === 'string') {
+          const parsed = JSON.parse(contentData.required_documents);
+          if (Array.isArray(parsed)) {
+            // Proses setiap dokumen untuk memastikan URL bekerja dengan benar
+            const processed = parsed.map(doc => {
+              let url = doc.url;
+              
+              // Jika URL relatif, tambahkan base API URL
+              if (url && url.startsWith('/uploads/')) {
+                // Gunakan process.env.NEXT_PUBLIC_API_URL untuk path lengkap ke back-end
+                url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${url}`;
+              }
+              
+              return {
+                ...doc,
+                url
+              };
+            });
+            
+            setProcessedDocs(processed);
+          }
+        }
+      } catch (e) {
+        console.error("Error parsing required_documents:", e);
+        setProcessedDocs([]);
+      }
+    }
+  }, [contentData]);
 
   if (isLoading) {
     return (
@@ -25,54 +62,48 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
   }
 
   if (contentData) {
-    // Parsing untuk required_documents jika string JSON
+    // Menggunakan processedDocs yang sudah disiapkan
     let requiredDocuments = null;
-    if (contentData.required_documents) {
-      try {
-        // Coba parse jika string JSON
-        if (typeof contentData.required_documents === 'string') {
-          const parsed = JSON.parse(contentData.required_documents);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            requiredDocuments = (
-              <div className="mt-4">
-                {/* <h5 className="text-lg font-semibold text-[#003868] mb-2">
-                  Dokumen yang Diperlukan:
-                </h5> */}
-                <ul className="list-disc pl-5 text-[#414c5a]">
-                  {parsed.map((doc, index) => (
-                    <li key={index}>
-                      {doc.name && <span>{doc.name}</span>}
-                      {doc.url && (
-                        <a
-                          href={doc.url}
-                          className="text-blue-600 hover:underline ml-2"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Lihat Dokumen
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-        }
-      } catch (e) {
-        // Jika bukan JSON valid, gunakan sebagai HTML
-        requiredDocuments = (
-          <div className="mt-4">
-            <h5 className="text-lg font-semibold text-[#003868] mb-2">
-              Dokumen yang Diperlukan:
-            </h5>
-            <div 
-              className="text-[#414c5a] ql-editor" 
-              dangerouslySetInnerHTML={{ __html: contentData.required_documents }}
-            />
-          </div>
-        );
-      }
+    if (processedDocs.length > 0) {
+      requiredDocuments = (
+        <div className="mt-4">
+          <h5 className="text-lg font-semibold text-[#003868] mb-2">
+            Dokumen yang Diperlukan:
+          </h5>
+          <ul className="list-disc pl-5 text-[#414c5a]">
+            {processedDocs.map((doc, index) => (
+              <li key={index}>
+                {doc.name && <span>{doc.name}</span>}
+                {doc.url && (
+                  <a
+                    href={doc.url}
+                    className="text-blue-600 hover:underline ml-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Lihat Dokumen
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else if (contentData.required_documents && 
+               typeof contentData.required_documents === 'string' && 
+               !contentData.required_documents.startsWith('[')) {
+      // Jika bukan JSON valid, gunakan sebagai HTML
+      requiredDocuments = (
+        <div className="mt-4">
+          <h5 className="text-lg font-semibold text-[#003868] mb-2">
+            Dokumen yang Diperlukan:
+          </h5>
+          <div
+            className="text-[#414c5a] ql-editor"
+            dangerouslySetInnerHTML={{ __html: contentData.required_documents }}
+          />
+        </div>
+      );
     }
 
     return (
@@ -80,15 +111,14 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
-
         {/* Tampilkan deskripsi konten dengan kelas ql-editor untuk styles Quill */}
         {contentData.description && (
-          <div 
-            className="mb-6 text-[#414c5a] prose max-w-none ql-editor" 
+          <div
+            className="mb-6 text-[#414c5a] prose max-w-none ql-editor"
             dangerouslySetInnerHTML={{ __html: contentData.description }}
           />
         )}
-
+        
         {/* Tampilkan dokumen yang diperlukan jika ada */}
         {requiredDocuments}
 
@@ -115,8 +145,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             <h5 className="text-lg font-semibold text-[#003868] mb-2">
               Informasi Tambahan:
             </h5>
-            <div 
-              className="text-[#414c5a] ql-editor" 
+            <div
+              className="text-[#414c5a] ql-editor"
               dangerouslySetInnerHTML={{ __html: contentData.additional_content }}
             />
           </div>
@@ -143,7 +173,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         Informasi Tidak Tersedia
       </h4>
       <p className="text-[#414c5a]">
-        Mohon maaf, informasi untuk halaman ini belum tersedia. Silakan kunjungi halaman lain atau hubungi kami untuk informasi lebih lanjut.
+        Mohon maaf, informasi untuk halaman ini belum tersedia. Silakan kunjungi
+        halaman lain atau hubungi kami untuk informasi lebih lanjut.
       </p>
     </div>
   );
