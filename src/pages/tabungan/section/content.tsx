@@ -1,5 +1,6 @@
 import { Content as ContentType } from "@/pages/api/fetching/routes";
-import "react-quill-new/dist/quill.snow.css"; // Tambahkan import CSS Quill
+import { useEffect, useState } from "react";
+import "react-quill-new/dist/quill.snow.css"; 
 
 interface ContentProps {
   contentData: ContentType | null;
@@ -7,7 +8,7 @@ interface ContentProps {
 }
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
-  // Debug info
+  const [processedDocs, setProcessedDocs] = useState<any[]>([]);
   console.log(
     "Content component - received contentData:",
     contentData
@@ -20,6 +21,33 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
       : null
   );
 
+  // Proses URLs dokumen untuk menangani perbedaan antara back-end dan front-end
+  useEffect(() => {
+    if (contentData?.required_documents) {
+      try {
+        if (typeof contentData.required_documents === 'string') {
+          const parsed = JSON.parse(contentData.required_documents);
+          if (Array.isArray(parsed)) {
+            // Proses setiap dokumen untuk memastikan URL bekerja dengan benar
+            const processed = parsed.map(doc => {
+              let url = doc.url;
+              // Jika URL relatif, tambahkan base API URL
+              if (url && url.startsWith('/uploads/')) {
+                // Gunakan process.env.NEXT_PUBLIC_API_URL untuk path lengkap ke back-end
+                url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${url}`;
+              }
+              return { ...doc, url };
+            });
+            setProcessedDocs(processed);
+          }
+        }
+      } catch (e) {
+        console.error("Error parsing required_documents:", e);
+        setProcessedDocs([]);
+      }
+    }
+  }, [contentData]);
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-10">
@@ -29,53 +57,46 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
   }
 
   if (contentData) {
-    // Parsing untuk required_documents jika string JSON
     let requiredDocuments = null;
-    if (contentData.required_documents) {
-      try {
-        // Coba parse jika string JSON
-        if (typeof contentData.required_documents === "string") {
-          const parsed = JSON.parse(contentData.required_documents);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            requiredDocuments = (
-              <div className="mt-4">
-                <ul className="list-disc pl-5 text-[#414c5a]">
-                  {parsed.map((doc, index) => (
-                    <li key={index}>
-                      {doc.name && <span>{doc.name}</span>}
-                      {doc.url && (
-                        <a
-                          href={doc.url}
-                          className="text-blue-600 hover:underline ml-2"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Lihat Dokumen
-                        </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-        }
-      } catch (e) {
-        // Jika bukan JSON valid, gunakan sebagai HTML
-        requiredDocuments = (
-          <div className="mt-4">
-            <h5 className="text-lg font-semibold text-[#003868] mb-2">
-              Dokumen yang Diperlukan:
-            </h5>
-            <div
-              className="text-[#414c5a] ql-editor"
-              dangerouslySetInnerHTML={{
-                __html: contentData.required_documents,
-              }}
-            />
-          </div>
-        );
-      }
+    if (processedDocs.length > 0) {
+      requiredDocuments = (
+        <div className="mt-4">
+          <h5 className="text-lg font-semibold text-[#003868] mb-2">
+            Informasi Tambahan:
+          </h5>
+          <ul className="list-disc pl-5 text-[#414c5a]">
+            {processedDocs.map((doc, index) => (
+              <li key={index}>
+                {doc.name && <span>{doc.name}</span>}
+                {doc.url && (
+                  <a
+                    href={doc.url}
+                    className="text-blue-600 hover:underline ml-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Lihat Dokumen
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    } else if (contentData.required_documents && typeof contentData.required_documents === 'string' && !contentData.required_documents.startsWith('[')) {
+      requiredDocuments = (
+        <div className="mt-4">
+          <h5 className="text-lg font-semibold text-[#003868] mb-2">
+            Dokumen yang Diperlukan:
+          </h5>
+          <div
+            className="text-[#414c5a] ql-editor"
+            dangerouslySetInnerHTML={{
+              __html: contentData.required_documents,
+            }}
+          />
+        </div>
+      );
     }
 
     return (
@@ -83,7 +104,6 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
-        
         {/* Tampilkan deskripsi konten dengan kelas ql-editor */}
         {contentData.description && (
           <div
@@ -91,11 +111,9 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             dangerouslySetInnerHTML={{ __html: contentData.description }}
           />
         )}
-        
-        {/* Tampilkan dokumen yang diperlukan jika ada */}
+        {/* Tampilkan dokumen */}
         {requiredDocuments}
-        
-        {/* Tampilkan informasi tambahan untuk laporan jika ada */}
+        {/* Tampilkan informasi  */}
         {contentData.report_type && (
           <div className="mt-4">
             <h5 className="text-lg font-semibold text-[#003868] mb-2">
@@ -113,9 +131,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             )}
           </div>
         )}
-        
         {/* Tampilkan konten tambahan lainnya jika tersedia */}
-        {contentData.additional_content && (
+        {/* {contentData.additional_content && (
           <div className="mt-4">
             <h5 className="text-lg font-semibold text-[#003868] mb-2">
               Informasi Tambahan:
@@ -127,9 +144,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               }}
             />
           </div>
-        )}
-        
-        {/* Tampilkan tanggal pembaruan jika tersedia */}
+        )} */}
+        {/* Tampilkan tangga */}
         {contentData.updated_at && (
           <div className="mt-6 text-xs text-gray-500">
             Terakhir diperbarui:{" "}
@@ -144,7 +160,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     );
   }
 
-  // Default fallback jika tidak ada konten
+  // Default fallback 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <h4 className="text-2xl font-bold text-[#414c5a] mb-6">

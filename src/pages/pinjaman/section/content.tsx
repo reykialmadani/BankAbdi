@@ -1,7 +1,7 @@
 // pages/pinjaman/section/content.tsx
 import { Content as ContentType } from "@/pages/api/fetching/routes";
-import "react-quill-new/dist/quill.snow.css";
 import { useEffect, useState } from "react";
+import "react-quill-new/dist/quill.snow.css";
 
 interface ContentProps {
   contentData: ContentType | null;
@@ -9,10 +9,7 @@ interface ContentProps {
 }
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
-  // State untuk menyimpan dokumen yang sudah diproses
   const [processedDocs, setProcessedDocs] = useState<any[]>([]);
-
-  // Debug info dengan detail tambahan
   console.log("Content component - received contentData:", contentData ? {
     id: contentData.id,
     title: contentData.title,
@@ -62,7 +59,6 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
   }
 
   if (contentData) {
-    // Menggunakan processedDocs yang sudah disiapkan
     let requiredDocuments = null;
     if (processedDocs.length > 0) {
       requiredDocuments = (
@@ -92,7 +88,6 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     } else if (contentData.required_documents && 
                typeof contentData.required_documents === 'string' && 
                !contentData.required_documents.startsWith('[')) {
-      // Jika bukan JSON valid, gunakan sebagai HTML
       requiredDocuments = (
         <div className="mt-4">
           <h5 className="text-lg font-semibold text-[#003868] mb-2">
@@ -111,6 +106,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
+
         {/* Tampilkan deskripsi konten dengan kelas ql-editor untuk styles Quill */}
         {contentData.description && (
           <div
@@ -119,10 +115,10 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
           />
         )}
         
-        {/* Tampilkan dokumen yang diperlukan jika ada */}
+        {/* Tampilkan dokumen*/}
         {requiredDocuments}
 
-        {/* Tampilkan informasi tambahan untuk laporan jika ada */}
+        {/* Tampilkan informasi*/}
         {contentData.report_type && (
           <div className="mt-4">
             <h5 className="text-lg font-semibold text-[#003868] mb-2">
@@ -139,7 +135,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
           </div>
         )}
 
-        {/* Tampilkan konten tambahan lainnya jika tersedia */}
+        {/* Tampilkan konten tambahan lainnya jika tersedia
         {contentData.additional_content && (
           <div className="mt-4">
             <h5 className="text-lg font-semibold text-[#003868] mb-2">
@@ -150,9 +146,9 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
               dangerouslySetInnerHTML={{ __html: contentData.additional_content }}
             />
           </div>
-        )}
+        )} */}
 
-        {/* Tampilkan tanggal pembaruan jika tersedia */}
+        {/* Tampilkan tanggal */}
         {contentData.updated_at && (
           <div className="mt-6 text-xs text-gray-500">
             Terakhir diperbarui: {new Date(contentData.updated_at).toLocaleDateString('id-ID', {
@@ -166,7 +162,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     );
   }
 
-  // Default fallback jika tidak ada konten
+  // Default fallback 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <h4 className="text-2xl font-bold text-[#414c5a] mb-6">
