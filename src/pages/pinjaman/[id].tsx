@@ -10,6 +10,7 @@ import LoanProductsSlider from "./section/LoanProductSlider";
 import CreditRequitment from "./section/tabelRequitment";
 import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
+import VisitorTracker from "../components/visitorTracker"; // Import visitor tracker component
 import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
 
 interface LoanProduct {
@@ -79,40 +80,41 @@ const PinjamanDetail = () => {
   const [menuItems, setMenuItems] = useState<{ href: string; label: string }[]>([]);
   const [loanProducts, setLoanProducts] = useState<LoanProduct[]>([]);
   const [currentContent, setCurrentContent] = useState<ContentType | null>(null);
+  const [subMenuData, setSubMenuData] = useState<{ id: number, name: string } | null>(null);
 
-  // Menentukan apakah halaman yang diakses adalah form-pengajuan-kredit
-  const isFormulirPage = id === "form-pengajuan-kredit";
-
-  // Ensure we always have the default menu items first in the correct order
   useEffect(() => {
-    // Define the exact order we want
-    const orderKeys = [
-      "kredit-modal-kerja",
-      "kredit-investasi",
-      "kredit-multiguna",
-      "kredit-kepemilikan-rumah",
-      "kredit-kepemilikan-mobil",
-      "kredit-kendaraan-bermotor",
-      "kredit-tanpa-agunan",
-      "form-pengajuan-kredit"
-    ];
+    if (id && typeof id === 'string') {
+      const findSubMenuId = async () => {
+        try {
+          const allContents = await getAllContents();
+          const matchingContent = allContents.find(content => {
+            if (!content.sub_menu || !content.status) return false;
+            const subMenuUrl = content.sub_menu.url;
+            const urlParts = subMenuUrl.split('/');
+            const lastUrlPart = urlParts[urlParts.length - 1];
+            return (
+              lastUrlPart === id || 
+              subMenuUrl === `/${id}` || 
+              subMenuUrl === id || 
+              subMenuUrl === `/pinjaman/${id}` || 
+              subMenuUrl.endsWith(`/${id}`)
+            );
+          });
 
-    // Set default menu items immediately in the specified order
-    const defaultMenuItems = orderKeys.map(key => ({
-      href: `/pinjaman/${key}`,
-      label: defaultData[key].title,
-    }));
-    setMenuItems(defaultMenuItems);
+          if (matchingContent && matchingContent.sub_menu) {
+            setSubMenuData({
+              id: matchingContent.sub_menu.id,
+              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name
+            });
+          }
+        } catch (error) {
+          console.error("Error mencari sub-menu ID:", error);
+        }
+      };
 
-    // Also set default loan products in the same order
-    const defaultLoanProducts = orderKeys.map(key => ({
-      title: defaultData[key].title,
-      description: defaultData[key].description,
-      icon: defaultData[key].icon,
-      href: `/pinjaman/${key}`,
-    }));
-    setLoanProducts(defaultLoanProducts);
-  }, []);
+      findSubMenuId();
+    }
+  }, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,39 +122,28 @@ const PinjamanDetail = () => {
         setLoading(true);
         if (!id) return;
 
-        // Normalisasi ID untuk pencarian
         const normalizedId = typeof id === 'string' ? id : '';
         console.log("Current URL ID:", normalizedId);
 
-        // Ambil semua konten dari backend
-        console.log("Fetching all contents...");
         const allContents = await getAllContents();
-        console.log("API Response (all contents):", JSON.stringify(allContents, null, 2));
-        
         setContents(allContents);
 
-        // Check if we got valid content from backend
         const hasValidContent = allContents && allContents.length > 0;
         
         if (hasValidContent) {
           console.log("Processing backend data for menu items");
-          // Create a set to keep track of added menu items to avoid duplicates
           const processedMenuItems: Set<string> = new Set();
           const backendMenuItems: { href: string; label: string }[] = [];
 
-          // First, go through all contents and extract valid menu items
           allContents.forEach(content => {
             if (content.sub_menu && content.status) {
-              // Extract the last part of the URL to match with our route format
               const subMenuUrl = content.sub_menu.url;
               const urlParts = subMenuUrl.split('/');
               const lastUrlPart = urlParts[urlParts.length - 1];
 
-              // Use the lastUrlPart as our route parameter
               const routeId = lastUrlPart || subMenuUrl.replace(/^\//g, '').replace(/^pinjaman\//g, '');
               const href = `/pinjaman/${routeId}`;
 
-              // Make sure we don't add duplicates
               const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
               if (!processedMenuItems.has(menuKey)) {
                 processedMenuItems.add(menuKey);
@@ -164,12 +155,7 @@ const PinjamanDetail = () => {
             }
           });
 
-          // If we have backend items, only use them if we have all expected items
-          // Otherwise we'll stick with our ordered default items
           if (backendMenuItems.length >= Object.keys(defaultData).length) {
-            console.log("Using backend-provided menu items:", backendMenuItems);
-            
-            // Define the exact order we want
             const orderKeys = [
               "kredit-modal-kerja",
               "kredit-investasi",
@@ -181,20 +167,17 @@ const PinjamanDetail = () => {
               "form-pengajuan-kredit"
             ];
 
-            // Create a map for quick lookups
             const menuItemMap = new Map();
             backendMenuItems.forEach(item => {
               const key = item.href.replace('/pinjaman/', '');
               menuItemMap.set(key, item);
             });
 
-            // Create ordered items from backend data
             const orderedMenuItems = orderKeys
               .map(key => menuItemMap.get(key) || { href: `/pinjaman/${key}`, label: defaultData[key].title });
             
             setMenuItems(orderedMenuItems);
 
-            // Update loan products based on ordered backend data
             const backendLoanProducts = orderKeys.map(key => {
               const matchingContent = allContents.find(content => {
                 if (!content.sub_menu || !content.status) return false;
@@ -209,24 +192,21 @@ const PinjamanDetail = () => {
                 );
               });
 
-              // Use default data as fallback
               const defaultProduct = defaultData[key];
               const menuItem = menuItemMap.get(key) || { href: `/pinjaman/${key}`, label: defaultData[key].title };
 
               return {
                 title: menuItem.label,
-                description: defaultProduct?.description || "", // Always use description from defaultData
+                description: defaultProduct?.description || "",
                 icon: matchingContent?.thumbnail || (defaultProduct?.icon || "/img/icon/placeholder-icon.png"),
                 href: `/pinjaman/${key}`,
               };
             });
 
-            // Make sure to update loanProducts state with backend data
             setLoanProducts(backendLoanProducts);
           }
         }
 
-        // Find content for current page
         const findContentForPage = (normalizedId: string) => {
           return contents.find(content => {
             if (!content.sub_menu || !content.status) return false;
@@ -245,9 +225,7 @@ const PinjamanDetail = () => {
 
         const contentForCurrentPage = findContentForPage(normalizedId);
 
-        // If not found directly, try API call
         if (!contentForCurrentPage && hasValidContent) {
-          console.log("Trying to fetch specific content for:", normalizedId);
           try {
             let specificContents = await getContentBySubMenuUrl(normalizedId);
             if (!specificContents || specificContents.length === 0) {
@@ -265,7 +243,6 @@ const PinjamanDetail = () => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        // On error, keep using default data (already set in first useEffect)
       } finally {
         setLoading(false);
       }
@@ -280,13 +257,11 @@ const PinjamanDetail = () => {
     if (!id) return null;
     const normalizedId = typeof id === 'string' ? id : '';
 
-    // Always prioritize default data for visual consistency
     const defaultHeroData = defaultData[normalizedId];
     if (!defaultHeroData) {
       return null;
     }
 
-    // Try to find matching backend content for additional data if needed
     const content = contents.find(c => {
       if (!c.sub_menu || !c.status) return false;
       const subMenuUrl = c.sub_menu.url;
@@ -321,6 +296,13 @@ const PinjamanDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {id && (
+        <VisitorTracker 
+          subMenuId={subMenuData?.id || id} 
+          subMenuName={subMenuData?.name || (typeof id === 'string' ? id : '')}
+        />
+      )}
+      
       <Header />
       {pinjamanData ? (
         <>
@@ -332,7 +314,6 @@ const PinjamanDetail = () => {
           />
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-8 py-8">
-              {/* Sidebar with menu items - always populated */}
               <Sidebar menuItems={menuItems} currentPath={router.asPath} />
               <div className="lg:w-3/4 w-full">
                 {id === "form-pengajuan-kredit" ? (
@@ -343,7 +324,6 @@ const PinjamanDetail = () => {
               </div>
             </div>
             <TableSection />
-            {/* Pass the dynamically loaded loanProducts to the LoanProductsSlider */}
             <LoanProductsSlider loanProducts={loanProducts} />
             <CreditRequitment />
           </div>
