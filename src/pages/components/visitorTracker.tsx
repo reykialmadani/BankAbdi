@@ -25,21 +25,31 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
     // Fungsi untuk melacak kunjungan
     const trackVisit = async () => {
       const sessionId = ensureSessionId();
-      
       if (!sessionId) {
         console.error("Session ID tidak ditemukan!");
         return;
       }
-      
+
       // Pastikan subMenuId adalah angka yang valid
       let finalSubMenuId: string | number = subMenuId;
-      
       if (typeof subMenuId === 'string' && !isNaN(parseInt(subMenuId, 10))) {
         finalSubMenuId = parseInt(subMenuId, 10);
       }
+
+      // Buat kunci unik untuk halaman ini untuk sessionStorage
+      const visitKey = `visited_${sessionId}_${finalSubMenuId}`;
       
+      // Periksa apakah halaman ini sudah dilacak dalam sesi ini
+      if (sessionStorage.getItem(visitKey)) {
+        console.log("Halaman ini sudah dilacak dalam sesi ini.");
+        return;
+      }
+
       try {
         console.log(`Melacak kunjungan untuk subMenu: ${finalSubMenuId} - ${subMenuName || 'Tidak ada nama'}`);
+        
+        // Tandai halaman ini sebagai sudah dilacak untuk sesi ini
+        sessionStorage.setItem(visitKey, new Date().toISOString());
         
         // Gunakan URL backend yang benar
         const response = await fetch(`${BACKEND_URL}/api/admin/track-visit`, {
@@ -55,7 +65,7 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
           // Penting untuk permintaan lintas origin
           credentials: 'include',
         });
-        
+
         if (response.ok) {
           try {
             const data = await response.json();
@@ -65,6 +75,8 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
           }
         } else {
           console.error("Gagal melacak kunjungan:", response.status, response.statusText);
+          // Jika gagal, hapus tanda kunjungan agar bisa dicoba lagi
+          sessionStorage.removeItem(visitKey);
           
           try {
             const textResponse = await response.text();
@@ -75,6 +87,8 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
         }
       } catch (error) {
         console.error("Error mengirim data pelacakan:", error);
+        // Jika terjadi error, hapus tanda kunjungan agar bisa dicoba lagi
+        sessionStorage.removeItem(visitKey);
       }
     };
 

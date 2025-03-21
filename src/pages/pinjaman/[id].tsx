@@ -10,7 +10,7 @@ import LoanProductsSlider from "./section/LoanProductSlider";
 import CreditRequitment from "./section/tabelRequitment";
 import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
-import VisitorTracker from "../components/visitorTracker"; // Import visitor tracker component
+import VisitorTracker from "../components/visitorTracker";
 import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
 
 interface LoanProduct {

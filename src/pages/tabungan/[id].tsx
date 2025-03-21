@@ -8,12 +8,13 @@ import Header from "../components/layout/header";
 import Hero from "../components/section/hero";
 import Sidebar from "./section/sidebar";
 import Content from "./section/content";
-import Main from "./section/main"; 
+import Main from "./section/main";
 import RiskManagement from "./section/riskManegement";
 import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "./section/LoanProductSlider";
 import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
+import VisitorTracker from "../components/visitorTracker";
 
 // API fetching functions
 import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
@@ -108,6 +109,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
   const [contents, setContents] = useState<ContentType[]>([]);
   const [menuItems, setMenuItems] = useState<{ href: string; label: string }[]>([]);
   const [currentContent, setCurrentContent] = useState<ContentType | null>(null);
+  const [subMenuData, setSubMenuData] = useState<{ id: number, name: string } | null>(null);
 
   // Define the exact order we want for menu items
   const orderKeys = [
@@ -120,6 +122,39 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
 
   // Check if the current page is the formulir page
   const isFormulirPage = id === "formulir";
+
+  // Find the subMenuId for visitor tracker
+  useEffect(() => {
+    if (id && typeof id === 'string') {
+      const findSubMenuId = async () => {
+        try {
+          const allContents = await getAllContents();
+          const matchingContent = allContents.find(content => {
+            if (!content.sub_menu || !content.status) return false;
+            const subMenuUrl = content.sub_menu.url;
+            const urlParts = subMenuUrl.split('/');
+            const lastUrlPart = urlParts[urlParts.length - 1];
+            return (
+              lastUrlPart === id || 
+              subMenuUrl === `/${id}` || 
+              subMenuUrl === id || 
+              subMenuUrl === `/tabungan/${id}` || 
+              subMenuUrl.endsWith(`/${id}`)
+            );
+          });
+          if (matchingContent && matchingContent.sub_menu) {
+            setSubMenuData({
+              id: matchingContent.sub_menu.id,
+              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name
+            });
+          }
+        } catch (error) {
+          console.error("Error mencari sub-menu ID:", error);
+        }
+      };
+      findSubMenuId();
+    }
+  }, [id]);
 
   // Set default menu items on mount
   useEffect(() => {
@@ -137,7 +172,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
       try {
         setLoading(true);
         if (!id) return;
-        
+
         // For formulir page, don't fetch from backend
         if (isFormulirPage) {
           setLoading(false);
@@ -190,6 +225,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
           // Otherwise we'll stick with our ordered default items
           if (backendMenuItems.length >= orderKeys.length - 1) { // Subtract 1 to account for formulir which is static
             console.log("Using backend-provided menu items:", backendMenuItems);
+
             // Create a map for quick lookups
             const menuItemMap = new Map();
             backendMenuItems.forEach(item => {
@@ -202,16 +238,11 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
             const orderedMenuItems = orderKeys
               .map(key => {
                 if (key === "formulir") {
-                  return {
-                    href: `/tabungan/${key}`,
-                    label: defaultData[key].title
-                  };
+                  return { href: `/tabungan/${key}`, label: defaultData[key].title };
                 }
-                return menuItemMap.get(key) || {
-                  href: `/tabungan/${key}`,
-                  label: defaultData[key].title
-                };
+                return menuItemMap.get(key) || { href: `/tabungan/${key}`, label: defaultData[key].title };
               });
+
             setMenuItems(orderedMenuItems);
           }
         }
@@ -287,20 +318,6 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
     }
 
     // Try to find matching backend content for additional data if needed
-    const content = contents.find(c => {
-      if (!c.sub_menu || !c.status) return false;
-      const subMenuUrl = c.sub_menu.url;
-      const urlParts = subMenuUrl.split('/');
-      const lastUrlPart = urlParts[urlParts.length - 1];
-      return (
-        lastUrlPart === normalizedId ||
-        subMenuUrl === `/${normalizedId}` ||
-        subMenuUrl === normalizedId ||
-        subMenuUrl === `/tabungan/${normalizedId}` ||
-        subMenuUrl.endsWith(`/${normalizedId}`)
-      );
-    });
-
     return {
       title: defaultHeroData.title,
       description: defaultHeroData.description,
@@ -344,6 +361,13 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {id && (
+        <VisitorTracker 
+          subMenuId={subMenuData?.id || id} 
+          subMenuName={subMenuData?.name || (typeof id === 'string' ? id : '')} 
+        />
+      )}
+      
       <Header />
       {tabunganData ? (
         <>
@@ -357,7 +381,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
             <div className="flex flex-col lg:flex-row gap-8 py-8">
               {/* Sidebar Section */}
               <Sidebar menuItems={menuItems} currentPath={router.asPath} />
-              
+
               {/* Main Content */}
               <div className="lg:w-3/4 w-full">
                 {isFormulirPage ? (
@@ -391,30 +415,27 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Define the paths for pre-rendering
   const paths = Object.keys(defaultData).map((id) => ({
     params: { id },
   }));
   return {
     paths,
-    fallback: true, // Allow paths not returned from getStaticPaths to render on-demand
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
   try {
-    // For SSG, we'll just use the default data directly
-    // This matches the behavior of the getTabunganData function on the client
     const defaultHeroData = defaultData[id];
     return {
       props: {
         tabunganData: defaultHeroData || null,
       },
-      revalidate: 60, // Revalidate the page every 60 seconds
+      revalidate: 60,
     };
   } catch (error) {
-    // On error, use default data
+    console.error(error);
     return {
       props: {
         tabunganData: defaultData[id] || null,

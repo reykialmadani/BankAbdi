@@ -12,6 +12,7 @@ import RiskManagement from "../../pages/deposito/section/riskManagement";
 import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "../../pages/tabungan/section/LoanProductSlider";
 import Footer from "../../pages/components/layout/footer";
+import VisitorTracker from "../../pages/components/visitorTracker";
 
 // API
 import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
@@ -88,6 +89,42 @@ const DepositoDetail: NextPage = () => {
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
   const [currentContent, setCurrentContent] = useState<ContentType | null>(null);
+  const [subMenuData, setSubMenuData] = useState<{ id: number, name: string } | null>(null);
+
+  // Find subMenu ID for VisitorTracker
+  useEffect(() => {
+    if (id && typeof id === 'string') {
+      const findSubMenuId = async () => {
+        try {
+          const allContents = await getAllContents();
+          const matchingContent = allContents.find(content => {
+            if (!content.sub_menu || !content.status) return false;
+            const subMenuUrl = content.sub_menu.url;
+            const urlParts = subMenuUrl.split('/');
+            const lastUrlPart = urlParts[urlParts.length - 1];
+            return (
+              lastUrlPart === id || 
+              subMenuUrl === `/${id}` || 
+              subMenuUrl === id || 
+              subMenuUrl === `/deposito/${id}` || 
+              subMenuUrl.endsWith(`/${id}`)
+            );
+          });
+          
+          if (matchingContent && matchingContent.sub_menu) {
+            setSubMenuData({ 
+              id: matchingContent.sub_menu.id, 
+              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name 
+            });
+          }
+        } catch (error) {
+          console.error("Error mencari sub-menu ID:", error);
+        }
+      };
+      
+      findSubMenuId();
+    }
+  }, [id]);
 
   // Dynamic content loading for 'deposito-berjangka' only
   useEffect(() => {
@@ -114,11 +151,9 @@ const DepositoDetail: NextPage = () => {
             
             const matchingContent = allContents.find(content => {
               if (!content.sub_menu || !content.status) return false;
-              
               const subMenuUrl = content.sub_menu.url;
               const urlParts = subMenuUrl.split('/');
               const lastUrlPart = urlParts[urlParts.length - 1];
-              
               return (
                 lastUrlPart === normalizedId || 
                 subMenuUrl === `/${normalizedId}` || 
@@ -144,7 +179,7 @@ const DepositoDetail: NextPage = () => {
         setLoading(false);
       }
     };
-
+    
     if (id) {
       fetchData();
     }
@@ -164,10 +199,7 @@ const DepositoDetail: NextPage = () => {
           <p className="text-gray-600 mt-4">
             Silakan pilih jenis deposito yang tersedia.
           </p>
-          <Link
-            href="/deposito"
-            className="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
+          <Link href="/deposito" className="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             Kembali ke Daftar Deposito
           </Link>
         </div>
@@ -177,14 +209,22 @@ const DepositoDetail: NextPage = () => {
 
   // Check if the current page is formulir-deposito or kalkulator-deposito
   const hideRiskManagement = id === "formulir-deposito" || id === "kalkulator-deposito";
-
+  
   // Import MainPage component only for specific pages
   const MainPage = id === "formulir-deposito" || id === "kalkulator-deposito" 
-    ? require("./section/main").default
+    ? require("./section/main").default 
     : null;
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Visitor Tracker Component */}
+      {id && (
+        <VisitorTracker 
+          subMenuId={subMenuData?.id || id} 
+          subMenuName={subMenuData?.name || (typeof id === 'string' ? id : '')} 
+        />
+      )}
+
       <Header />
       <Hero
         imageSrc={depositoData.image}
@@ -196,7 +236,7 @@ const DepositoDetail: NextPage = () => {
         <div className="flex flex-col lg:flex-row gap-8 py-8">
           {/* Sidebar Section */}
           <Sidebar currentPath={router.asPath} />
-          
+
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
             {/* Render dynamic content or static components based on ID */}
@@ -205,7 +245,7 @@ const DepositoDetail: NextPage = () => {
             ) : (
               <Content contentData={currentContent} isLoading={loading} />
             )}
-            
+
             {/* Only show RiskManagement if NOT on formulir-deposito or kalkulator-deposito page */}
             {!hideRiskManagement && <RiskManagement />}
           </div>
@@ -223,6 +263,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Object.keys(dataDeposito).map((id) => ({
     params: { id },
   }));
+
   return {
     paths,
     fallback: false, // fallback to 404 if id doesn't match
@@ -232,6 +273,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
   const depositoData = dataDeposito[id] || null;
+
   return {
     props: {
       depositoData,
