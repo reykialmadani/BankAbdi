@@ -28,16 +28,14 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             const processed = parsed.map(doc => {
               let url = doc.url;
               
-              // Jika URL relatif, tambahkan base API URL
+              // Jika URL relatif, tambahkan base API URL dan ubah path uploads menjadi storage
               if (url && url.startsWith('/uploads/')) {
-                // Gunakan process.env.NEXT_PUBLIC_API_URL untuk path lengkap ke back-end
-                url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${url}`;
+                // Mengubah path dari /uploads/ menjadi /storage/
+                const filename = url.replace('/uploads/', '');
+                url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/storage/${filename}`;
               }
               
-              return {
-                ...doc,
-                url
-              };
+              return { ...doc, url };
             });
             
             setProcessedDocs(processed);
