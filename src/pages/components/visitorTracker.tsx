@@ -71,6 +71,7 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
             const data = await response.json();
             console.log("Kunjungan berhasil dilacak!", data);
           } catch (jsonError) {
+            console.log(jsonError);
             console.log("Kunjungan berhasil dilacak! (Tidak dapat parse respons)");
           }
         } else {
@@ -82,6 +83,7 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
             const textResponse = await response.text();
             console.error("Respons server:", textResponse.substring(0, 100));
           } catch (textError) {
+            console.log(textError);
             console.error("Tidak dapat membaca respons server");
           }
         }
