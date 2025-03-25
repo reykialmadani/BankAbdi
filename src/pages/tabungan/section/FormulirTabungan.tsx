@@ -110,12 +110,12 @@ const FormulirTabungan: React.FC = () => {
     
     // Persiapkan data untuk dikirim ke Google Form
     const formDataGoogle = new FormData();
-    formDataGoogle.append("entry.566903359", formData.jenisTabungan); // Jenis Tabungan
-    formDataGoogle.append("entry.703610632", formData.namaLengkap);   // Nama Lengkap
-    formDataGoogle.append("entry.1211476152", formData.noHandphone);  // No Handphone
-    formDataGoogle.append("entry.1104566216", formData.email);        // Email
-    formDataGoogle.append("entry.628538996", formData.provinsi);      // Provinsi
-    formDataGoogle.append("entry.1601530458", formData.kota);         // Kota
+    formDataGoogle.append("entry.566903359", formData.jenisTabungan); 
+    formDataGoogle.append("entry.703610632", formData.namaLengkap);   
+    formDataGoogle.append("entry.1211476152", formData.noHandphone);  
+    formDataGoogle.append("entry.1104566216", formData.email);        
+    formDataGoogle.append("entry.628538996", formData.provinsi);      
+    formDataGoogle.append("entry.1601530458", formData.kota);
 
     try {
       // Buat iframe tersembunyi untuk target form submission

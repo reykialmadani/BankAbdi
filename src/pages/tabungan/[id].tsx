@@ -8,7 +8,7 @@ import Header from "../components/layout/header";
 import Hero from "../components/section/hero";
 import Sidebar from "./section/sidebar";
 import Content from "./section/content";
-import Main from "./section/main";
+import FormulirTabungan from "./section/FormulirTabungan";
 import RiskManagement from "./section/riskManegement";
 import CreditRequitment from "./section/tabelRequitment";
 import LoanProductSlider from "./section/LoanProductSlider";
@@ -385,7 +385,7 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
               {/* Main Content */}
               <div className="lg:w-3/4 w-full">
                 {isFormulirPage ? (
-                  <Main />
+                  <FormulirTabungan />
                 ) : (
                   <Content contentData={currentContent} isLoading={loading} />
                 )}

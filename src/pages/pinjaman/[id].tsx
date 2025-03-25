@@ -4,7 +4,7 @@ import Header from "../components/layout/header";
 import Hero from "../components/section/hero";
 import Sidebar from "./section/sidebar";
 import Content from "./section/content";
-import Main from "./section/main";
+import FormulirPinjaman from "./section/FormulirPinjaman";
 import TableSection from "./section/tableSection";
 import LoanProductsSlider from "./section/LoanProductSlider";
 import CreditRequitment from "./section/tabelRequitment";
@@ -317,7 +317,7 @@ const PinjamanDetail = () => {
               <Sidebar menuItems={menuItems} currentPath={router.asPath} />
               <div className="lg:w-3/4 w-full">
                 {id === "form-pengajuan-kredit" ? (
-                  <Main />
+                  <FormulirPinjaman />
                 ) : (
                   <Content contentData={currentContent} isLoading={loading} />
                 )}
