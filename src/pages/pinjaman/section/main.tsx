@@ -130,18 +130,18 @@ const FormulirComponent = () => {
     }
     
     setIsSubmitting(true);
-    const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSffkXXz-Qk-bspU32ZPJGGzqdpp5ThmxKybHmh6RTqVB04MGw/viewform?usp=preview";
+    const googleFormUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSffkXXz-Qk-bspU32ZPJGGzqdpp5ThmxKybHmh6RTqVB04MGw/formResponse";
 
     const cleanNominal = formData.NominalPengajuan.replace(/[^\d]/g, '');
     const formDataGoogle = new FormData();
-    formDataGoogle.append("entry.2887643431", formData.NamaLengkap);
+    formDataGoogle.append("entry.2087643431", formData.NamaLengkap);
     formDataGoogle.append("entry.252411449", formData.NoHandphone);
-    formDataGoogle.append("entry.154163368", formData.Email);
-    formDataGoogle.append("entry.81370468", formData.Provinsi);
-    formDataGoogle.append("entry.887786019", formData.Kota);
+    formDataGoogle.append("entry.1541634360", formData.Email);
+    formDataGoogle.append("entry.813704468", formData.Provinsi);
+    formDataGoogle.append("entry.987786019", formData.Kota);
     formDataGoogle.append("entry.1496153433", formData.Pekerjaan);
-    formDataGoogle.append("entry.1971368886", formData.JenisJaminan);
-    formDataGoogle.append("entry.291528118", cleanNominal); 
+    formDataGoogle.append("entry.1971368686", formData.JenisJaminan);
+    formDataGoogle.append("entry.291528116", cleanNominal); 
     
     try {
       const iframe = document.createElement("iframe");
@@ -150,7 +150,6 @@ const FormulirComponent = () => {
       document.body.appendChild(iframe);
       
       iframe.addEventListener('load', () => {
-        // Reset form setelah submit berhasil
         setFormData({
           NamaLengkap: "",
           NoHandphone: "",
