@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Phone, Mail, MapPin } from "lucide-react";
 import Header from "./components/layout/header";
 import Hero from "./components/section/hero";
@@ -51,21 +52,25 @@ const ContactPage: React.FC = () => {
         </>
       ),
     },
-   
   ];
 
   return (
     <div>
+      <Head>
+        <title>Hubungi Kami - Bank Abdi</title>
+        <meta name="description" content="Halaman kontak resmi Bank Abdi. Hubungi kami melalui telepon, email, atau kunjungi kantor kami." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Header />
       <Hero imageSrc="https://bankabdi.co.id/img/banner/hero-contact.webp" title="Hubungi Kami" showButton={false} />
-      
-      {/* Kontak Section */}
+
       <section className="bg-gray-50 py-12">
         <div className="container mx-auto px-6 lg:px-20">
           <div className="text-center mb-8">
             <h2 className="text-black text-3xl font-semibold">KONTAK BANK ABDI</h2>
           </div>
-          
+
           <div className="p-8 grid lg:grid-cols-2 gap-8">
             {contactInfo.map((contact, index) => (
               <div key={index} className="flex items-start space-x-4">
@@ -79,7 +84,7 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );

@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-import Cookie from "js-cookie";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-// Tetapkan URL backend yang benar
-const BACKEND_URL = 'http://localhost:5000';
+// URL API backend
+const API_URL = 'http://localhost:5000/api/admin/track-visit';
 
 interface VisitorTrackerProps {
   subMenuId: string | number;
@@ -11,22 +10,44 @@ interface VisitorTrackerProps {
 }
 
 const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName }) => {
+  const [ipAddress, setIpAddress] = useState<string | null>(null);
+
   useEffect(() => {
-    // Fungsi untuk membuat session ID jika belum ada
-    const ensureSessionId = () => {
-      if (!Cookie.get('session_id')) {
-        const sessionId = uuidv4();
-        Cookie.set('session_id', sessionId, { expires: 30 });
+    // Fungsi untuk mendapatkan IP address pengunjung
+    const getIpAddress = async () => {
+      try {
+        // Menggunakan layanan publik untuk mendapatkan IP
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        setIpAddress(data.ip);
+        return data.ip;
+      } catch (error) {
+        console.error("Gagal mendapatkan alamat IP:", error);
+        return null;
+      }
+    };
+
+    // Fungsi untuk mengelola session ID di localStorage
+    const getOrCreateSessionId = () => {
+      const storageKey = 'visitor_session_id';
+      let sessionId = localStorage.getItem(storageKey);
+      
+      if (!sessionId) {
+        sessionId = uuidv4();
+        localStorage.setItem(storageKey, sessionId);
         console.log("Session ID baru dibuat:", sessionId);
       }
-      return Cookie.get('session_id');
+      
+      return sessionId;
     };
 
     // Fungsi untuk melacak kunjungan
     const trackVisit = async () => {
-      const sessionId = ensureSessionId();
-      if (!sessionId) {
-        console.error("Session ID tidak ditemukan!");
+      const sessionId = getOrCreateSessionId();
+      const visitorIp = await getIpAddress();
+      
+      if (!sessionId && !visitorIp) {
+        console.error("Tidak dapat melacak pengunjung: Session ID dan IP tidak tersedia");
         return;
       }
 
@@ -37,60 +58,52 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
       }
 
       // Buat kunci unik untuk halaman ini untuk sessionStorage
-      const visitKey = `visited_${sessionId}_${finalSubMenuId}`;
-      
-      // Periksa apakah halaman ini sudah dilacak dalam sesi ini
-      if (sessionStorage.getItem(visitKey)) {
-        console.log("Halaman ini sudah dilacak dalam sesi ini.");
+      // Ini untuk mencegah permintaan berulang selama sesi browser saat ini
+      const sessionStorageKey = `visited_${finalSubMenuId}`;
+
+      // Periksa apakah halaman ini sudah dilacak dalam sesi browser ini
+      if (sessionStorage.getItem(sessionStorageKey)) {
+        console.log("Halaman ini sudah dilacak dalam sesi browser ini.");
         return;
       }
 
       try {
         console.log(`Melacak kunjungan untuk subMenu: ${finalSubMenuId} - ${subMenuName || 'Tidak ada nama'}`);
         
-        // Tandai halaman ini sebagai sudah dilacak untuk sesi ini
-        sessionStorage.setItem(visitKey, new Date().toISOString());
-        
-        // Gunakan URL backend yang benar
-        const response = await fetch(`${BACKEND_URL}/api/admin/track-visit`, {
+        const response = await fetch(API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             sessionId,
+            ipAddress: visitorIp,
             subMenuId: finalSubMenuId,
             timestamp: new Date().toISOString(),
-          }),
-          // Penting untuk permintaan lintas origin
-          credentials: 'include',
+          })
         });
 
         if (response.ok) {
+          // Tandai halaman ini sebagai sudah dilacak untuk sesi browser ini
+          sessionStorage.setItem(sessionStorageKey, new Date().toISOString());
+          
           try {
             const data = await response.json();
-            console.log("Kunjungan berhasil dilacak!", data);
+            console.log("Respons tracking kunjungan:", data);
           } catch (jsonError) {
-            console.log(jsonError);
             console.log("Kunjungan berhasil dilacak! (Tidak dapat parse respons)");
           }
         } else {
           console.error("Gagal melacak kunjungan:", response.status, response.statusText);
-          // Jika gagal, hapus tanda kunjungan agar bisa dicoba lagi
-          sessionStorage.removeItem(visitKey);
-          
           try {
             const textResponse = await response.text();
             console.error("Respons server:", textResponse.substring(0, 100));
           } catch (textError) {
-            console.log(textError);
             console.error("Tidak dapat membaca respons server");
           }
         }
       } catch (error) {
         console.error("Error mengirim data pelacakan:", error);
-        // Jika terjadi error, hapus tanda kunjungan agar bisa dicoba lagi
-        sessionStorage.removeItem(visitKey);
       }
     };
 
@@ -98,7 +111,7 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
     if (subMenuId) {
       trackVisit();
     }
-  }, [subMenuId, subMenuName]);
+  }, [subMenuId, subMenuName]); // Dependency array untuk useEffect, hanya jalan ulang jika subMenuId atau subMenuName berubah
 
   // Komponen ini tidak merender apapun, hanya melacak kunjungan
   return null;

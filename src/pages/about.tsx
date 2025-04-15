@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,6 +45,15 @@ const AboutPage: React.FC = () => {
 
   return (
     <div>
+      <Head>
+        <title>Tentang Kami - Bank Abdi</title>
+        <meta
+          name="description"
+          content="Halaman kontak resmi Bank Abdi. Hubungi kami melalui telepon, email, atau kunjungi kantor kami."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Header />
       <Hero
         imageSrc="https://bankabdi.co.id/img/banner/hero-about.webp"
