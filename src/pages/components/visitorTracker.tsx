@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 // URL API backend
 const API_URL = 'http://localhost:5000/api/admin/track-visit';
+// Interval waktu untuk melacak ulang kunjungan (dalam milidetik), sesuaikan dengan backend
+const TRACKING_INTERVAL = 10 * 60 * 1000; // 10 menit
 
 interface VisitorTrackerProps {
   subMenuId: string | number;
@@ -58,12 +60,14 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
       }
 
       // Buat kunci unik untuk halaman ini untuk sessionStorage
-      // Ini untuk mencegah permintaan berulang selama sesi browser saat ini
       const sessionStorageKey = `visited_${finalSubMenuId}`;
-
-      // Periksa apakah halaman ini sudah dilacak dalam sesi browser ini
-      if (sessionStorage.getItem(sessionStorageKey)) {
-        console.log("Halaman ini sudah dilacak dalam sesi browser ini.");
+      
+      // Cek apakah halaman sudah dilacak dan apakah sudah lewat interval waktu untuk melacak ulang
+      const lastVisitTime = sessionStorage.getItem(sessionStorageKey);
+      const shouldTrack = !lastVisitTime || (new Date().getTime() - new Date(lastVisitTime).getTime() >= TRACKING_INTERVAL);
+      
+      if (!shouldTrack) {
+        console.log(`Halaman ini sudah dilacak dalam interval ${TRACKING_INTERVAL/60000} menit. Menunggu interval berikutnya.`);
         return;
       }
 
@@ -84,7 +88,7 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
         });
 
         if (response.ok) {
-          // Tandai halaman ini sebagai sudah dilacak untuk sesi browser ini
+          // Catat waktu kunjungan saat ini
           sessionStorage.setItem(sessionStorageKey, new Date().toISOString());
           
           try {
