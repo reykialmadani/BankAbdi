@@ -187,7 +187,7 @@ const Footer = () => {
               </a>
             </div>
             <p className="text-gray-400 text-base">
-              COPYRIGHT © 2022 PT BPR ABDI. ALL RIGHTS RESERVED.
+              COPYRIGHT © 2025 PT BPR ABDI. ALL RIGHTS RESERVED.
             </p>
           </div>
         </div>

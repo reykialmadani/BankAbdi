@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface HeroSectionProps {
@@ -54,15 +55,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
         )}
 
         {showButton && (
-          <motion.button 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="ml-8 mt-4 bg-[#003868] text-white px-6 py-3 rounded-full hover:bg-blue-800 font-semibold"
-            style={segoeUIStyles}
-          >
-            Pengajuan Kredit
-          </motion.button>
+          <Link href="/pinjaman/form-pengajuan-kredit" passHref>
+            <motion.button 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="ml-8 mt-4 bg-[#003868] text-white px-6 py-3 rounded-full hover:bg-blue-800 font-semibold"
+              style={segoeUIStyles}
+            >
+              Pengajuan Kredit
+            </motion.button>
+          </Link>
         )}
       </div>
     </div>

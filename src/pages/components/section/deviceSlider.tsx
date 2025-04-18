@@ -13,12 +13,21 @@ type PinjamanType =
   | "Kredit Modal Kerja";
 type TabunganType = "Tabungan Abdi" | "Tabungan ABDIKU" | "Tabungan Simpel";
 
+const pinjamanUrlMap: Record<PinjamanType, string> = {
+  "KTA": "kredit-tanpa-agunan",
+  "KKB": "kredit-kendaraan-bermotor",
+  "KPM": "kredit-kepemilikan-mobil",
+  "KPR": "kredit-kepemilikan-rumah",
+  "Kredit Multiguna": "kredit-multiguna",
+  "Kredit Investasi": "kredit-investasi",
+  "Kredit Modal Kerja": "kredit-modal-kerja"
+};
+
 const DeviceSliderColumn = () => {
   const [activeTab, setActiveTab] = useState<TabType>("Pinjaman");
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const tabs: TabType[] = ["Pinjaman", "Tabungan", "Deposito"];
-
   const pinjamanItems: PinjamanType[] = [
     "KTA",
     "KKB",
@@ -42,6 +51,10 @@ const DeviceSliderColumn = () => {
     fontFamily: "'Segoe UI', sans-serif",
   };
 
+  const getPinjamanSlug = (item: PinjamanType) => {
+    return pinjamanUrlMap[item];
+  };
+
   return (
     <div
       className="relative flex flex-col items-center py-4 w-full bg-no-repeat"
@@ -52,7 +65,6 @@ const DeviceSliderColumn = () => {
         ...segoeUIStyles,
       }}
     >
-      {/* Modified tab container to ensure horizontal display */}
       <div className="flex w-full justify-center mb-4">
         <div className="grid grid-cols-3 w-full max-w-md">
           {tabs.map((tab) => (
@@ -123,14 +135,16 @@ const DeviceSliderColumn = () => {
                         openSection === item ? "rotate-180" : "rotate-0"
                       }`}
                       style={{ color: "#8E9BAE" }}
-                      
                     >
                       ▼
                     </span>
                   </div>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                      <p className="text-sm text-black" style={segoeUIStyles}>
+                      <p
+                        className="text-sm text-black"
+                        style={segoeUIStyles}
+                      >
                         {item === "KTA" &&
                           "Penuhi berbagai macam kebutuhan Anda tanpa jaminan bersama BANK ABDI dengan Kredit Tanpa Agunan."}
                         {item === "KKB" &&
@@ -148,9 +162,7 @@ const DeviceSliderColumn = () => {
                       </p>
                       <div className="flex justify-end">
                         <a
-                          href={`/pinjaman/${item
-                            .toLowerCase()
-                            .replace(/ /g, "-")}`}
+                          href={`/pinjaman/${getPinjamanSlug(item)}`}
                           className="px-4 py-2 text-sm font-semibold text-white bg-[#003868] rounded-full shadow-md hover:opacity-80 transition duration-300"
                         >
                           Selengkapnya ⮕
@@ -217,7 +229,10 @@ const DeviceSliderColumn = () => {
                   </div>
                   {openSection === item && (
                     <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                      <p className="text-sm text-black" style={segoeUIStyles}>
+                      <p
+                        className="text-sm text-black"
+                        style={segoeUIStyles}
+                      >
                         {item === "Tabungan Abdi" &&
                           "Rencanakan masa depan Anda bersama Tabungan ABDI."}
                         {item === "Tabungan ABDIKU" &&
@@ -294,7 +309,10 @@ const DeviceSliderColumn = () => {
                 </div>
                 {openSection === "Deposito" && (
                   <div className="mt-2 transition-all duration-300 ease-in-out opacity-100">
-                    <p className="text-sm text-black" style={segoeUIStyles}>
+                    <p
+                      className="text-sm text-black"
+                      style={segoeUIStyles}
+                    >
                       Dapatkan keuntungan dalam Berinvestasi secara Pasti.
                     </p>
                     <div className="flex justify-end">

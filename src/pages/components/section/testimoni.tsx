@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 interface Testimonial {
@@ -10,17 +10,26 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    content: "Saya sangat berharap BPR ABDI dapat tumbuh dan berkembang dengan baik sehingga berkontribusi dalam pembiayaan kepada pelaku usaha mikro kecil dan menengah di Indonesia",
-    author: "Bpk. Roberto Akyuwen",
-    position: "Kepala OJK KR 1 DKI Jakarta-Banten",
-    avatar: "https://bankabdi.co.id/img/avatars/pak_robert2.webp",
+    content:
+      'Saya sangat berharap BPR ABDI dapat tumbuh dan berkembang dengan baik sehingga berkontribusi dalam pembiayaan kepada pelaku usaha mikro kecil dan menengah di Indonesia',
+    author: 'Bpk. Roberto Akyuwen',
+    position: 'Kepala OJK KR 1 DKI Jakarta-Banten',
+    avatar: 'https://bankabdi.co.id/img/avatars/pak_robert2.webp',
   },
   {
-    content: "Semoga BANK ABDI dapat lebih membantu kegiatan masyarakat khususnya dalam rangka UMKM sehingga dapat membantu pemulihan Ekonomi Nasional",
-    author: "Bpk. Antonius Prihadi",
-    position: "Ketua Perbarindo Komisariat DKI Jakarta",
-    avatar: "https://bankabdi.co.id/img/avatars/pak_anton.webp",
-  }
+    content:
+      'Semoga BANK ABDI dapat lebih membantu kegiatan masyarakat khususnya dalam rangka UMKM sehingga dapat membantu pemulihan Ekonomi Nasional',
+    author: 'Bpk. Antonius Prihadi',
+    position: 'Ketua Perbarindo Komisariat DKI Jakarta',
+    avatar: 'https://bankabdi.co.id/img/avatars/pak_anton.webp',
+  },
+];
+
+// Tambah dummy slide untuk infinite scroll
+const extendedTestimonials = [
+  testimonials[testimonials.length - 1], // duplikat terakhir
+  ...testimonials,
+  testimonials[0], // duplikat pertama
 ];
 
 const TestimonialSection = () => {
@@ -29,6 +38,13 @@ const TestimonialSection = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      // Posisikan ke slide pertama asli
+      sliderRef.current.scrollLeft = sliderRef.current.offsetWidth;
+    }
+  }, []);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return;
@@ -40,23 +56,35 @@ const TestimonialSection = () => {
   const handleMouseUp = () => {
     if (!sliderRef.current) return;
     setIsDragging(false);
-    
+
     const slideWidth = sliderRef.current.offsetWidth;
     const currentScroll = sliderRef.current.scrollLeft;
     const nearestSlide = Math.round(currentScroll / slideWidth);
-    
+
+    // Loop logic
+    if (nearestSlide === 0) {
+      // ke duplikat terakhir → teleport ke terakhir asli
+      sliderRef.current.scrollLeft = slideWidth * testimonials.length;
+      setCurrentSlide(testimonials.length - 1);
+      return;
+    } else if (nearestSlide === testimonials.length + 1) {
+      // ke duplikat pertama → teleport ke pertama asli
+      sliderRef.current.scrollLeft = slideWidth;
+      setCurrentSlide(0);
+      return;
+    }
+
     sliderRef.current.scrollTo({
       left: nearestSlide * slideWidth,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
-    
-    setCurrentSlide(nearestSlide);
+    setCurrentSlide(nearestSlide - 1); // offset karena dummy di depan
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDragging || !sliderRef.current) return;
     e.preventDefault();
-    
+
     const x = e.pageX - sliderRef.current.offsetLeft;
     const walk = (x - startX) * 2;
     sliderRef.current.scrollLeft = scrollLeft - walk;
@@ -64,11 +92,13 @@ const TestimonialSection = () => {
 
   const handleSlideClick = (index: number) => {
     if (isDragging || !sliderRef.current) return;
-    
+
     const slideWidth = sliderRef.current.offsetWidth;
+    const actualIndex = index + 1; // offset karena dummy depan
+
     sliderRef.current.scrollTo({
-      left: index * slideWidth,
-      behavior: 'smooth'
+      left: actualIndex * slideWidth,
+      behavior: 'smooth',
     });
     setCurrentSlide(index);
   };
@@ -81,46 +111,45 @@ const TestimonialSection = () => {
         </div>
 
         <div className="relative">
-          <div 
+          <div
             ref={sliderRef}
-            className="overflow-x-hidden cursor-grab active:cursor-grabbing"
+            className={`overflow-x-hidden flex cursor-grab active:cursor-grabbing ${
+              isDragging ? 'select-none' : 'select-auto'
+            }`}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             onMouseMove={handleMouseMove}
           >
-            <div className="flex">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index}
-                  className="w-full flex-shrink-0"
-                  onClick={() => handleSlideClick(index)}
-                >
-                  <div className="max-w-2xl mx-auto px-4">
-                    <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200 relative">
-                      <p className="text-gray-700 text-lg italic mb-8">{testimonial.content}</p>
-                    </div>
-                  </div>
-
-                  {/* Info di bawah card */}
-                  <div className="flex items-center justify-start mt-4 ml-[22%]">
-                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                      <Image
-                        src={testimonial.avatar}
-                        alt={`Testimonial by ${testimonial.author}`}
-                        className="w-full h-full object-cover"
-                        width={48}
-                        height={48}
-                      />
-                    </div>
-                    <div>
-                      <h6 className="font-semibold text-gray-800 text-sm">{testimonial.author}</h6>
-                      <p className="text-gray-600 text-xs">{testimonial.position}</p>
-                    </div>
+            {extendedTestimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="w-full flex-shrink-0"
+                onClick={() => handleSlideClick(index - 1)} // offset
+              >
+                <div className="max-w-2xl mx-auto px-4">
+                  <div className="bg-white rounded-lg shadow-lg p-8 mb-6 border border-gray-200 relative">
+                    <p className="text-gray-700 text-lg italic mb-8">{testimonial.content}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                <div className="flex items-center justify-start mt-4 ml-[22%]">
+                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={`Testimonial by ${testimonial.author}`}
+                      className="w-full h-full object-cover"
+                      width={48}
+                      height={48}
+                    />
+                  </div>
+                  <div>
+                    <h6 className="font-semibold text-gray-800 text-sm">{testimonial.author}</h6>
+                    <p className="text-gray-600 text-xs">{testimonial.position}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="flex justify-center mt-6">
