@@ -180,7 +180,6 @@ const ContactPage: React.FC = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.146722836435!2d106.79448207457091!3d-6.2443869937439525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1f6719b6427%3A0x1d994159d7539bc6!2sBulungan%20Business%20Center%20BBC!5e0!3m2!1sid!2sid!4v1744977677490!5m2!1sid!2sid"
               width="100%"
               height="450"
-              style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               className="rounded-xl"

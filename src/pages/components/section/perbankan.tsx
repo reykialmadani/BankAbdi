@@ -43,6 +43,10 @@ const fadeInUp = {
 };
 
 const BankingSolutions = () => {
+  const initialSlideIndex = bankingSolutions.findIndex(
+    (solution) => solution.title === "Deposito"
+  );
+
   return (
     <motion.div
       className="relative flex flex-col items-center justify-center bg-cover bg-center min-h-[500px] w-full py-8"
@@ -65,6 +69,7 @@ const BankingSolutions = () => {
           </h2>
           <div className="flex justify-center">
             <Swiper
+              initialSlide={initialSlideIndex}
               modules={[FreeMode, Pagination, EffectCoverflow]}
               effect="coverflow"
               grabCursor={true}
