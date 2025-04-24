@@ -33,6 +33,9 @@ const bankingSolutions = [
   },
 ];
 
+// Duplikat slide untuk efek loop yang lebih baik
+const duplicatedSolutions = [...bankingSolutions, ...bankingSolutions, ...bankingSolutions];
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -43,7 +46,8 @@ const fadeInUp = {
 };
 
 const BankingSolutions = () => {
-  const initialSlideIndex = bankingSolutions.findIndex(
+  // Hitung initial slide di tengah set pertama
+  const initialSlideIndex = bankingSolutions.length + bankingSolutions.findIndex(
     (solution) => solution.title === "Deposito"
   );
 
@@ -61,10 +65,7 @@ const BankingSolutions = () => {
     >
       <section className="w-full px-4">
         <div className="max-w-6xl mx-auto">
-          <h2
-            className="text-2xl font-semibold text-black text-center mb-8"
-            style={segoeUIStyles}
-          >
+          <h2 className="text-2xl font-semibold text-black text-center mb-8" style={segoeUIStyles}>
             Solusi Perbankan Kami, untuk Anda Nasabah Kami
           </h2>
           <div className="flex justify-center">
@@ -74,6 +75,8 @@ const BankingSolutions = () => {
               effect="coverflow"
               grabCursor={true}
               centeredSlides={true}
+              loop={true}
+              loopAdditionalSlides={2} // Tambahan slide untuk loop yang lebih mulus
               coverflowEffect={{
                 rotate: 0,
                 stretch: 0,
@@ -114,17 +117,14 @@ const BankingSolutions = () => {
               }}
               className="!pb-12 w-full"
             >
-              {bankingSolutions.map((solution, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="flex justify-center items-center transition-all duration-300"
-                >
+              {duplicatedSolutions.map((solution, index) => (
+                <SwiperSlide key={index} className="flex justify-center items-center transition-all duration-300">
                   <motion.div
                     className="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-[280px] h-[400px] transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl"
                     style={segoeUIStyles}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.5, delay: (index % bankingSolutions.length) * 0.1 }}
                     viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                   >
                     <div className="relative h-3/5 w-full">
@@ -133,21 +133,15 @@ const BankingSolutions = () => {
                         layout="fill"
                         objectFit="cover"
                         alt={solution.title}
-                        priority={index === 0}
+                        priority={index === initialSlideIndex}
                       />
                     </div>
                     <div className="p-6 h-2/5 flex flex-col justify-between">
                       <div>
-                        <h3
-                          className="text-lg font-semibold text-black mb-2"
-                          style={segoeUIStyles}
-                        >
+                        <h3 className="text-lg font-semibold text-black mb-2" style={segoeUIStyles}>
                           {solution.title}
                         </h3>
-                        <p
-                          className="text-gray-600 text-sm mb-4"
-                          style={segoeUIStyles}
-                        >
+                        <p className="text-gray-600 text-sm mb-4" style={segoeUIStyles}>
                           {solution.description}
                         </p>
                       </div>
