@@ -17,6 +17,7 @@ export interface Content {
   report_type: string | null;
   report_year: string | null;
   sub_menu?: {
+    sub_menu_name: string;
     id: number;
     menu_id: number;
     name: string;
