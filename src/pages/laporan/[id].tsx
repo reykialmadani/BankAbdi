@@ -1,125 +1,100 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Header from "../components/layout/header";
-import Hero from "../components/section/hero";
-import Content from "./section/content";
-import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
-import VisitorTracker from "../components/visitorTracker";
-import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "../api/fetching/routes";
 
-// Define types properly to eliminate the warnings
-interface SubMenu {
+// Definisi tipe data untuk laporan
+interface LaporanItem {
   id: number;
-  name?: string;
-  sub_menu_name?: string;
-  url: string;
-  menu_id?: number;
+  judul: string;
+  bulan: string;
+  tahun: string;
+  fileUrl: string;
 }
 
-// Extended content type with proper property definitions
-interface ExtendedContentType extends ContentType {
-  report_type?: string;
-  report_year?: string;
-  report_quarter?: string;
-  sub_menu?: SubMenu;
+// Definisi tipe data untuk kategori laporan
+interface LaporanCategory {
+  title: string;
+  description: string;
+  heroImage: string;
 }
 
-const defaultData: Record<string, { title: string, description: string, image: string, icon: string }> = {
-  "2021": {
-    title: "LAPORAN TAHUNAN",
-    description: "Laporan tahunan dan Triwulan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun 2021-2025.",
-    image: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
-    icon: "https://bankabdi.co.id/img/icon/laporan.png",
+// Informasi kategori laporan
+const categoryInfo: Record<string, LaporanCategory> = {
+  tahunan: {
+    title: "Laporan Tahunan",
+    description:
+      "Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun berjalan.",
+    heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
+  },
+  bulanan: {
+    title: "Laporan Bulanan",
+    description:
+      "Laporan bulanan BANK ABDI yang mencakup kinerja dan aktivitas bank dalam periode bulanan.",
+    heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
+  },
+  publikasi: {
+    title: "Laporan Publikasi",
+    description:
+      "Laporan publikasi BANK ABDI yang berisi informasi keuangan dan non-keuangan yang dipublikasikan secara berkala.",
+    heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
+  },
+  "tata-kelola": {
+    title: "Laporan Tata Kelola",
+    description:
+      "Laporan tata kelola BANK ABDI yang menjabarkan praktik tata kelola perusahaan yang baik.",
+    heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
   },
 };
-
-// Removed unused debugContent function
 
 const LaporanDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(true);
-  const [contents, setContents] = useState<ExtendedContentType[]>([]);
-  const [currentContent, setCurrentContent] = useState<ExtendedContentType | null>(null);
-  const [subMenuData, setSubMenuData] = useState<{ id: number | string, name: string } | null>(null);
-
-  // Find subMenu ID for VisitorTracker
-  useEffect(() => {
-    if (id && typeof id === 'string') {
-      const findSubMenuId = async () => {
-        try {
-          const allContents = await getAllContents() as ExtendedContentType[];
-          const matchingContent = allContents.find(content => {
-            if (!content.sub_menu || !content.status) return false;
-            
-            // Check if the content is a report with matching year/period
-            if (content.report_type === 'Tahunan' && content.report_year === id) {
-              return true;
-            }
-            
-            // For period reports like "2023-1" (year-quarter)
-            if (id.includes('-')) {
-              const [year, quarter] = id.split('-');
-              return content.report_type === 'Triwulan' && 
-                     content.report_year === year && 
-                     content.report_quarter === quarter;
-            }
-            
-            // Check URL matching as fallback
-            const subMenuUrl = content.sub_menu.url;
-            const urlParts = subMenuUrl.split('/');
-            const lastUrlPart = urlParts[urlParts.length - 1];
-            return (
-              lastUrlPart === id || 
-              subMenuUrl === `/${id}` || 
-              subMenuUrl === id || 
-              subMenuUrl === `/laporan/${id}` || 
-              subMenuUrl.endsWith(`/${id}`)
-            );
-          });
-          
-          if (matchingContent && matchingContent.sub_menu) {
-            setSubMenuData({ 
-              id: matchingContent.sub_menu.id, 
-              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name || `Laporan ${id}`
-            });
-          }
-        } catch (error) {
-          console.error("Error mencari sub-menu ID:", error);
-        }
-      };
-      
-      findSubMenuId();
-    }
-  }, [id]);
+  const [laporanItems, setLaporanItems] = useState<LaporanItem[]>([]);
+  const [categoryData, setCategoryData] = useState<LaporanCategory | null>(
+    null
+  );
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        if (!id) return;
-        
-        const normalizedId = typeof id === 'string' ? id : '';
-        const allContents = await getAllContents() as ExtendedContentType[];
-        
-        if (Array.isArray(allContents)) {
-          setContents(allContents);
-          const matchingContents = findMatchingContents(allContents, normalizedId);
-          
-          if (matchingContents.length > 0) {
-            setCurrentContent(matchingContents[0]);
+        setError(null);
+
+        if (id && typeof id === "string") {
+          const normalizedId = id.toLowerCase();
+
+          // Cek apakah kategori valid
+          if (normalizedId in categoryInfo) {
+            setCategoryData(categoryInfo[normalizedId]);
+
+            // Fetch data dari API endpoint
+            const response = await fetch(
+              `http://localhost:5000/api/report/report=${normalizedId}`
+            );
+
+            if (!response.ok) {
+              throw new Error(`API error: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log("Data dari API:", responseData); 
+            console.log("Isi laporanItems:", responseData.data);
+
+            setLaporanItems(responseData.data);
           } else {
-            const specificContents = await getContentByReportType(normalizedId) as ExtendedContentType[];
-            setCurrentContent(specificContents.length > 0 ? specificContents[0] : null);
+            // Jika kategori tidak ditemukan
+            setCategoryData(null);
+            setLaporanItems([]);
+            setError("Kategori laporan tidak tersedia");
           }
-        } else {
-          setContents([]);
-          setCurrentContent(null);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        setCurrentContent(null);
+        setError("Gagal memuat data. Silakan coba lagi nanti.");
+        setLaporanItems([]);
       } finally {
         setLoading(false);
       }
@@ -130,70 +105,11 @@ const LaporanDetail = () => {
     }
   }, [id]);
 
-  const findMatchingContents = (allContents: ExtendedContentType[], normalizedId: string): ExtendedContentType[] => {
-    let matchingContents: ExtendedContentType[] = [];
-    
-    if (normalizedId.includes('-')) {
-      const parts = normalizedId.split('-');
-      for (const year of parts) {
-        matchingContents.push(
-          ...allContents.filter(content => 
-            content.report_type === 'Tahunan' && content.report_year === year
-          )
-        );
-        matchingContents.push(
-          ...allContents.filter(content => 
-            content.report_type === 'Triwulan' && content.report_year === year
-          )
-        );
-      }
-    } else {
-      matchingContents = allContents.filter(content => 
-        content.report_type === 'Tahunan' && content.report_year === normalizedId
-      );
-    }
-    
-    return matchingContents;
+  // Handler untuk download
+  const handleDownload = (fileUrl: string, judulFile: string) => {
+    // Membuka file di tab baru untuk diunduh
+    window.open(fileUrl, "_blank");
   };
-
-  const getContentByReportType = async (normalizedId: string) => {
-    const [year, quarter] = normalizedId.split('-');
-    const url = quarter 
-      ? `/api/reports?type=Triwulan&year=${year}&quarter=${quarter}` 
-      : `/api/reports?type=Tahunan&year=${year}`;
-    
-    return await getContentBySubMenuUrl(url);
-  };
-
-  const getLaporanData = (): { title: string; description: string; image: string; icon: string } | null => {
-    if (!id) return null;
-    
-    const normalizedId = typeof id === 'string' ? id : '';
-    const defaultLaporanData = defaultData[normalizedId];
-    
-    if (defaultLaporanData) {
-      return defaultLaporanData;
-    }
-    
-    if (normalizedId.includes('-')) {
-      const parts = normalizedId.split('-');
-      return {
-        title: `LAPORAN ${parts[0]}-${parts[1]}`,
-        description: `Laporan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama periode ${parts[1]} hingga ${parts[0]}.`,
-        image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
-        icon: "https://bankabdi.co.id/img/icon/laporan.png",
-      };
-    } else {
-      return {
-        title: `LAPORAN TAHUNAN ${normalizedId}`,
-        description: `Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun ${normalizedId}.`,
-        image: "https://bankabdi.co.id/img/banner/hero-laporan.webp",
-        icon: "https://bankabdi.co.id/img/icon/laporan.png",
-      };
-    }
-  };
-
-  const laporanData = getLaporanData();
 
   if (loading) {
     return (
@@ -203,45 +119,127 @@ const LaporanDetail = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Visitor Tracker Component */}
-      {id && (
-        <VisitorTracker 
-          subMenuId={subMenuData?.id || id} 
-          subMenuName={subMenuData?.name || (typeof id === 'string' ? 
-            (id.includes('-') ? `Laporan Triwulan ${id}` : `Laporan Tahunan ${id}`) : '')} 
-        />
-      )}
-      
-      <Header />
-      {laporanData ? (
-        <>
-          <Hero 
-            imageSrc={laporanData.image} 
-            title={laporanData.title} 
-            paragraph={laporanData.description} 
-            showButton={false} 
-          />
-          <div className="container mx-auto px-4">
-            <div className="py-8">
-              <Content
-                contentData={currentContent as ContentType | null}
-                isLoading={loading}
-                id={id}
-                allContents={contents as ContentType[]}
-              />
-            </div>
-          </div>
-          <Blog />
-          <Footer />
-        </>
-      ) : (
+  if (!categoryData || error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
         <div className="text-center py-20">
           <h1 className="text-3xl font-bold">Halaman Tidak Ditemukan</h1>
-          <p className="text-gray-600">Silakan pilih jenis laporan yang tersedia.</p>
+          <p className="text-gray-600">
+            {error || "Kategori laporan tidak tersedia."}
+          </p>
         </div>
-      )}
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+      {/* Hero Section */}
+      <div className="relative">
+        <div
+          className="w-full h-64 md:h-80 bg-cover bg-center"
+          style={{ backgroundImage: `url(${categoryData.heroImage})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="text-center px-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                {categoryData.title}
+              </h1>
+              <p className="text-white text-base md:text-lg max-w-2xl mx-auto">
+                {categoryData.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Table Section */}
+      <div className="container mx-auto px-4 py-8 flex-grow">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    No
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Judul
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Bulan
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Tahun
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Aksi
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {laporanItems.length > 0 ? (
+                  laporanItems.map((item, index) => (
+                    <tr key={item.id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {index + 1}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {item.judul}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {item.bulan}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {item.tahun}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <button
+                          onClick={() =>
+                            handleDownload(item.fileUrl, item.judul)
+                          }
+                          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-md text-sm transition duration-200"
+                        >
+                          Download
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={5}
+                      className="px-6 py-4 text-center text-sm text-gray-500"
+                    >
+                      Tidak ada data laporan tersedia.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 };
