@@ -1,7 +1,8 @@
-// pages/pinjaman/section/content.tsx
+// pages/pinjaman/section/Content.tsx
 import { Content as ContentType } from "@/pages/api/fetching/routes";
 import { useEffect, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
+import { transformDocumentUrl } from "../../config/axiosConfig";
 
 interface ContentProps {
   contentData: ContentType | null;
@@ -10,34 +11,32 @@ interface ContentProps {
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
   const [processedDocs, setProcessedDocs] = useState<any[]>([]);
-  console.log("Content component - received contentData:", contentData ? {
-    id: contentData.id,
-    title: contentData.title,
-    subMenuId: contentData.sub_menu_id,
-    subMenu: contentData.sub_menu
-  } : null);
 
-  // Proses URLs dokumen untuk menangani perbedaan antara back-end dan front-end
+  console.log(
+    "Content component - received contentData:",
+    contentData
+      ? {
+          id: contentData.id,
+          title: contentData.title,
+          subMenuId: contentData.sub_menu_id,
+          subMenu: contentData.sub_menu,
+        }
+      : null
+  );
+
+  // Proses URLs dokumen menggunakan helper function dari axiosConfig
   useEffect(() => {
     if (contentData?.required_documents) {
       try {
         if (typeof contentData.required_documents === 'string') {
           const parsed = JSON.parse(contentData.required_documents);
           if (Array.isArray(parsed)) {
-            // Proses setiap dokumen untuk memastikan URL bekerja dengan benar
             const processed = parsed.map(doc => {
-              let url = doc.url;
-              
-              // Jika URL relatif, tambahkan base API URL dan ubah path uploads menjadi storage
-              if (url && url.startsWith('/uploads/')) {
-                // Mengubah path dari /uploads/ menjadi /storage/
-                const filename = url.replace('/uploads/', '');
-                url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/storage/${filename}`;
-              }
-              
-              return { ...doc, url };
+              return {
+                ...doc,
+                url: doc.url ? transformDocumentUrl(doc.url) : doc.url
+              };
             });
-            
             setProcessedDocs(processed);
           }
         }
@@ -83,9 +82,11 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
           </ul>
         </div>
       );
-    } else if (contentData.required_documents && 
-               typeof contentData.required_documents === 'string' && 
-               !contentData.required_documents.startsWith('[')) {
+    } else if (
+      contentData.required_documents &&
+      typeof contentData.required_documents === 'string' &&
+      !contentData.required_documents.startsWith('[')
+    ) {
       requiredDocuments = (
         <div className="mt-4">
           <h5 className="text-lg font-semibold text-[#003868] mb-2">
@@ -93,7 +94,9 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
           </h5>
           <div
             className="text-[#414c5a] ql-editor"
-            dangerouslySetInnerHTML={{ __html: contentData.required_documents }}
+            dangerouslySetInnerHTML={{
+              __html: contentData.required_documents,
+            }}
           />
         </div>
       );
@@ -104,7 +107,6 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
         <h4 className="text-2xl font-bold text-[#003868] mb-6">
           {contentData.title}
         </h4>
-
         {/* Tampilkan deskripsi konten dengan kelas ql-editor untuk styles Quill */}
         {contentData.description && (
           <div
@@ -112,10 +114,8 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             dangerouslySetInnerHTML={{ __html: contentData.description }}
           />
         )}
-        
         {/* Tampilkan dokumen*/}
         {requiredDocuments}
-
         {/* Tampilkan informasi*/}
         {contentData.report_type && (
           <div className="mt-4">
@@ -132,27 +132,14 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
             )}
           </div>
         )}
-
-        {/* Tampilkan konten tambahan lainnya jika tersedia
-        {contentData.additional_content && (
-          <div className="mt-4">
-            <h5 className="text-lg font-semibold text-[#003868] mb-2">
-              Informasi Tambahan:
-            </h5>
-            <div
-              className="text-[#414c5a] ql-editor"
-              dangerouslySetInnerHTML={{ __html: contentData.additional_content }}
-            />
-          </div>
-        )} */}
-
         {/* Tampilkan tanggal */}
         {contentData.updated_at && (
           <div className="mt-6 text-xs text-gray-500">
-            Terakhir diperbarui: {new Date(contentData.updated_at).toLocaleDateString('id-ID', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
+            Terakhir diperbarui:{" "}
+            {new Date(contentData.updated_at).toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
             })}
           </div>
         )}
@@ -160,7 +147,7 @@ const Content = ({ contentData, isLoading = false }: ContentProps) => {
     );
   }
 
-  // Default fallback 
+  // Default fallback
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <h4 className="text-2xl font-bold text-[#414c5a] mb-6">

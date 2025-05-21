@@ -477,11 +477,11 @@ const AboutPage: React.FC = () => {
             </h2>
           </div>
           {/* List Container */}
-          <div className="flex flex-col md:flex-row justify-center gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Laporan Tahunan */}
-            <div className="list-informasi-laporan max-w-xs">
-              <Link href="/laporan/2021" className="block hover:opacity-80">
-                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
+            <div className="report-card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+              <Link href="/laporan/tahunan" className="block h-full">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-3">
                   Laporan Tahunan
                   <Image
                     src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
@@ -491,18 +491,17 @@ const AboutPage: React.FC = () => {
                     className="ml-2"
                   />
                 </h3>
-                <h6 className="text-sm text-gray-600 line-clamp-3">
-                  Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan
-                  pencapaian yang telah diperoleh selama setahun berjalan.
-                </h6>
+                <p className="text-sm text-gray-600 line-clamp-3">
+                  Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun berjalan.
+                </p>
               </Link>
             </div>
 
-            {/* Laporan Triwulan */}
-            <div className="list-informasi-laporan max-w-xs">
-              <Link href="/laporan/2021" className="block hover:opacity-80">
-                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-2">
-                  Laporan Triwulan
+            {/* Laporan Bulanan */}
+            <div className="report-card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+              <Link href="/laporan/bulanan" className="block h-full">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-3">
+                  Laporan Bulanan
                   <Image
                     src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
                     alt="arrow right"
@@ -511,9 +510,47 @@ const AboutPage: React.FC = () => {
                     className="ml-2"
                   />
                 </h3>
-                <h6 className="text-sm text-gray-600">
-                  Laporan triwulanan BANK ABDI yang terbit setiap triwulan.
-                </h6>
+                <p className="text-sm text-gray-600 line-clamp-3">
+                 Laporan bulanan BANK ABDI yang mencakup kinerja dan aktivitas bank dalam periode bulanan.
+                </p>
+              </Link>
+            </div>
+
+            {/* Laporan Publikasi */}
+            <div className="report-card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+              <Link href="/laporan/publikasi" className="block h-full">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-3">
+                  Laporan Publikasi
+                  <Image
+                    src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                    alt="arrow right"
+                    width={24}
+                    height={24}
+                    className="ml-2"
+                  />
+                </h3>
+                <p className="text-sm text-gray-600 line-clamp-3">
+                  Laporan publikasi BANK ABDI yang berisi informasi keuangan dan non-keuangan yang dipublikasikan secara berkala.
+                </p>
+              </Link>
+            </div>
+
+            {/* Laporan Tata Kelola */}
+            <div className="report-card bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+              <Link href="/laporan/tata-kelola" className="block h-full">
+                <h3 className="text-[#003868] flex items-center text-lg font-semibold mb-3">
+                  Laporan Tata Kelola
+                  <Image
+                    src="https://bankabdi.co.id/img/icon/arrow_circle_right.png"
+                    alt="arrow right"
+                    width={24}
+                    height={24}
+                    className="ml-2"
+                  />
+                </h3>
+                <p className="text-sm text-gray-600 line-clamp-3">
+                 Laporan tata kelola BANK ABDI yang menjabarkan praktik tata kelola perusahaan yang baik.
+                </p>
               </Link>
             </div>
           </div>

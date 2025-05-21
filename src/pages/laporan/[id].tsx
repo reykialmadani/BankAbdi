@@ -6,10 +6,10 @@ import Footer from "../components/layout/footer";
 // Definisi tipe data untuk laporan
 interface LaporanItem {
   id: number;
-  judul: string;
-  bulan: string;
-  tahun: string;
-  fileUrl: string;
+  title: string;
+  month: string;
+  report_year: string;
+  required_documents: { url: string; name?: string }[];
 }
 
 // Definisi tipe data untuk kategori laporan
@@ -23,26 +23,22 @@ interface LaporanCategory {
 const categoryInfo: Record<string, LaporanCategory> = {
   tahunan: {
     title: "Laporan Tahunan",
-    description:
-      "Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun berjalan.",
+    description: "Laporan tahunan BANK ABDI yang berisi tentang aktivitas dan pencapaian yang telah diperoleh selama tahun berjalan.",
     heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
   },
   bulanan: {
     title: "Laporan Bulanan",
-    description:
-      "Laporan bulanan BANK ABDI yang mencakup kinerja dan aktivitas bank dalam periode bulanan.",
+    description: "Laporan bulanan BANK ABDI yang mencakup kinerja dan aktivitas bank dalam periode bulanan.",
     heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
   },
   publikasi: {
     title: "Laporan Publikasi",
-    description:
-      "Laporan publikasi BANK ABDI yang berisi informasi keuangan dan non-keuangan yang dipublikasikan secara berkala.",
+    description: "Laporan publikasi BANK ABDI yang berisi informasi keuangan dan non-keuangan yang dipublikasikan secara berkala.",
     heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
   },
   "tata-kelola": {
     title: "Laporan Tata Kelola",
-    description:
-      "Laporan tata kelola BANK ABDI yang menjabarkan praktik tata kelola perusahaan yang baik.",
+    description: "Laporan tata kelola BANK ABDI yang menjabarkan praktik tata kelola perusahaan yang baik.",
     heroImage: "https://bankabdi.co.id/img/banner/hero-pinjaman-kmk.webp",
   },
 };
@@ -52,10 +48,10 @@ const LaporanDetail = () => {
   const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [laporanItems, setLaporanItems] = useState<LaporanItem[]>([]);
-  const [categoryData, setCategoryData] = useState<LaporanCategory | null>(
-    null
-  );
+  const [categoryData, setCategoryData] = useState<LaporanCategory | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const BASE_URL = 'http://localhost:5000';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,27 +61,24 @@ const LaporanDetail = () => {
 
         if (id && typeof id === "string") {
           const normalizedId = id.toLowerCase();
-
-          // Cek apakah kategori valid
+          setCurrentCategory(normalizedId);
+          
           if (normalizedId in categoryInfo) {
             setCategoryData(categoryInfo[normalizedId]);
-
-            // Fetch data dari API endpoint
-            const response = await fetch(
-              `http://localhost:5000/api/report/report=${normalizedId}`
-            );
-
-            if (!response.ok) {
-              throw new Error(`API error: ${response.status}`);
-            }
-
+            const response = await fetch(`http://localhost:5000/api/report/report=${normalizedId}`);
+            
+            if (!response.ok) throw new Error(`API error: ${response.status}`);
+            
             const responseData = await response.json();
-            console.log("Data dari API:", responseData); 
-            console.log("Isi laporanItems:", responseData.data);
-
-            setLaporanItems(responseData.data);
+            console.log(responseData);
+            
+            const parsedData = responseData.data.map((item: any) => ({
+              ...item,
+              required_documents: safeJsonParse(item.required_documents),
+            }));
+            
+            setLaporanItems(parsedData);
           } else {
-            // Jika kategori tidak ditemukan
             setCategoryData(null);
             setLaporanItems([]);
             setError("Kategori laporan tidak tersedia");
@@ -100,16 +93,18 @@ const LaporanDetail = () => {
       }
     };
 
-    if (id) {
-      fetchData();
-    }
+    if (id) fetchData();
   }, [id]);
 
-  // Handler untuk download
-  const handleDownload = (fileUrl: string, judulFile: string) => {
-    // Membuka file di tab baru untuk diunduh
-    window.open(fileUrl, "_blank");
+  const safeJsonParse = (input: string): string[] => {
+    try {
+      return typeof input === "string" ? JSON.parse(input) : input;
+    } catch {
+      return [];
+    }
   };
+
+  const showMonthColumn = currentCategory === 'bulanan';
 
   if (loading) {
     return (
@@ -125,9 +120,7 @@ const LaporanDetail = () => {
         <Header />
         <div className="text-center py-20">
           <h1 className="text-3xl font-bold">Halaman Tidak Ditemukan</h1>
-          <p className="text-gray-600">
-            {error || "Kategori laporan tidak tersedia."}
-          </p>
+          <p className="text-gray-600">{error || "Kategori laporan tidak tersedia."}</p>
         </div>
         <Footer />
       </div>
@@ -137,6 +130,7 @@ const LaporanDetail = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
+      
       {/* Hero Section */}
       <div className="relative">
         <div
@@ -155,7 +149,7 @@ const LaporanDetail = () => {
           </div>
         </div>
       </div>
-
+      
       {/* Table Section */}
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -163,72 +157,42 @@ const LaporanDetail = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    No
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Judul
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Bulan
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Tahun
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Aksi
-                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                  {showMonthColumn && (
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bulan</th>
+                  )}
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {laporanItems.length > 0 ? (
                   laporanItems.map((item, index) => (
                     <tr key={item.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {item.judul}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {item.bulan}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {item.tahun}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <button
-                          onClick={() =>
-                            handleDownload(item.fileUrl, item.judul)
-                          }
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-md text-sm transition duration-200"
-                        >
-                          Download
-                        </button>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.title}</td>
+                      {showMonthColumn && (
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{item.month}</td>
+                      )}
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.report_year}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 space-y-1">
+                        {item.required_documents?.map((doc, idx) => (
+                          <a
+                            key={idx}
+                            href={`${BASE_URL}${doc.url}`}
+                            download
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-md text-sm inline-block mr-2"
+                          >
+                            Download
+                          </a>
+                        ))}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td
-                      colSpan={5}
-                      className="px-6 py-4 text-center text-sm text-gray-500"
-                    >
+                    <td colSpan={showMonthColumn ? 5 : 4} className="px-6 py-4 text-center text-sm text-gray-500">
                       Tidak ada data laporan tersedia.
                     </td>
                   </tr>
@@ -238,7 +202,6 @@ const LaporanDetail = () => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );
