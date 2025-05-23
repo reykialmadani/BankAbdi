@@ -167,134 +167,156 @@ const TabunganDetail: NextPage<TabunganDetailProps> = ({ tabunganData: initialDa
   }, []);
 
   // Fetch data when ID changes (but only for non-formulir pages)
-  useEffect(() => {
+// Fetch data when ID changes (but only for non-formulir pages)
+useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        if (!id) return;
+        try {
+            setLoading(true);
+            
+            // ✅ Reset current content terlebih dahulu
+            setCurrentContent(null);
+            
+            if (!id) return;
 
-        // For formulir page, don't fetch from backend
-        if (isFormulirPage) {
-          setLoading(false);
-          return;
-        }
+            // For formulir page, don't fetch from backend
+            if (isFormulirPage) {
+                setLoading(false);
+                return;
+            }
 
-        // Normalize ID for search
-        const normalizedId = typeof id === 'string' ? id : '';
-        console.log("Current URL ID:", normalizedId);
+            // Normalize ID for search
+            const normalizedId = typeof id === 'string' ? id : '';
+            console.log("Current URL ID:", normalizedId);
 
-        // Fetch all contents from backend
-        console.log("Fetching all contents...");
-        const allContents = await getAllContents();
-        console.log("API Response (all contents):", JSON.stringify(allContents, null, 2));
-        setContents(allContents);
+            // ✅ Selalu fetch data fresh dari backend
+            console.log("Fetching all contents...");
+            const allContents = await getAllContents();
+            console.log("API Response (all contents):", JSON.stringify(allContents, null, 2));
+            setContents(allContents);
 
-        // Check if we got valid content from backend
-        const hasValidContent = allContents && allContents.length > 0;
-        if (hasValidContent) {
-          console.log("Processing backend data for menu items");
-          // Create a set to keep track of added menu items to avoid duplicates
-          const processedMenuItems: Set<string> = new Set();
-          const backendMenuItems: { href: string; label: string }[] = [];
+            // Check if we got valid content from backend
+            const hasValidContent = allContents && allContents.length > 0;
 
-          // Process all contents and extract valid menu items
-          allContents.forEach(content => {
-            if (content.sub_menu && content.status) {
-              // Extract the last part of the URL to match with our route format
-              const subMenuUrl = content.sub_menu.url;
-              const urlParts = subMenuUrl.split('/');
-              const lastUrlPart = urlParts[urlParts.length - 1];
+            if (hasValidContent) {
+                console.log("Processing backend data for menu items");
+                
+                // Create a set to keep track of added menu items to avoid duplicates
+                const processedMenuItems: Set<string> = new Set();
+                const backendMenuItems: { href: string; label: string }[] = [];
 
-              // Use the lastUrlPart as our route parameter
-              const routeId = lastUrlPart || subMenuUrl.replace(/^\//g, '').replace(/^tabungan\//g, '');
-              const href = `/tabungan/${routeId}`;
+                // Process all contents and extract valid menu items
+                allContents.forEach(content => {
+                    if (content.sub_menu && content.status) {
+                        // Extract the last part of the URL to match with our route format
+                        const subMenuUrl = content.sub_menu.url;
+                        const urlParts = subMenuUrl.split('/');
+                        const lastUrlPart = urlParts[urlParts.length - 1];
 
-              // Make sure we don't add duplicates
-              const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
-              if (!processedMenuItems.has(menuKey)) {
-                processedMenuItems.add(menuKey);
-                backendMenuItems.push({
-                  href: href,
-                  label: content.sub_menu.name || content.sub_menu.sub_menu_name
+                        // Use the lastUrlPart as our route parameter
+                        const routeId = lastUrlPart || subMenuUrl.replace(/^\//g, '').replace(/^tabungan\//g, '');
+                        const href = `/tabungan/${routeId}`;
+
+                        // Make sure we don't add duplicates
+                        const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
+                        if (!processedMenuItems.has(menuKey)) {
+                            processedMenuItems.add(menuKey);
+                            backendMenuItems.push({
+                                href: href,
+                                label: content.sub_menu.name || content.sub_menu.sub_menu_name
+                            });
+                        }
+                    }
                 });
-              }
-            }
-          });
 
-          // If we have backend items, only use them if we have all expected items
-          // Otherwise we'll stick with our ordered default items
-          if (backendMenuItems.length >= orderKeys.length - 1) { // Subtract 1 to account for formulir which is static
-            console.log("Using backend-provided menu items:", backendMenuItems);
+                // If we have backend items, only use them if we have all expected items
+                // Otherwise we'll stick with our ordered default items
+                if (backendMenuItems.length >= orderKeys.length - 1) { // Subtract 1 to account for formulir which is static
+                    console.log("Using backend-provided menu items:", backendMenuItems);
+                    
+                    // Create a map for quick lookups
+                    const menuItemMap = new Map();
+                    backendMenuItems.forEach(item => {
+                        const key = item.href.replace('/tabungan/', '');
+                        menuItemMap.set(key, item);
+                    });
 
-            // Create a map for quick lookups
-            const menuItemMap = new Map();
-            backendMenuItems.forEach(item => {
-              const key = item.href.replace('/tabungan/', '');
-              menuItemMap.set(key, item);
-            });
-
-            // Create ordered items from backend data
-            // Always add formulir from default data
-            const orderedMenuItems = orderKeys
-              .map(key => {
-                if (key === "formulir") {
-                  return { href: `/tabungan/${key}`, label: defaultData[key].title };
+                    // Create ordered items from backend data
+                    // Always add formulir from default data
+                    const orderedMenuItems = orderKeys.map(key => {
+                        if (key === "formulir") {
+                            return { href: `/tabungan/${key}`, label: defaultData[key].title };
+                        }
+                        return menuItemMap.get(key) || { href: `/tabungan/${key}`, label: defaultData[key].title };
+                    });
+                    
+                    setMenuItems(orderedMenuItems);
                 }
-                return menuItemMap.get(key) || { href: `/tabungan/${key}`, label: defaultData[key].title };
-              });
 
-            setMenuItems(orderedMenuItems);
-          }
-        }
+                // ✅ Find content for current page menggunakan allContents (data fresh)
+                const findContentForPage = (normalizedId: string) => {
+                    return allContents.find(content => {
+                        if (!content.sub_menu || !content.status) return false;
+                        const subMenuUrl = content.sub_menu.url;
+                        const urlParts = subMenuUrl.split('/');
+                        const lastUrlPart = urlParts[urlParts.length - 1];
+                        return (
+                            lastUrlPart === normalizedId ||
+                            subMenuUrl === `/${normalizedId}` ||
+                            subMenuUrl === normalizedId ||
+                            subMenuUrl === `/tabungan/${normalizedId}` ||
+                            subMenuUrl.endsWith(`/${normalizedId}`)
+                        );
+                    });
+                };
 
-        // Find content for current page
-        const findContentForPage = (normalizedId: string) => {
-          return contents.find(content => {
-            if (!content.sub_menu || !content.status) return false;
-            const subMenuUrl = content.sub_menu.url;
-            const urlParts = subMenuUrl.split('/');
-            const lastUrlPart = urlParts[urlParts.length - 1];
-            return (
-              lastUrlPart === normalizedId ||
-              subMenuUrl === `/${normalizedId}` ||
-              subMenuUrl === normalizedId ||
-              subMenuUrl === `/tabungan/${normalizedId}` ||
-              subMenuUrl.endsWith(`/${normalizedId}`)
-            );
-          });
-        };
+                const contentForCurrentPage = findContentForPage(normalizedId);
 
-        const contentForCurrentPage = findContentForPage(normalizedId);
-
-        // If not found directly, try API call
-        if (!contentForCurrentPage && hasValidContent) {
-          console.log("Trying to fetch specific content for:", normalizedId);
-          try {
-            let specificContents = await getContentBySubMenuUrl(normalizedId);
-            if (!specificContents || specificContents.length === 0) {
-              specificContents = await getContentBySubMenuUrl(`/tabungan/${normalizedId}`);
+                if (contentForCurrentPage) {
+                    // ✅ Set content yang ditemukan
+                    setCurrentContent(contentForCurrentPage);
+                    console.log("✅ Content found:", contentForCurrentPage.title);
+                } else {
+                    // ✅ Jika tidak ditemukan, coba fetch spesifik
+                    console.log("Trying to fetch specific content for:", normalizedId);
+                    try {
+                        let specificContents = await getContentBySubMenuUrl(normalizedId);
+                        if (!specificContents || specificContents.length === 0) {
+                            specificContents = await getContentBySubMenuUrl(`/tabungan/${normalizedId}`);
+                        }
+                        
+                        if (specificContents && specificContents.length > 0) {
+                            setCurrentContent(specificContents[0]);
+                            console.log("✅ Specific content found:", specificContents[0].title);
+                        } else {
+                            // ✅ Set null jika benar-benar tidak ada
+                            setCurrentContent(null);
+                            console.log("❌ No content found for:", normalizedId);
+                        }
+                    } catch (err) {
+                        console.error("Error fetching specific content:", err);
+                        setCurrentContent(null);
+                    }
+                }
+            } else {
+                // ✅ Jika tidak ada data dari backend, set null
+                setCurrentContent(null);
+                console.log("❌ No valid content from backend");
             }
-            if (specificContents && specificContents.length > 0) {
-              setCurrentContent(specificContents[0]);
-            }
-          } catch (err) {
-            console.error("Error fetching specific content:", err);
-          }
-        } else {
-          setCurrentContent(contentForCurrentPage || null);
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setCurrentContent(null);
+        } finally {
+            setLoading(false);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // On error, keep using default data
-      } finally {
-        setLoading(false);
-      }
     };
 
     if (id) {
-      fetchData();
+        console.log('🔄 ID berubah ke:', id);
+        console.log('📝 Current content sebelum fetch:', currentContent?.title);
+        fetchData();
     }
-  }, [id, contents.length, isFormulirPage]);
+}, [id, isFormulirPage]); // ✅ Hapus contents.length dari dependency
 
   // Get tabungan data consistently with default data priority
   const getTabunganData = () => {

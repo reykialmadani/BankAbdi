@@ -123,182 +123,196 @@ const PinjamanDetail = () => {
     }
   }, [id]);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        // Selalu ambil konten, bahkan jika tidak ada ID
-        const allContents = await getAllContents();
-        setContents(allContents);
-        const hasValidContent = allContents && allContents.length > 0;
+        try {
+            setLoading(true);
+            // ✅ Reset current content terlebih dahulu
+            setCurrentContent(null);
+            
+            // Selalu ambil data fresh dari backend
+            const allContents = await getAllContents();
+            setContents(allContents);
+            
+            const hasValidContent = allContents && allContents.length > 0;
+            
+            if (hasValidContent) {
+                console.log("Processing backend data for menu items");
+                const processedMenuItems: Set<string> = new Set();
+                const backendMenuItems: { href: string; label: string }[] = [];
 
-        if (hasValidContent) {
-          console.log("Processing backend data for menu items");
-          const processedMenuItems: Set<string> = new Set();
-          const backendMenuItems: { href: string; label: string }[] = [];
+                // Proses menu items dari backend
+                allContents.forEach(content => {
+                    if (content.sub_menu && content.status && content.sub_menu.url) {
+                        const subMenuUrl = content.sub_menu.url;
+                        const urlParts = subMenuUrl.split('/');
+                        const lastUrlPart = urlParts[urlParts.length - 1];
 
-          // Proses menu items dari backend
-          allContents.forEach(content => {
-            if (content.sub_menu && content.status && content.sub_menu.url) {
-              const subMenuUrl = content.sub_menu.url;
-              const urlParts = subMenuUrl.split('/');
-              const lastUrlPart = urlParts[urlParts.length - 1];
-              
-              // Ekstrak routeId dengan lebih fleksibel
-              let routeId = lastUrlPart;
-              if (!routeId) {
-                routeId = subMenuUrl.replace(/^\//g, '').replace(/^pinjaman\//g, '');
-              }
-              
-              if (routeId) {
-                const href = `/pinjaman/${routeId}`;
-                const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
-                
-                if (!processedMenuItems.has(menuKey) && (content.sub_menu.name || content.sub_menu.sub_menu_name)) {
-                  processedMenuItems.add(menuKey);
-                  backendMenuItems.push({
-                    href: href,
-                    label: content.sub_menu.name || content.sub_menu.sub_menu_name
-                  });
+                        // Ekstrak routeId dengan lebih fleksibel
+                        let routeId = lastUrlPart;
+                        if (!routeId) {
+                            routeId = subMenuUrl.replace(/^\//g, '').replace(/^pinjaman\//g, '');
+                        }
+
+                        if (routeId) {
+                            const href = `/pinjaman/${routeId}`;
+                            const menuKey = `${href}-${content.sub_menu.name || content.sub_menu.sub_menu_name}`;
+
+                            if (!processedMenuItems.has(menuKey) && (content.sub_menu.name || content.sub_menu.sub_menu_name)) {
+                                processedMenuItems.add(menuKey);
+                                backendMenuItems.push({
+                                    href: href,
+                                    label: content.sub_menu.name || content.sub_menu.sub_menu_name
+                                });
+                            }
+                        }
+                    }
+                });
+
+                // Proses menu items hanya jika ada data yang valid dari backend
+                if (backendMenuItems.length > 0) {
+                    const orderKeys = [
+                        "kredit-modal-kerja",
+                        "kredit-investasi", 
+                        "kredit-multiguna",
+                        "kredit-kepemilikan-rumah",
+                        "kredit-kepemilikan-mobil",
+                        "kredit-kendaraan-bermotor",
+                        "kredit-tanpa-agunan",
+                        "form-pengajuan-kredit"
+                    ];
+
+                    const menuItemMap = new Map();
+                    backendMenuItems.forEach(item => {
+                        const key = item.href.replace('/pinjaman/', '');
+                        menuItemMap.set(key, item);
+                    });
+
+                    // Tambahkan default jika tidak ditemukan di backend
+                    const orderedMenuItems = orderKeys.map(key => 
+                        menuItemMap.get(key) || { 
+                            href: `/pinjaman/${key}`, 
+                            label: defaultData[key].title 
+                        }
+                    );
+
+                    setMenuItems(orderedMenuItems);
+
+                    // ✅ Proses loan products berdasarkan menu yang tersedia
+                    const backendLoanProducts = orderKeys.map(key => {
+                        const matchingContent = allContents.find(content => {
+                            if (!content.sub_menu || !content.status) return false;
+                            const subMenuUrl = content.sub_menu.url;
+                            const urlParts = subMenuUrl.split('/');
+                            const lastUrlPart = urlParts[urlParts.length - 1];
+                            return (
+                                lastUrlPart === key ||
+                                subMenuUrl.endsWith(`/${key}`) ||
+                                subMenuUrl === key ||
+                                subMenuUrl === `/${key}`
+                            );
+                        });
+
+                        const defaultProduct = defaultData[key];
+                        const menuItem = menuItemMap.get(key) || { 
+                            href: `/pinjaman/${key}`, 
+                            label: defaultData[key].title 
+                        };
+
+                        return {
+                            title: menuItem.label,
+                            description: defaultProduct?.description || "",
+                            icon: matchingContent?.thumbnail || (defaultProduct?.icon || "/img/icon/placeholder-icon.png"),
+                            href: `/pinjaman/${key}`,
+                        };
+                    });
+
+                    setLoanProducts(backendLoanProducts);
+                } else {
+                    // Fallback ke default data jika tidak ada menu dari backend
+                    const defaultLoanProducts = Object.keys(defaultData).map(key => ({
+                        title: defaultData[key].title,
+                        description: defaultData[key].description,
+                        icon: defaultData[key].icon,
+                        href: `/pinjaman/${key}`
+                    }));
+                    setLoanProducts(defaultLoanProducts);
                 }
-              }
+                
+                // ✅ Jika ada ID, langsung cari dari data yang baru saja di-fetch
+                if (id) {
+                    const normalizedId = typeof id === 'string' ? id : '';
+                    
+                    // ✅ Gunakan allContents (data fresh) bukan contents (state lama)
+                    const findContentForPage = (normalizedId: string) => {
+                        return allContents.find(content => {
+                            if (!content.sub_menu || !content.status) return false;
+                            const subMenuUrl = content.sub_menu.url;
+                            const urlParts = subMenuUrl.split('/');
+                            const lastUrlPart = urlParts[urlParts.length - 1];
+                            return (
+                                lastUrlPart === normalizedId ||
+                                subMenuUrl === `/${normalizedId}` ||
+                                subMenuUrl === normalizedId ||
+                                subMenuUrl === `/pinjaman/${normalizedId}` ||
+                                subMenuUrl.endsWith(`/${normalizedId}`)
+                            );
+                        });
+                    };
+                    
+                    const contentForCurrentPage = findContentForPage(normalizedId);
+                    
+                    if (contentForCurrentPage) {
+                        // ✅ Set content yang ditemukan
+                        setCurrentContent(contentForCurrentPage);
+                    } else {
+                        // ✅ Jika tidak ditemukan, coba fetch spesifik
+                        try {
+                            let specificContents = await getContentBySubMenuUrl(normalizedId);
+                            if (!specificContents || specificContents.length === 0) {
+                                specificContents = await getContentBySubMenuUrl(`/pinjaman/${normalizedId}`);
+                            }
+                            
+                            if (specificContents && specificContents.length > 0) {
+                                setCurrentContent(specificContents[0]);
+                            } else {
+                                // ✅ Set null jika benar-benar tidak ada
+                                setCurrentContent(null);
+                            }
+                        } catch (err) {
+                            console.error("Error fetching specific content:", err);
+                            setCurrentContent(null);
+                        }
+                    }
+                }
+            } else {
+                // ✅ Fallback ke default data jika tidak ada konten
+                const defaultMenuItems = Object.keys(defaultData).map(key => ({
+                    href: `/pinjaman/${key}`,
+                    label: defaultData[key].title
+                }));
+                setMenuItems(defaultMenuItems);
+
+                const defaultLoanProducts = Object.keys(defaultData).map(key => ({
+                    title: defaultData[key].title,
+                    description: defaultData[key].description,
+                    icon: defaultData[key].icon,
+                    href: `/pinjaman/${key}`
+                }));
+                setLoanProducts(defaultLoanProducts);
             }
-          });
-
-          // Proses menu items hanya jika ada data yang valid dari backend
-          if (backendMenuItems.length > 0) {
-            const orderKeys = [
-              "kredit-modal-kerja",
-              "kredit-investasi", 
-              "kredit-multiguna",
-              "kredit-kepemilikan-rumah",
-              "kredit-kepemilikan-mobil",
-              "kredit-kendaraan-bermotor",
-              "kredit-tanpa-agunan",
-              "form-pengajuan-kredit"
-            ];
-
-            const menuItemMap = new Map();
-            backendMenuItems.forEach(item => {
-              const key = item.href.replace('/pinjaman/', '');
-              menuItemMap.set(key, item);
-            });
-
-            // Tambahkan default jika tidak ditemukan di backend
-            const orderedMenuItems = orderKeys.map(key => 
-              menuItemMap.get(key) || { 
-                href: `/pinjaman/${key}`, 
-                label: defaultData[key].title 
-              }
-            );
-
-            setMenuItems(orderedMenuItems);
-
-            // Proses loan products berdasarkan menu yang tersedia
-            const backendLoanProducts = orderKeys.map(key => {
-              const matchingContent = allContents.find(content => {
-                if (!content.sub_menu || !content.status) return false;
-                const subMenuUrl = content.sub_menu.url;
-                const urlParts = subMenuUrl.split('/');
-                const lastUrlPart = urlParts[urlParts.length - 1];
-                return (
-                  lastUrlPart === key || 
-                  subMenuUrl.endsWith(`/${key}`) || 
-                  subMenuUrl === key || 
-                  subMenuUrl === `/${key}`
-                );
-              });
-
-              const defaultProduct = defaultData[key];
-              const menuItem = menuItemMap.get(key) || { 
-                href: `/pinjaman/${key}`, 
-                label: defaultData[key].title 
-              };
-
-              return {
-                title: menuItem.label,
-                description: defaultProduct?.description || "",
-                icon: matchingContent?.thumbnail || (defaultProduct?.icon || "/img/icon/placeholder-icon.png"),
-                href: `/pinjaman/${key}`,
-              };
-            });
-
-            setLoanProducts(backendLoanProducts);
-          } else {
-            // Fallback ke default data jika tidak ada menu dari backend
-            const defaultLoanProducts = Object.keys(defaultData).map(key => ({
-              title: defaultData[key].title,
-              description: defaultData[key].description,
-              icon: defaultData[key].icon,
-              href: `/pinjaman/${key}`
-            }));
-            setLoanProducts(defaultLoanProducts);
-          }
-        } else {
-          // Fallback ke default data jika tidak ada konten
-          const defaultMenuItems = Object.keys(defaultData).map(key => ({
-            href: `/pinjaman/${key}`,
-            label: defaultData[key].title
-          }));
-          setMenuItems(defaultMenuItems);
-
-          const defaultLoanProducts = Object.keys(defaultData).map(key => ({
-            title: defaultData[key].title,
-            description: defaultData[key].description,
-            icon: defaultData[key].icon,
-            href: `/pinjaman/${key}`
-          }));
-          setLoanProducts(defaultLoanProducts);
+            
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setCurrentContent(null);
+        } finally {
+            setLoading(false);
         }
-
-        // Jika ada ID, cari konten untuk halaman tersebut
-        if (id) {
-          const normalizedId = typeof id === 'string' ? id : '';
-          
-          const findContentForPage = (normalizedId: string) => {
-            return contents.find(content => {
-              if (!content.sub_menu || !content.status) return false;
-              const subMenuUrl = content.sub_menu.url;
-              const urlParts = subMenuUrl.split('/');
-              const lastUrlPart = urlParts[urlParts.length - 1];
-              return (
-                lastUrlPart === normalizedId || 
-                subMenuUrl === `/${normalizedId}` || 
-                subMenuUrl === normalizedId || 
-                subMenuUrl === `/pinjaman/${normalizedId}` || 
-                subMenuUrl.endsWith(`/${normalizedId}`)
-              );
-            });
-          };
-
-          const contentForCurrentPage = findContentForPage(normalizedId);
-          
-          if (!contentForCurrentPage && hasValidContent) {
-            try {
-              let specificContents = await getContentBySubMenuUrl(normalizedId);
-              if (!specificContents || specificContents.length === 0) {
-                specificContents = await getContentBySubMenuUrl(`/pinjaman/${normalizedId}`);
-              }
-              if (specificContents && specificContents.length > 0) {
-                setCurrentContent(specificContents[0]);
-              }
-            } catch (err) {
-              console.error("Error fetching specific content:", err);
-            }
-          } else {
-            setCurrentContent(contentForCurrentPage || null);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
     };
 
-    // Selalu fetch data, bahkan jika tidak ada ID
+    // ✅ Selalu fetch data ketika ID berubah
     fetchData();
-  }, [id]);
+}, [id]);
 
   const getPinjamanData = () => {
     if (!id) {

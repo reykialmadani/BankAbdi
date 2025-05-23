@@ -128,14 +128,16 @@ const BankingSolutions = () => {
                     viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                   >
                     <div className="relative h-3/5 w-full">
-                      <Image
-                        src={solution.image}
-                        layout="fill"
-                        objectFit="cover"
-                        alt={solution.title}
-                        priority={index === initialSlideIndex}
-                      />
-                    </div>
+  <Image
+    src={solution.image}
+    alt={solution.title}
+    fill
+    style={{ objectFit: 'cover' }}
+    priority={index === initialSlideIndex}
+    sizes="100vw"
+  />
+</div>
+
                     <div className="p-6 h-2/5 flex flex-col justify-between">
                       <div>
                         <h3 className="text-lg font-semibold text-black mb-2" style={segoeUIStyles}>

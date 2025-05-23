@@ -7,9 +7,13 @@ interface ContentProps {
   contentData?: ContentType | null;
   isLoading?: boolean;
 }
+interface DocumentItem {
+  name?: string;
+  url?: string;
+}
 
 const Content = ({ contentData, isLoading = false }: ContentProps) => {
-  const [processedDocs, setProcessedDocs] = useState<any[]>([]);
+  const [processedDocs, setProcessedDocs] = useState<DocumentItem[]>([]);
 
   console.log(
     "Content component - received contentData:",

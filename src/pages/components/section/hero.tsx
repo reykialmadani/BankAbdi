@@ -16,12 +16,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ imageSrc, title, paragraph, s
 
   return (
     <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
-      <Image 
-        src={imageSrc} 
-        layout="fill" 
-        objectFit="cover" 
-        alt="Hero Logo" 
-        className="z-0"
+      <Image
+        src={imageSrc}
+        alt={title}
+        fill
+        style={{ objectFit: 'cover' }}
+        sizes="100vw"
       />
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 z-10">
         <motion.h1 
