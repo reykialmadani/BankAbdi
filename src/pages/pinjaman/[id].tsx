@@ -11,7 +11,7 @@ import CreditRequitment from "./section/tabelRequitment";
 import Blog from "../components/section/blog";
 import Footer from "../components/layout/footer";
 import VisitorTracker from "../components/visitorTracker";
-import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
+import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/config/axiosConfig";
 
 interface LoanProduct {
   title: string;

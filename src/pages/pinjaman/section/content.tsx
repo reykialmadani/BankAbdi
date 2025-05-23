@@ -1,8 +1,7 @@
 // pages/pinjaman/section/Content.tsx
-import { Content as ContentType } from "@/pages/api/fetching/routes";
+import { Content as ContentType, transformDocumentUrl } from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
-import { transformDocumentUrl } from "../../config/axiosConfig";
 
 interface ContentProps {
   contentData: ContentType | null;

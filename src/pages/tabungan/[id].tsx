@@ -17,7 +17,7 @@ import Footer from "../components/layout/footer";
 import VisitorTracker from "../components/visitorTracker";
 
 // API fetching functions
-import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/api/fetching/routes";
+import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "@/pages/config/axiosConfig";
 
 // Define the interface for Savings Product
 interface SavingsProduct {
