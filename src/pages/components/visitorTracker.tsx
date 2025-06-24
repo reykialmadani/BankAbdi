@@ -11,13 +11,18 @@ interface VisitorTrackerProps {
 }
 
 const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName }) => {
-  const [ipAddress, setIpAddress] = useState<string | null>(null);
+  const [, setIpAddress] = useState<string | null>(null);
 
   useEffect(() => {
+    // ✅ PERBAIKAN: Validasi awal subMenuId
+    if (!subMenuId) {
+      console.warn("VisitorTracker: subMenuId tidak valid:", subMenuId);
+      return;
+    }
+
     // Fungsi untuk mendapatkan IP address pengunjung
     const getIpAddress = async () => {
       try {
-        // Menggunakan layanan publik untuk mendapatkan IP
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
         setIpAddress(data.ip);
@@ -32,13 +37,11 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
     const getOrCreateSessionId = () => {
       const storageKey = 'visitor_session_id';
       let sessionId = localStorage.getItem(storageKey);
-      
       if (!sessionId) {
         sessionId = uuidv4();
         localStorage.setItem(storageKey, sessionId);
         console.log("Session ID baru dibuat:", sessionId);
       }
-      
       return sessionId;
     };
 
@@ -46,44 +49,51 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
     const trackVisit = async () => {
       const sessionId = getOrCreateSessionId();
       const visitorIp = await getIpAddress();
-      
+
       if (!sessionId && !visitorIp) {
         console.error("Tidak dapat melacak pengunjung: Session ID dan IP tidak tersedia");
         return;
       }
 
-      // Pastikan subMenuId adalah angka yang valid
+      // ✅ PERBAIKAN: Normalisasi subMenuId
       let finalSubMenuId: string | number = subMenuId;
+      
+      // Jika string dan berisi angka, convert ke number
       if (typeof subMenuId === 'string' && !isNaN(parseInt(subMenuId, 10))) {
         finalSubMenuId = parseInt(subMenuId, 10);
       }
+      
+      // ✅ PERBAIKAN: Buat kunci yang lebih unik
+      const sessionStorageKey = `visited_${finalSubMenuId}_${typeof finalSubMenuId}`;
 
-      // Buat kunci unik untuk halaman ini untuk sessionStorage
-      const sessionStorageKey = `visited_${finalSubMenuId}`;
-      
-      // Cek apakah halaman sudah dilacak dan apakah sudah lewat interval waktu untuk melacak ulang
+      // Cek apakah halaman sudah dilacak dan apakah sudah lewat interval waktu
       const lastVisitTime = sessionStorage.getItem(sessionStorageKey);
-      const shouldTrack = !lastVisitTime || (new Date().getTime() - new Date(lastVisitTime).getTime() >= TRACKING_INTERVAL);
-      
+      const shouldTrack = !lastVisitTime || 
+        (new Date().getTime() - new Date(lastVisitTime).getTime() >= TRACKING_INTERVAL);
+
       if (!shouldTrack) {
-        console.log(`Halaman ini sudah dilacak dalam interval ${TRACKING_INTERVAL/60000} menit. Menunggu interval berikutnya.`);
+        console.log(`Halaman ${finalSubMenuId} sudah dilacak dalam interval ${TRACKING_INTERVAL/60000} menit. Menunggu interval berikutnya.`);
         return;
       }
 
       try {
-        console.log(`Melacak kunjungan untuk subMenu: ${finalSubMenuId} - ${subMenuName || 'Tidak ada nama'}`);
+        console.log(`🔍 Melacak kunjungan untuk subMenu: ${finalSubMenuId} (${typeof finalSubMenuId}) - ${subMenuName || 'Tidak ada nama'}`);
         
+        const requestBody = {
+          sessionId,
+          ipAddress: visitorIp,
+          subMenuId: finalSubMenuId,
+          timestamp: new Date().toISOString(),
+        };
+
+        console.log("📤 Data yang dikirim:", requestBody);
+
         const response = await fetch(API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            sessionId,
-            ipAddress: visitorIp,
-            subMenuId: finalSubMenuId,
-            timestamp: new Date().toISOString(),
-          })
+          body: JSON.stringify(requestBody)
         });
 
         if (response.ok) {
@@ -92,29 +102,29 @@ const VisitorTracker: React.FC<VisitorTrackerProps> = ({ subMenuId, subMenuName 
           
           try {
             const data = await response.json();
-            console.log("Respons tracking kunjungan:", data);
+            console.log("✅ Respons tracking kunjungan:", data);
           } catch (jsonError) {
-            console.log("Kunjungan berhasil dilacak! (Tidak dapat parse respons)");
+            console.log("✅ Kunjungan berhasil dilacak! (Tidak dapat parse respons)", jsonError);
           }
         } else {
-          console.error("Gagal melacak kunjungan:", response.status, response.statusText);
+          console.error("❌ Gagal melacak kunjungan:", response.status, response.statusText);
           try {
             const textResponse = await response.text();
-            console.error("Respons server:", textResponse.substring(0, 100));
+            console.error("📄 Respons server:", textResponse.substring(0, 200));
           } catch (textError) {
-            console.error("Tidak dapat membaca respons server");
+            console.error("❌ Tidak dapat membaca respons server", textError);
           }
         }
       } catch (error) {
-        console.error("Error mengirim data pelacakan:", error);
+        console.error("❌ Error mengirim data pelacakan:", error);
       }
     };
 
-    // Hanya melacak jika subMenuId valid
-    if (subMenuId) {
-      trackVisit();
-    }
-  }, [subMenuId, subMenuName]); // Dependency array untuk useEffect, hanya jalan ulang jika subMenuId atau subMenuName berubah
+    // ✅ PERBAIKAN: Logging untuk debugging
+    console.log(`🚀 VisitorTracker dimount untuk subMenuId: ${subMenuId} (${typeof subMenuId}), subMenuName: ${subMenuName}`);
+    
+    trackVisit();
+  }, [subMenuId, subMenuName]);
 
   // Komponen ini tidak merender apapun, hanya melacak kunjungan
   return null;

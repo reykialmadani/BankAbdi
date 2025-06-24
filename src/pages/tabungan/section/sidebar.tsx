@@ -2,9 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-interface SidebarProps {
+export interface SidebarProps {
+  menuItems: { href: string; label: string }[];
   currentPath: string;
 }
+
 
 const Sidebar = ({ }: SidebarProps) => {
   const router = useRouter(); // Inisialisasi router
