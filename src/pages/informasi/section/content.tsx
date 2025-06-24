@@ -43,52 +43,52 @@ const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => {
 };
 
 // Pagination Component
-const Pagination = ({ currentPage, totalPages }: { currentPage: number; totalPages: number }) => {
-  return (
-    <nav className="flex justify-center mt-8">
-      <ul className="flex space-x-1">
-        <li className={`${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
-          <Link
-            href={`/blog?page=${currentPage - 1}`}
-            className={`px-3 py-2 border rounded ${
-              currentPage === 1 
-                ? 'bg-gray-100 text-gray-600' 
-                : 'bg-white text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            &lsaquo;
-          </Link>
-        </li>
-        {[...Array(totalPages)].map((_, i) => (
-          <li key={i + 1}>
-            <Link
-              href={`/blog?page=${i + 1}`}
-              className={`px-3 py-2 border rounded ${
-                currentPage === i + 1
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
-              }`}
-            >
-              {i + 1}
-            </Link>
-          </li>
-        ))}
-        <li className={`${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}>
-          <Link
-            href={`/blog?page=${currentPage + 1}`}
-            className={`px-3 py-2 border rounded ${
-              currentPage === totalPages
-                ? 'bg-gray-100 text-gray-600'
-                : 'bg-white text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            &rsaquo;
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+// const Pagination = ({ currentPage, totalPages }: { currentPage: number; totalPages: number }) => {
+//   return (
+//     <nav className="flex justify-center mt-8">
+//       <ul className="flex space-x-1">
+//         <li className={`${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
+//           <Link
+//             href={`/blog?page=${currentPage - 1}`}
+//             className={`px-3 py-2 border rounded ${
+//               currentPage === 1 
+//                 ? 'bg-gray-100 text-gray-600' 
+//                 : 'bg-white text-gray-700 hover:bg-gray-50'
+//             }`}
+//           >
+//             &lsaquo;
+//           </Link>
+//         </li>
+//         {[...Array(totalPages)].map((_, i) => (
+//           <li key={i + 1}>
+//             <Link
+//               href={`/blog?page=${i + 1}`}
+//               className={`px-3 py-2 border rounded ${
+//                 currentPage === i + 1
+//                   ? 'bg-blue-500 text-white'
+//                   : 'bg-white text-gray-700 hover:bg-gray-50'
+//               }`}
+//             >
+//               {i + 1}
+//             </Link>
+//           </li>
+//         ))}
+//         <li className={`${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}>
+//           <Link
+//             href={`/blog?page=${currentPage + 1}`}
+//             className={`px-3 py-2 border rounded ${
+//               currentPage === totalPages
+//                 ? 'bg-gray-100 text-gray-600'
+//                 : 'bg-white text-gray-700 hover:bg-gray-50'
+//             }`}
+//           >
+//             &rsaquo;
+//           </Link>
+//         </li>
+//       </ul>
+//     </nav>
+//   );
+// };
 
 const Content = () => {
   const router = useRouter();
@@ -614,7 +614,7 @@ const Content = () => {
                   ))}
                 </div>
     
-                <Pagination currentPage={1} totalPages={2} />
+                {/* <Pagination currentPage={1} totalPages={2} /> */}
               </div>
             );
       default:

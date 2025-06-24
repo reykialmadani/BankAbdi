@@ -49,7 +49,7 @@ const InformationDetail = () => {
       icon: "https://bankabdi.co.id/img/icon/info_iso.png"
     },
     "blog": {
-      title: "ISO",
+      title: "BLOG",
       description: "",
       image: "https://bankabdi.co.id/img/banner/simpanan-abdiku.webp",
       icon: "https://bankabdi.co.id/img/icon/info_iso.png"

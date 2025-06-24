@@ -30,7 +30,7 @@ const Informasi = () => {
               />
               <div className="p-6 flex flex-col flex-grow">
                 <h3
-                  className="text-sm text-gray-400 mb-2"
+                  className="text-sm text-black mb-2"
                   style={segoeUIStyles}
                 >
                   Nasabah Bank ABDI
@@ -43,7 +43,7 @@ const Informasi = () => {
                 </p>
                 <a
                   href="#"
-                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  className="text-sm text-gray-700 hover:text-indigo-800"
                   style={segoeUIStyles}
                 >
                   Baca Selengkapnya
@@ -64,7 +64,7 @@ const Informasi = () => {
               />
               <div className="p-6 flex flex-col flex-grow">
                 <h3
-                  className="text-sm text-gray-400 mb-2"
+                  className="text-sm text-black mb-2"
                   style={segoeUIStyles}
                 >
                   Nasabah Bank ABDI
@@ -77,7 +77,7 @@ const Informasi = () => {
                 </p>
                 <a
                   href="#"
-                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  className="text-sm text-gray-700 hover:text-indigo-800"
                   style={segoeUIStyles}
                 >
                   Baca Selengkapnya
@@ -98,7 +98,7 @@ const Informasi = () => {
               />
               <div className="p-6 flex flex-col flex-grow">
                 <h3
-                  className="text-sm text-gray-400 mb-2"
+                  className="text-sm text-black mb-2"
                   style={segoeUIStyles}
                 >
                   Nasabah Bank ABDI
@@ -111,7 +111,7 @@ const Informasi = () => {
                 </p>
                 <a
                   href="#"
-                  className="text-sm text-gray-300 hover:text-indigo-800"
+                  className="text-sm text-gray-700 hover:text-indigo-800"
                   style={segoeUIStyles}
                 >
                   Baca Selengkapnya

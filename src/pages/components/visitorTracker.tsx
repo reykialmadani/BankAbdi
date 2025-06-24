@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 // URL API backend
 const API_URL = 'http://localhost:5000/api/admin/track-visit';
-// Interval waktu untuk melacak ulang kunjungan (dalam milidetik), sesuaikan dengan backend
 const TRACKING_INTERVAL = 10 * 60 * 1000; // 10 menit
 
 interface VisitorTrackerProps {
