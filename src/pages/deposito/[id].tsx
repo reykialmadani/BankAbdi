@@ -15,7 +15,11 @@ import Footer from "../../pages/components/layout/footer";
 import VisitorTracker from "../../pages/components/visitorTracker";
 
 // API
-import { getAllContents, getContentBySubMenuUrl, Content as ContentType } from "../../pages/config/axiosConfig";
+import { 
+  getAllContents, 
+  getContentBySubMenuUrl, 
+  Content as ContentType 
+} from "../../pages/config/axiosConfig";
 
 // Define interfaces
 interface SavingsProduct {
@@ -89,39 +93,58 @@ const DepositoDetail: NextPage = () => {
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
   const [currentContent, setCurrentContent] = useState<ContentType | null>(null);
-  const [subMenuData, setSubMenuData] = useState<{ id: number, name: string } | null>(null);
+  const [subMenuData, setSubMenuData] = useState<{ 
+    id: number, 
+    name: string 
+  } | null>(null);
+  const [isSubMenuLoaded, setIsSubMenuLoaded] = useState(false);
 
   // Find subMenu ID for VisitorTracker
   useEffect(() => {
     if (id && typeof id === 'string') {
       const findSubMenuId = async () => {
         try {
+          setIsSubMenuLoaded(false);
           const allContents = await getAllContents();
+          
           const matchingContent = allContents.find(content => {
             if (!content.sub_menu || !content.status) return false;
+            
             const subMenuUrl = content.sub_menu.url;
             const urlParts = subMenuUrl.split('/');
             const lastUrlPart = urlParts[urlParts.length - 1];
+            
             return (
-              lastUrlPart === id || 
-              subMenuUrl === `/${id}` || 
-              subMenuUrl === id || 
-              subMenuUrl === `/deposito/${id}` || 
+              lastUrlPart === id ||
+              subMenuUrl === `/${id}` ||
+              subMenuUrl === id ||
+              subMenuUrl === `/deposito/${id}` ||
               subMenuUrl.endsWith(`/${id}`)
             );
           });
-          
+
           if (matchingContent && matchingContent.sub_menu) {
-            setSubMenuData({ 
-              id: matchingContent.sub_menu.id, 
-              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name 
+            setSubMenuData({
+              id: matchingContent.sub_menu.id,
+              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name
             });
+            console.log("✅ SubMenu found:", {
+              id: matchingContent.sub_menu.id,
+              name: matchingContent.sub_menu.name || matchingContent.sub_menu.sub_menu_name,
+              url: matchingContent.sub_menu.url
+            });
+          } else {
+            console.warn("⚠️ SubMenu not found for:", id);
+            setSubMenuData(null);
           }
         } catch (error) {
-          console.error("Error mencari sub-menu ID:", error);
+          console.error("❌ Error mencari sub-menu ID:", error);
+          setSubMenuData(null);
+        } finally {
+          setIsSubMenuLoaded(true);
         }
       };
-      
+
       findSubMenuId();
     }
   }, [id]);
@@ -151,18 +174,20 @@ const DepositoDetail: NextPage = () => {
             
             const matchingContent = allContents.find(content => {
               if (!content.sub_menu || !content.status) return false;
+              
               const subMenuUrl = content.sub_menu.url;
               const urlParts = subMenuUrl.split('/');
               const lastUrlPart = urlParts[urlParts.length - 1];
+              
               return (
-                lastUrlPart === normalizedId || 
-                subMenuUrl === `/${normalizedId}` || 
-                subMenuUrl === normalizedId || 
-                subMenuUrl === `/deposito/${normalizedId}` || 
+                lastUrlPart === normalizedId ||
+                subMenuUrl === `/${normalizedId}` ||
+                subMenuUrl === normalizedId ||
+                subMenuUrl === `/deposito/${normalizedId}` ||
                 subMenuUrl.endsWith(`/${normalizedId}`)
               );
             });
-            
+
             if (matchingContent) {
               setCurrentContent(matchingContent);
             }
@@ -179,7 +204,7 @@ const DepositoDetail: NextPage = () => {
         setLoading(false);
       }
     };
-    
+
     if (id) {
       fetchData();
     }
@@ -199,7 +224,10 @@ const DepositoDetail: NextPage = () => {
           <p className="text-gray-600 mt-4">
             Silakan pilih jenis deposito yang tersedia.
           </p>
-          <Link href="/deposito" className="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          <Link
+            href="/deposito"
+            className="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
             Kembali ke Daftar Deposito
           </Link>
         </div>
@@ -209,7 +237,7 @@ const DepositoDetail: NextPage = () => {
 
   // Check if the current page is formulir-deposito or kalkulator-deposito
   const hideRiskManagement = id === "formulir-deposito" || id === "kalkulator-deposito";
-  
+
   // Import MainPage component only for specific pages
   const MainPage = id === "formulir-deposito" || id === "kalkulator-deposito" 
     ? require("./section/main").default 
@@ -217,25 +245,27 @@ const DepositoDetail: NextPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Visitor Tracker Component */}
-      {id && (
+      {/* Visitor Tracker Component - Only render when subMenu data is loaded */}
+      {id && isSubMenuLoaded && subMenuData && (
         <VisitorTracker 
-          subMenuId={subMenuData?.id || id} 
-          subMenuName={subMenuData?.name || (typeof id === 'string' ? id : '')} 
+          subMenuId={subMenuData.id} // Always number
+          subMenuName={subMenuData.name} 
         />
       )}
 
       <Header />
+      
       <Hero
         imageSrc={depositoData.image}
         title={depositoData.title}
         paragraph={depositoData.description}
         showButton={false}
       />
+      
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 py-8">
           {/* Sidebar Section */}
-          <Sidebar currentPath={router.asPath} />
+          <Sidebar currentPath={router.asPath} menuItems={[]} />
 
           {/* Main Content */}
           <div className="lg:w-3/4 w-full">
@@ -251,6 +281,7 @@ const DepositoDetail: NextPage = () => {
           </div>
         </div>
       </div>
+
       <CreditRequitment />
       <LoanProductSlider savingsProducts={savingsProducts} />
       <Footer />
