@@ -1,40 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Bank Abdi - Website Profil & Layanan Perbankan
 
-## Getting Started
+Repositori ini berisi kode sumber untuk website **Bank Abdi** (Bank Perekonomian Rakyat / Pembiayaan Rakyat Syariah), yang dibangun menggunakan **Next.js** (Pages Router), **TypeScript**, dan **Tailwind CSS**.
 
-First, run the development server:
+Website ini dirancang untuk menyajikan informasi profil perusahaan, produk perbankan (tabungan, deposito, pinjaman/pembiayaan), laporan keuangan/tahunan, serta artikel/berita terbaru kepada nasabah dan masyarakat luas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Fitur Utama
+
+- **Halaman Beranda Dinamis**: Banner hero interaktif, keunggulan layanan, solusi perbankan, ulasan nasabah (testimoni), dan informasi terbaru.
+- **Halaman Profil (Tentang Kami)**: Informasi detail mengenai visi, misi, sejarah, kepengurusan, dan legalitas Bank Abdi.
+- **Produk Perbankan Dinamis**:
+  - **Tabungan**: Informasi berbagai jenis produk tabungan nasabah.
+  - **Deposito**: Detail program simpanan berjangka dengan bagi hasil/suku bunga kompetitif.
+  - **Pinjaman**: Informasi pembiayaan atau pinjaman untuk modal usaha, konsumtif, dll.
+- **Laporan Perusahaan**: Akses publik untuk laporan tahunan dan laporan tata kelola bank.
+- **Blog & Informasi**: Informasi edukasi keuangan, berita terbaru, dan pengumuman resmi.
+- **Formulir Hubungi Kami**: Kontak detail, peta lokasi kantor, serta formulir pengiriman pesan.
+- **Visitor Tracker**: Integrasi pencatat kunjungan nasabah/pengunjung website.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+Proyek ini dibangun di atas ekosistem modern web development:
+
+- **Framework**: [Next.js 15 (Pages Router)](https://nextjs.org/) & [React 19](https://react.dev/)
+- **Bahasa**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v3](https://tailwindcss.com/) & [PostCSS](https://postcss.org/)
+- **Animasi & Transisi**: [Framer Motion](https://www.framer.com/motion/)
+- **Slider/Karusel**: [Swiper](https://swiperjs.com/)
+- **Icons**: [Lucide React](https://lucide.dev/) & [FontAwesome 6](https://fontawesome.com/)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+- **Rich Text Editor**: [React Quill (React Quill New)](https://github.com/zenoamaro/react-quill)
+- **State/Cookie Management**: [js-cookie](https://github.com/js-cookie/js-cookie) & [uuid](https://github.com/uuidjs/uuid)
+
+---
+
+## 📂 Struktur Direktori Utama
+
+```text
+bankabdi/
+├── public/              # Aset statis (gambar, logo, ikon, dokumen)
+├── src/
+│   ├── lib/             # Konfigurasi utilitas bersama (helper, API helper)
+│   ├── styles/          # File style global dan konfigurasi CSS
+│   └── pages/           # Sistem Routing Next.js (Pages Router)
+│       ├── components/  # Komponen UI Reusable
+│       │   ├── layout/  # Header, Footer, Sidebar
+│       │   └── section/ # Komponen bagian halaman (Hero, Keunggulan, dll)
+│       ├── deposito/    # Rute dinamis produk Deposito
+│       ├── informasi/   # Rute dinamis info/pengumuman
+│       ├── laporan/     # Rute dinamis laporan keuangan/tahunan
+│       ├── pinjaman/    # Rute dinamis produk Pinjaman/Pembiayaan
+│       ├── posts/       # Rute dinamis artikel & berita blog
+│       ├── tabungan/    # Rute dinamis produk Tabungan
+│       ├── _app.tsx     # Inisialisasi halaman utama
+│       ├── _document.tsx# Kustomisasi tag HTML dan Body
+│       ├── index.tsx    # Halaman Utama (Home Entry Point)
+│       ├── about.tsx    # Halaman Tentang Kami
+│       └── contact.tsx  # Halaman Hubungi Kami
+├── .env.local           # Konfigurasi Environment Variables (Lokal)
+├── next.config.ts       # Konfigurasi Next.js
+├── tailwind.config.ts   # Konfigurasi Tailwind CSS
+└── tsconfig.json        # Konfigurasi TypeScript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Persiapan & Instalasi
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek di komputer lokal Anda:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### 1. Prasyarat
+Pastikan Anda sudah menginstal:
+- [Node.js](https://nodejs.org/) (Versi LTS direkomendasikan, minimal v18+)
+- Package manager seperti `npm` (bawaan Node.js), `yarn`, atau `pnpm`.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Kloning Repositori
+```bash
+git clone <url-repositori-anda>
+cd bankabdi
+```
 
-## Learn More
+### 3. Instalasi Dependensi
+Jalankan perintah berikut untuk mengunduh semua library yang dibutuhkan:
+```bash
+npm install
+# atau
+yarn install
+# atau
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Konfigurasi Environment Variables
+Buat berkas `.env.local` di root direktori jika belum ada (Anda dapat menyalin dari `.env`), lalu sesuaikan variabel lingkungan seperti URL API backend:
+```env
+NEXT_PUBLIC_API_URL=https://api.bankabdi.co.id
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### 5. Menjalankan Server Pengembangan
+Jalankan server lokal untuk melihat hasil codingan secara langsung:
+```bash
+npm run dev
+# atau
+yarn dev
+# atau
+pnpm dev
+```
+Setelah berjalan, buka [http://localhost:3000](http://localhost:3000) di peramban (browser) Anda.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 6. Membuat Build Produksi
+Untuk mengompilasi dan mengoptimalkan website sebelum di-deploy ke production:
+```bash
+npm run build
+npm run start
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
